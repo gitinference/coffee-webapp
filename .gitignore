@@ -94,12 +94,6 @@ ipython_config.py
 #   install all needed dependencies.
 #Pipfile.lock
 
-# UV
-#   Similar to Pipfile.lock, it is generally recommended to include uv.lock in version control.
-#   This is especially recommended for binary packages to ensure reproducibility, and is more
-#   commonly ignored for libraries.
-#uv.lock
-
 # poetry
 #   Similar to Pipfile.lock, it is generally recommended to include poetry.lock in version control.
 #   This is especially recommended for binary packages to ensure reproducibility, and is more
@@ -112,10 +106,8 @@ ipython_config.py
 #pdm.lock
 #   pdm stores project-wide configurations in .pdm.toml, but it is recommended to not include it
 #   in version control.
-#   https://pdm.fming.dev/latest/usage/project/#working-with-version-control
+#   https://pdm.fming.dev/#use-with-ide
 .pdm.toml
-.pdm-python
-.pdm-build/
 
 # PEP 582; used by e.g. github.com/David-OConnor/pyflow and github.com/pdm-project/pdm
 __pypackages__/
@@ -167,8 +159,22 @@ cython_debug/
 #  option (not recommended) you can uncomment the following to ignore the entire idea folder.
 #.idea/
 
-# Ruff stuff:
-.ruff_cache/
+# ignore files in Data folder
+data/raw/*
+data/external/*
+data/processed/*
+data/cuestionarios/*
+!data/external/ForecastAnual.parquet
+!data/external/ForecastTrimestral.parquet
+!data/raw/series-historicas-1950-2011.parquet
+!data/raw/series-historicas-2001-2023.parquet
 
-# PyPI configuration file
-.pypirc
+# ignore mac files
+*.DS_Store
+*.sqlite
+
+# ignore quarter files 
+notebooks/*
+!notebooks/*.qmd
+# vscode
+.vscode
