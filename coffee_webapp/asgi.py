@@ -1,5 +1,5 @@
 """
-ASGI config for fsdc_webapp project.
+ASGI config for coffee_webapp project.
 
 It exposes the ASGI callable as a module-level variable named ``application``.
 
@@ -11,6 +11,6 @@ import os
 
 from django.core.asgi import get_asgi_application
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'fsdc_webapp.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'coffee_webapp.settings')
 
 application = get_asgi_application()

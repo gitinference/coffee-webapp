@@ -1,5 +1,5 @@
 """
-WSGI config for fsdc_webapp project.
+WSGI config for coffee_webapp project.
 
 It exposes the WSGI callable as a module-level variable named ``application``.
 
@@ -11,6 +11,6 @@ import os
 
 from django.core.wsgi import get_wsgi_application
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'fsdc_webapp.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'coffee_webapp.settings')
 
 application = get_wsgi_application()

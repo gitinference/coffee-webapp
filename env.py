@@ -17,7 +17,7 @@ def get_db_credentials() -> list:
     if not all([HOST, USER, DATABASE, SECRET_KEY, PORT]):
         raise ValueError("Database credentials not set")
     if os.environ.get("DEV") == "True":
-        HOST = "localhost"
+        HOST = "0.0.0.0"
         DATABASE_URL = f"postgresql://{USER}:{PASSWORD}@{HOST}:{PORT}/{DATABASE}"
         API_URL = str(os.getenv("API_URL")).strip()
     else:
