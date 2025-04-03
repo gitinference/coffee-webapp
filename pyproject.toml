@@ -1,12 +1,12 @@
 
 [project]
 name = "coffee-webapp"
-version = "0.1.0"
+version = "0.1.1"
 description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
-  "django>=5.1.7",
+  "django>=5.2",
   "psycopg2-binary>=2.9.10",
   "python-dotenv>=1.1.0",
 ]
