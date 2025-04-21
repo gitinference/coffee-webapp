@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", function () {
   // For spans that need custom text
   const cafePlaceholder = document.getElementById("cafe-year-placeholder");
   if (cafePlaceholder) {
-    cafePlaceholder.textContent = `¿Cuál fue el total de cuerdas sembradas de café arábigo para el ${year}?`;
+    cafePlaceholder.textContent = `6. ¿Cuál fue el total de cuerdas sembradas de café arábigo para el ${year}?`;
   }
 
   // For spans that only need the year
