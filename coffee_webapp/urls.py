@@ -20,6 +20,8 @@ from django.urls import path
 from django.urls import path, include
 from forms import views
 
+# path ('como se llama la dirección que se escriba, nombre de funcion que está en views.py, no se que siginifica lo de name yet ')
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('cuestionario-cafe/', views.coffeeTest, name='coffee-questionaire'),
