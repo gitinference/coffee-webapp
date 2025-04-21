@@ -4,8 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Encuesta de Preferencias de Café</title>
-    <link rel="stylesheet" href="styles.css">
-    <script defer src="script.js"></script>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'CoffeeQuestionare/styles.css' %}">
+    <script src="{% static 'CoffeeQuestionare/script.js' %}"></script>
 </head>
 <body>
     <!-- <header>
