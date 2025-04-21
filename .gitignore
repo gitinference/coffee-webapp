@@ -178,3 +178,4 @@ notebooks/*
 !notebooks/*.qmd
 # vscode
 .vscode
+db/
