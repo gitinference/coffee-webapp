@@ -15,7 +15,6 @@
     <main>
     
         <form id="coffeeForm">
-                <!-- Pregunta 1 -->
                 <div class="question" style="text-align: center; font-size: 30px; padding: 2px; font-family: Arial, sans-serif; max-width: 100%; margin: auto;">
                     <label for="favoriteType"><strong>CUESTIONARIO DEL CAFÉ<br><br>CONCENTIMIENTO INFORMADO PARA PARTICIPANTES</strong></label>
                     <p>
@@ -52,7 +51,7 @@
                                         1. ¿Cuál es la dirección física o postal de la finca?&emsp;
                                     </td>
                                     <td>
-                                        <input type="text" placeholder="Dirección" style="border: 1px solid black; margin-right: 10px; padding: 1px; font-size: 24px; width: 550px"/>
+                                        <input type="text" placeholder="Dirección" style="border: 1px solid black; margin-right: 10px; padding: 1px; font-size: 24px; width: 550px" required/>
                                     </td>
                                 </tr>
                             </table>
@@ -61,7 +60,7 @@
                                 <tr>
                                     <td>
                                         2. ¿Cuál es zipcode de la finca?&emsp;
-                                        <input type="number" min="0" max="9999" placeholder="Zipcode finca" style="font-size: 24px; border: 1px solid black; margin-right: 10px; padding: 1px; width: 100px"/>
+                                        <input type="number" min="0" max="9999" placeholder="Zipcode finca" style="font-size: 24px; border: 1px solid black; margin-right: 10px; padding: 1px; width: 100px" required/>
                                     </td>
                                 </tr>
                             </table>
@@ -74,7 +73,7 @@
                                 </tr>
                                 <tr>
                                     <td>
-                                        &emsp;&emsp;&emsp;<input type="radio" name="posicion" className="radio-spacing" />
+                                        &emsp;&emsp;&emsp;<input type="radio" name="posicion" className="radio-spacing" required/>
                                         &emsp;&emsp;&emsp;<label htmlFor="dueno">Dueño o Dueña</label><br/>
                                         &emsp;&emsp;&emsp;<input type="radio" name="posicion" className="radio-spacing" />
                                         &emsp;&emsp;&emsp;<label htmlFor="administrador">Administrador</label><br/>
@@ -96,7 +95,7 @@
                                 <tr>
                                     <td>
                                         4. ¿En qué año comenzó operaciones en la finca?&emsp;
-                                        <select style = "font-size: 24px">
+                                        <select style = "font-size: 24px" required>
                                             <option value="">Seleccione un año</option>
                                             <option value="1920">1920</option>
                                             <option value="1921">1921</option>
@@ -213,7 +212,7 @@
                                 <tr>
                                     <td>
                                         5. ¿Cuántas cuerdas tiene la finca en total?&emsp;
-                                        <input type="number" min="0" placeholder="Total cuerdas" style="font-size: 24px; border: 1px solid black; margin-right: 10px; padding:1px"/>
+                                        <input type="number" step="0.01" min="0" placeholder="Total cuerdas" style="font-size: 24px; border: 1px solid black; margin-right: 10px; padding:1px" required/>
                                     </td>
                                 </tr>
                             </table>
@@ -222,7 +221,7 @@
                                 <tr>
                                     <td>
                                         <span id="cafe-year-placeholder"></span>&emsp;
-                                        <input type="number" min="0" placeholder="Total Cuerdas" style="font-size: 24px; border: 1px solid black; margin-right: 10px; padding: 1px"/>
+                                        <input type="number" step="0.01" min="0" placeholder="Total Cuerdas" style="font-size: 24px; border: 1px solid black; margin-right: 10px; padding: 1px" required/>
                                     </td>
                                 </tr>
                             </table>
@@ -232,7 +231,7 @@
                                     <td>
                                         7. Si usted alquila el terreno, ¿Cuánto usted paga
                                         ($) al año por el alquiler?&emsp;
-                                        <input type="number" min="0" placeholder="Total $" style= "font-size: 24px; border: 1px solid black; margin-right: 10px; width: 100px" />
+                                        <input type="number" step="0.01" min="0" placeholder="Total $" style= "font-size: 24px; border: 1px solid black; margin-right: 10px; width: 100px" required/>
                                     </td>
                                 </tr>
                             </table>
@@ -245,7 +244,7 @@
                                         <span id="alquiler-year"></span> ($) por el alquiler anual?
                                     </td>
                                     <td>
-                                        <input type="number" min="0" placeholder="Total $" style="font-size: 24px; border: 1px solid black; margin-right: 10px; padding: 5px; width: 100px;" />
+                                        <input type="number" step="0.01" min="0" placeholder="Total $" style="font-size: 24px; border: 1px solid black; margin-right: 10px; padding: 5px; width: 100px;" required/>
                                     </td>
                                 </tr>
                             </table>
@@ -259,13 +258,13 @@
                                 <tr>
                                     <td>
                                         &emsp;&emsp;&emsp;Siembra a maduración (los primeros dos años y medio)&emsp;
-                                        <input type="number" min="0" placeholder="Total empleados" style="font-size: 24px; border: 1px solid black; margin-right: 10px; padding: 1px;" />
+                                        <input type="number" min="0" placeholder="Total empleados" style="font-size: 24px; border: 1px solid black; margin-right: 10px; padding: 1px;" required/>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
                                     &emsp;&emsp;&emsp;Cosecha (últimos 5 a 6 meses)&emsp;
-                                    <input type="number" min="0" placeholder="Total empleados" style="font-size: 24px; border: 1px solid black; margin-right: 10px; padding: 1px;" />
+                                    <input type="number" min="0" placeholder="Total empleados" style="font-size: 24px; border: 1px solid black; margin-right: 10px; padding: 1px;" required/>
                                     </td>
                                 </tr>
                             </table>
@@ -280,7 +279,7 @@
                                 <tr>
                                     <td>
                                         &emsp;&emsp;&emsp;Siembra a maduración (los primeros dos años y medio)&emsp;
-                                        <input type="number" min="0" placeholder="Total horas" style="font-size: 24px; border: 1px solid black; margin-right: 10px; padding: 1px;" />
+                                        <input type="number" min="0" placeholder="Total horas" style="font-size: 24px; border: 1px solid black; margin-right: 10px; padding: 1px;" required/>
                                     </td>
                                 </tr>
                             </table>
@@ -294,13 +293,13 @@
                                 <tr>
                                     <td>
                                         &emsp;&emsp;&emsp;Siembra a maduración (los primeros dos años y medio)&emsp;
-                                        <input type="number" min="0" placeholder="Total $" style="font-size: 24px; border: 1px solid black; margin-right: 10px; padding: 1px;" />
+                                        <input type="number" min="0" step="0.01" placeholder="Total $" style="font-size: 24px; border: 1px solid black; margin-right: 10px; padding: 1px;" required/>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
                                         &emsp;&emsp;&emsp;Cosecha (últimos 5 a 6 meses)&emsp;
-                                        <input type="number" min="0" placeholder="Total $" style="font-size: 24px; border: 1px solid black; margin-right: 10px; padding: 1px;" />
+                                        <input type="number" min="0" step="0.01" placeholder="Total $" style="font-size: 24px; border: 1px solid black; margin-right: 10px; padding: 1px;" required/>
                                     </td>
                                 </tr>
                             </table>
@@ -315,19 +314,19 @@
                                 <tr>
                                     <td>
                                         &emsp;&emsp;&emsp;Siembra a maduración (los primeros dos años y medio)&emsp;
-                                        <input type="number" min="0" placeholder="Total $" style="font-size: 24px; border: 1px solid black; margin-right: 10px; padding: 1px;" />
+                                        <input type="number" min="0" step="0.01" placeholder="Total $" style="font-size: 24px; border: 1px solid black; margin-right: 10px; padding: 1px;" required/>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
                                         &emsp;&emsp;&emsp;Cosecha (últimos 5 a 6 meses)&emsp;
-                                        <input type="number" min="0" placeholder="Total $" style="font-size: 24px; border: 1px solid black; margin-right: 10px; padding: 1px;" />
+                                        <input type="number" min="0" step="0.01" placeholder="Total $" style="font-size: 24px; border: 1px solid black; margin-right: 10px; padding: 1px;" required/>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
                                         &emsp;&emsp;&emsp;Si en la cosecha se le paga por almud por favor especifíque.&emsp;
-                                        <input type="text" placeholder="Especifique pago" style="font-size: 24px; border: 1px solid black; margin-right: 10px; padding: 1px;" />
+                                        <input type="text" step="0.01" placeholder="Especifique pago" style="font-size: 24px; border: 1px solid black; margin-right: 10px; padding: 1px;" required/>
                                     </td>
                                 </tr>
                             </table>
@@ -343,7 +342,7 @@
                                 <tr>
                                     <td>
                                         &emsp;&emsp;&emsp;Café arábigo&emsp;
-                                        <input type="number" min="0" placeholder="Total árboles" style="font-size: 24px; border: 1px solid black; margin-right: 10px; padding: 1px;" />
+                                        <input type="number" min="0" step="0.01" placeholder="Total árboles" style="font-size: 24px; border: 1px solid black; margin-right: 10px; padding: 1px;" required/>
                                     </td>
                                 </tr>
                             </table>
@@ -357,7 +356,7 @@
                                 <tr>
                                     <td>
                                         &emsp;&emsp;&emsp;Café arábigo&emsp;
-                                        <input type="number" min="0" placeholder="Total $" style="font-size: 24px; border: 1px solid black; margin-right: 10px; padding: 1px;" />
+                                        <input type="number" step="0.01" min="0" placeholder="Total $" style="font-size: 24px; border: 1px solid black; margin-right: 10px; padding: 1px;" required/>
                                     </td>
                                 </tr>
                             </table>
@@ -366,7 +365,7 @@
                                 <tr>
                                     <td>
                                         15. ¿Utilizó vale para la compra de arbolitos de café arábigo?&emsp;
-                                        <input type="radio" id="si" name="vale" value="si" />
+                                        <input type="radio" id="si" name="vale" value="si" required/>
                                         <label for="si" style="margin-right: 30px;">Sí</label>
                                         <input type="radio" id="no" name="vale" value="no" />
                                         <label for="no">No</label>
@@ -384,29 +383,29 @@
                                 <tr>
                                     <td>
                                         &emsp;&emsp;&emsp;Precio de venta por almud del café arábigo maduro ($)&emsp;
-                                        <input type="number" min="0" placeholder="Total $" 
-                                        style="font-size: 24px; border: 1px solid black; margin-right: 10px; padding: 1px;" />
+                                        <input type="number" step="0.01" min="0" placeholder="Total $" 
+                                        style="font-size: 24px; border: 1px solid black; margin-right: 10px; padding: 1px;" required/>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
                                         &emsp;&emsp;&emsp;Cantidad de almud de café arábigo maduro&emsp;
-                                        <input type="number" min="0" placeholder="Total almud" 
-                                        style="font-size: 24px; border: 1px solid black; margin-right: 10px; padding: 1px;" />
+                                        <input type="number" step="0.01" min="0" placeholder="Total almud" 
+                                        style="font-size: 24px; border: 1px solid black; margin-right: 10px; padding: 1px;" required/>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
                                         &emsp;&emsp;&emsp;Precio de venta por almud del café arábigo verde-maduro&emsp;
-                                        <input type="number" min="0" placeholder="Total $" 
-                                        style="font-size: 24px; border: 1px solid black; margin-right: 10px; padding: 1px;" />
+                                        <input type="number" step="0.01" min="0" placeholder="Total $" 
+                                        style="font-size: 24px; border: 1px solid black; margin-right: 10px; padding: 1px;" required/>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
                                         &emsp;&emsp;&emsp;Cantidad de almud de café arábigo verde-maduro&emsp;
-                                        <input type="number" min="0" placeholder="Total almud" 
-                                        style="font-size: 24px; border: 1px solid black; margin-right: 10px; padding: 1px;" />
+                                        <input type="number" step="0.01" min="0" placeholder="Total almud" 
+                                        style="font-size: 24px; border: 1px solid black; margin-right: 10px; padding: 1px;" required/>
                                     </td>
                                 </tr>
                             </table>
@@ -427,79 +426,79 @@
                                 
                                     <tr>
                                         <td style="text-align: right;">Abono&emsp;</td>
-                                        <td><input type="number" min="0" placeholder="Total $" style="font-size: 24px; border: 1px solid black; margin-right: 10px;"></td>
-                                        <td><input type="number" min="0" placeholder="Total $" style="font-size: 24px; border: 1px solid black; margin-right: 10px;"></td>
-                                        <td><input type="number" min="0" placeholder="Total $" style="font-size: 24px; border: 1px solid black; margin-right: 10px;"></td>
+                                        <td><input type="number" step="0.01" min="0" placeholder="Total $" style="font-size: 24px; border: 1px solid black; margin-right: 10px;" required></td>
+                                        <td><input type="number" step="0.01" min="0" placeholder="Total $" style="font-size: 24px; border: 1px solid black; margin-right: 10px;" required></td>
+                                        <td><input type="number" step="0.01" min="0" placeholder="Total $" style="font-size: 24px; border: 1px solid black; margin-right: 10px;" required></td>
                                     </tr>
                                 
                                     <tr>
                                         <td style="text-align: right;">Cal&emsp;</td>
-                                        <td><input type="number" min="0" placeholder="Total $" style="font-size: 24px; border: 1px solid black; margin-right: 10px;"></td>
-                                        <td><input type="number" min="0" placeholder="Total $" style="font-size: 24px; border: 1px solid black; margin-right: 10px;"></td>
-                                        <td><input type="number" min="0" placeholder="Total $" style="font-size: 24px; border: 1px solid black; margin-right: 10px;"></td>
+                                        <td><input type="number" step="0.01" min="0" placeholder="Total $" style="font-size: 24px; border: 1px solid black; margin-right: 10px;" required></td>
+                                        <td><input type="number" step="0.01" min="0" placeholder="Total $" style="font-size: 24px; border: 1px solid black; margin-right: 10px;" required></td>
+                                        <td><input type="number" step="0.01" min="0" placeholder="Total $" style="font-size: 24px; border: 1px solid black; margin-right: 10px;" required></td>
                                     </tr>
                                 
                                     <tr>
                                         <td>Superfosfato Triple&emsp;</td>
-                                        <td><input type="number" min="0" placeholder="Total $" style="font-size: 24px; border: 1px solid black; margin-right: 10px;"></td>
-                                        <td><input type="number" min="0" placeholder="Total $" style="font-size: 24px; border: 1px solid black; margin-right: 10px;"></td>
-                                        <td><input type="number" min="0" placeholder="Total $" style="font-size: 24px; border: 1px solid black; margin-right: 10px;"></td>
+                                        <td><input type="number" step="0.01" min="0" placeholder="Total $" style="font-size: 24px; border: 1px solid black; margin-right: 10px;" required></td>
+                                        <td><input type="number" step="0.01" min="0" placeholder="Total $" style="font-size: 24px; border: 1px solid black; margin-right: 10px;" required></td>
+                                        <td><input type="number" step="0.01" min="0" placeholder="Total $" style="font-size: 24px; border: 1px solid black; margin-right: 10px;" required></td>
                                     </tr>
                                 
                                     <tr>
                                         <td>Insecticida&emsp;</td>
-                                        <td><input type="number" min="0" placeholder="Total $" style="font-size: 24px; border: 1px solid black; margin-right: 10px;"></td>
-                                        <td><input type="number" min="0" placeholder="Total $" style="font-size: 24px; border: 1px solid black; margin-right: 10px;"></td>
-                                        <td><input type="number" min="0" placeholder="Total $" style="font-size: 24px; border: 1px solid black; margin-right: 10px;"></td>
+                                        <td><input type="number" step="0.01" min="0" placeholder="Total $" style="font-size: 24px; border: 1px solid black; margin-right: 10px;" required></td>
+                                        <td><input type="number" step="0.01" min="0" placeholder="Total $" style="font-size: 24px; border: 1px solid black; margin-right: 10px;" required></td>
+                                        <td><input type="number" step="0.01" min="0" placeholder="Total $" style="font-size: 24px; border: 1px solid black; margin-right: 10px;" required></td>
                                     </tr>
                                 
                                     <tr>
                                         <td>Fungicida&emsp;</td>
-                                        <td><input type="number" min="0" placeholder="Total $" style="font-size: 24px; border: 1px solid black; margin-right: 10px;"></td>
-                                        <td><input type="number" min="0" placeholder="Total $" style="font-size: 24px; border: 1px solid black; margin-right: 10px;"></td>
-                                        <td><input type="number" min="0" placeholder="Total $" style="font-size: 24px; border: 1px solid black; margin-right: 10px;"></td>
+                                        <td><input type="number" step="0.01" min="0" placeholder="Total $" style="font-size: 24px; border: 1px solid black; margin-right: 10px;" required></td>
+                                        <td><input type="number" step="0.01" min="0" placeholder="Total $" style="font-size: 24px; border: 1px solid black; margin-right: 10px;" required></td>
+                                        <td><input type="number" step="0.01" min="0" placeholder="Total $" style="font-size: 24px; border: 1px solid black; margin-right: 10px;" required></td>
                                     </tr>
                                 
                                     <tr>
                                         <td>Herbicida&emsp;</td>
-                                        <td><input type="number" min="0" placeholder="Total $" style="font-size: 24px; border: 1px solid black; margin-right: 10px;"></td>
-                                        <td><input type="number" min="0" placeholder="Total $" style="font-size: 24px; border: 1px solid black; margin-right: 10px;"></td>
-                                        <td><input type="number" min="0" placeholder="Total $" style="font-size: 24px; border: 1px solid black; margin-right: 10px;"></td>
+                                        <td><input type="number" step="0.01" min="0" placeholder="Total $" style="font-size: 24px; border: 1px solid black; margin-right: 10px;" required></td>
+                                        <td><input type="number" step="0.01" min="0" placeholder="Total $" style="font-size: 24px; border: 1px solid black; margin-right: 10px;" required></td>
+                                        <td><input type="number" step="0.01" min="0" placeholder="Total $" style="font-size: 24px; border: 1px solid black; margin-right: 10px;" required></td>
                                     </tr>
                                 
                                     <tr>
                                         <td>Micotrol&emsp;</td>
-                                        <td><input type="number" min="0" placeholder="Total $" style="font-size: 24px; border: 1px solid black; margin-right: 10px;"></td>
-                                        <td><input type="number" min="0" placeholder="Total $" style="font-size: 24px; border: 1px solid black; margin-right: 10px;"></td>
-                                        <td><input type="number" min="0" placeholder="Total $" style="font-size: 24px; border: 1px solid black; margin-right: 10px;"></td>
+                                        <td><input type="number" step="0.01" min="0" placeholder="Total $" style="font-size: 24px; border: 1px solid black; margin-right: 10px;" required></td>
+                                        <td><input type="number" step="0.01" min="0" placeholder="Total $" style="font-size: 24px; border: 1px solid black; margin-right: 10px;" required></td>
+                                        <td><input type="number" step="0.01" min="0" placeholder="Total $" style="font-size: 24px; border: 1px solid black; margin-right: 10px;" required></td>
                                     </tr>
                                 
                                     <tr>
                                         <td>Trampas/Alcohol&emsp;</td>
-                                        <td><input type="number" min="0" placeholder="Total $" style="font-size: 24px; border: 1px solid black; margin-right: 10px;"></td>
-                                        <td><input type="number" min="0" placeholder="Total $" style="font-size: 24px; border: 1px solid black; margin-right: 10px;"></td>
-                                        <td><input type="number" min="0" placeholder="Total $" style="font-size: 24px; border: 1px solid black; margin-right: 10px;"></td>
+                                        <td><input type="number" step="0.01" min="0" placeholder="Total $" style="font-size: 24px; border: 1px solid black; margin-right: 10px;" required></td>
+                                        <td><input type="number" step="0.01" min="0" placeholder="Total $" style="font-size: 24px; border: 1px solid black; margin-right: 10px;" required></td>
+                                        <td><input type="number" step="0.01" min="0" placeholder="Total $" style="font-size: 24px; border: 1px solid black; margin-right: 10px;" required></td>
                                     </tr>
                                 
                                     <tr>
                                         <td>Gasolina&emsp;</td>
-                                        <td><input type="number" min="0" placeholder="Total $" style="font-size: 24px; border: 1px solid black; margin-right: 10px;"></td>
-                                        <td><input type="number" min="0" placeholder="Total $" style="font-size: 24px; border: 1px solid black; margin-right: 10px;"></td>
-                                        <td><input type="number" min="0" placeholder="Total $" style="font-size: 24px; border: 1px solid black; margin-right: 10px;"></td>
+                                        <td><input type="number" step="0.01" min="0" placeholder="Total $" style="font-size: 24px; border: 1px solid black; margin-right: 10px;" required></td>
+                                        <td><input type="number" step="0.01" min="0" placeholder="Total $" style="font-size: 24px; border: 1px solid black; margin-right: 10px;" required></td>
+                                        <td><input type="number" step="0.01" min="0" placeholder="Total $" style="font-size: 24px; border: 1px solid black; margin-right: 10px;" required></td>
                                     </tr>
                                 
                                     <tr>
                                         <td>Equipo (Timer, Mochilas, Machetes, Palas, etc)&emsp;</td>
-                                        <td><input type="number" min="0" placeholder="Total $" style="font-size: 24px; border: 1px solid black; margin-right: 10px;"></td>
-                                        <td><input type="number" min="0" placeholder="Total $" style="font-size: 24px; border: 1px solid black; margin-right: 10px;"></td>
-                                        <td><input type="number" min="0" placeholder="Total $" style="font-size: 24px; border: 1px solid black; margin-right: 10px;"></td>
+                                        <td><input type="number" step="0.01" min="0" placeholder="Total $" style="font-size: 24px; border: 1px solid black; margin-right: 10px;" required></td>
+                                        <td><input type="number" step="0.01" min="0" placeholder="Total $" style="font-size: 24px; border: 1px solid black; margin-right: 10px;" required></td>
+                                        <td><input type="number" step="0.01" min="0" placeholder="Total $" style="font-size: 24px; border: 1px solid black; margin-right: 10px;" required></td>
                                     </tr>
                                 
                                     <tr>
                                         <td>Transportación (pickup u otro)&emsp;</td>
-                                        <td><input type="number" min="0" placeholder="Total $" style="font-size: 24px; border: 1px solid black; margin-right: 10px;"></td>
-                                        <td><input type="number" min="0" placeholder="Total $" style="font-size: 24px; border: 1px solid black; margin-right: 10px;"></td>
-                                        <td><input type="number" min="0" placeholder="Total $" style="font-size: 24px; border: 1px solid black; margin-right: 10px;"></td>
+                                        <td><input type="number" step="0.01" min="0" placeholder="Total $" style="font-size: 24px; border: 1px solid black; margin-right: 10px;" required></td>
+                                        <td><input type="number" step="0.01" min="0" placeholder="Total $" style="font-size: 24px; border: 1px solid black; margin-right: 10px;" required></td>
+                                        <td><input type="number" step="0.01" min="0" placeholder="Total $" style="font-size: 24px; border: 1px solid black; margin-right: 10px;" required></td>
                                     </tr>
                                 </table>
 
@@ -539,63 +538,63 @@
                                         </tr>
                                         <tr>
                                             <td>Seguro de Cosecha y Plantación ($)&emsp;</th>
-                                            <td><input type="number" min="0" placeholder="Total $" style="font-size: 24px; border: 1px solid black; margin-right: 10px; padding: 1px;"></td>
-                                            <td><input type="number" min="0" placeholder="Total $" style="font-size: 24px; border: 1px solid black; margin-right: 10px; padding: 1px;"></td>
-                                            <td><input type="number" min="0" placeholder="Total $" style="font-size: 24px; border: 1px solid black; margin-right: 10px; padding: 1px;"></td>
+                                            <td><input type="number" step="0.01" min="0" placeholder="Total $" style="font-size: 24px; border: 1px solid black; margin-right: 10px; padding: 1px;"></td>
+                                            <td><input type="number" step="0.01" min="0" placeholder="Total $" style="font-size: 24px; border: 1px solid black; margin-right: 10px; padding: 1px;"></td>
+                                            <td><input type="number" step="0.01" min="0" placeholder="Total $" style="font-size: 24px; border: 1px solid black; margin-right: 10px; padding: 1px;"></td>
                                         </tr>
                                         <tr>
                                             <td>Gastos Administrativos ($) (Libretas, Bolígrafos, Libreta Recibos)&emsp;</td>
-                                            <td><input type="number" min="0" placeholder="Total $" style="font-size: 24px; border: 1px solid black; margin-right: 10px; padding: 1px;"></td>
-                                            <td><input type="number" min="0" placeholder="Total $" style="font-size: 24px; border: 1px solid black; margin-right: 10px; padding: 1px;"></td>
-                                            <td><input type="number" min="0" placeholder="Total $" style="font-size: 24px; border: 1px solid black; margin-right: 10px; padding: 1px;"></td>
+                                            <td><input type="number" step="0.01" min="0" placeholder="Total $" style="font-size: 24px; border: 1px solid black; margin-right: 10px; padding: 1px;"></td>
+                                            <td><input type="number" step="0.01" min="0" placeholder="Total $" style="font-size: 24px; border: 1px solid black; margin-right: 10px; padding: 1px;"></td>
+                                            <td><input type="number" step="0.01" min="0" placeholder="Total $" style="font-size: 24px; border: 1px solid black; margin-right: 10px; padding: 1px;"></td>
                                         </tr>
                                         <tr>
                                             <td>Alquiler de equipo ($)&emsp;</td>
-                                            <td><input type="number" min="0" placeholder="Total $" style="font-size: 24px; border: 1px solid black; margin-right: 10px; padding: 1px;"></td>
-                                            <td><input type="number" min="0" placeholder="Total $" style="font-size: 24px; border: 1px solid black; margin-right: 10px; padding: 1px;"></td>
-                                            <td><input type="number" min="0" placeholder="Total $" style="font-size: 24px; border: 1px solid black; margin-right: 10px; padding: 1px;"></td>
+                                            <td><input type="number" step="0.01" min="0" placeholder="Total $" style="font-size: 24px; border: 1px solid black; margin-right: 10px; padding: 1px;"></td>
+                                            <td><input type="number" step="0.01" min="0" placeholder="Total $" style="font-size: 24px; border: 1px solid black; margin-right: 10px; padding: 1px;"></td>
+                                            <td><input type="number" step="0.01" min="0" placeholder="Total $" style="font-size: 24px; border: 1px solid black; margin-right: 10px; padding: 1px;"></td>
                                         </tr>
                                         <tr>
                                             <td>Reparación de equipo y maquinaria ($)&emsp;</td>
-                                            <td><input type="number" min="0" placeholder="Total $" style="font-size: 24px; border: 1px solid black; margin-right: 10px; padding: 1px;"></td>
-                                            <td><input type="number" min="0" placeholder="Total $" style="font-size: 24px; border: 1px solid black; margin-right: 10px; padding: 1px;"></td>
-                                            <td><input type="number" min="0" placeholder="Total $" style="font-size: 24px; border: 1px solid black; margin-right: 10px; padding: 1px;"></td>
+                                            <td><input type="number" step="0.01" min="0" placeholder="Total $" style="font-size: 24px; border: 1px solid black; margin-right: 10px; padding: 1px;"></td>
+                                            <td><input type="number" step="0.01" min="0" placeholder="Total $" style="font-size: 24px; border: 1px solid black; margin-right: 10px; padding: 1px;"></td>
+                                            <td><input type="number" step="0.01" min="0" placeholder="Total $" style="font-size: 24px; border: 1px solid black; margin-right: 10px; padding: 1px;"></td>
                                         </tr>
                                         <tr>
                                             <td>Servicios para el control de plagas y enfermedades ($)&emsp;</td>
-                                            <td><input type="number" min="0" placeholder="Total $" style="font-size: 24px; border: 1px solid black; margin-right: 10px; padding: 1px;"></td>
-                                            <td><input type="number" min="0" placeholder="Total $" style="font-size: 24px; border: 1px solid black; margin-right: 10px; padding: 1px;"></td>
-                                            <td><input type="number" min="0" placeholder="Total $" style="font-size: 24px; border: 1px solid black; margin-right: 10px; padding: 1px;"></td>
+                                            <td><input type="number" step="0.01" min="0" placeholder="Total $" style="font-size: 24px; border: 1px solid black; margin-right: 10px; padding: 1px;"></td>
+                                            <td><input type="number" step="0.01" min="0" placeholder="Total $" style="font-size: 24px; border: 1px solid black; margin-right: 10px; padding: 1px;"></td>
+                                            <td><input type="number" step="0.01" min="0" placeholder="Total $" style="font-size: 24px; border: 1px solid black; margin-right: 10px; padding: 1px;"></td>
                                         </tr>
                                         <tr>
                                             <td>Servicios de contabilidad ($)&emsp;</td>
-                                            <td><input type="number" min="0" placeholder="Total $" style="font-size: 24px; border: 1px solid black; margin-right: 10px; padding: 1px;"></td>
-                                            <td><input type="number" min="0" placeholder="Total $" style="font-size: 24px; border: 1px solid black; margin-right: 10px; padding: 1px;"></td>
-                                            <td><input type="number" min="0" placeholder="Total $" style="font-size: 24px; border: 1px solid black; margin-right: 10px; padding: 1px;"></td>
+                                            <td><input type="number" step="0.01" min="0" placeholder="Total $" style="font-size: 24px; border: 1px solid black; margin-right: 10px; padding: 1px;"></td>
+                                            <td><input type="number" step="0.01" min="0" placeholder="Total $" style="font-size: 24px; border: 1px solid black; margin-right: 10px; padding: 1px;"></td>
+                                            <td><input type="number" step="0.01" min="0" placeholder="Total $" style="font-size: 24px; border: 1px solid black; margin-right: 10px; padding: 1px;"></td>
                                         </tr>
                                         <tr>
                                             <td>Servicios legales ($)&emsp;</td>
-                                            <td><input type="number" min="0" placeholder="Total $" style="font-size: 24px; border: 1px solid black; margin-right: 10px; padding: 1px;"></td>
-                                            <td><input type="number" min="0" placeholder="Total $" style="font-size: 24px; border: 1px solid black; margin-right: 10px; padding: 1px;"></td>
-                                            <td><input type="number" min="0" placeholder="Total $" style="font-size: 24px; border: 1px solid black; margin-right: 10px; padding: 1px;"></td>
+                                            <td><input type="number" step="0.01" min="0" placeholder="Total $" style="font-size: 24px; border: 1px solid black; margin-right: 10px; padding: 1px;"></td>
+                                            <td><input type="number" step="0.01" min="0" placeholder="Total $" style="font-size: 24px; border: 1px solid black; margin-right: 10px; padding: 1px;"></td>
+                                            <td><input type="number" step="0.01" min="0" placeholder="Total $" style="font-size: 24px; border: 1px solid black; margin-right: 10px; padding: 1px;"></td>
                                         </tr>
                                         <tr>
                                             <td>Servicios de gestoría ($)&emsp;</td>
-                                            <td><input type="number" min="0" placeholder="Total $" style="font-size: 24px; border: 1px solid black; margin-right: 10px; padding: 1px;"></td>
-                                            <td><input type="number" min="0" placeholder="Total $" style="font-size: 24px; border: 1px solid black; margin-right: 10px; padding: 1px;"></td>
-                                            <td><input type="number" min="0" placeholder="Total $" style="font-size: 24px; border: 1px solid black; margin-right: 10px; padding: 1px;"></td>
+                                            <td><input type="number" step="0.01" min="0" placeholder="Total $" style="font-size: 24px; border: 1px solid black; margin-right: 10px; padding: 1px;"></td>
+                                            <td><input type="number" step="0.01" min="0" placeholder="Total $" style="font-size: 24px; border: 1px solid black; margin-right: 10px; padding: 1px;"></td>
+                                            <td><input type="number" step="0.01" min="0" placeholder="Total $" style="font-size: 24px; border: 1px solid black; margin-right: 10px; padding: 1px;"></td>
                                         </tr>
                                         <tr>
                                             <td>Computadora ($)&emsp;</td>
-                                            <td><input type="number" min="0" placeholder="Total $" style="font-size: 24px; border: 1px solid black; margin-right: 10px; padding: 1px;"></td>
-                                            <td><input type="number" min="0" placeholder="Total $" style="font-size: 24px; border: 1px solid black; margin-right: 10px; padding: 1px;"></td>
-                                            <td><input type="number" min="0" placeholder="Total $" style="font-size: 24px; border: 1px solid black; margin-right: 10px; padding: 1px;"></td>
+                                            <td><input type="number" step="0.01" min="0" placeholder="Total $" style="font-size: 24px; border: 1px solid black; margin-right: 10px; padding: 1px;"></td>
+                                            <td><input type="number" step="0.01" min="0" placeholder="Total $" style="font-size: 24px; border: 1px solid black; margin-right: 10px; padding: 1px;"></td>
+                                            <td><input type="number" step="0.01" min="0" placeholder="Total $" style="font-size: 24px; border: 1px solid black; margin-right: 10px; padding: 1px;"></td>
                                         </tr>
                                         <tr>
                                             <td>Gastos misceláneos (alimentos/meriendas para trabajadores)&emsp;</td>
-                                            <td><input type="number" min="0" placeholder="Total $" style="font-size: 24px; border: 1px solid black; margin-right: 10px; padding: 1px;"></td>
-                                            <td><input type="number" min="0" placeholder="Total $" style="font-size: 24px; border: 1px solid black; margin-right: 10px; padding: 1px;"></td>
-                                            <td><input type="number" min="0" placeholder="Total $" style="font-size: 24px; border: 1px solid black; margin-right: 10px; padding: 1px;"></td>
+                                            <td><input type="number" step="0.01" min="0" placeholder="Total $" style="font-size: 24px; border: 1px solid black; margin-right: 10px; padding: 1px;"></td>
+                                            <td><input type="number" step="0.01" min="0" placeholder="Total $" style="font-size: 24px; border: 1px solid black; margin-right: 10px; padding: 1px;"></td>
+                                            <td><input type="number" step="0.01" min="0" placeholder="Total $" style="font-size: 24px; border: 1px solid black; margin-right: 10px; padding: 1px;"></td>
                                         </tr>
                                     </table>
 
@@ -611,81 +610,81 @@
                                     </tr>
                                     <tr>
                                         <td>Preparación de Terreno (incluye construir o reparar caminos)&emsp;</th>
-                                        <td><input type="number" min="0" placeholder="Total $" style="font-size: 24px; border: 1px solid black; margin-right: 10px; padding: 1px;" /></td>
-                                        <td><input type="number" min="0" placeholder="Total $" style="font-size: 24px; border: 1px solid black; margin-right: 10px; padding: 1px;" /></td>
-                                        <td><input type="number" min="0" placeholder="Total $" style="font-size: 24px; border: 1px solid black; margin-right: 10px; padding: 1px;" /></td>
+                                        <td><input type="number" step="0.01" min="0" placeholder="Total $" style="font-size: 24px; border: 1px solid black; margin-right: 10px; padding: 1px;" /></td>
+                                        <td><input type="number" step="0.01" min="0" placeholder="Total $" style="font-size: 24px; border: 1px solid black; margin-right: 10px; padding: 1px;" /></td>
+                                        <td><input type="number" step="0.01" min="0" placeholder="Total $" style="font-size: 24px; border: 1px solid black; margin-right: 10px; padding: 1px;" /></td>
                                     </tr>
                                     <tr>
                                         <td>Alineado de Siembra (o siembras a contorno)&emsp;</td>
-                                        <td><input type="number" min="0" placeholder="Total $" style="font-size: 24px; border: 1px solid black; margin-right: 10px; padding: 1px;" /></td>
-                                        <td><input type="number" min="0" placeholder="Total $" style="font-size: 24px; border: 1px solid black; margin-right: 10px; padding: 1px;" /></td>
-                                        <td><input type="number" min="0" placeholder="Total $" style="font-size: 24px; border: 1px solid black; margin-right: 10px; padding: 1px;" /></td>
+                                        <td><input type="number" step="0.01" min="0" placeholder="Total $" style="font-size: 24px; border: 1px solid black; margin-right: 10px; padding: 1px;" /></td>
+                                        <td><input type="number" step="0.01" min="0" placeholder="Total $" style="font-size: 24px; border: 1px solid black; margin-right: 10px; padding: 1px;" /></td>
+                                        <td><input type="number" step="0.01" min="0" placeholder="Total $" style="font-size: 24px; border: 1px solid black; margin-right: 10px; padding: 1px;" /></td>
                                     </tr>
                                     <tr>
                                         <td>Cargar Arbolito para Siembra en Predio&emsp;</td>
-                                        <td><input type="number" min="0" placeholder="Total $" style="font-size: 24px; border: 1px solid black; margin-right: 10px; padding: 1px;" /></td>
-                                        <td><input type="number" min="0" placeholder="Total $" style="font-size: 24px; border: 1px solid black; margin-right: 10px; padding: 1px;" /></td>
-                                        <td><input type="number" min="0" placeholder="Total $" style="font-size: 24px; border: 1px solid black; margin-right: 10px; padding: 1px;" /></td>
+                                        <td><input type="number" step="0.01" min="0" placeholder="Total $" style="font-size: 24px; border: 1px solid black; margin-right: 10px; padding: 1px;" /></td>
+                                        <td><input type="number" step="0.01" min="0" placeholder="Total $" style="font-size: 24px; border: 1px solid black; margin-right: 10px; padding: 1px;" /></td>
+                                        <td><input type="number" step="0.01" min="0" placeholder="Total $" style="font-size: 24px; border: 1px solid black; margin-right: 10px; padding: 1px;" /></td>
                                     </tr>
                                     <tr>
                                         <td>Ahoyado y Siembra&emsp;</td>
-                                        <td><input type="number" min="0" placeholder="Total $" style="font-size: 24px; border: 1px solid black; margin-right: 10px; padding: 1px;" /></td>
-                                        <td><input type="number" min="0" placeholder="Total $" style="font-size: 24px; border: 1px solid black; margin-right: 10px; padding: 1px;" /></td>
-                                        <td><input type="number" min="0" placeholder="Total $" style="font-size: 24px; border: 1px solid black; margin-right: 10px; padding: 1px;" /></td>
+                                        <td><input type="number" step="0.01" min="0" placeholder="Total $" style="font-size: 24px; border: 1px solid black; margin-right: 10px; padding: 1px;" /></td>
+                                        <td><input type="number" step="0.01" min="0" placeholder="Total $" style="font-size: 24px; border: 1px solid black; margin-right: 10px; padding: 1px;" /></td>
+                                        <td><input type="number" step="0.01" min="0" placeholder="Total $" style="font-size: 24px; border: 1px solid black; margin-right: 10px; padding: 1px;" /></td>
                                     </tr>
                                     <tr>
                                         <td>Resiembra&emsp;</td>
-                                        <td><input type="number" min="0" placeholder="Total $" style="font-size: 24px; border: 1px solid black; margin-right: 10px; padding: 1px;" /></td>
-                                        <td><input type="number" min="0" placeholder="Total $" style="font-size: 24px; border: 1px solid black; margin-right: 10px; padding: 1px;" /></td>
-                                        <td><input type="number" min="0" placeholder="Total $" style="font-size: 24px; border: 1px solid black; margin-right: 10px; padding: 1px;" /></td>
+                                        <td><input type="number" step="0.01" min="0" placeholder="Total $" style="font-size: 24px; border: 1px solid black; margin-right: 10px; padding: 1px;" /></td>
+                                        <td><input type="number" step="0.01" min="0" placeholder="Total $" style="font-size: 24px; border: 1px solid black; margin-right: 10px; padding: 1px;" /></td>
+                                        <td><input type="number" step="0.01" min="0" placeholder="Total $" style="font-size: 24px; border: 1px solid black; margin-right: 10px; padding: 1px;" /></td>
                                     </tr>
                                     <tr>
                                         <td>Desyerbo&emsp;</td>
-                                        <td><input type="number" min="0" placeholder="Total $" style="font-size: 24px; border: 1px solid black; margin-right: 10px; padding: 1px;" /></td>
-                                        <td><input type="number" min="0" placeholder="Total $" style="font-size: 24px; border: 1px solid black; margin-right: 10px; padding: 1px;" /></td>
-                                        <td><input type="number" min="0" placeholder="Total $" style="font-size: 24px; border: 1px solid black; margin-right: 10px; padding: 1px;" /></td>
+                                        <td><input type="number" step="0.01" min="0" placeholder="Total $" style="font-size: 24px; border: 1px solid black; margin-right: 10px; padding: 1px;" /></td>
+                                        <td><input type="number" step="0.01" min="0" placeholder="Total $" style="font-size: 24px; border: 1px solid black; margin-right: 10px; padding: 1px;" /></td>
+                                        <td><input type="number" step="0.01" min="0" placeholder="Total $" style="font-size: 24px; border: 1px solid black; margin-right: 10px; padding: 1px;" /></td>
                                     </tr>
                                     <tr>
                                         <td>Abonamiento&emsp;</td>
-                                        <td><input type="number" min="0" placeholder="Total $" style="font-size: 24px; border: 1px solid black; margin-right: 10px; padding: 1px;" /></td>
-                                        <td><input type="number" min="0" placeholder="Total $" style="font-size: 24px; border: 1px solid black; margin-right: 10px; padding: 1px;" /></td>
-                                        <td><input type="number" min="0" placeholder="Total $" style="font-size: 24px; border: 1px solid black; margin-right: 10px; padding: 1px;" /></td>
+                                        <td><input type="number" step="0.01" min="0" placeholder="Total $" style="font-size: 24px; border: 1px solid black; margin-right: 10px; padding: 1px;" /></td>
+                                        <td><input type="number" step="0.01" min="0" placeholder="Total $" style="font-size: 24px; border: 1px solid black; margin-right: 10px; padding: 1px;" /></td>
+                                        <td><input type="number" step="0.01" min="0" placeholder="Total $" style="font-size: 24px; border: 1px solid black; margin-right: 10px; padding: 1px;" /></td>
                                     </tr>
                                     <tr>
                                         <td>Encalado&emsp;</td>
-                                        <td><input type="number" min="0" placeholder="Total $" style="font-size: 24px; border: 1px solid black; margin-right: 10px; padding: 1px;" /></td>
-                                        <td><input type="number" min="0" placeholder="Total $" style="font-size: 24px; border: 1px solid black; margin-right: 10px; padding: 1px;" /></td>
-                                        <td><input type="number" min="0" placeholder="Total $" style="font-size: 24px; border: 1px solid black; margin-right: 10px; padding: 1px;" /></td>
+                                        <td><input type="number" step="0.01" min="0" placeholder="Total $" style="font-size: 24px; border: 1px solid black; margin-right: 10px; padding: 1px;" /></td>
+                                        <td><input type="number" step="0.01" min="0" placeholder="Total $" style="font-size: 24px; border: 1px solid black; margin-right: 10px; padding: 1px;" /></td>
+                                        <td><input type="number" step="0.01" min="0" placeholder="Total $" style="font-size: 24px; border: 1px solid black; margin-right: 10px; padding: 1px;" /></td>
                                     </tr>
                                     <tr>
                                         <td>Aplicar Superfosfato Triple&emsp;</td>
-                                        <td><input type="number" min="0" placeholder="Total $" style="font-size: 24px; border: 1px solid black; margin-right: 10px; padding: 1px;" /></td>
-                                        <td><input type="number" min="0" placeholder="Total $" style="font-size: 24px; border: 1px solid black; margin-right: 10px; padding: 1px;" /></td>
-                                        <td><input type="number" min="0" placeholder="Total $" style="font-size: 24px; border: 1px solid black; margin-right: 10px; padding: 1px;" /></td>
+                                        <td><input type="number" step="0.01" min="0" placeholder="Total $" style="font-size: 24px; border: 1px solid black; margin-right: 10px; padding: 1px;" /></td>
+                                        <td><input type="number" step="0.01" min="0" placeholder="Total $" style="font-size: 24px; border: 1px solid black; margin-right: 10px; padding: 1px;" /></td>
+                                        <td><input type="number" step="0.01" min="0" placeholder="Total $" style="font-size: 24px; border: 1px solid black; margin-right: 10px; padding: 1px;" /></td>
                                     </tr>
                                     <tr>
                                         <td>Aplicación Insecticida&emsp;</td>
-                                        <td><input type="number" min="0" placeholder="Total $" style="font-size: 24px; border: 1px solid black; margin-right: 10px; padding: 1px;" /></td>
-                                        <td><input type="number" min="0" placeholder="Total $" style="font-size: 24px; border: 1px solid black; margin-right: 10px; padding: 1px;" /></td>
-                                        <td><input type="number" min="0" placeholder="Total $" style="font-size: 24px; border: 1px solid black; margin-right: 10px; padding: 1px;" /></td>
+                                        <td><input type="number" step="0.01" min="0" placeholder="Total $" style="font-size: 24px; border: 1px solid black; margin-right: 10px; padding: 1px;" /></td>
+                                        <td><input type="number" step="0.01" min="0" placeholder="Total $" style="font-size: 24px; border: 1px solid black; margin-right: 10px; padding: 1px;" /></td>
+                                        <td><input type="number" step="0.01" min="0" placeholder="Total $" style="font-size: 24px; border: 1px solid black; margin-right: 10px; padding: 1px;" /></td>
                                     </tr>
                                     <tr>
                                         <td>Aplicación de Herbicida&emsp;</td>
-                                        <td><input type="number" min="0" placeholder="Total $" style="font-size: 24px; border: 1px solid black; margin-right: 10px; padding: 1px;" /></td>
-                                        <td><input type="number" min="0" placeholder="Total $" style="font-size: 24px; border: 1px solid black; margin-right: 10px; padding: 1px;" /></td>
-                                        <td><input type="number" min="0" placeholder="Total $" style="font-size: 24px; border: 1px solid black; margin-right: 10px; padding: 1px;" /></td>
+                                        <td><input type="number" step="0.01" min="0" placeholder="Total $" style="font-size: 24px; border: 1px solid black; margin-right: 10px; padding: 1px;" /></td>
+                                        <td><input type="number" step="0.01" min="0" placeholder="Total $" style="font-size: 24px; border: 1px solid black; margin-right: 10px; padding: 1px;" /></td>
+                                        <td><input type="number" step="0.01" min="0" placeholder="Total $" style="font-size: 24px; border: 1px solid black; margin-right: 10px; padding: 1px;" /></td>
                                     </tr>
                                     <tr>
                                         <td>Aplicación de Fungicida&emsp;</td>
-                                        <td><input type="number" min="0" placeholder="Total $" style="font-size: 24px; border: 1px solid black; margin-right: 10px; padding: 1px;" /></td>
-                                        <td><input type="number" min="0" placeholder="Total $" style="font-size: 24px; border: 1px solid black; margin-right: 10px; padding: 1px;" /></td>
-                                        <td><input type="number" min="0" placeholder="Total $" style="font-size: 24px; border: 1px solid black; margin-right: 10px; padding: 1px;" /></td>
+                                        <td><input type="number" step="0.01" min="0" placeholder="Total $" style="font-size: 24px; border: 1px solid black; margin-right: 10px; padding: 1px;" /></td>
+                                        <td><input type="number" step="0.01" min="0" placeholder="Total $" style="font-size: 24px; border: 1px solid black; margin-right: 10px; padding: 1px;" /></td>
+                                        <td><input type="number" step="0.01" min="0" placeholder="Total $" style="font-size: 24px; border: 1px solid black; margin-right: 10px; padding: 1px;" /></td>
                                     </tr>
                                     <tr>
                                         <td>Control Broca&emsp;</td>
-                                        <td><input type="number" min="0" placeholder="Total $" style="font-size: 24px; border: 1px solid black; margin-right: 10px; padding: 1px;" /></td>
-                                        <td><input type="number" min="0" placeholder="Total $" style="font-size: 24px; border: 1px solid black; margin-right: 10px; padding: 1px;" /></td>
-                                        <td><input type="number" min="0" placeholder="Total $" style="font-size: 24px; border: 1px solid black; margin-right: 10px; padding: 1px;" /></td>
+                                        <td><input type="number" step="0.01" min="0" placeholder="Total $" style="font-size: 24px; border: 1px solid black; margin-right: 10px; padding: 1px;" /></td>
+                                        <td><input type="number" step="0.01" min="0" placeholder="Total $" style="font-size: 24px; border: 1px solid black; margin-right: 10px; padding: 1px;" /></td>
+                                        <td><input type="number" step="0.01" min="0" placeholder="Total $" style="font-size: 24px; border: 1px solid black; margin-right: 10px; padding: 1px;" /></td>
                                     </tr>
 
                                 <table>
@@ -799,31 +798,31 @@
                                     <table style="text-align: right;">
                                         <tr>
                                             <td>Plagas&emsp;</td>
-                                            <td><input type="number" min="0" placeholder="Total almudes" style="font-size: 24px; border: 1px solid black; margin-right: 10px; padding: 1px;" /></td>
+                                            <td><input type="number" step="0.01" min="0" placeholder="Total almudes" style="font-size: 24px; border: 1px solid black; margin-right: 10px; padding: 1px;" /></td>
                                         </tr>
                                         <tr>
                                             <td>Sequías&emsp;</td>
-                                            <td><input type="number" min="0" placeholder="Total almudes" style="font-size: 24px; border: 1px solid black; margin-right: 10px; padding: 1px;" /></td>
+                                            <td><input type="number" step="0.01" min="0" placeholder="Total almudes" style="font-size: 24px; border: 1px solid black; margin-right: 10px; padding: 1px;" /></td>
                                         </tr>
                                         <tr>
                                             <td>Inundaciones&emsp;</td>
-                                            <td><input type="number" min="0" placeholder="Total almudes" style="font-size: 24px; border: 1px solid black; margin-right: 10px; padding: 1px;" /></td>
+                                            <td><input type="number" step="0.01" min="0" placeholder="Total almudes" style="font-size: 24px; border: 1px solid black; margin-right: 10px; padding: 1px;" /></td>
                                         </tr>
                                         <tr>
                                             <td>Enfermedad del Dueño&emsp;</td>
-                                            <td><input type="number" min="0" placeholder="Total almudes" style="font-size: 24px; border: 1px solid black; margin-right: 10px; padding: 1px;" /></td>
+                                            <td><input type="number" step="0.01" min="0" placeholder="Total almudes" style="font-size: 24px; border: 1px solid black; margin-right: 10px; padding: 1px;" /></td>
                                         </tr>
                                         <tr>
                                             <td>Falta de Mano de Obra&emsp;</td>
-                                            <td><input type="number" min="0" placeholder="Total almudes" style="font-size: 24px; border: 1px solid black; margin-right: 10px; padding: 1px;" /></td>
+                                            <td><input type="number" step="0.01" min="0" placeholder="Total almudes" style="font-size: 24px; border: 1px solid black; margin-right: 10px; padding: 1px;" /></td>
                                         </tr>
                                         <tr>
                                             <td>Mal manejo&emsp;</td>
-                                            <td><input type="number" min="0" placeholder="Total almudes" style="font-size: 24px; border: 1px solid black; margin-right: 10px; padding: 1px;" /></td>
+                                            <td><input type="number" step="0.01" min="0" placeholder="Total almudes" style="font-size: 24px; border: 1px solid black; margin-right: 10px; padding: 1px;" /></td>
                                         </tr>
                                         <tr>
                                             <td>Robo&emsp;</td>
-                                            <td><input type="number" min="0" placeholder="Total almudes" style="font-size: 24px; border: 1px solid black; margin-right: 10px; padding: 1px;" /></td>
+                                            <td><input type="number" step="0.01" min="0" placeholder="Total almudes" style="font-size: 24px; border: 1px solid black; margin-right: 10px; padding: 1px;" /></td>
                                         </tr>
                                         <tr>
                                             <td>Otra (especificar)&emsp;</td>
@@ -831,7 +830,7 @@
                                         </tr>
                                         <tr>
                                             <td>Total&emsp;</td>
-                                            <td><input type="number" min="0" placeholder="Total almudes" style="font-size: 24px; border: 1px solid black; margin-right: 10px; padding: 1px;" /></td>
+                                            <td><input type="number" step="0.01" min="0" placeholder="Total almudes" style="font-size: 24px; border: 1px solid black; margin-right: 10px; padding: 1px;" /></td>
                                         </tr>
                                     </table>
 
