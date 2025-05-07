@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="es">
+
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="DESCRIPTION" />
+
+    <title>Proyecto de Café</title>
+
+    <link rel="icon" href="CoffeeTabLogo.png" type="image/png" />
+
+    <style>
+      body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+        background-color: #fffdf8;
+        color: #333;
+      }
+
+      .intro-block {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 2rem;
+        max-width: 1000px;
+        margin: 2rem auto;
+        padding: 2rem;
+        background-color: #fffdf8;
+        border-radius: 0.5rem;
+      }
+
+      .logo {
+        height: 300px;
+        width: auto;
+        flex-shrink: 0;
+      }
+
+      .intro-text {
+        max-width: 600px;
+      }
+
+      .intro-text h2 {
+        margin-top: 0;
+      }
+
+      nav {
+        background-color: #135214;
+        color: white;
+        display: flex;
+        justify-content: center;
+        gap: 2rem;
+        padding: 1rem;
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+      }
+
+      nav a {
+        color: white;
+        text-decoration: none;
+        font-weight: bold;
+      }
+
+      nav a:hover {
+        text-decoration: underline;
+      }
+
+      .hero-image {
+        background: url('https://images.unsplash.com/photo-1509042239860-f550ce710b93') center/cover no-repeat;
+        height: 400px;
+        width: 100%;
+      }
+
+      header.hero {
+        background-color: #248a22;
+        color: white;
+        text-align: center;
+        padding: 1.5rem 2rem;
+      }
+
+      header.hero h1 {
+        font-size: 2.5rem;
+        margin: 0;
+      }
+
+      header.hero p {
+        font-size: 1.2rem;
+        margin-top: 0.5rem;
+      }
+
+      .intro, .stages {
+        padding: 2rem;
+        max-width: 1000px;
+        margin: auto;
+      }
+
+      .stages h2, .intro h2 {
+        text-align: center;
+        margin-bottom: 2rem;
+      }
+
+      .project-purpose {
+        background-color: #f5f5f5;
+        padding: 2rem;
+        max-width: 1000px;
+        margin: 2rem auto;
+        border-radius: 0.5rem;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      }
+
+      .project-purpose h2 {
+        text-align: center;
+        margin-bottom: 1rem;
+      }
+
+      footer {
+        text-align: center;
+        padding: 1rem;
+        background-color: #f0e9dd;
+        color: #333;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="hero-image"></div>
+
+    <nav>
+      <a href="#inicio">Inicio</a>
+      <!-- <a href="Cuestionario">Cuestionarios</a> -->
+      <a href="#contacto">Equipo de Trabajo</a>
+    </nav>
+
+    <!-- Bloque debajo del header menu (its pretty cute ngl) -->
+    <!-- <header class="hero" id="inicio">
+      <h1>Proyecto de Café</h1>
+    </header> -->
+
+    <section class="intro-block">
+      <img src="CoffeeLogo.png" alt="Logo del Proyecto de Café" class="logo" />
+      <div class="intro-text">
+        <h2>¿Qué es la Producción de Café?</h2>
+        <p>La producción de café es un proceso complejo y hermoso que involucra el cultivo, cosecha, procesamiento y preparación de los granos. 
+            Acompáñanos en este recorrido desde la semilla hasta la taza.
+        </p>
+      </div>
+    </section>
+    
+
+    <section class="project-purpose">
+      <h2>Propósito del Proyecto</h2>
+      <p>
+        Este proyecto investiga el impacto que tienen las regulaciones del Departamento de 
+        Asuntos del Consumidor (DACO) sobre los precios del café en Puerto Rico. 
+        En enero de 2023, bajo la Orden Provisional Número 1 del Reglamento 8578,
+        se estableció un precio mínimo para el café arábiga y robusta. 
+        Esta regulación, vigente por 12 meses, busca proteger a los caficultores, pero 
+        su verdadero efecto sobre los costos de producción y el precio al consumidor 
+        sigue siendo debatido. A través de esta iniciativa, analizamos la estructura de 
+        costos de producción en las fincas cafetaleras, el mercado de venta de café 
+        uva, y cómo estas políticas públicas han influido en el precio del café a lo largo de los años.
+      </p>
+    </section>
+    
+
+    <footer id="contacto">
+      <p>Hecho con 💛 por Adriana I. Carrasquillo Cruz | Proyecto educativo</p>
+    </footer>
+  </body>
+</html>
