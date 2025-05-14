@@ -25,4 +25,7 @@ from forms import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('cuestionario-cafe/', views.coffeeTest, name='coffee-questionaire'),
+    path('', views.homepage, name='homepage'), # default page
+    path('homepage/', views.homepage, name='homepage'), # default page
+
 ]

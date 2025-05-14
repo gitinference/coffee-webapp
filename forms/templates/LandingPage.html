@@ -5,6 +5,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="DESCRIPTION" />
+    {% load static %}
 
     <title>Proyecto de Café</title>
 
@@ -130,8 +131,9 @@
 
     <nav>
       <a href="#inicio">Inicio</a>
-      <a href="forms/templates/CoffeeQuestionare.html">Cuestionarios</a>
+      <a href="/cuestionario-cafe/">Cuestionario Café</a>
       <a href="#contacto">Equipo de Trabajo</a>
+
     </nav>
 
     <!-- Bloque debajo del header menu (its pretty cute ngl) -->
@@ -140,7 +142,8 @@
     </header> -->
 
     <section class="intro-block">
-      <img src="CoffeeLogo.png" alt="Logo del Proyecto de Café" class="logo" />
+      <!-- <img src="CoffeeLogo.png" alt="Logo del Proyecto de Café" class="logo" /> -->
+      <img src="{% static 'CoffeeQuestionare/CoffeeLogo.png' %}" alt="Logo del Proyecto de Café" class="logo" />
       <div class="intro-text">
         <h2>¿Qué es la Producción de Café?</h2>
         <p>La producción de café es un proceso complejo y hermoso que involucra el cultivo, cosecha, procesamiento y preparación de los granos. 

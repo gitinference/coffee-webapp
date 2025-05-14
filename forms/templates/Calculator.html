@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Multiplicador de Empleo</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background-color: #f9f9f9;
+      color: #333;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 2rem;
+    }
+
+    h1 {
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+    }
+
+    h2 {
+      font-size: 1.2rem;
+      margin-bottom: 1rem;
+    }
+
+    .container {
+      background: white;
+      padding: 2rem;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+      width: 100%;
+      max-width: 800px;
+    }
+
+    .form-section {
+      text-align: center;
+      margin-bottom: 1.5rem;
+    }
+
+    select, input[type="number"] {
+      padding: 8px;
+      margin: 0.5rem;
+      font-size: 1rem;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 1rem;
+    }
+
+    th, td {
+      padding: 10px;
+      border: 1px solid #aaa;
+      text-align: center;
+    }
+
+    th {
+      background-color: #eee;
+    }
+
+    .definitions {
+      margin-top: 2rem;
+    }
+
+    .definitions strong {
+      display: block;
+      margin-top: 1rem;
+      font-weight: bold;
+    }
+
+    .definitions p {
+      margin-bottom: 0.5rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Multiplicador de Empleo</h1>
+    <h2>Empleos generados por cada millón de dólares en inversión</h2>
+
+    <p>
+      La Junta de Planificación produce los multiplicadores de empleo. Para más información, escriba a 
+      <a href="mailto:diaz_a@jp.pr.gov">diaz_a@jp.pr.gov</a> o 
+      <a href="mailto:garcia_my@jp.pr.gov">garcia_my@jp.pr.gov</a>.
+    </p>
+
+    <div class="form-section">
+      <label for="sector">Sector:</label>
+      <select id="sector">
+        <option>Construcción</option>
+        <option>Servicios</option>
+        <option>Agricultura</option>
+        <option>Manufactura</option>
+        <option>Gobierno</option>
+      </select>
+
+      <label for="year">Año:</label>
+<select id="year">
+  <option>2023r</option>
+  <option>2023p</option>
+  <option>2024r</option>
+  <option>2024p</option>
+  <option>2025r</option>
+  <option>2025p</option>
+</select>
+
+      <label for="inv">Inversión (en millones):</label>
+      <input type="number" id="inv" placeholder="0" />
+    </div>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Directos</th>
+          <th>Directos e Indirectos</th>
+          <th>Indirectos</th>
+          <th>Inducidos</th>
+          <th>Totales</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>88</td>
+          <td>184</td>
+          <td>96</td>
+          <td>8</td>
+          <td>192</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="definitions">
+      <strong>Empleo Directo:</strong>
+      <p>Se define como los empleos requeridos por cada millón de dólares de inversión en un proceso de producción específico.</p>
+
+      <strong>Empleo Directo e Indirecto:</strong>
+      <p>Incluye empleos directos más los indirectos relacionados con la cadena de suministro.</p>
+
+      <strong>Empleo Directo, Indirecto e Inducido:</strong>
+      <p>Incluye el impacto adicional de los gastos personales y de consumo de los trabajadores en la economía.</p>
+    </div>
+  </div>
+</body>
+</html>
