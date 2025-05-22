@@ -1,0 +1,466 @@
+<!doctype html>
+<html lang="es">
+
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="DESCRIPTION" />
+
+    <title>Proyecto de Café</title>
+
+    <link rel="icon" href="CoffeeTabLogo.png" type="image/png" />
+
+    <style>
+      body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+        background-color: #fffdf8;
+        color: #333;
+      }
+
+      .intro-block {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 2rem;
+        max-width: 1000px;
+        margin: 2rem auto;
+        padding: 2rem;
+        background-color: #fffdf8;
+        border-radius: 0.5rem;
+      }
+
+      .logo {
+        height: 300px;
+        width: auto;
+        flex-shrink: 0;
+      }
+
+      .intro-text {
+        max-width: 600px;
+      }
+
+      .intro-text h2 {
+        margin-top: 0;
+      }
+
+      nav {
+        background-color: #135214;
+        color: white;
+        display: flex;
+        justify-content: center;
+        gap: 2rem;
+        padding: 1rem;
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+      }
+
+      nav a {
+        color: white;
+        text-decoration: none;
+        font-weight: bold;
+      }
+
+      nav a:hover {
+        text-decoration: underline;
+      }
+
+      .hero-image {
+        background: url('https://images.unsplash.com/photo-1509042239860-f550ce710b93') center/cover no-repeat;
+        height: 400px;
+        width: 100%;
+      }
+
+      header.hero {
+        background-color: #248a22;
+        color: white;
+        text-align: center;
+        padding: 1.5rem 2rem;
+      }
+
+      header.hero h1 {
+        font-size: 2.5rem;
+        margin: 0;
+      }
+
+      header.hero p {
+        font-size: 1.2rem;
+        margin-top: 0.5rem;
+      }
+
+      .intro, .stages {
+        padding: 2rem;
+        max-width: 1000px;
+        margin: auto;
+      }
+
+      .stages h2, .intro h2 {
+        text-align: center;
+        margin-bottom: 2rem;
+      }
+
+      .project-purpose {
+        background-color: #f5f5f5;
+        padding: 2rem;
+        max-width: 1000px;
+        margin: 2rem auto;
+        border-radius: 0.5rem;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      }
+
+      .project-purpose h2 {
+        text-align: center;
+        margin-bottom: 1rem;
+      }
+
+      footer {
+        text-align: center;
+        padding: 1rem;
+        background-color: #f0e9dd;
+        color: #333;
+      }
+
+      body {
+          margin: 0;
+          padding: 100px 0px;
+          height: 100%;
+          box-sizing: border-box;
+          font-family: sans-serif;
+      }
+
+      h1 {
+          text-align: center;
+          color: #000000;
+          font-size: 45px;
+      }
+
+      .container {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          width: 80%;
+          margin: auto;
+      }
+
+      .our-team {
+          background: #f7f5ec;
+          text-align: center;
+          overflow: hidden;
+          position: relative;
+          padding: 30px 0 40px;
+          margin: 0px 20px;
+          width: 30%;
+      }
+
+      .our-team .pic {
+          display: inline-block;
+          width: 130px;
+          height: 130px;
+          margin-bottom: 0px;
+          z-index: 1;
+          position: relative;
+      }
+
+      .our-team .pic::before {
+          content: "";
+          width: 100%;
+          height: 0;
+          border-radius: 50%;
+          background: #248a22;
+          position: absolute;
+          bottom: 135%;
+          right: 0;
+          left: 0;
+          opacity: 0.2;
+          transform: scale(3);
+          transition: all 0.3s linear 0s;
+      }
+
+      .our-team:hover .pic::before {
+          height: 100%;
+      }
+
+      .ou-team .pic:after {
+          content: "";
+          width: 100%;
+          height: 100%;
+          border-radius: 50%;
+          background: #248a22;
+          position: absolute;
+          top: 0;
+          left: 0;
+          z-index: -1;
+      }
+
+      .our-team .pic img {
+          width: 100%;
+          height: auto;
+          border-radius: 50%;
+          transform: scale(1);
+          transition: all 0.9s ease 0s;
+      }
+
+      .our-team:hover .pic img {
+          box-shadow: 0 0 0 14px #f7f5ec;
+          transform: scale(0.7);
+      }
+
+      .our-team .team-content {
+          margin-bottom: 30px;
+      }
+
+      .our-team .title {
+          font-size: 22px;
+          font-weight: 700;
+          color: #4e5052;
+          letter-spacing: 1px;
+          margin-bottom: 5px;
+      }
+
+      .our-team .post {
+          display: block;
+          font-size: 15px;
+          color: #4e5052;
+      }
+
+      .our-team .social {
+          width: 100%;
+          padding: 0;
+          margin: 0;
+          background: #248a22;
+          position: absolute;
+          bottom: -150px;
+          left: 0;
+          transition: all 0.5s ease 0s;
+      }
+
+      .our-team:hover .social {
+          bottom: 0;
+      }
+
+      .our-team .social li a {
+          text-decoration: none;
+          display: block;
+          padding: 10px;
+          font-size: 17px;
+          color: #fff;
+          transition: all 0.3s ease 0s;
+      }
+
+      .our-team .social li a:hover {
+          color: #248a22;
+          background: #7ae9a3;
+      }
+
+      @media (max-width: 720px) {
+          .container {
+              flex-direction: column;
+          }
+
+          .our-team {
+              width: 80%;
+              margin-top: 30px; 
+          }
+      }
+
+      .bloque-texto {
+        background-color: #ffffff;
+        border: 1px solid #ccc;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        padding: 1.5rem;
+        border-radius: 12px;
+        max-width: 700px;
+        margin: 2rem auto;
+        font-size: 1.1rem;
+        line-height: 1.7;
+      }
+
+    </style>
+  </head>
+
+  <body>
+    <div class="hero-image"></div>
+
+    <nav>
+      <a href="#inicio">Inicio</a>
+      <a href="Calculadora">Calculadora</a>
+      <a href="Team.html">Equipo</a>
+    </nav>
+
+
+
+    <!-- Title -->
+    <section class="intro-block">
+        <h2>Equipo</h2>
+    </section>
+
+    <!-- INTRODUCTION -->
+    <section class="bloque-texto">
+        <p>
+            Nuestro equipo está compuesto por una colaboración única entre estudiantes de 
+            ingeniería de software, economistas y profesores dedicados. 
+            Juntos, combinamos nuestras habilidades y conocimientos para desarrollar 
+            soluciones innovadoras que abordan desafíos complejos. 
+            Cada miembro del equipo aporta una perspectiva única, lo que nos permite 
+            crear proyectos que son tanto técnicamente sólidos como económicamente 
+            viables. Estamos comprometidos con el aprendizaje continuo y la excelencia, 
+            trabajando en conjunto para llevar adelante iniciativas que marcan la 
+            diferencia.
+        </p>
+    </section>
+
+    <br>
+    <br>
+    <br>
+
+    <section>
+        <h2 class="intro-block">Profesores de la Universidad de Puerto Rico - Recinto Universitario de Mayaguez</h2>
+        <div class="container">
+            <!--Team 1-->
+            <div class="our-team">
+                <div class="pic">
+                    <img src="https://i.ibb.co/R0CznND/Julio-C-sar-Hern-ndez.png" alt="">
+                </div>
+                <div class="team-content">
+                    <h3 class="title">Julio César, Ph.D. </h3>
+                    <span class="post">Investigador Principal / Catedrático</span>
+                    <span class="post">Director de Proyecto</span>
+                </div>
+                <ul class="social">
+                    <!-- <li><span>Departamento de Economía Agrícola y Sociología Rural de la Universidad de Puerto Rico - Recinto de Mayagüez</span> </li> -->
+                    <li><span>julio.hernandez3@upr.edu</span></li>
+                    <li><a href="https://juliocesarhernandez.com" class="fas fa-globe"></a></li>
+                </ul>
+            </div>
+            </div>
+    </section>
+    <br>
+    <br>
+    <br>
+
+    <section>
+        <h2 class="intro-block">Asistentes de Investigación de la Universidad de Puerto Rico - Recinto Universitario de Mayaguez</h2>
+        <div class="container">
+            <!--Team 1-->
+            <div class="our-team">
+                <div class="team-content">
+                    <h3 class="title">Diego A. Perez Matías</h3>
+                </div>
+                <ul class="social">
+                <li><span>diego.perez28@upr.edu</span></li>
+            </ul>
+            </div>
+
+            <!--Team 2-->
+            <div class="our-team">
+            <div class="team-content">
+                <h3 class="title">José E. Lopez Maldonado</h3>
+            </div>
+            <ul class="social">
+                <li><span>jose.lopez121@upr.edu</span></li>
+            </ul>
+        </div>
+
+        <!--Team 3-->
+        <div class="our-team">
+            <div class="team-content">
+                <h3 class="title">Aixa Z. Ferrer Soler</h3>
+            </div>
+            <ul class="social">
+            <li><span>aixa.ferrer@upr.edu</span></li>
+        </ul>
+        </div>
+
+    </section>
+    <br>
+    <br>
+    <br>
+    <section>
+    <!--Team 2-->
+    <div class="container">
+        <div class="our-team">
+            <div class="team-content">
+                <h3 class="title">Andrew M. Hermann Holland</h3>
+            </div>
+            <ul class="social">
+            <li><span>andrew.hermann@upr.edu</span></li>
+        </ul>
+        </div>
+
+        <!--Team 2-->
+        <div class="our-team">
+        <div class="team-content">
+            <h3 class="title">Elsie C. Zayas Muñiz</h3>
+        </div>
+        <ul class="social">
+            <li><span>elsie.zayas@upr.edu</span></li>
+        </ul>
+    </div>
+    </section>
+    <section>
+        <h2 class="intro-block">Estudiantes de Bachillerato de la Universidad de Puerto Rico - Recinto Universitario de Mayaguez</h2>
+        <div class="container">
+            <!--Team 1-->
+            <div class="our-team">
+                <div class="pic">
+                    <img src="https://i.ibb.co/yWBvJ4K/Adriana2.jpg" alt="">
+                </div>
+                <div class="team-content">
+                    <h3 class="title">Adriana Carrasquillo Cruz</h3>
+                    <span class="post">Ingeniería de Software</span>
+                </div>
+                <ul class="social">
+                    <li><a href="https://github.com/Adriana-Isabel" class="fab fa-github"></a></li>
+                    <li><a href="https://www.linkedin.com/in/adriana-carrasquillo-cruz-297777263" class="fab fa-linkedin"></a></li>
+                    <li><a href="https://drive.google.com/file/d/1bJ8nJyRfa3ExYfxSWdhFcSqQSuHdPctz/view" class="fas fa-file-pdf"></a></li>
+                </ul>
+            </div>
+            
+            <!--Team 2-->
+            <div class="our-team">
+                <div class="pic">
+                    <img src="https://i.ibb.co/D5HbNDr/Edzel.jpg" alt="">
+                </div>
+                <div class="team-content">
+                    <h3 class="title">Edzel E. Ortiz</h3>
+                    <span class="post">Ciencias e Ingeniería de la Computación</span>
+                </div>
+                <ul class="social">
+                    <li><a href="https://github.com/EdzelOrtiz" class="fab fa-github"></a></li>
+                </ul>
+            </div>
+        </div>
+    </section>
+    <br>
+    <br>
+    <br>
+    <section>
+        <h2 class="intro-block">Estudiantes de Maestría de la Universidad de Puerto Rico - Recinto Universitario de Mayaguez</h2>
+        <div class="container">
+            <!--Team 1-->
+            <div class="our-team">
+                <div class="pic">
+                    <img src="https://avatars.githubusercontent.com/u/87619490?v=4" alt="">
+                </div>
+                <div class="team-content">
+                    <h3 class="title">Alejandro Ouslan</h3>
+                    <span class="post">Economía</span>
+                </div>
+                <ul class="social">
+                    <li><a href="https://github.com/ouslan" class="fab fa-github"></a></li>
+                </ul>
+            </div>
+        </div>
+    </section>
+    <br>
+    <br>
+    <br>
+    <footer id="contacto">
+        <p>Hecho con 💛 por Adriana I. Carrasquillo Cruz | Proyecto educativo</p>
+      </footer>
+    </body>
+  </html>
+  
