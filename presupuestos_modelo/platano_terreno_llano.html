@@ -62,16 +62,20 @@
                 <th colspan="10">PRODUCCION POR CUERDA</th>
             </tr>
             <tr>
+                <th colspan="9">Numero de cuerdas sembradas</th>
+                <td><input type="number" title="Número de cuerdas sembradas" class="numero_cuerdas" /></td>
+            </tr>
+            <tr>
                 <th colspan="9">Número de plantas por cuerda</th>
-                <td><input type="number" title="Número de plantas por cuerda" /></td>
+                <td><input type="number" title="Número de plantas por cuerda" class="numero_plantas" /></td>
             </tr>
             <tr>
                 <th colspan="9">Rendimiento por planta</th>
-                <td><input type="number" title="Rendimiento por planta" /></td>
+                <td><input type="number" title="Rendimiento por planta" class="rendimiento_planta" /></td>
             </tr>
             <tr>
                 <th colspan="9">Rendimiento por cuerda</th>
-                <td></td>
+                <td class="rendimiento_cuerda"></td>
             </tr>
             <tr>
                 <td colspan="10" style="height: 20px; background-color: transparent;"></td>
@@ -183,6 +187,23 @@
         }
 
         const tabla = document.getElementById("tabla");
+
+        function rendimientoPorCuerda() {
+            const numeroCuerdas = parseFloat(document.querySelector(".numero_cuerdas")?.value) || 0;
+            const numeroPlantas = parseFloat(document.querySelector(".numero_plantas")?.value) || 0;
+            const rendimientoPorPlanta = parseFloat(document.querySelector(".rendimiento_planta")?.value) || 0;
+            return numeroCuerdas * numeroPlantas * rendimientoPorPlanta;
+        }
+
+        document.querySelector(".rendimiento_cuerda").textContent = formatNumber(rendimientoPorCuerda());
+
+        // Actualizar rendimiento por cuerda al cambiar cualquiera de los campos relevantes
+        document.querySelectorAll(".numero_cuerdas, .numero_plantas, .rendimiento_planta").forEach(input => {
+            input.addEventListener("input", () => {
+                document.querySelector(".rendimiento_cuerda").textContent = formatNumber(rendimientoPorCuerda());
+                actualizarTotalesGenerales();
+            });
+        });
 
         const mano_de_obra_1 = [
             'Operación maquinaria',
@@ -759,7 +780,6 @@
         tabla.appendChild(columnas_5);
 
         totales = [
-            'Número de Cuerdas',
             'Ingreso Total',
             'Gasto Total',
             'Ingreso Neto',
@@ -772,7 +792,7 @@
             fila.innerHTML = `
         <td colspan='6'>${total}</td>
         <!-- Estandar -->
-        <td colspan='2'>${total == 'Número de Cuerdas' ? `<input type="number" class="numero_cuerdas" min="0" />` : `<span id="valor_${index}">$ -</span>`}</td>
+        <td colspan='2'><span id="valor_${index}">$ -</span></td>
         <td colspan='2'><span class='mi_finca_${index}'>$ -</span></td>
           `;
 
@@ -793,33 +813,24 @@
             const ingresoNeto = ingresoTotal - gastoTotal;
             const produccionMinima = gastos_totales / 0.30 * numeroCuerdas;
 
-            if (document.getElementById("valor_0")) document.getElementById("valor_0").textContent = numeroCuerdas ? numeroCuerdas : '-';
-            if (document.querySelector('.mi_finca_0')) document.querySelector('.mi_finca_0').textContent = numeroCuerdas ? `${numeroCuerdas - 1}` : '-';
-            if (document.getElementById("valor_1")) document.getElementById("valor_1").textContent = ingresoTotal ? formatSignedCurrency(ingresoTotal) : '-';
-            if (document.querySelector('.mi_finca_1')) {
+            if (document.getElementById("valor_0")) document.getElementById("valor_0").textContent = ingresoTotal ? formatSignedCurrency(ingresoTotal) : '-';
+            if (document.querySelector('.mi_finca_0')) {
                 const diff = ingresoTotal - ingresos_totales;
+                document.querySelector('.mi_finca_0').textContent = diff === 0 ? '-' : formatSignedCurrency(diff);
+            }
+            if (document.getElementById("valor_1")) document.getElementById("valor_1").textContent = gastoTotal ? formatSignedCurrency(gastoTotal) : '-';
+            if (document.querySelector('.mi_finca_1')) {
+                const diff = gastoTotal - gastos_totales;
                 document.querySelector('.mi_finca_1').textContent = diff === 0 ? '-' : formatSignedCurrency(diff);
             }
-            if (document.getElementById("valor_2")) document.getElementById("valor_2").textContent = gastoTotal ? formatSignedCurrency(gastoTotal) : '-';
+            if (document.getElementById("valor_2")) document.getElementById("valor_2").textContent = ingresoNeto ? formatSignedCurrency(ingresoNeto) : '-';
             if (document.querySelector('.mi_finca_2')) {
-                const diff = gastoTotal - gastos_totales;
+                const diff = ingresoNeto - ingreso_neto_total;
                 document.querySelector('.mi_finca_2').textContent = diff === 0 ? '-' : formatSignedCurrency(diff);
             }
-            if (document.getElementById("valor_3")) document.getElementById("valor_3").textContent = ingresoNeto ? formatSignedCurrency(ingresoNeto) : '-';
-            if (document.querySelector('.mi_finca_3')) {
-                const diff = ingresoNeto - ingreso_neto_total;
-                document.querySelector('.mi_finca_3').textContent = diff === 0 ? '-' : formatSignedCurrency(diff);
-            }
-            document.getElementById("valor_4").textContent = `${formatCurrency(produccionMinima).replace('$', '')}`;
-            document.querySelector('.mi_finca_4').textContent = `${formatCurrency((gastos_totales / 0.30 - produccionMinima)).replace('$', '')}`;
+            document.getElementById("valor_3").textContent = `${formatCurrency(produccionMinima).replace('$', '')}`;
+            document.querySelector('.mi_finca_3').textContent = `${formatCurrency((produccionMinima - gastos_totales / 0.30)).replace('$', '')}`;
         }
-
-        // input listener para actualizar totales generales
-        tabla.addEventListener("input", (e) => {
-            if (e.target.matches(".numero_cuerdas")) {
-                actualizarTotalesGenerales();
-            }
-        });
 
         // Inicializar los valores al cargar la página
         actualizarTotalesGenerales();
