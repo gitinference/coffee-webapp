@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Presupuesto modelo: Producción de Pacas de Heno</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 20px; }
+    table { width: 100%; border-collapse: collapse; margin-bottom: 20px; }
+    th, td { border: 1px solid #ccc; padding: 8px; text-align: center; }
+    th { background-color: #f2f2f2; }
+    input, select { width: 95%; padding: 4px; }
+
+    td:first-child,
+    th:first-child{
+      text-align: left;
+    }
+  </style>
+</head>
+<body>
+  <h1>Presupuesto modelo: Producción de Pacas de Heno (35 libras)
+    <h2>con Pastos Mejorados utilizando SEMILLA<sup>1</sup>								</h2> 															<sup style="font-size: 0.1em;">K11</sup></h1>
+
+
+  <table>
+    <thead>
+      <tr>
+        <th>Partida</th>
+        <th>Cantidad</th>
+        <th>Unidad (Primer año)</th>
+        <th>Precio</th>
+        <th>Costo Primer año</th>
+        <th>Costo Segundo año</th>
+       
+      </tr>
+
+    </thead>
+    <tbody id="tabla">
+      <!-- Filas generadas por JS -->
+    </tbody>
+
+    <tfoot>
+      <tr>
+        <td colspan="10" style="padding: 20px; background-color: #fff; line-height: 1.6;">
+
+          <h2 style="color: #000000; font-size: 1em">Supuestos</h2>
+          * La etiqueta requiere que el MOCAP se incorpor al suelo inmediatamente despues de su aplicación.								
+          <ol style="padding-left: 20px;">
+            <li>Se aplica yerbicida tres veces durante el ciclo del cultivo/8 horas cada vez.</li>
+            <li>Se aplica tres veces por linea de riego por goteo</li>
+            <li>Se realiza tres veces durante el ciclo</li>
+            <li>Return (Vydate L.) La mencion del producto no representa nuestro endoso.  7.5 cc por planta. Dos aplicaciones.</li>
+            <li>25% del total de la nómina</li>
+            <li>Uso de terreno incluye sistema de riego</li>
+            <li>10% del total de mano de obra y maquinaria</li>
+            <li>El interés sobre el capital circulante es el costo del dinero en efectivo que se usa en la empresa. Total de gastos en efectivo por la tasa de interés prevaleciente en el mercado (9%).</li>
+            <li>No se tomó en consideración el subsidio salarial, si se aplicara el subsidio el ingreso neto aumentaría. Se proveyó encasillado para que coloque el valor del subsidio.</li>
+								
+          </ol>
+
+          <span style="font-weight: bold;">Preparado por:</span><br>
+          Mildred Cortes, PhD<br>
+          Catedrática de Extensión Agrícola en Economía Agrícola<br>
+          Manuel Diaz, PhD<br>
+          Especialista en Farináceos<br><br>
+      
+
+          <span style="font-weight: bold;">Versión Electrónica:</span><br>
+          Alexandra Gregory Crespo, PhD<br>
+          Catedrática del Servicio de Extensión Agrícola en Economía Agrícola<br><br>
+    
+          <span style="font-weight: bold;">Versión Web:</span><br>
+          Julio C. Hernández Correa<br>
+          Catedrático del Servicio de Extensión Agrícola en Economía Agrícola<br><br>
+    
+          <span style="font-weight: bold;">Fecha de revisión:</span><br>
+          Junio 2025<br><br>
+    
+          <div style="margin-top: 20px; padding: 12px; border-left: 5px solid #d9534f; background-color: #fdf2f2;">
+            <strong>AVISO:</strong> Los Presupuestos Modelos presentan la información de los ingresos y gastos bajo condiciones normales y características particulares de una finca. La Universidad de Puerto Rico no asume responsabilidad por los resultados si los ingresos y gastos de una empresa en particular difieren de dicha publicación. El usuario de estos modelos releva a la Universidad de Puerto Rico de toda responsabilidad, reclamación, pérdida, daño o costo relacionado o surgido por el uso de estos modelos.
+          </div>
+    
+          <div style="margin-top: 20px; font-size: 0.85em; text-align: center; color: #999;">
+            This material is based upon work supported by USDA/OPPE under Award Number: AO212501x443G010
+          </div>
+        </td>
+      </tr>
+    </tfoot>
+
+    
+  </table>
+<!----------------------------------------------------------------------------------------------------------------------------------------->
+<!----------------------------------------------------------------------------------------------------------------------------------------->
+<!----------------------------------------------------------------------------------------------------------------------------------------->
+  <script>
+
+    const tabla = document.getElementById("tabla");
+
+    const actividades = {
+      "Preparación de Terreno": 7.25,
+      "Poda": 8.50,
+      "Cosecha": 6.75
+    };
+
+    const header1 = document.createElement("tr");
+      header1.innerHTML = `<th colspan="6" style="text-align: center; background-color: #cccccc;">GASTOS DE MAQUINARIA</th>`;
+      tabla.appendChild(header1);
+
+    const mano_de_obra_1 = [
+    "Limpieza de area<sup>4</sup>", 
+    "Arar<sup>5</sup>", 
+    "Rastrillar<sup>6</sup>",
+    "Siembra<sup>7</sup>",
+    "Desyerbo Mecánico <sup>8</sup> ",
+    "Aplicar abono <sup>9</sup>",
+    "Aplicar herbicida",
+    "Corte y alineación de pastos <sup>10</sup>",
+    "Empaque de heno"
+    
+  ];
+
+  const valores_segundo_año_t1=[
+    120.00,80.00,105.00,105.00
+  ];
+
+  
+
+    mano_de_obra_1.forEach((trabajo, index) => {
+      const fila = document.createElement("tr");
+      
+      fila.innerHTML = `
+      <td>${trabajo}</td>
+      <td><input type="number" min="0" step="1" id="cantidad-${index}"  oninput="calcularCostoAño1(${index})"></td>
+      <td>Horas</td>
+      <td><input type="number" min="0" step="0.01" id="precio-${index}"  oninput="calcularCostoAño1(${index})"></td>
+      <td id="costo-año1-${index}">$0.00</td>
+      <td id="costo-año2-${index}">${index > 4 && (index - 5) < valores_segundo_año_t1.length? "$"+valores_segundo_año_t1[index-5].toFixed(2) : "-"}</td>
+      
+    `;
+
+    tabla.appendChild(fila);
+  });
+
+    
+
+    const filaTotalMaquinaria = document.createElement("tr");
+    filaTotalMaquinaria.innerHTML = `
+        <th colspan="4">TOTAL DE GASTOS DE MAQUINARIA</th>
+        <th id="total_costo_año1_t1">$0.00</th>
+        <th id=total_costo_año2_t1>$410.00</th>
+        
+      `;
+      tabla.appendChild(filaTotalMaquinaria);
+
+      function calcularCostoAño1(index){
+        const precio = parseFloat(document.getElementById(`precio-${index}`).value) || 0;
+        const cantidad= parseFloat(document.getElementById(`cantidad-${index}`).value) || 0;
+        const costoCalculado=precio * cantidad;
+        document.getElementById(`costo-año1-${index}`).textContent = "$" + costoCalculado.toFixed(2);
+        calcularTotal_CostoAño1_t1();
+
+      }
+
+    function calcularTotal_CostoAño1_t1() {
+      let total_valores= 0;
+      for (let i = 0; i < mano_de_obra_1.length; i++) {
+        const texto = document.getElementById(`costo-año1-${i}`).textContent; 
+        const valor = parseFloat(texto.replace("$", "")) || 0;
+        total_valores+=valor;
+      }
+      document.getElementById("total_costo_año1_t1").textContent = "$" + total_valores.toFixed(2);
+    }
+
+
+    const filaVacía_1 = document.createElement("tr");
+    filaVacía_1.innerHTML = `<td colspan="6" style="height: 20px; background-color: transparent;"></td>`;
+    tabla.appendChild(filaVacía_1);
+
+
+
+
+    
+
+//-----------------------------------------------------------------------------------------------------------------------------------------------------
+//-----------------------------------------------------------------------------------------------------------------------------------------------------
+//----------------------------------------------------------------------------------------------------------------------------------------------------- 
+    const header2 = document.createElement("tr");
+      header2.innerHTML = `<th colspan="6" style="text-align: center; background-color: #cccccc;">GASTOS DE MANO DE OBRA</th>`;
+      tabla.appendChild(header2);
+
+    const mano_de_obra2=[
+     ["Sembrar",-1,"hora", -1],
+      ["Aplicar cal",-1,"hora",-1],
+     ["Aplicar abono<sup>11</sup>",-1,"hora",-1],
+      ["Aplicar herbicida <sup>12</sup>",-1,"hora",-1],
+      ["Manejo del sistema de riego <sup>13</sup>",-1,"hora",-1],
+      ["Recogido de pacas<sup>14</sup>",-1,"paca",-1],
+      ["Subtotal",5.5,"",""],
+      ["Obligaciones patronales","","",""]
+    ];
+
+    const valores_segundo_año_t2=[
+      3.63,3.63,3.63,90.00,100.89,20.18
+    ];
+
+    mano_de_obra2.forEach((trabajo, index) => {
+  const fila = document.createElement("tr");
+
+  const cantidad = trabajo[1] === -1 
+    ? `<input type="number" min="0" step="1" id="cantidad-año1-t2-${index}" oninput="calcularCostoAñot2(${index})">` 
+    : trabajo[1];
+
+  const precio = trabajo[3] === -1 
+    ? `<input type="number" min="0" step="1" id="precio-año1-t2${index}"oninput="calcularCostoAñot2(${index})">` 
+    : `${trabajo[3]}`;
+
+  fila.innerHTML = `
+    <td>${trabajo[0]}</td>
+    <td>${cantidad}</td>
+    <td>${trabajo[2]}</td>
+    <td>${precio}</td>
+    <td id="costo-año1-t2-${index}">$0.00</td>
+    <td id="costo-año2-t2-${index}">${index > 1 && index-2 < valores_segundo_año_t2.length? "$"+valores_segundo_año_t2[index-2].toFixed(2) : "-"}</td>
+  `;
+
+  tabla.appendChild(fila);
+});
+
+function calcularCostoAñot2(index) {
+  const precioInput = document.getElementById(`precio-año1-t2${index}`);
+  const cantidadInput = document.getElementById(`cantidad-año1-t2-${index}`);
+
+  const precio = parseFloat(precioInput?.value) || 0;
+  const cantidad = parseFloat(cantidadInput?.value) || 0;
+
+  const costoCalculado = precio * cantidad;
+  document.getElementById(`costo-año1-t2-${index}`).textContent = "$" + costoCalculado.toFixed(2);
+  calcularSubtotalyObligaciones();
+}
+
+function calcularSubtotalyObligaciones() {
+  let subtotal = 0;
+  for (let i = 0; i <= 5; i++) {
+    const texto = document.getElementById(`costo-año1-t2-${i}`)?.textContent || "$0.00";
+    const valor = parseFloat(texto.replace("$", "")) || 0;
+    subtotal += valor;
+  }
+  const subtotalElem = document.getElementById("costo-año1-t2-6");
+  if (subtotalElem) {
+    subtotalElem.textContent = `$${subtotal.toFixed(2)}`;
+  }
+  const obligaciones = subtotal * 0.2;
+  const obligacionesElem = document.getElementById("costo-año1-t2-7");
+  if (obligacionesElem) {
+    obligacionesElem.textContent = `$${obligaciones.toFixed(2)}`;
+  }
+
+  const total=subtotal+obligaciones;
+  const totalElem=document.getElementById("total_costo_año1_t2");
+  if(totalElem){
+    totalElem.textContent=`$${total.toFixed(2)}`;
+  }
+}
+
+
+const filaTotalManodeObra = document.createElement("tr");
+    filaTotalManodeObra.innerHTML = `
+        <th colspan="4">TOTAL GASTO EN MANO DE OBRA</th>
+        <th id="total_costo_año1_t2">$0.00</th>
+        <th id=total_costo_año2_t2>$121.07</th>
+        
+      `;
+      tabla.appendChild(filaTotalManodeObra);
+
+
+const filaVacía_2 = document.createElement("tr");
+    filaVacía_2.innerHTML = `<td colspan="6" style="height: 20px; background-color: transparent;"></td>`;
+    tabla.appendChild(filaVacía_2);
+
+//-----------------------------------------------------------------------------------------------------------------------------------------------------
+//-----------------------------------------------------------------------------------------------------------------------------------------------------
+//----------------------------------------------------------------------------------------------------------------------------------------------------- 
+
+const header3 = document.createElement("tr");
+      header3.innerHTML = `<th colspan="6" style="text-align: center; background-color: #cccccc;">GASTO DE MATERIALES</th>`;
+      tabla.appendChild(header3);
+
+const materiales=[
+  ["Semillas<sup>16</sup>",-1,"lbs",-1],
+  ["Cal<sup>17</sup",-1,"ton",-1],
+  ["Superfosfato triple<sup>18</sup>",-1,"saco",-1],
+  ["Fertilizante 15-5-10<sup>19</sup>",-1,"qq",-1],
+  ["Hebicidas<sup>20</sup>","-","-","-"],
+  ["Combustible",-1,"galón",-1],
+  ["Hilo",-1,"rollo",-1]
+  ];
+
+  const valores_segundo_año_t3=[600.00,28.00,22.80,37.50];
+
+  materiales.forEach((trabajo, index) => {
+  const fila = document.createElement("tr");
+
+  const cantidad = trabajo[1] === -1 
+    ? `<input type="number" min="0" step="1" id="cantidad-año1-t3-${index}" oninput="calcularCostoAño1t3(${index})">` 
+    : trabajo[1];
+
+  const precio = trabajo[3] === -1 
+    ? `<input type="number" min="0" step="1" id="precio-año1-t3${index}"oninput="calcularCostoAño1t3(${index})">` 
+    : `${trabajo[3]}`;
+
+  fila.innerHTML = `
+    <td>${trabajo[0]}</td>
+    <td>${cantidad}</td>
+    <td>${trabajo[2]}</td>
+    <td>${precio}</td>
+    <td id="costo-año1-t3-${index}">$0.00</td>
+    <td id="costo-año2-t3-${index}">${index > 2 && index-3 < valores_segundo_año_t3.length? "$"+valores_segundo_año_t3[index-3].toFixed(2) : "-"}</td>
+  `;
+
+  tabla.appendChild(fila);
+});
+
+
+function calcularCostoAño1t3(index) {
+  const precioInput = document.getElementById(`precio-año1-t3${index}`);
+  const cantidadInput = document.getElementById(`cantidad-año1-t3-${index}`);
+
+  const precio = parseFloat(precioInput?.value) || 0;
+  const cantidad = parseFloat(cantidadInput?.value) || 0;
+
+  const costoCalculado = precio * cantidad;
+  document.getElementById(`costo-año1-t3-${index}`).textContent = "$" + costoCalculado.toFixed(2);
+  CalcularTotalAño1t3();
+}
+
+  function CalcularTotalAño1t3(){
+    total=0;
+    for(i=0;i<materiales.length;i++){
+    const texto = document.getElementById(`costo-año1-t3-${i}`)?.textContent || "$0.00";
+    const valor = parseFloat(texto.replace("$", "")) || 0;
+    total += valor;
+    }
+  const totalElem=document.getElementById("total_costo_año1_t3");
+  if(totalElem){
+    totalElem.textContent=`$${total.toFixed(2)}`;
+  }
+
+  }
+
+  const filaTotalMateriales = document.createElement("tr");
+    filaTotalMateriales.innerHTML = `
+        <th colspan="4">TOTAL GASTO EN MATERIALES</th>
+        <th id="total_costo_año1_t3">$0.00</th>
+        <th id=total_costo_año2_t3>$688.30</th>
+        
+      `;
+      tabla.appendChild(filaTotalMateriales);
+
+  
+  const filaVacía_3 = document.createElement("tr");
+    filaVacía_3.innerHTML = `<td colspan="6" style="height: 20px; background-color: transparent;"></td>`;
+    tabla.appendChild(filaVacía_3);
+
+
+
+//-----------------------------------------------------------------------------------------------------------------------------------------------------
+//-----------------------------------------------------------------------------------------------------------------------------------------------------
+//----------------------------------------------------------------------------------------------------------------------------------------------------- 
+
+
+  const header4 = document.createElement("tr");
+      header4.innerHTML = `<th colspan="6" style="text-align: center; background-color: #cccccc;">OTROS GASTOS</th>`;
+      tabla.appendChild(header4);
+
+  const otrosGastos=[
+    ["Analasis de suelo<sup>21</sup>","","","",20.00,"-"],
+    ["Renta de terreno<sup>22</sup>","","",100.00,100.00],
+    ["Gastos Misceláneos","","",50.0,50.00]
+  ]
+
+
+
+
+  
+ 
+
+  </script>
+</body>
+</html>
