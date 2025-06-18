@@ -20,6 +20,16 @@
 <body>
   <h1>Nómina Semanal - Registro de Horas<sup style="font-size: 0.1em;">K11</sup></h1>
 
+  <table>
+    <thead>
+      <tr>
+        <th colspan="6">PRODUCCION POR CUERDA</th>
+      </tr>
+    </thead>
+    <tbody id="tabla-rendimiento">
+      <!--logica en js-->
+    </tbody>
+  </table>
 
   <table>
     <thead>
@@ -44,33 +54,45 @@
 
           <h2 style="color: #000000; font-size: 1em">Supuestos</h2>
           <ol style="padding-left: 20px;">
-            <li>El presupuesto modelo presentado para una cuerda en producción se refiere a una cuerda adulta en producción comercial, esto es de 4 a 8 años luego del establecimiento, cuando se recomienda la práctica de poda de renovación de ser necesaria y años subsiguientes hasta que haya una reducción en la producción y la plantación sea podada nuevamente.</li>
-            <li>Incluye pago del Seguro Social al Internal Revenue Service, Seguro por Desempleo al Departamento del Trabajo y Recursos Humanos y Seguro Obrero a la Corporación del Fondo del Seguro del Estado.</li>
-            <li>Cuando se paga el salario mínimo estatal agrícola de $5.25/hora, la cosecha se paga por ajuste, y no aplican los beneficios marginales, sin embargo, si se paga el salario mínimo federal de $7.25/hora, también se incluye el costo de beneficios marginales en el costo de la cosecha.</li>
-            <li>El costo de cosecha cuando se paga por ajuste se estimó usando un valor medio de $6.00/hora por almud de 28 libras de café maduro y $5.00/hora por un almud de verde y maduro. Cuando se paga el salario mínimo federal se asumió que un recogedor de café cosecha en promedio 1 almud de café maduro y 1.25 almudes de verde y maduro por hora. El costo de cosechar el almud se estimó basándose en un salario de $7.25/hora; el resultado de cosechar un almud de café maduro fue de $7.25, y de un almud de verde y maduro, $5.40.</li>
-            <li>Los costos de materiales se estiman basado en las recomendaciones del Conjunto Tecnológico del Cultivo para 1,500 cafetos, y los precios son los vigentes en el mercado al momento de redactar este escrito. En el mercado pueden existir diferentes tipos y marcas de materiales que se usan para fertilizar y controlar plagas, enfermedades y malezas; ajuste las cantidades y precio de acuerdo con el material que use en la finca.</li>
-            <li>Se incluyeron en otros costos misceláneos: 1) la transportación de arbolitos para la siembra y de trabajadores, 2) gastos de electricidad, y 3) mantenimiento de caminos y de equipos para el control de plagas y enfermedades.</li>
-            <li>10% del gasto de mano de obra y maquinaria.</li>
-            <li>Los precios de venta del quintal base pilado y del almud maduro y verde maduro usados para estimar el ingreso bruto de los presupuestos modelo provienen del análisis de diferentes escenarios de precios (ver tabla “Análisis de precios” de este documento); se usaron los precios en los cuales la cantidad recibida por ingreso bruto es similar al costo total (break even). Esto es, la razón beneficio/costo es igual a 1 (($ Ingreso Bruto/$ Costos Totales) = 1).</li>
+            <li>Una aplicación pre emergente, tres aplicaciones post emergentes.</li>
+            <li>Valor promedio del alquiler de un cuerda de terreno.</li>
+            <li>25% de la mano de obra. Las obligaciones patronales incluyen pagos al "Internet Revenue Service" (Seguro Social), Corporación del Fondo del Seguro del Estado (Seguros Obreros)</li>
+            <li>10% del total de mano de obra.</li>
+            <li>9% del total de gastos de operación.</li>
           </ol>
 
           <span style="font-weight: bold;">Preparado por:</span><br>
-          Carmen Álamo, PhD<br>
-          Catedrática de la Estación Experimental Agrícola en Economía Agrícola<br><br>
-    
+          Prof. Mildred Cortes<br>
+          Catedrática en Economía Agrícola<br>
+          Estación Experimental Agrícola<br><br>
+
+          Prof. Manuel Diaz<br>
+          Catedrático Asociado<br>
+          Especialista en Farináceos<br>
+          Servicio de Extensión Agrícola<br><br>
+
+          Prof. Juan Ortiz<br>
+          Catedrático en Economía Agrícola<br>
+          Estación Experimental Agrícola<br><br>
+
           <span style="font-weight: bold;">Versión Electrónica:</span><br>
-          Alexandra Gregory Crespo, PhD<br>
-          Catedrática del Servicio de Extensión Agrícola en Economía Agrícola<br><br>
-    
-          <span style="font-weight: bold;">Versión Web:</span><br>
-          Julio C. Hernández Correa<br>
-          Catedrático del Servicio de Extensión Agrícola en Economía Agrícola<br><br>
+          Dra. Alexandra Gregory<br>
+          Catedrática en Economía Agrícola<br>
+          Servicio de Extensión Agrícola<br><br>
+
+          Joe Kirk R. Lucarne<br>
+          Estudiante Graduado<br>
+          Departamento de Economía Agrícola y Sociología Rural<br><br>
+
+          Yaira A. Avilés Ortiz<br>
+          Economista Agrícola<br><br>
+
     
           <span style="font-weight: bold;">Fecha de revisión:</span><br>
           Junio 2025<br><br>
     
           <div style="margin-top: 20px; padding: 12px; border-left: 5px solid #d9534f; background-color: #fdf2f2;">
-            <strong>AVISO:</strong> Los Presupuestos Modelos presentan la información de los ingresos y gastos bajo condiciones normales y características particulares de una finca. La Universidad de Puerto Rico no asume responsabilidad por los resultados si los ingresos y gastos de una empresa en particular difieren de dicha publicación. El usuario de estos modelos releva a la Universidad de Puerto Rico de toda responsabilidad, reclamación, pérdida, daño o costo relacionado o surgido por el uso de estos modelos.
+            <strong>AVISO:</strong> Los Presupuestos Modelos presentan la información de los ingresos y gastos bajo condiciones normales y características particulares de una finca.  La Universidad de Puerto Rico no asume responsabilidad por los resultados si los ingresos y gastos de una empresa en particular difieren de dicha publicación. El usuario de estos modelos releva a la Universidad de Puerto Rico de toda responsabilidad, reclamación, pérdida, daño o costo relacionado o surgido por el uso de estos modelos.
           </div>
     
           <div style="margin-top: 20px; font-size: 0.85em; text-align: center; color: #999;">
@@ -87,6 +109,49 @@
 <!----------------------------------------------------------------------------------------------------------------------------------------->
   <script>
 
+    //logica para rendimiento por cuerdas-----------------------
+
+    const tabla_rendimiento = document.getElementById("tabla-rendimiento")
+    console.log(tabla_rendimiento)
+
+    const plantas_por_cuerdas = document.createElement("tr");
+      plantas_por_cuerdas.innerHTML = `
+        <td colspan="5">Número de plantas por cuerda para una distancia de siembra de 3'x4'</td>
+        <td colspan="1"><input type="number" min="0" step="1" id="produccion-input-plantas" oninput="calcular_rendimiento()"></td>
+      `;
+      tabla_rendimiento.appendChild(plantas_por_cuerdas);
+
+    const rendimiento_por_planta = document.createElement("tr");
+      rendimiento_por_planta.innerHTML = `
+        <td colspan="5">Rendimiento por planta (libra)</td>
+        <td colspan="1"><input type="number" min="0" step="1" id="produccion-input-rendimiento" oninput="calcular_rendimiento()"></td>
+      `;
+      tabla_rendimiento.appendChild(rendimiento_por_planta);
+
+    const rendimiento_por_cuerda = document.createElement("tr");
+      rendimiento_por_cuerda.innerHTML = `
+        <td colspan="5">Rendimiento por cuerda (quintal)</td>
+        <td colspan="1" id="rendimiento-cuerda">0.00</td>
+      `;
+      tabla_rendimiento.appendChild(rendimiento_por_cuerda);
+
+
+    document.querySelectorAll('[id^="produccion-input-"]').forEach((input) => {
+      input.addEventListener('input', () => {
+        calcular_rendimiento();
+      });
+    });
+
+    function calcular_rendimiento(){
+        const input_planta = document.getElementById("produccion-input-plantas").value || 0;
+        const input_rendimiento = document.getElementById("produccion-input-rendimiento").value || 0;
+        const resultado = (input_planta*input_rendimiento)/100
+        document.getElementById("rendimiento-cuerda").textContent = resultado.toFixed(2)
+    } 
+
+    //------------------------------------------------------------
+
+    
     const tabla = document.getElementById("tabla");
 
     const actividades = {
@@ -534,6 +599,7 @@
     `;
       tabla.appendChild(header6);
 
+    let PRODUCCION_MINIMA = 0;
     function calcular_produccion_precio_minimo(){
       let produccion = 0;
       let precio = 0;
@@ -541,12 +607,13 @@
       const text_gasto = document.getElementById("total_valor_C").textContent
       const valor_gasto = parseFloat(text_gasto.replace("$", "")) || 0;
       const valor_venta_unidad = document.getElementById("costo_unidad_cantidad_D-0").value || 0;
-      produccion = valor_gasto/valor_venta_unidad
-      document.getElementById("produccion_minima").textContent = produccion.toFixed(2)
+      PRODUCCION_MINIMA = valor_gasto/valor_venta_unidad
+      document.getElementById("produccion_minima").textContent = PRODUCCION_MINIMA.toFixed(2)
 
       const valor_venta_cantidad = document.getElementById("cantidad_unidad_D-0").value || 0;
       precio = valor_gasto/valor_venta_cantidad
       document.getElementById("precio_minimo").textContent = "$" + precio.toFixed(2)
+      calcular_produccion_minima()
     }
 
     const filaVacía_5 = document.createElement("tr");
@@ -594,34 +661,44 @@
     }); 
 
     let NUM_CUERDAS = 0;
-    document.querySelectorAll('[id^="cuerdas"]').forEach((input, index) => {
+    document.querySelectorAll('[id^="cuerdas"]').forEach((input) => {
       input.addEventListener('input', () => {
-        calcular_valores_E(index);
-        NUM_CUERDAS = document.getElementById("cuerdas").value || 0;
+        calcular_valores_E();
       });
     });
 
     function calcular_valores_E(){
+      NUM_CUERDAS = document.getElementById("cuerdas").value || 0;
       calcular_valor_ingreso_total()
       calcular_valor_gasto_total()
-      calcular_ingreso_neto("E")
+      calcular_ingreso_neto()
+      calcular_produccion_minima()
     }
 
-  
+    let resultado_ingreso_E =0;
     function calcular_valor_ingreso_total(){
-      const resultado = NUM_CUERDAS*INGRESO_TOTAL
-      document.getElementById("ingreso_total_E").textContent = "$" + resultado.toFixed(2)
-      calcular_ingreso_neto("ingreso")
+      console.log(INGRESO_TOTAL)
+      resultado_ingreso_E = NUM_CUERDAS*INGRESO_TOTAL
+      document.getElementById("ingreso_total_E").textContent = "$" + resultado_ingreso_E.toFixed(2)
+      calcular_ingreso_neto()
     }
 
+    let resultado_gasto_E = 0;
     function calcular_valor_gasto_total(){
-      const resultado = NUM_CUERDAS*GASTO_TOTAL
-      document.getElementById("gasto_total_E").textContent = "$" + resultado.toFixed(2)
-      calcular_ingreso_neto("gasto")
+      resultado_gasto_E = NUM_CUERDAS*GASTO_TOTAL
+      document.getElementById("gasto_total_E").textContent = "$" + resultado_gasto_E.toFixed(2)
+      calcular_ingreso_neto()
     }
 
-    function calcular_ingreso_neto(mensaje){
-      document.getElementById("ingreso_neto_E").textContent = mensaje
+    let resultado_neto_E = 0;
+    function calcular_ingreso_neto(){
+      resultado_neto_E = resultado_ingreso_E -resultado_gasto_E
+      document.getElementById("ingreso_neto_E").textContent = "$" + resultado_neto_E.toFixed(2)
+    }
+
+    function calcular_produccion_minima(){
+      const resultado = PRODUCCION_MINIMA*NUM_CUERDAS
+      document.getElementById("produccion_minima_E").textContent = "$" + resultado.toFixed(2)
     }
 
 
