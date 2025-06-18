@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nómina Semanal - Agricultores</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 20px; }
+    table { width: 100%; border-collapse: collapse; margin-bottom: 20px; }
+    th, td { border: 1px solid #ccc; padding: 8px; text-align: center; }
+    th { background-color: #f2f2f2; }
+    input, select { width: 95%; padding: 4px; }
+
+    td:first-child,
+    th:first-child{
+      text-align: left;
+    }
+  </style>
+</head>
+<body>
+  <h1>Nómina Semanal - Registro de Horas<sup style="font-size: 0.1em;">K11</sup></h1>
+
+  <table>
+    <tbody id="tabla">
+      <!-- Filas generadas por JS -->
+    </tbody>
+
+    <tfoot>
+      <tr>
+        <td colspan="6" style="padding: 20px; background-color: #ffffff; line-height: 1.6;">
+
+          <h2 style="color: #000000; font-size: 1em">Supuestos</h2>
+          <ol style="padding-left: 20px;">
+            <li>Una aplicación pre emergente, tres aplicaciones post emergentes.</li>
+            <li>Valor promedio del alquiler de un cuerda de terreno.</li>
+            <li>25% de la mano de obra. Las obligaciones patronales incluyen pagos al "Internet Revenue Service" (Seguro Social), Corporación del Fondo del Seguro del Estado (Seguros Obreros)</li>
+            <li>10% del total de mano de obra.</li>
+            <li>9% del total de gastos de operación.</li>
+          </ol>
+
+          <span style="font-weight: bold;">Preparado por:</span><br>
+          Prof. Mildred Cortes<br>
+          Catedrática en Economía Agrícola<br>
+          Estación Experimental Agrícola<br><br>
+
+          Prof. Manuel Diaz<br>
+          Catedrático Asociado<br>
+          Especialista en Farináceos<br>
+          Servicio de Extensión Agrícola<br><br>
+
+          Prof. Juan Ortiz<br>
+          Catedrático en Economía Agrícola<br>
+          Estación Experimental Agrícola<br><br>
+
+          <span style="font-weight: bold;">Versión Electrónica:</span><br>
+          Dra. Alexandra Gregory<br>
+          Catedrática en Economía Agrícola<br>
+          Servicio de Extensión Agrícola<br><br>
+
+          Joe Kirk R. Lucarne<br>
+          Estudiante Graduado<br>
+          Departamento de Economía Agrícola y Sociología Rural<br><br>
+
+          Yaira A. Avilés Ortiz<br>
+          Economista Agrícola<br><br>
+
+    
+          <span style="font-weight: bold;">Fecha de revisión:</span><br>
+          Junio 2025<br><br>
+    
+          <div style="margin-top: 20px; padding: 12px; border-left: 5px solid #d9534f; background-color: #fdf2f2;">
+            <strong>AVISO:</strong> Los Presupuestos Modelos presentan la información de los ingresos y gastos bajo condiciones normales y características particulares de una finca.  La Universidad de Puerto Rico no asume responsabilidad por los resultados si los ingresos y gastos de una empresa en particular difieren de dicha publicación. El usuario de estos modelos releva a la Universidad de Puerto Rico de toda responsabilidad, reclamación, pérdida, daño o costo relacionado o surgido por el uso de estos modelos.
+          </div>
+    
+          <div style="margin-top: 20px; font-size: 0.85em; text-align: center; color: #999;">
+            This material is based upon work supported by USDA/OPPE under Award Number: AO212501x443G010
+          </div>
+        </td>
+      </tr>
+    </tfoot>
+
+    
+  </table>
+<!----------------------------------------------------------------------------------------------------------------------------------------->
+<!----------------------------------------------------------------------------------------------------------------------------------------->
+<!----------------------------------------------------------------------------------------------------------------------------------------->
+  <script>
+
+   //variables globales
+   let NUMERO_UMBRACULOS = 0;
+   let NUMERO_COSECHAS = 0;
+   let RENDIMIENTO_PORCENTAJE = 0;
+   let RENDIMIENTO_LIBRAS = 0; 
+   let SUBTOTAL_MANO_DE_OBRA = 0;
+   let SUBTOTAL_GASTOS_OPERACIONALES = 0;
+   let TOTAL_GASTOS = 0;
+   let INGRESO_BRUTO = 0; 
+   let COSTO_CLANTRILLO = 0;
+   let CANTIDAD_CILANTRILLO = 0;
+
+   const tabla = document.getElementById("tabla")
+
+//-----------------------------------------------------------------------------------------------------------------------------------------------------  
+//-----------------------------------------------------------------------------------------------------------------------------------------------------
+//-----------------------------------------------------------------------------------------------------------------------------------------------------
+
+   //tabla 1
+   
+   const fila_inputs = [
+    ["Número de Umbráculos, umbráculo de 100x40 [1]", "t1-numero-umbraculos"],
+    ["Número de cosechas[2]", "t1-numero-cosechas"],
+    ['Número de Plantas (para una cosecha y un umbráculo) a una distancia de 6"x 6", 5 bancos: 3,500 x 5 [3]', "t1-numero-plantas"],
+    ["Rendimiento 85% (coloque en decimales)", "t1-rendimiento-porcentaje"],
+    ["Número de Plantas por Mazo", "t1-plantas_mazo"],
+    ["Número de Mazos por libra", "numero-mazos"],
+   ]
+
+   fila_inputs.forEach((item) => {
+    const fila = document.createElement("tr");
+
+    fila.innerHTML = `
+        <!--Titulo de item-->
+        <td colspan="4">${item[0]}</td>
+        <!--Input-->
+        <td colspan="1"><input type="number" min="0" step="1" id=${item[1]} oninput="calcular_rendimiento_libras(); calcular_valor_mano(index)">
+    `;
+    tabla.appendChild(fila)
+   });
+
+   document.querySelectorAll('[id^="t1-"]').forEach(input => {
+    input.addEventListener('input', ()=>{
+        calcular_rendimiento_libras();
+    })
+   })
+
+   document.getElementById("t1-numero-umbraculos").addEventListener('input', ()=>{
+        for (let i = 0; i<partidas_t2.length;i++){
+            calcular_valor_mano(i);
+        }
+   })
+
+   document.getElementById("t1-numero-cosechas").addEventListener('input', ()=>{
+        for (let i = 0; i<partidas_t2.length;i++){
+            calcular_valor_mano(i);
+        }
+   })
+
+   const fila_rendimiento_por_libras = document.createElement("tr")
+   fila_rendimiento_por_libras.innerHTML = `
+    <th colspan="4">Rendimiento en libras: cada <strong>Mazo</strong> tiene 2 plantas, cada <strong>Mazo</strong> tiene alrededor de 5-6 oz mazo, cada 3 mazos es una libra</th>
+    <th id="resultado-rendimiento-libras" colspan="1">0.00</th>
+   `;
+   tabla.appendChild(fila_rendimiento_por_libras)
+
+
+   function calcular_rendimiento_libras(){
+
+    const num_plantas = parseFloat(document.getElementById("t1-numero-plantas").value) || 0;
+    RENDIMIENTO_PORCENTAJE = parseFloat(document.getElementById("t1-rendimiento-porcentaje").value) || 0;
+    const num_plantas_mazo = parseFloat(document.getElementById("t1-plantas_mazo").value) || 0;
+    const num_mazos = parseFloat(document.getElementById("numero-mazos").value) || 0;
+    NUMERO_UMBRACULOS = parseFloat(document.getElementById("t1-numero-umbraculos").value) || 0;
+    NUMERO_COSECHAS = parseFloat(document.getElementById("t1-numero-cosechas").value) || 0;
+
+    //son denominadores en la funcion
+    if (num_plantas_mazo === 0 || num_mazos === 0) {
+    document.getElementById("resultado-rendimiento-libras").textContent = "0.00";
+    return;
+  }
+    RENDIMIENTO_LIBRAS = (((num_plantas*RENDIMIENTO_PORCENTAJE)/num_plantas_mazo)/num_mazos)*NUMERO_UMBRACULOS*NUMERO_COSECHAS;
+    document.getElementById("resultado-rendimiento-libras").textContent = RENDIMIENTO_LIBRAS.toFixed(2);
+   }
+
+
+   const filaVacía_1 = document.createElement("tr");
+    filaVacía_1.innerHTML = `<td colspan="5" style="height: 20px; background-color: transparent;"></td>`;
+      tabla.appendChild(filaVacía_1);
+
+//-----------------------------------------------------------------------------------------------------------------------------------------------------  
+//-----------------------------------------------------------------------------------------------------------------------------------------------------
+//-----------------------------------------------------------------------------------------------------------------------------------------------------
+    
+   //tabla 2
+   const t2_titulo1 = document.createElement("tr")
+   t2_titulo1.innerHTML =  `
+        <th colspan="5" style="text-align: center; background-color: #cccccc;">
+            Presupuesto para la Siembra de Cilantrillo en Hidropónico vivero 40x100 [1]
+        </th>
+   `;
+   tabla.appendChild(t2_titulo1);
+
+   const t2_titulo2 = document.createElement("tr")
+   t2_titulo2.innerHTML = `
+        <th colspan="5" style="text-align: center; background-color: #cccccc;">
+            Proyección por una cosecha (se puede producir 11 cosechas al año)
+        </th>
+   `;
+   tabla.appendChild(t2_titulo2);
+
+   const columnas = document.createElement("tr")
+   columnas.innerHTML = `
+        <th>Partida</th>
+        <th>Unidad</th>
+        <th>Cantidad</th>
+        <th>Costo</th>
+        <th>Valor $</th>
+   `;
+   tabla.appendChild(columnas)
+
+   const mano_de_obra = document.createElement("tr")
+   mano_de_obra.innerHTML = `<th colspan="5" style="text-align: center; background-color: #cccccc;">Mano de Obra</th>`;
+   tabla.appendChild(mano_de_obra);
+
+   const partidas_t2 = [
+        "Supervisión de Sistema [4]",
+        "Limpieza [5]",
+        "Preparación de Semillero [6]",
+        "Siembra [7]",
+        "Cosecha[8]",
+        "Preparación de Formula [9]",
+        "Entrega"
+   ]
+
+   partidas_t2.forEach((trabajo, index)=>{
+        const fila = document.createElement("tr")
+        fila.innerHTML = `
+            <!--Trabajo-->
+            <td>${trabajo}</th>
+            <!--Unidad-->
+            <td>Horas</td>
+            <!--Cantidad-->
+            <td><input type="number" min="0" step="1" id="t2-cantidad-${index}" oninput="calcular_valor_mano(${index})"></td>
+            <!--Costo-->
+            <td><input type="number" min="0" step="1" id="t2-costo-${index}" oninput="calcular_valor_mano(${index})"></td>
+            <!--Valor-->
+            <td id="t2-valor-${index}" data-valor="0">$0.00</td>
+        `;
+        tabla.appendChild(fila);
+   });
+
+   document.querySelectorAll('[id^="t2-"]').forEach((input, index)=>{
+        input.addEventListener('input', ()=>{
+            calcular_valor_mano(index)
+        });
+   });
+
+   const subtotal_mano = document.createElement("tr")
+   subtotal_mano.innerHTML = `
+        <th colspan="4">Subtotal Mano de Obra</th>
+        <th id="subtotal-t2">$0.00</th>
+   `;
+   tabla.appendChild(subtotal_mano)
+
+   
+
+   function calcular_valor_mano(index) {
+        const cantidad_t2 = parseFloat(document.getElementById(`t2-cantidad-${index}`).value) || 0;
+        const costo_t2 = parseFloat(document.getElementById(`t2-costo-${index}`).value) || 0;
+        const valor_t2 = cantidad_t2 * costo_t2 * NUMERO_COSECHAS * NUMERO_UMBRACULOS;
+        const cell = document.getElementById(`t2-valor-${index}`)
+        cell.dataset.valor = valor_t2;
+        cell.textContent = "$" + valor_t2.toFixed(2);
+
+        calcular_subtotal_t2();
+   }
+
+   function calcular_subtotal_t2(){
+        SUBTOTAL_MANO_DE_OBRA = 0;
+        for (let i = 0; i < partidas_t2.length;i++){
+            const valor = parseFloat(document.getElementById(`t2-valor-${i}`).dataset.valor) || 0;
+            SUBTOTAL_MANO_DE_OBRA += valor;
+        }
+        document.getElementById("subtotal-t2").textContent = "$" + SUBTOTAL_MANO_DE_OBRA.toFixed(2)
+   }
+
+//-----------------------------------------------------------------------------------------------------------------------------------------------------  
+//-----------------------------------------------------------------------------------------------------------------------------------------------------
+//-----------------------------------------------------------------------------------------------------------------------------------------------------
+
+   //tabla 3
+   const gastos_operacionales = document.createElement("tr")
+   gastos_operacionales.innerHTML = `<th colspan="5" style="text-align: center; background-color: #cccccc;">Gastos Operacionales</th>`;
+   tabla.appendChild(gastos_operacionales);
+
+   const partidas_t3 = [
+    ["Semillas", "Libra", -1, -1],
+    ["Abono[10]", "Saco 25lbs", -1,-1],
+    ["Nitrato de Calcio", "50lbs", -1,-1],
+    ["Sulfato de magnesio", "50lbs", -1,-1],
+    ["Control de Plagas y manejo de yerbajos", "", "", ""],
+    ["Oasis", "Cajas", -1,-1],
+    ["Agua [11]", "","", -1],
+    ["Obligaciones Patronales [12]", "", "", ""],
+    ["Electricidad [13]", "","",-1],
+    ["Fundas Plásticas", "Cajas", -1, -1],
+    ["Cajas Empaque", "c/u", -1, -1],
+    ["Detergentes", "", "", -1],
+    ["Misceláneos", "","",-1],
+    ["Mantenimiento y reparación", "", "", -1],
+    ["Depreciación Promedio Estructura Annual [14]", "","",-1],
+    ["Seguros", "","",-1],
+    ["Administración, supervisión e imprevistos (10% de la nómina)", "","",""],
+    ["Interés sobre gastos (9%)", "","",""],
+    ["Entrega (180 millas por 2 viajes por $0.40)", "","",-1]
+   ]
+
+   partidas_t3.forEach((partida, index)=>{
+        const fila = document.createElement("tr");
+        
+   })
+
+
+  </script>
+</body>
+</html>
+
+
+
