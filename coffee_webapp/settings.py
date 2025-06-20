@@ -21,6 +21,7 @@ DATABASE = creds[3]
 DATABASE_URL = creds[4]
 SECRET_KEY = creds[5]
 PORT = creds[7]
+DEBUG_FLAG = creds[8]
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -33,7 +34,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = "django-insecure-y*_oeapzt)_i()7ck7+(2c0s86wk@og+njsf=qe1woled$9mpz"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = DEBUG_FLAG
 
 ALLOWED_HOSTS = []
 
