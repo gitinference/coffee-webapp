@@ -1,0 +1,960 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nómina Semanal - Agricultores</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 20px;
+    }
+
+    th,
+    td {
+      border: 1px solid #ccc;
+      padding: 8px;
+      text-align: center;
+    }
+
+    th {
+      background-color: #f2f2f2;
+    }
+
+    input,
+    select {
+      width: 90%;
+    }
+
+    td:first-child,
+    th:first-child {
+      text-align: left;
+    }
+
+    input[type="number"]::-webkit-inner-spin-button,
+    input[type="number"]::-webkit-outer-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+
+    input[type="number"] {
+      -moz-appearance: textfield;
+      appearance: textfield;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Presupuesto modelo: Arboles en tiesto suelo</h1>
+  <p>Gastos e ingresos proyectados para la producción de 720 celdas de producción de Arboles en tiesto de Suelo</p>
+
+  <table>
+    <thead>
+      <tr>
+        <th colspan="10" style="text-align: center;">GASTOS DE INVERSIÓN</th>
+      </tr>
+      <tr>
+        <th colspan="2">PARTIDA</th>
+        <th colspan="1">UNIDAD</th>
+        <th colspan="1">CANTIDAD</th>
+        <th colspan="2">PRECIO/UNIDAD</th>
+        <th colspan="2">VALOR</th>
+        <th colspan="2">MI FINCA</th>
+      </tr>
+
+
+    </thead>
+    <tbody id="tabla">
+      <!-- Filas generadas por JS -->
+    </tbody>
+
+    <tfoot>
+      <tr>
+        <td colspan="10" style="padding: 20px; background-color: #fff; line-height: 1.6;">
+
+          <h2 style="color: #000000; font-size: 1em">Supuestos</h2>
+          <ol style="padding-left: 20px;">
+            <li>El Departamento de Ingeniería Agrícola y Biosistemas de la Universidad de Puerto Rico - Recinto
+              Universitario de Mayagüez, recomienda un sistema de riego por goteo utilizando: una bomba de 2.5 hp; un
+              inyector de químicos Mazei K584; un regulador de presión; filtros de malla #140; 4,000 pies de línea de
+              distribución de riego en Polyethylene de 3/4"; y líneas principales de PVC, y secundarias de Polyethylene.
+            </li>
+            <li>Actualmente en Puerto Rico no existe un mercado de semillas de árboles, los precios utilizados en este
+              presupuesto fueron tomados de ventas de semillas en otros países. Muchos de los productores tienen sus
+              propias plantas madre dentro de su negocio.
+            </li>
+            <li>Se recomienda usar fibra de coco por su alto porcentaje de enraizamiento. El saco de 3.8 pies cúbicos
+              comprimidos equivale a 7 pies cúbicos.
+            </li>
+            <li>Abono granular "Controlled Realease" de concentración 12-4-12, se calcula una cantidad de 30 gramos de
+              abono por cada tiesto de 3 galones, con una frecuencia de cada 3 meses. En temperaturas muy altas puede
+              que sea necesario aumentar la cantidad de abono aplicado o aplicar con una mayor frecuencia.</li>
+            <li>Usando un cuarto de galón de herbicida mensualmente. Tener en cuenta que la cantidad y la frecuencia de
+              aplicación varían de acuerdo a las condiciones climáticas de la zona.</li>
+            <li>Hace referencia a fungicidas y/o insecticidas. Se sugiere que solo se aplique de ser necesario; y el
+              valor puede variar dependiendo del tipo de producto utilizado y de la plaga que se quiera combatir, se
+              recomienda consultar a un experto antes de aplicar cualquier plaguicida o fungicida.</li>
+            <li>No se consideran: entrega, acarreo o distribución de productos fuera de la finca. Si desea considerar
+              esto dentro de su negocio, debe adicionar el valor del vehículo, los costos de mantenimiento del mismo, el
+              salario del chofer y el seguro choferil dentro del presupuesto.</li>
+            <li>Corresponde a 7.65% del Seguro Social, 6.1% del Fondo del Seguro del Estado y 2.9% de Desempleo. Se
+              deben hacer ajustes si se contemplan otros porcentajes u obligaciones que no están incluidos en este
+              documento.</li>
+            <li>Canon de arrendamiento por uso del terreno.</li>
+            <li>Se debe tener en cuenta que estos valores son aproximados y pueden variar dependiendo de cada caso.</li>
+          </ol>
+
+          <span style="font-weight: bold;">Presupuesto electrónico creado por:</span><br>
+          Dra. Gladys M. González Martínez<br>
+          Catedrática, Departamento de Economía Agrícola<br>
+          Directora de Proyecto Z-244<br>
+          Estación Experimental Agrícola<br><br>
+
+          Dr. Alwin J. Jiménez Maldonado<br>
+          Catedrático, Departamento de Economía Agrícola<br>
+          Colaborador de Proyecto Z-244<br>
+          Servicio de Extensión Agrícola<br><br>
+
+          Alexander Cano<br>
+          Asistente de Investigación Graduado<br>
+          Departamento de Economía Agrícola<br><br>
+
+          Andrés Alonso<br>
+          Asistente de Investigación Graduado<br>
+          Departamento de Economía Agrícola<br><br>
+
+          <span style="font-weight: bold;">Revisado por:</span><br>
+          Dra. María del C. Librán<br>
+          Catedrática<br>
+          Departamento de Cultivos y Ciencias Agro-ambientales<br><br>
+
+          Prof. Sally González<br>
+          Especialista en Arquitectura Paisajista y Forestación Urbana<br>
+          Departamento de Economía AgrícolaDepartamento de Cultivos y Ciencias Agro-ambientales<br>
+          Servicio de Extensión Agrícola<br><br>
+
+          Prof. Eric A. Irizarry<br>
+          Catedrático<br>
+          Departamento de Ingeniería Agrícola y Biosistemas<br>
+          Servicio de Extensión Agrícola<br><br>
+
+          <span style="font-weight: bold;">Versión en Excel:</span><br>
+          Dra. Alexandra Gregory Crespo<br>
+          Catedrática, Departamento de Economía Agrícola<br>
+          Servicio de Extensión Agrícola<br><br>
+
+          Herold Kasandor Eustache<br>
+          Estudiante graduado<br>
+          Departamento de Economía Agrícola<br><br>
+
+          Yaira A. Avilés Ortiz<br>
+          Economista Agrícola<br><br>
+
+          <span style="font-weight: bold;">Fecha de revisión:</span><br>
+          Marzo 2022<br><br>
+
+          <div style="margin-top: 20px; padding: 12px; border-left: 5px solid #d9534f; background-color: #fdf2f2;">
+            <strong>AVISO:</strong> Los Presupuestos Modelos presentan la información de los ingresos y gastos bajo
+            condiciones normales y características particulares de una finca.  La Universidad de Puerto Rico no asume
+            responsabilidad por los resultados si los ingresos y gastos de una empresa en particular difieren de dicha
+            publicación. El usuario de estos modelos releva a la Universidad de Puerto Rico de toda responsabilidad,
+            reclamación, pérdida, daño o costo relacionado o surgido por el uso de estos modelos.
+          </div>
+
+          <div style="margin-top: 20px; font-size: 0.85em; text-align: center; color: #999;">
+            This material is based upon work supported by USDA/OPPE under Award Number: AO212501x443G010 </div>
+        </td>
+      </tr>
+    </tfoot>
+
+
+  </table>
+  <!----------------------------------------------------------------------------------------------------------------------------------------->
+  <!----------------------------------------------------------------------------------------------------------------------------------------->
+  <!----------------------------------------------------------------------------------------------------------------------------------------->
+  <script>
+    function formatNumber(value) {
+      return new Intl.NumberFormat('es-PR', {
+        style: 'decimal',
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2
+      }).format(value);
+    }
+
+    function formatCurrency(value) {
+      return new Intl.NumberFormat('es-PR', {
+        style: 'currency',
+        currency: 'USD',
+        minimumFractionDigits: 2
+      }).format(value);
+    }
+
+    const tabla = document.getElementById("tabla");
+
+    const gastos_inversion = [
+      'Sistema de riego',
+      'Bomba de fumigación de espalda de 4 galones'
+    ];
+
+    // Generar filas
+    gastos_inversion.forEach((gasto, index) => {
+      const fila = document.createElement("tr");
+      fila.innerHTML = `
+        <td colspan='2'>${gasto}</td>
+        <td colspan='1'>-</td>
+        <td colspan='1'>1</td>
+        <td colspan='2'>-</td>
+        <td colspan='2'><input type="number" class="valor_gastos_inversion" data-index="${index}"></td>
+        <td colspan='2' class="mi_finca_gastos_inversion" data-index="${index}">${formatCurrency(0)}</td>
+    `;
+      tabla.appendChild(fila);
+    });
+
+    // Fila total
+    const filaTotal = document.createElement("tr");
+    filaTotal.innerHTML = `
+    <th colspan="6">TOTAL DE GASTOS DE INVERSIÓN</th>
+    <th style="background-color: #f0f0f0;" colspan='2' id="valor_gastos_inversion_total"></th>
+    <th style="background-color: #f0f0f0;" colspan='2' id="mi_finca_gastos_inversion_total"></th>
+    `;
+    tabla.appendChild(filaTotal);
+
+    // Totalizador
+    function actualizarTotalesGastosInversion() {
+      let totalValor = 0;
+
+      document.querySelectorAll(".valor_gastos_inversion").forEach(cell => {
+        const valor = parseFloat(cell.value) || 0;
+        totalValor += valor;
+      });
+
+      const valorCell = document.getElementById("valor_gastos_inversion_total");
+      valorCell.textContent = totalValor ? formatCurrency(totalValor) : '';
+
+      const miFincaCell = document.getElementById("mi_finca_gastos_inversion_total");
+      miFincaCell.textContent = totalValor ? formatCurrency(0) : '';
+
+      return totalValor;
+    }
+
+    let gastos_inversion_total = actualizarTotalesGastosInversion();
+
+    // input listener
+    tabla.addEventListener("input", (e) => {
+      if (!e.target.matches(".valor_gastos_inversion")) return;
+
+      gastos_inversion_total = actualizarTotalesGastosInversion();
+    });
+
+    const filaVacía = document.createElement("tr");
+    filaVacía.innerHTML = `<td colspan="10" style="height: 20px; background-color: transparent;"></td>`;
+    tabla.appendChild(filaVacía);
+
+    //-----------------------------------------------------------------------------------------------------------------------------------------------------
+    //-----------------------------------------------------------------------------------------------------------------------------------------------------
+    //-----------------------------------------------------------------------------------------------------------------------------------------------------
+
+    const gastos_variables = document.createElement("tr");
+    gastos_variables.innerHTML = `<th colspan="10" style="text-align: center;">GASTOS VARIABLES</th>`;
+    tabla.appendChild(gastos_variables);
+
+    const fila = document.createElement("tr");
+    fila.innerHTML = `
+    <td colspan="10" style="height: 20px; background-color: transparent;"></td>
+    `;
+    tabla.appendChild(fila);
+
+    //-----------------------------------------------------------------------------------------------------------------------------------------------------
+    //-----------------------------------------------------------------------------------------------------------------------------------------------------
+    //-----------------------------------------------------------------------------------------------------------------------------------------------------
+
+    const header2 = document.createElement("tr");
+    header2.innerHTML = `<th colspan="10" style="text-align: center;">GASTOS EN MATERIALES</th>`;
+    tabla.appendChild(header2);
+
+    columnas_2 = document.createElement("tr");
+    columnas_2.innerHTML = `
+      <th colspan="2">PARTIDA</th>
+      <th colspan="1">UNIDAD</th>
+      <th colspan="1">CANTIDAD</th>
+      <th colspan="2">PRECIO/UNIDAD</th>
+      <th colspan="2">VALOR</th>
+      <th colspan="2">MI FINCA</th>
+    `;
+    tabla.appendChild(columnas_2);
+
+
+    const materiales = [
+      // Segundo grupo (añadido)
+      ['Semillas', 'Semilla'],
+      ['Bandejas', 'Paquete de 10 bandejas de 72 celdas'],
+      ['Tiestos', 'Tiesto de 3 galones'],
+      ['Mezcla de sustrato', 'Saco de 3.8 pies cúbicos'],
+      ['Abono', 'Saco de 50 libras'],
+      ['Herbicida', '-'],
+      ['Plaguicidas', '-']
+    ];
+
+    materiales.forEach((material, index) => {
+      const fila = document.createElement("tr");
+
+      fila.innerHTML = `
+        <td colspan='2'>${material[0]}</td>
+        <td colspan='1'>${material[1]}</td>
+        <td colspan='1'>${index == 5 || index == 6 ? `-` : `<input type="number" class="cantidad_material" data-index="${index}">`}</td>
+        <td colspan='2'>${index == 5 || index == 6 ? `-` : `<input type="number" class="precio_material" data-index="${index}">`}</td>
+        <td colspan='2' class="valor_material" data-index="${index}">${index == 5 || index == 6 ? `<input type="number" class="valor_material_directo" data-index="${index}">` : formatCurrency(0)}</td>
+        <td colspan='2'>${formatCurrency(0)}</td>
+      `;
+
+      tabla.appendChild(fila);
+    });
+
+    const filaTotal_C = document.createElement("tr");
+    filaTotal_C.innerHTML = `
+        <th colspan="6">TOTAL DE GASTO DE MATERIALES</th>
+        <th style="background-color: #f0f0f0;" colspan='2' id="valor_material_total"></th>
+        <th style="background-color: #f0f0f0;" colspan='2' id="mi_finca_material_total"></th>
+      `;
+    tabla.appendChild(filaTotal_C);
+
+    // Totalizador
+    function actualizarTotalesMaterial() {
+      let totalValor = 0;
+
+      document.querySelectorAll(".valor_material").forEach(cell => {
+        const valor = parseFloat(cell.textContent.replace(/[$,]/g, '')) || 0;
+        totalValor += valor;
+      });
+
+      document.querySelectorAll(".valor_material_directo").forEach(input => {
+        const valor = parseFloat(input.value.replace(/,/g, '')) || 0;
+        totalValor += valor;
+      });
+
+      const valorCell = document.getElementById("valor_material_total");
+
+      valorCell.textContent = totalValor == 0 ? '' : formatCurrency(totalValor);
+
+      const miFincaCell = document.getElementById("mi_finca_material_total");
+      miFincaCell.textContent = totalValor ? formatCurrency(0) : '';
+
+      return totalValor;
+    }
+
+    let materiales_total = actualizarTotalesMaterial();
+
+    // input listener
+    tabla.addEventListener("input", (e) => {
+      if (
+        !e.target.matches(
+          ".cantidad_material, .precio_material, .valor_material_directo"
+        )
+      )
+        return;
+
+      // Only update .valor_material cells if cantidad/precio changed
+      if (
+        e.target.matches(".cantidad_material, .precio_material")
+      ) {
+        const index = e.target.dataset.index;
+
+        const cantidadInput = document.querySelector(
+          `.cantidad_material[data-index='${index}']`
+        );
+        const precioInput = document.querySelector(
+          `.precio_material[data-index='${index}']`
+        );
+        const valorCell = document.querySelector(
+          `.valor_material[data-index='${index}']`
+        );
+
+        const cantidad = parseFloat(cantidadInput.value) || 0;
+        const precio = parseFloat(precioInput.value) || 0;
+        const total = cantidad * precio;
+
+        valorCell.textContent = formatCurrency(total);
+      }
+
+      materiales_total = actualizarTotalesMaterial();
+    });
+
+    const filaVacía_3 = document.createElement("tr");
+    filaVacía_3.innerHTML = `<td colspan="10" style="height: 20px; background-color: transparent;"></td>`;
+    tabla.appendChild(filaVacía_3);
+
+    //-----------------------------------------------------------------------------------------------------------------------------------------------------
+    //-----------------------------------------------------------------------------------------------------------------------------------------------------
+    //----------------------------------------------------------------------------------------------------------------------------------------------------- 
+
+    const header = document.createElement("tr");
+    header.innerHTML = `<th colspan="10" style="text-align: center;">GASTOS DE MANO DE OBRA</th>`;
+    tabla.appendChild(header);
+
+    const columnas = document.createElement("tr");
+    columnas.innerHTML = `
+      <th colspan="2">PARTIDA</th>
+      <th colspan="1">UNIDAD</th>
+      <th colspan="1">NÚMERO DE HORAS</th>
+      <th colspan="2">SALARIO/HORA</th>
+      <th colspan="2">VALOR</th>
+      <th colspan="2">MI FINCA</th>
+    `;
+    tabla.appendChild(columnas);
+
+    const mano_de_obra_1 = [
+      "Limpieza y preparación del área",
+      "Preparación de semilleros",
+      "Llenado de tiestos",
+      "Trasplante",
+      "Control de malezas",
+      "Abonamiento",
+      "Aplicación de plaguicidas",
+      "Venta al detal",
+      "Obligaciones patronales"
+    ];
+
+    // Generar filas
+    mano_de_obra_1.forEach((trabajo, index) => {
+      const fila = document.createElement("tr");
+      fila.innerHTML = `
+        <td colspan='2'>${trabajo}</td>
+        <td colspan='1'>${trabajo == mano_de_obra_1[mano_de_obra_1.length - 1] ? 'Nómina' : 'Hora'}</td>
+        <td colspan='1'>
+          ${index === mano_de_obra_1.length - 1
+          ? `<div style="position: relative; display: flex; align-items: center;">
+                  <input type="number" class="cantidad_mano_de_obra" data-index="${index}" style="padding-right: 20px; width: 90%;">
+                  <span style="position: absolute; right: 10px; pointer-events: none; color: #888;">%</span>
+                </div>`
+          : `<input type="number" class="cantidad_mano_de_obra" data-index="${index}">`
+        }
+        </td>
+        <td colspan='2'>${trabajo == mano_de_obra_1[mano_de_obra_1.length - 1] ? '-' : `<input type="number" class="precio_mano_de_obra" data-index="${index}">`}</td>
+        <td colspan='2' class="valor_mano_de_obra" data-index="${index}">${formatCurrency(0)}</td>
+        <td colspan='2'>${formatCurrency(0)}</td>
+    `;
+      tabla.appendChild(fila);
+    });
+
+    // Fila total
+    const filaTotal_A = document.createElement("tr");
+    filaTotal_A.innerHTML = `
+    <th colspan="6">TOTAL GASTO EN MANO DE OBRA</th>
+    <th style="background-color: #f0f0f0;" colspan='2' id="valor_mano_de_obra_total"></th>
+    <th style="background-color: #f0f0f0;" colspan='2' id="mi_finca_mano_de_obra_total"></th>
+    `;
+    tabla.appendChild(filaTotal_A);
+
+    // Totalizador
+    function actualizarTotalesManoDeObra() {
+      let totalCantidad = 0;
+      let totalValor = 0;
+
+      document.querySelectorAll(".cantidad_mano_de_obra").forEach(input => {
+        totalCantidad += parseFloat(input.value) || 0;
+      });
+
+      document.querySelectorAll(".valor_mano_de_obra").forEach(cell => {
+        const valor = parseFloat(cell.textContent.replace(/[$,]/g, '')) || 0;
+        totalValor += valor;
+      });
+
+      const valorCell = document.getElementById("valor_mano_de_obra_total");
+      valorCell.textContent = totalValor ? formatCurrency(totalValor) : '';
+      const miFincaCell = document.getElementById("mi_finca_mano_de_obra_total");
+      miFincaCell.textContent = totalValor ? formatCurrency(0) : '';
+
+      return totalValor;
+    }
+
+    let mano_de_obra_total = actualizarTotalesManoDeObra();
+
+    // input listener
+    tabla.addEventListener("input", (e) => {
+      if (!e.target.matches(".cantidad_mano_de_obra, .precio_mano_de_obra")) return;
+
+      const index = e.target.dataset.index;
+
+      const cantidadInput = document.querySelector(`.cantidad_mano_de_obra[data-index='${index}']`);
+      const precioInput = document.querySelector(`.precio_mano_de_obra[data-index='${index}']`);
+      const valorCell = document.querySelector(`.valor_mano_de_obra[data-index='${index}']`);
+
+      const cantidad = parseFloat(cantidadInput.value) || 0;
+      const precio = parseFloat(precioInput?.value) || 0;
+      let total = cantidad * precio;
+
+      // Si es la última fila (Obligaciones patronales), calcular como porcentaje del total (cantidad * precio)
+      if (parseInt(index) === mano_de_obra_1.length - 1) {
+        // El valor en "cantidad" es el porcentaje
+        const porcentaje = cantidad;
+        // Sumar todas las cantidades * precios excepto la última
+        let totalValor = 0;
+        document.querySelectorAll(".cantidad_mano_de_obra").forEach((input, idx) => {
+          if (parseInt(idx) !== mano_de_obra_1.length - 1) {
+            const cantidadTmp = parseFloat(input.value) || 0;
+            const precioTmp = parseFloat(document.querySelector(`.precio_mano_de_obra[data-index='${idx}']`)?.value) || 0;
+            totalValor += cantidadTmp * precioTmp;
+          }
+        });
+        total = (porcentaje / 100) * totalValor;
+        valorCell.textContent = formatCurrency(total);
+      } else {
+        valorCell.textContent = formatCurrency(total);
+      }
+
+      mano_de_obra_total = actualizarTotalesManoDeObra();
+    });
+
+
+    const filaVacía_1 = document.createElement("tr");
+    filaVacía_1.innerHTML = `<td colspan="10" style="height: 20px; background-color: transparent;"></td>`;
+    tabla.appendChild(filaVacía_1);
+
+    //-----------------------------------------------------------------------------------------------------------------------------------------------------
+    //-----------------------------------------------------------------------------------------------------------------------------------------------------
+    //-----------------------------------------------------------------------------------------------------------------------------------------------------
+
+    const header3 = document.createElement("tr");
+    header3.innerHTML = `<th colspan="10" style="text-align: center;">OTROS GASTOS</th>`;
+    tabla.appendChild(header3);
+
+    columnas_3 = document.createElement("tr");
+    columnas_3.innerHTML = `
+      <th colspan="2">PARTIDA</th>
+      <th colspan="1">UNIDAD</th>
+      <th colspan="1">CANTIDAD</th>
+      <th colspan="2">PRECIO/UNIDAD</th>
+      <th colspan="2">VALOR</th>
+      <th colspan="2">MI FINCA</th>
+    `;
+    tabla.appendChild(columnas_3);
+
+    const otros_gastos = [
+      'Uso del terreno',
+      'Electricidad',
+      'Agua',
+      'Seguros',
+      'Gastos misceláneos',
+      'Administración, supervisión e imprevistos',
+      'Interés sobre los gastos'
+    ];
+
+    otros_gastos.forEach((gasto, index) => {
+      const fila = document.createElement("tr");
+
+      fila.innerHTML = `
+        <td colspan='2'>${gasto}</td>
+        ${gasto != otros_gastos[otros_gastos.length - 1] && gasto != otros_gastos[otros_gastos.length - 2] ? (gasto == otros_gastos[0]
+          ? `<td colspan='1'><input type="text" id="unidad_otros_gastos"></td>
+          <td colspan='1'><input type="number" id="cantidad_otros_gastos"></td>
+          <td colspan='2'><input type="number" id="precio_otros_gastos"></td>`
+          : `<td colspan='1'>-</td>
+        <td colspan='1'>-</td>
+        <td colspan='2'>-</td>`) : `
+        <td colspan='1'>${gasto != otros_gastos[otros_gastos.length - 1] ? 'Nómina' : 'Gastos'}</td>
+        <td colspan='1'>${gasto != otros_gastos[otros_gastos.length - 1] ? '10%' : '9%'}</td>
+        <td colspan='2'>-</td>`}
+        <td colspan='2' id="valor_otros_gastos_${index}">${gasto != otros_gastos[otros_gastos.length - 1] && gasto != otros_gastos[otros_gastos.length - 2] && gasto != otros_gastos[0] ? `<input type="number" class="valor_otros_gastos" data-index="${index}">` : formatCurrency(0)}</td>
+        <td colspan='2'>${formatCurrency(0)}</td>
+      `;
+
+      tabla.appendChild(fila);
+    });
+
+    const filaTotal_D = document.createElement("tr");
+    filaTotal_D.innerHTML = `
+            <th colspan="6">TOTAL OTROS GASTOS</th>
+            <th style="background-color: #f0f0f0;" colspan='2' id="total_otros_gastos"></th>
+            <th style="background-color: #f0f0f0;" colspan='2' id="mi_finca_otros_gastos"></th>
+        `;
+    tabla.appendChild(filaTotal_D);
+
+    // Totalizador actualizado para otros gastos
+    function actualizarTotalesOtrosGastos() {
+      let totalValor = 0;
+
+      // Calcular y mostrar el valor de "Uso del terreno" (primer gasto)
+      const cantidad = document.getElementById('cantidad_otros_gastos');
+      const precio = document.getElementById('precio_otros_gastos');
+      const valor = document.getElementById('valor_otros_gastos_0');
+      if (cantidad && precio && valor) {
+        const usoTerreno = cantidad.value && precio.value
+          ? parseFloat(cantidad.value) * parseFloat(precio.value)
+          : 0;
+        valor.textContent = formatCurrency(usoTerreno);
+        totalValor += usoTerreno;
+      } else if (valor) {
+        valor.textContent = formatCurrency(0);
+      }
+
+      // Sumar solo los inputs directos (excluyendo los dos últimos calculados)
+      document.querySelectorAll('.valor_otros_gastos').forEach(input => {
+        const idx = parseInt(input.dataset.index);
+        if (!isNaN(idx) && idx > 0 && idx < otros_gastos.length - 2) {
+          totalValor += parseFloat(input.value.replace(/,/g, '')) || 0;
+        }
+      });
+
+      // NO sumar los dos últimos valores calculados aquí (evita doble conteo)
+
+      const totalOtrosGastos = document.getElementById("total_otros_gastos");
+      totalOtrosGastos.textContent = totalValor ? formatCurrency(totalValor) : '';
+      const miFinca = document.getElementById('mi_finca_otros_gastos');
+      if (miFinca) {
+        miFinca.textContent = totalValor ? formatCurrency(0) : '';
+      }
+
+      return totalValor;
+    }
+
+    let otros_gastos_total = actualizarTotalesOtrosGastos();
+
+    // input listener
+    tabla.addEventListener("input", (e) => {
+      if (!e.target.matches("#cantidad_otros_gastos, #precio_otros_gastos, .valor_otros_gastos")) return;
+      otros_gastos_total = actualizarTotalesOtrosGastos();
+      actualizarValorOtrosGastos10Porciento();
+      actualizarValorOtrosGastos9Porciento();
+    });
+    function actualizarValorOtrosGastos10Porciento() {
+      const index = otros_gastos.length - 2; // "Administración, supervisión e imprevistos" es el penúltimo
+      const valorCell = document.getElementById(`valor_otros_gastos_${index}`);
+      if (valorCell) {
+        valorCell.textContent = formatCurrency(mano_de_obra_total * 0.10);
+        valorCell.setAttribute('data-calculado', 'true');
+      }
+    }
+
+    // Actualizar el valor de "Interés sobre los gastos" (9% del total de mano de obra, materiales, otros gastos y uso del terreno)
+    function actualizarValorOtrosGastos9Porciento() {
+      const index = otros_gastos.length - 1; // "Interés sobre los gastos" es el último
+      const valorCell = document.getElementById(`valor_otros_gastos_${index}`);
+      if (valorCell) {
+        // Sumar mano_de_obra_total, materiales_total, uso de terreno y el total de otros gastos (sin incluir el interés mismo)
+        let sumaOtrosGastos = 0;
+        // Sumar todos los valores de otros gastos (inputs directos, excluyendo los dos últimos)
+        document.querySelectorAll('.valor_otros_gastos').forEach(input => {
+          // Exclude last two (calculated) cells
+          const idx = parseInt(input.dataset.index);
+          if (idx < otros_gastos.length - 2) {
+            sumaOtrosGastos += parseFloat(input.value.replace(/,/g, '')) || 0;
+          }
+        });
+        // Sumar el valor de "Administración, supervisión e imprevistos" (penúltimo gasto)
+        const adminCell = document.getElementById(`valor_otros_gastos_${otros_gastos.length - 2}`);
+        if (adminCell) {
+          sumaOtrosGastos += parseFloat(adminCell.textContent.replace(/[$,]/g, '')) || 0;
+        }
+        // Sumar el valor de "Uso del terreno" (primer gasto)
+        const usoTerrenoCell = document.getElementById('valor_otros_gastos_0');
+        let usoTerreno = 0;
+        if (usoTerrenoCell) {
+          usoTerreno = parseFloat(usoTerrenoCell.textContent.replace(/[$,]/g, '')) || 0;
+        }
+        // Total base para el 9%
+        const base = mano_de_obra_total + materiales_total + sumaOtrosGastos + usoTerreno;
+        valorCell.textContent = formatCurrency(base * 0.09);
+        valorCell.setAttribute('data-calculado', 'true');
+      }
+    }
+
+    // Llama a las funciones cada vez que mano_de_obra_total, materiales_total u otros_gastos cambian
+    tabla.addEventListener('input', (e) => {
+      if (
+        e.target.matches(".cantidad_mano_de_obra, .precio_mano_de_obra") ||
+        e.target.matches(".cantidad_material, .precio_material, .valor_material_directo") ||
+        e.target.matches("#cantidad_otros_gastos, #precio_otros_gastos, .valor_otros_gastos")
+      ) {
+        actualizarValorOtrosGastos10Porciento();
+        actualizarValorOtrosGastos9Porciento();
+        actualizarTotalesOtrosGastos();
+      }
+    });
+
+    // Inicializa los valores al cargar
+    actualizarValorOtrosGastos10Porciento();
+    actualizarValorOtrosGastos9Porciento();
+    actualizarTotalesOtrosGastos();
+
+    const total_gastos = document.createElement("tr");
+    total_gastos.innerHTML = `
+        <th colspan="6">TOTAL DE GASTOS</th>
+        <th style="background-color: #f0f0f0;" colspan='2' id="gastos_total"></th>
+        <th style="background-color: #f0f0f0;" colspan='2' id="mi_finca_gastos_total"></th>
+      `;
+    tabla.appendChild(total_gastos);
+
+
+    // Totalizador
+    function actualizarTotalGastos() {
+      const totalGastos = gastos_inversion_total + mano_de_obra_total + materiales_total + otros_gastos_total;
+
+      document.getElementById("gastos_total").textContent = totalGastos ? formatCurrency(totalGastos) : '';
+      document.getElementById("mi_finca_gastos_total").textContent = totalGastos ? formatCurrency(0) : '';
+
+      return totalGastos;
+    }
+
+    let gastos_totales = actualizarTotalGastos();
+
+    // input listener
+    tabla.addEventListener("input", (e) => {
+      if (!e.target.matches(".cantidad_mano_de_obra, .precio_mano_de_obra, .cantidad_maquinaria, .precio_maquinaria, .cantidad_material, .precio_material, .valor_otros_gastos, #cantidad_otros_gastos, #precio_otros_gastos")) return;
+
+      gastos_totales = actualizarTotalGastos();
+    });
+
+    const filaVacía_4 = document.createElement("tr");
+    filaVacía_4.innerHTML = `<td colspan="10" style="height: 20px; background-color: transparent;"></td>`;
+    tabla.appendChild(filaVacía_4);
+
+    //-----------------------------------------------------------------------------------------------------------------------------------------------------
+    //-----------------------------------------------------------------------------------------------------------------------------------------------------
+    //----------------------------------------------------------------------------------------------------------------------------------------------------- 
+
+    const header4 = document.createElement("tr");
+    header4.innerHTML = `<th colspan="10" style="text-align: center;">INGRESOS ESPERADOS</th>`;
+    tabla.appendChild(header4);
+
+    columnas_4 = document.createElement("tr");
+    columnas_4.innerHTML = `
+      <th colspan="2">PARTIDA</th>
+      <th colspan="1">UNIDAD</th>
+      <th colspan="1">CANTIDAD</th>
+      <th colspan="2">PRECIO/UNIDAD</th>
+      <th colspan="2">VALOR</th>
+      <th colspan="2">MI FINCA</th>
+    `;
+    tabla.appendChild(columnas_4);
+
+    const ingresos = [
+      "Ingreso Bruto por Ventas",
+      "Subsidio salarial"
+    ];
+
+    ingresos.forEach((ingreso, index) => {
+      const fila = document.createElement("tr");
+
+      const isSubsidio = ingreso === "Subsidio salarial";
+      const cantidad = isSubsidio ? '-' : '<input type="number" id="cantidad_ingreso" />';
+      const unidad = isSubsidio ? '-' : 'Tiestos 3 galones';
+      const precio = isSubsidio ? `<input type="number" id="subsidio_salarial" />` : `<input type="number" id="precio_ingreso" />`
+
+      fila.innerHTML = `
+            <td colspan='2'>${ingreso}</td>
+            <td colspan='1'>${unidad}</td>
+            <td colspan='1'>${cantidad}</td>
+            <td colspan='2'>${precio}</td>
+            <td colspan='2' class='valor_ingreso' data-index="${index}">${formatCurrency(0)}</td>
+            <td colspan='2'>${formatCurrency(0)}</td>
+        `;
+
+      tabla.appendChild(fila);
+    });
+
+    // fila total ingresos
+    const filaTotal_F = document.createElement("tr");
+    filaTotal_F.innerHTML = `
+        <th colspan="6">TOTAL DE INGRESOS</th>
+        <th style="background-color: #f0f0f0;" colspan='2' id='valor_ingreso_total'></th>
+        <th style="background-color: #f0f0f0;" colspan='2' id='mi_finca_total'></th>
+        `;
+    tabla.appendChild(filaTotal_F);
+
+    // totalizador
+    function actualizarTotalesIngresos() {
+      let total = 0;
+      document.querySelectorAll('.valor_ingreso').forEach(cell => {
+        total += parseFloat(cell.textContent.replace(/[$,]/g, '')) || 0;
+      });
+
+      document.getElementById('valor_ingreso_total').textContent = total ? formatCurrency(total) : '';
+      document.getElementById('mi_finca_total').textContent = total ? formatCurrency(0) : '';
+
+      return total;
+    }
+
+    let ingresos_totales = actualizarTotalesIngresos();
+
+    // input listener for ingresos (venta y subsidio)
+    tabla.addEventListener("input", (e) => {
+      if (!e.target.matches("#precio_ingreso, #cantidad_ingreso, #subsidio_salarial")) return;
+
+      const cantidadInput = document.getElementById(`cantidad_ingreso`);
+      const precioInput = document.getElementById(`precio_ingreso`);
+      const subsidioInput = document.getElementById(`subsidio_salarial`);
+      const valorCell1 = document.querySelector(`.valor_ingreso[data-index="0"]`);
+      const valorCell2 = document.querySelector('.valor_ingreso[data-index="1"]');
+
+      // Actualizar ingreso bruto por ventas
+      if (precioInput && cantidadInput && valorCell1) {
+        const precio = parseFloat(precioInput.value) || 0;
+        const cantidad = parseFloat(cantidadInput.value) || 0;
+        valorCell1.textContent = formatCurrency(cantidad * precio);
+      }
+
+      // Actualizar subsidio salarial
+      if (subsidioInput && valorCell2) {
+        const subsidio = parseFloat(subsidioInput.value) || 0;
+        valorCell2.textContent = formatCurrency(subsidio);
+      }
+
+      ingresos_totales = actualizarTotalesIngresos();
+    });
+
+
+    const ingreso_neto = document.createElement("tr");
+    ingreso_neto.innerHTML = `
+            <th colspan="6">INGRESO NETO</th>
+            <th style="background-color: #f0f0f0;" colspan='2' id='ingreso_neto_total'></th>
+            <th style="background-color: #f0f0f0;" colspan='2' id='mi_finca_neto_total'></th>
+        `;
+    tabla.appendChild(ingreso_neto);
+
+    // Totalizador
+    function actualizarIngresoNeto() {
+      const ingresoNeto = ingresos_totales - gastos_totales;
+      document.getElementById("ingreso_neto_total").textContent = ingresoNeto ? formatCurrency(ingresoNeto) : '';
+      document.getElementById("mi_finca_neto_total").textContent = ingresoNeto ? formatCurrency(0) : '';
+      return ingresoNeto;
+    }
+
+    let ingreso_neto_total = actualizarIngresoNeto();
+
+    // input listener
+    tabla.addEventListener("input", (e) => {
+      // Actualizar ingreso_neto siempre que cualquier input relevante cambie
+      ingreso_neto_total = actualizarIngresoNeto();
+      actualizarTotalesGenerales(); // <-- AÑADIDO: actualiza los totales generales en cada cambio
+    });
+
+    const filaVacía_7 = document.createElement("tr");
+    filaVacía_7.innerHTML = `<td colspan="10" style="height: 20px; background-color: transparent;"></td>`;
+    tabla.appendChild(filaVacía_7);
+
+    //-----------------------------------------------------------------------------------------------------------------------------------------------------
+    //-----------------------------------------------------------------------------------------------------------------------------------------------------
+    //-----------------------------------------------------------------------------------------------------------------------------------------------------
+
+    function obtenerPrecioTiestos() {
+      const precioInput = document.getElementById('precio_ingreso');
+      return parseFloat(precioInput?.value) || 0;
+    }
+
+    function obtenerCantidadTiestos() {
+      const cantidadInput = document.getElementById('cantidad_ingreso');
+      return parseFloat(cantidadInput?.value) || 0;
+    }
+
+    let produccion_minima_platanos = document.createElement("tr");
+    produccion_minima_platanos.innerHTML = `
+        <th colspan="8">PRODUCCIÓN MÍNIMA</th>
+        <td colspan="2" id="produccion_minima_total">${(() => {
+        const precio = obtenerPrecioTiestos();
+        return precio > 0 ? (gastos_totales / precio).toFixed(2) : '-';
+      })()
+      }</td>
+      `;
+    tabla.appendChild(produccion_minima_platanos);
+
+    let precio_minimo_platanos = document.createElement("tr");
+    const cantidad = obtenerPrecioTiestos();
+    precio_minimo_platanos.innerHTML = `
+            <th colspan="8">PRECIO MÍNIMO</th>
+            <td colspan="2" id="precio_minimo_total">${formatCurrency((gastos_totales / cantidad))}</td>
+        `;
+    tabla.appendChild(precio_minimo_platanos);
+
+    const filaVacía_8 = document.createElement("tr");
+    filaVacía_8.innerHTML = `<td colspan="10" style="height: 20px; background-color: transparent;"></td>`;
+    tabla.appendChild(filaVacía_8);
+
+    // Actualizar dinámicamente los valores cuando cambian los totales
+    function actualizarProduccionYPrecioMinimo() {
+      let precioTiestos = obtenerPrecioTiestos();
+      let cantidadTiestos = obtenerCantidadTiestos();
+      if (isNaN(precioTiestos)) precioTiestos = 0;
+      if (precioTiestos <= 0) {
+        document.getElementById("produccion_minima_total").textContent = '0.00';
+        document.getElementById("precio_minimo_total").textContent = '0.00';
+        return;
+      }
+      // Actualizar producción mínima y precio mínimo
+      document.getElementById("produccion_minima_total").textContent = (gastos_totales / precioTiestos).toLocaleString('es-PR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+      document.getElementById("precio_minimo_total").textContent = (gastos_totales / cantidadTiestos).toLocaleString('es-PR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    }
+
+    // Escuchar cambios relevantes
+    tabla.addEventListener("input", () => {
+      actualizarProduccionYPrecioMinimo();
+    });
+
+    // Inicializar valores al cargar
+    actualizarProduccionYPrecioMinimo();
+
+    //-----------------------------------------------------------------------------------------------------------------------------------------------------
+    //-----------------------------------------------------------------------------------------------------------------------------------------------------
+    //-----------------------------------------------------------------------------------------------------------------------------------------------------
+
+    columnas_5 = document.createElement("tr");
+    columnas_5.innerHTML = `
+          <th colspan="8">PARTIDA</th>
+          <th colspan="2">VALOR</th>
+        `;
+    tabla.appendChild(columnas_5);
+
+    totales = [
+      'Ingreso Total',
+      'Gasto Total',
+      'Ingreso Neto',
+    ];
+
+    totales.forEach((total, index) => {
+      const fila = document.createElement("tr");
+
+      fila.innerHTML = `
+        <td colspan='8'>${total}</td>
+        <!-- Estandar -->
+        <td colspan='2'><span id="valor_${index}"></span></td>
+      `;
+
+      tabla.appendChild(fila);
+    });
+
+    function formatSignedCurrency(value) {
+      const abs = Math.abs(value);
+      const formatted = formatCurrency(abs).replace('$', ''); // remove $ from inside
+      return value < 0 ? `$(${formatted})` : `$${formatted}`;
+    }
+
+    // Totalizador
+    function actualizarTotalesGenerales() {
+      const ingresoTotal = ingresos_totales;
+      const gastoTotal = gastos_totales;
+      const ingresoNeto = ingresoTotal - gastoTotal;
+      let precioTiestos = obtenerPrecioTiestos();
+
+      if (document.getElementById("valor_0")) document.getElementById("valor_0").textContent = ingresoTotal ? formatSignedCurrency(ingresoTotal) : '-';
+      if (document.getElementById("valor_1")) document.getElementById("valor_1").textContent = gastoTotal ? formatSignedCurrency(gastoTotal) : '-';
+      if (document.getElementById("valor_2")) document.getElementById("valor_2").textContent = ingresoNeto ? formatSignedCurrency(ingresoNeto) : '-';
+    }
+
+    // Inicializar los valores al cargar la página
+    actualizarTotalesGenerales();
+
+
+  </script>
+</body>
+
+</html>
+
+
+
+<!-- ejemplo, pagina de café, copy, paste y ajustan -->

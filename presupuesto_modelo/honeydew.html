@@ -1,0 +1,1070 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nómina Semanal - Agricultores</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 20px;
+    }
+
+    th,
+    td {
+      border: 1px solid #ccc;
+      padding: 8px;
+      text-align: center;
+    }
+
+    th {
+      background-color: #f2f2f2;
+    }
+
+    input,
+    select {
+      width: 90%;
+    }
+
+    td:first-child,
+    th:first-child {
+      text-align: left;
+    }
+
+    input[type="number"]::-webkit-inner-spin-button,
+    input[type="number"]::-webkit-outer-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+
+    input[type="number"] {
+      -moz-appearance: textfield;
+      appearance: textfield;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Presupuesto Modelo: Honeydew (1 cuerda) 1</h1>
+
+  <table>
+    <thead>
+      <tr>
+        <th colspan="10">PRODUCCION POR CUERDA</th>
+      </tr>
+      <tr>
+        <th colspan="9">Numero de cuerdas sembradas</th>
+        <td><input type="number" title="Número de cuerdas sembradas" class="numero_cuerdas" /></td>
+      </tr>
+      <tr>
+        <th colspan="9">Numero de plantas por cuerda distancia de siembra de 6' entre bancos por 1' entre plantas en
+          hilera sencilla</th>
+        <td><input type="number" title="Número de plantas por cuerda" class="numero_plantas" /></td>
+      </tr>
+      <tr>
+        <th colspan="9">Rendimiento por planta</th>
+        <td><input type="number" title="Rendimiento por planta" class="rendimiento_planta" /></td>
+      </tr>
+      <tr>
+        <th colspan="9">Rendimiento por cuerda (Millar)</th>
+        <td class="rendimiento_cuerda"></td>
+      </tr>
+      <tr>
+        <td colspan="10" style="height: 20px; background-color: transparent;"></td>
+      </tr>
+      <tr>
+        <th colspan="10" style="text-align: center;">GASTOS DE MANO DE OBRA</th>
+      </tr>
+      <tr>
+        <th colspan="2">PARTIDA</th>
+        <th colspan="1">UNIDAD</th>
+        <th colspan="1">CANTIDAD</th>
+        <th colspan="2">PRECIO/UNIDAD</th>
+        <th colspan="2">VALOR</th>
+        <th colspan="2">MI FINCA</th>
+      </tr>
+
+
+    </thead>
+    <tbody id="tabla">
+      <!-- Filas generadas por JS -->
+    </tbody>
+
+    <tfoot>
+      <tr>
+        <td colspan="10" style="padding: 20px; background-color: #fff; line-height: 1.6;">
+
+          <h2 style="color: #000000; font-size: 1em">SUPUESTOS PARA EL PRESUPUESTO DEL CULTIVO DE HONEYDEW</h2>
+          <ol style="padding-left: 20px;">
+            <li>Para un ciclo de producción, 75 a 90 días, en 1 cuerda conriego por goteo</li>
+            <li>El agricultor establecerá los intervalos de aplicación de fertilizantes utilizando sistema de riego.
+            </li>
+            <li>La cosecha comienza a partir de 75 a 90 días de haberse efectuado la siembra, dependiendo de la variedad
+              sembrada. Se realizan de 3 a 8 pases por ciclo de producción.
+            </li>
+            <li>Los gastos de alquiler de maquinaria incluyen el costo del operador y del combustible. Incluye
+              aditamentos de la maquinaria.</li>
+            <li>La preparación del terreno incluye arado, rastrillado, banqueo, aplicación de abono e instalación de
+              mangas de riego y plástico.</li>
+            <li>Se basa en una distancia de siembra de 6' entre bancos por 1' entre plantas en hilera sencilla</li>
+            <li>Se aplica cada 15 días</li>
+            <li>El costo de herbicida es mínimo porque asume que se utilizarán plásticos y riego por goteo para la
+              siembra. Este costo puede variar según las condiciones climatológicas y la eficiencia con que el
+              agricultor maneje sus sistema de riego</li>
+            <li>El valor de los plaguicidas varia de acuerdo a la incidencia de plagas y enfermedades en el área.</li>
+            <li>Se asume que la finca posee la infraestructura de riego incluyendo tanques y dosificadores para los
+              fertilizantes. El costo de la infraestructura varia de acuerdo a la fuente de agua disponible para la
+              finca, la topografía y otros factores.</li>
+            <li>El costo de empaque puede variar si el mercado no es exigente.</li>
+            <li>Es necesario tener dos colmenas de abejas por cuerda. Esto es determinante en la calidad del producto y
+              en el rendimiento final.</li>
+            <li>No incluye el gasto de cal. Se recomienda realizar un análisis de suelo para determinar si es necesario
+              aplicar cal.</li>
+            <li>Esto representa un costo de arrendamiento por cuatro meses, incluyendo las contribuciones.</li>
+            <li>10% del total de mano de obra y maquinaria.</li>
+            <li>El interés sobre el capital circulante es el costo del dinero en efectivo que se usa en la empresa.
+              Total de gastos en efectivo por la tasa de interés prevaleciente en el mercado (9%).</li>
+            <li>Las obligaciones patronales incluyen pagos al Interna Revenue Service (Seguro Social), Fondo del Seguro
+              del Estado (Seguro Obrero), Departamento del Trabajo (Seguro por Desempleo) y Seguro Social Choferil
+              (Seguro Choferil).</li>
+            <li>No se tomó en consideración el subsidio salarial, si se aplicara el subsidio el ingreso neto aumentaría.
+              Se proveyó encasillado para que coloque el valor del subsidio.</li>
+          </ol>
+
+          <span style="font-weight: bold;">Preparado y revisado por:</span><br>
+          Prof. Mildred Cortes<br>
+          Catedrática en Economía Agrícola<br>
+          Estación Experimental Agrícola<br><br>
+
+          Carlos Gautier<br>
+          Agente Agrícola<br>
+          Servicio de Extensión Agrícola<br><br>
+
+          <span style="font-weight: bold;">Versión Electrónica:</span><br>
+          Dra. Alexandra Gregory Crespo<br>
+          Catedrática en Economía Agrícola<br>
+          Servicio de Extensión Agrícola<br><br>
+
+          Joe Kirk R. Lucarne<br>
+          Estudiante Graduado<br>
+          Departamento de Economía Agrícola<br><br>
+
+          Juan Arellano Uribe<br>
+          Estudiante Graduado<br>
+          Departamento de Economía Agrícola<br><br>
+
+          Yaira A. Avilés Ortiz<br>
+          Economista Agrícola<br><br>
+
+          <span style="font-weight: bold;">Fecha de revisión:</span><br>
+          Febrero 2022<br><br>
+
+          <div style="margin-top: 20px; padding: 12px; border-left: 5px solid #d9534f; background-color: #fdf2f2;">
+            <strong>AVISO:</strong> Los Presupuestos Modelos presentan la información de los ingresos y gastos bajo
+            condiciones normales y características particulares de una finca.  La Universidad de Puerto Rico no asume
+            responsabilidad por los resultados si los ingresos y gastos de una empresa en particular difieren de dicha
+            publicación. El usuario de estos modelos releva a la Universidad de Puerto Rico de toda responsabilidad,
+            reclamación, pérdida, daño o costo relacionado o surgido por el uso de estos modelos.
+          </div>
+
+          <div style="margin-top: 20px; font-size: 0.85em; text-align: center; color: #999;">
+            This material is based upon work supported by USDA/OPPE under Award Number: AO212501x443G010
+          </div>
+        </td>
+      </tr>
+    </tfoot>
+
+
+  </table>
+  <!----------------------------------------------------------------------------------------------------------------------------------------->
+  <!----------------------------------------------------------------------------------------------------------------------------------------->
+  <!----------------------------------------------------------------------------------------------------------------------------------------->
+  <script>
+    function formatNumber(value) {
+      return new Intl.NumberFormat('es-PR', {
+        style: 'decimal',
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2
+      }).format(value);
+    }
+
+    function formatCurrency(value) {
+      return new Intl.NumberFormat('es-PR', {
+        style: 'currency',
+        currency: 'USD',
+        minimumFractionDigits: 2
+      }).format(value);
+    }
+
+    const tabla = document.getElementById("tabla");
+
+    function rendimientoPorCuerda() {
+      const numeroCuerdas = parseFloat(document.querySelector(".numero_cuerdas")?.value) || 0;
+      const numeroPlantas = parseFloat(document.querySelector(".numero_plantas")?.value) || 0;
+      const rendimientoPorPlanta = parseFloat(document.querySelector(".rendimiento_planta")?.value) || 0;
+      return numeroCuerdas * numeroPlantas * rendimientoPorPlanta;
+    }
+
+    document.querySelector(".rendimiento_cuerda").textContent = formatNumber(rendimientoPorCuerda());
+
+    // Actualizar rendimiento por cuerda al cambiar cualquiera de los campos relevantes
+    document.querySelectorAll(".numero_cuerdas, .numero_plantas, .rendimiento_planta").forEach(input => {
+      input.addEventListener("input", () => {
+        document.querySelector(".rendimiento_cuerda").textContent = formatNumber(rendimientoPorCuerda());
+        actualizarTotalesGenerales();
+      });
+    });
+
+    const mano_de_obra_1 = [
+      'Siembra',
+      'Abonamiento',
+      'Cultivo',
+      'Riego',
+      'Cosecha',
+      'Empaque',
+    ];
+
+    // Generar filas
+    mano_de_obra_1.forEach((trabajo, index) => {
+      const fila = document.createElement("tr");
+      fila.innerHTML = `
+        <td colspan='2'>${trabajo}</td>
+        <td colspan='1'>Hora</td>
+        <td colspan='1'><input type="number" class="cantidad_mano_de_obra" data-index="${index}"></td>
+        <td colspan='2'><input type="number" class="precio_mano_de_obra" data-index="${index}"></td>
+        <td colspan='2' class="valor_mano_de_obra" data-index="${index}">${formatCurrency(0)}</td>
+        <td colspan='2' class="mi_finca_mano_de_obra" data-index="${index}">${formatCurrency(0)}</td>
+    `;
+      tabla.appendChild(fila);
+    });
+
+    // Fila total
+    const filaTotal_A = document.createElement("tr");
+    filaTotal_A.innerHTML = `
+    <th colspan="3">TOTAL DE MANO DE OBRA</th>
+    <th id="cantidad_mano_de_obra_total"></th>
+    <th style="background-color: #f0f0f0;" colspan='2'></th>
+    <th style="background-color: #f0f0f0;" colspan='2' id="valor_mano_de_obra_total"></th>
+    <th style="background-color: #f0f0f0;" colspan='2' id="mi_finca_mano_de_obra_total"></th>
+    `;
+    tabla.appendChild(filaTotal_A);
+
+    // Totalizador
+    function actualizarTotalesManoDeObra() {
+      let totalCantidad = 0;
+      let totalValor = 0;
+
+      document.querySelectorAll(".cantidad_mano_de_obra").forEach(input => {
+        totalCantidad += parseFloat(input.value) || 0;
+      });
+
+      document.querySelectorAll(".valor_mano_de_obra").forEach(cell => {
+        const valor = parseFloat(cell.textContent.replace(/[$,]/g, '')) || 0;
+        totalValor += valor;
+      });
+
+      const cantidadCell = document.getElementById("cantidad_mano_de_obra_total");
+      cantidadCell.textContent = totalCantidad ? totalCantidad : '';
+
+      const valorCell = document.getElementById("valor_mano_de_obra_total");
+      valorCell.textContent = totalValor ? formatCurrency(totalValor) : '';
+
+      const miFincaCell = document.getElementById("mi_finca_mano_de_obra_total");
+      const numeroCuerdas = parseFloat(document.querySelector(".numero_cuerdas")?.value) || 0;
+      miFincaCell.textContent = totalValor ? formatCurrency(totalValor * numeroCuerdas) : '';
+
+      return totalValor;
+    }
+
+    let mano_de_obra_total = actualizarTotalesManoDeObra();
+
+    // input listener
+    tabla.addEventListener("input", (e) => {
+      if (!e.target.matches(".cantidad_mano_de_obra, .precio_mano_de_obra")) return;
+
+      const index = e.target.dataset.index;
+
+      const cantidadInput = document.querySelector(`.cantidad_mano_de_obra[data-index='${index}']`);
+      const precioInput = document.querySelector(`.precio_mano_de_obra[data-index='${index}']`);
+      const valorCell = document.querySelector(`.valor_mano_de_obra[data-index='${index}']`);
+      const miFincaCell = document.querySelector(`.mi_finca_mano_de_obra[data-index='${index}']`);
+
+      const cantidad = parseFloat(cantidadInput.value) || 0;
+      const precio = parseFloat(precioInput.value) || 0;
+      const total = cantidad * precio;
+
+      valorCell.textContent = formatCurrency(total);
+      const numeroCuerdas = parseFloat(document.querySelector(".numero_cuerdas")?.value) || 0;
+      miFincaCell.textContent = formatCurrency(total * numeroCuerdas);
+
+      mano_de_obra_total = actualizarTotalesManoDeObra();
+    });
+
+    // update Mi Finca values when numero_cuerdas changes
+    document.querySelector(".numero_cuerdas").addEventListener("input", () => {
+      const numeroCuerdas = parseFloat(document.querySelector(".numero_cuerdas")?.value) || 0;
+      let total = 0;
+      document.querySelectorAll(".valor_mano_de_obra").forEach((cell, idx) => {
+        const valor = parseFloat(cell.textContent.replace(/[$,]/g, '')) || 0;
+        const miFincaCell = document.querySelector(`.mi_finca_mano_de_obra[data-index='${idx}']`);
+        if (miFincaCell) {
+          miFincaCell.textContent = formatCurrency(valor * numeroCuerdas);
+          total += valor * numeroCuerdas;
+        }
+      });
+
+      mano_de_obra_total = actualizarTotalesManoDeObra();
+    });
+
+    const filaVacía_1 = document.createElement("tr");
+    filaVacía_1.innerHTML = `<td colspan="10" style="height: 20px; background-color: transparent;"></td>`;
+    tabla.appendChild(filaVacía_1);
+
+    //-----------------------------------------------------------------------------------------------------------------------------------------------------
+    //-----------------------------------------------------------------------------------------------------------------------------------------------------
+    //-----------------------------------------------------------------------------------------------------------------------------------------------------
+    const header1 = document.createElement("tr");
+    header1.innerHTML = `<th colspan="10" style="text-align: center;">GASTOS DE ALQUILER DE MAQUINARIA</th>`;
+    tabla.appendChild(header1);
+
+    const columnas_1 = document.createElement("tr");
+    columnas_1.innerHTML = `
+      <th colspan="2">Partida</th>
+      <th colspan="1">Unidad</th>
+      <th colspan="1">Cantidad</th>
+      <th colspan="2">PRECIO/UNIDAD</th>
+      <th colspan="2">VALOR</th>
+      <th colspan="2">MI FINCA</th>
+    `;
+    tabla.appendChild(columnas_1);
+
+    const maquinaria_y_equipo = [
+      'Preparación de terreno',
+      'Combate de plagas'
+    ];
+
+    maquinaria_y_equipo.forEach((maquinaria, index) => {
+      const fila = document.createElement("tr");
+
+      fila.innerHTML = `
+        <td colspan='2'>${maquinaria}</td>
+        <td colspan='1'>Hora</td>
+        <td colspan='1'><input type="number" class="cantidad_maquinaria" data-index="${index}"></td>
+        <td colspan='2'><input type="number" class="precio_maquinaria" data-index="${index}"></td>
+        <td colspan='2' class="valor_maquinaria" data-index="${index}">$0.00</td>
+        <td colspan='2' class="mi_finca_maquinaria" data-index="${index}">${formatCurrency(0)}</td>
+      `;
+
+      tabla.appendChild(fila);
+    });
+
+    const filaTotal_B = document.createElement("tr");
+    filaTotal_B.innerHTML = `
+    <th colspan="3">TOTAL DE GASTOS DE ALQUILER DE MAQUIINARIA</th>
+    <th id="cantidad_maquinaria_total"></th>
+    <th style="background-color: #f0f0f0;" colspan='2'></th>
+    <th style="background-color: #f0f0f0;" colspan='2' id="valor_maquinaria_total"></th>
+    <th style="background-color: #f0f0f0;" colspan='2' id="mi_finca_maquinaria_total"></th>
+    `;
+    tabla.appendChild(filaTotal_B);
+
+    // Totalizador
+    function actualizarTotalesMaquinaria() {
+      let totalCantidad = 0;
+      let totalValor = 0;
+
+      document.querySelectorAll(".cantidad_maquinaria").forEach(input => {
+        totalCantidad += parseFloat(input.value) || 0;
+      });
+
+      document.querySelectorAll(".valor_maquinaria").forEach(cell => {
+        const valor = parseFloat(cell.textContent.replace(/[$,]/g, '')) || 0;
+        totalValor += valor;
+      });
+
+      const cantidadCell = document.getElementById("cantidad_maquinaria_total");
+      const valorCell = document.getElementById("valor_maquinaria_total");
+      cantidadCell.textContent = totalCantidad ? totalCantidad : '';
+      valorCell.textContent = totalValor == 0 ? '' : formatCurrency(totalValor);
+
+      const miFincaCell = document.getElementById("mi_finca_maquinaria_total");
+      const numeroCuerdas = parseFloat(document.querySelector(".numero_cuerdas")?.value) || 0;
+      if (miFincaCell) {
+        miFincaCell.textContent = totalValor === 0 ? '' : formatCurrency(totalValor * numeroCuerdas);
+      }
+
+      return totalValor;
+    }
+
+    let maquinaria_y_equipo_total = actualizarTotalesMaquinaria();
+
+    // input listener
+    tabla.addEventListener("input", (e) => {
+      if (!e.target.matches(".cantidad_maquinaria, .precio_maquinaria")) return;
+
+      const index = e.target.dataset.index;
+
+      const cantidadInput = document.querySelector(`.cantidad_maquinaria[data-index='${index}']`);
+      const precioInput = document.querySelector(`.precio_maquinaria[data-index='${index}']`);
+      const valorCell = document.querySelector(`.valor_maquinaria[data-index='${index}']`);
+      const miFincaCell = document.querySelector(`.mi_finca_maquinaria[data-index='${index}']`);
+
+      const cantidad = parseFloat(cantidadInput.value) || 0;
+      const precio = parseFloat(precioInput.value) || 0;
+      const total = cantidad * precio;
+
+      valorCell.textContent = formatCurrency(total);
+      const numeroCuerdas = parseFloat(document.querySelector(".numero_cuerdas")?.value) || 0;
+      miFincaCell.textContent = formatCurrency(total * numeroCuerdas);
+
+      maquinaria_y_equipo_total = actualizarTotalesMaquinaria();
+    });
+
+    // update Mi Finca values when numero_cuerdas changes
+    document.querySelector(".numero_cuerdas").addEventListener("input", () => {
+      const numeroCuerdas = parseFloat(document.querySelector(".numero_cuerdas")?.value) || 0;
+      let total = 0;
+      document.querySelectorAll(".valor_maquinaria").forEach((cell, idx) => {
+        const valor = parseFloat(cell.textContent.replace(/[$,]/g, '')) || 0;
+        const miFincaCell = document.querySelector(`.mi_finca_maquinaria[data-index='${idx}']`);
+        if (miFincaCell) {
+          miFincaCell.textContent = formatCurrency(valor * numeroCuerdas);
+          total += valor * numeroCuerdas;
+        }
+      });
+
+      maquinaria_y_equipo_total = actualizarTotalesMaquinaria();
+    });
+
+
+    const filaVacía_2 = document.createElement("tr");
+    filaVacía_2.innerHTML = `<td colspan="10" style="height: 20px; background-color: transparent;"></td>`;
+    tabla.appendChild(filaVacía_2);
+
+    //-----------------------------------------------------------------------------------------------------------------------------------------------------  
+    //-----------------------------------------------------------------------------------------------------------------------------------------------------
+    //-----------------------------------------------------------------------------------------------------------------------------------------------------
+
+    const header2 = document.createElement("tr");
+    header2.innerHTML = `<th colspan="10" style="text-align: center;">GASTOS EN MATERIALES</th>`;
+    tabla.appendChild(header2);
+
+    columnas_2 = document.createElement("tr");
+    columnas_2.innerHTML = `
+      <th colspan="2">PARTIDA</th>
+      <th colspan="1">UNIDAD</th>
+      <th colspan="1">CANTIDAD</th>
+      <th colspan="2">PRECIO/UNIDAD</th>
+      <th colspan="2">VALOR</th>
+      <th colspan="2">MI FINCA</th>
+    `;
+    tabla.appendChild(columnas_2);
+
+
+    const materiales = [
+      ['Semilla hibrida', 'libra',],
+      ['Plántulas', 'c/u'],
+      ['Abono', '-'],
+      ['Urea (fertigación)', 'quintal'],
+      ['Abono foliar', 'libra'],
+      ['Herbicidas', '-'],
+      ['Plaguicidas', '-'],
+      ['Plásticos plateados', 'rollo'],
+      ['Mangas de riego', 'rollo de 7,500'],
+      ['Agua de riego', '-'],
+      ['Cajas de empaque', 'c/u'],
+      ['Colmena de abejas', 'c/u']
+    ];
+
+    const precios_materiales = [
+      160.00,
+      375.00,
+      349.24,
+      26.20,
+      60.00,
+      0.00,
+      0.00,
+      300.00,
+      160.00,
+      0.00,
+      1001.00,
+      50.00,
+      3061.44
+    ];
+
+    materiales.forEach((material, index) => {
+      const fila = document.createElement("tr");
+
+      fila.innerHTML = `
+        <td colspan='2'>${material[0]}</td>
+        <td colspan='1'>${material[1]}</td>
+        <td colspan='1'>${precios_materiales[index] ? `<input type="number" class="cantidad_material" data-index="${index}">` : `-`}</td>
+        <td colspan='2'>${precios_materiales[index] ? `<input type="number" class="precio_material" data-index="${index}">` : `-`}</td>
+        <td colspan='2' class="valor_material" data-index="${index}">${!precios_materiales[index] ? `<input type="number" class="valor_material_directo" data-index="${index}">` : formatCurrency(0)}</td>
+        <td colspan='2' class="mi_finca_material" data-index="${index}">${formatCurrency(0)}</td>
+      `;
+
+      tabla.appendChild(fila);
+    });
+
+    const filaTotal_C = document.createElement("tr");
+    filaTotal_C.innerHTML = `
+        <th colspan="6">TOTAL DE GASTO DE MATERIALES</th>
+        <th style="background-color: #f0f0f0;" colspan='2' id="valor_material_total"></th>
+        <th style="background-color: #f0f0f0;" colspan='2' id="mi_finca_material_total"></th>
+      `;
+    tabla.appendChild(filaTotal_C);
+
+    // Totalizador
+    function actualizarTotalesMaterial() {
+      let totalValor = 0;
+
+      document.querySelectorAll(".valor_material").forEach(cell => {
+        const valor = parseFloat(cell.textContent.replace(/[$,]/g, '')) || 0;
+        totalValor += valor;
+      });
+
+      document.querySelectorAll(".valor_material_directo").forEach(input => {
+        const valor = parseFloat(input.value.replace(/,/g, '')) || 0;
+        totalValor += valor;
+      });
+
+      const valorCell = document.getElementById("valor_material_total");
+      valorCell.textContent = totalValor == 0 ? '' : formatCurrency(totalValor);
+      const miFincaCell = document.getElementById("mi_finca_material_total");
+      const numeroCuerdas = parseFloat(document.querySelector(".numero_cuerdas")?.value) || 0;
+      miFincaCell.textContent = totalValor == 0 ? '' : formatCurrency(totalValor * numeroCuerdas);
+
+      return totalValor;
+    }
+
+    let materiales_total = actualizarTotalesMaterial();
+
+    // input listener
+    tabla.addEventListener("input", (e) => {
+      if (
+        !e.target.matches(
+          ".cantidad_material, .precio_material, .valor_material_directo"
+        )
+      )
+        return;
+
+      // Only update .valor_material cells if cantidad/precio changed
+      if (
+        e.target.matches(".cantidad_material, .precio_material")
+      ) {
+        const index = e.target.dataset.index;
+
+        const cantidadInput = document.querySelector(
+          `.cantidad_material[data-index='${index}']`
+        );
+        const precioInput = document.querySelector(
+          `.precio_material[data-index='${index}']`
+        );
+        const valorCell = document.querySelector(
+          `.valor_material[data-index='${index}']`
+        );
+
+        const cantidad = parseFloat(cantidadInput.value) || 0;
+        const precio = parseFloat(precioInput.value) || 0;
+        const total = cantidad * precio;
+
+        valorCell.textContent = formatCurrency(total);
+        const miFincaCell = document.querySelector(`.mi_finca_material[data-index='${index}']`);
+        const numeroCuerdas = parseFloat(document.querySelector(".numero_cuerdas")?.value) || 0;
+        if (miFincaCell) {
+          miFincaCell.textContent = formatCurrency(total * numeroCuerdas);
+        }
+      }
+      if (e.target.matches(".valor_material_directo")) {
+        const index = e.target.dataset.index;
+        const valorCell = document.querySelector(`.valor_material[data-index='${index}']`);
+        const miFincaCell = document.querySelector(`.mi_finca_material[data-index='${index}']`);
+        const valorDirecto = parseFloat(e.target.value.replace(/,/g, '')) || 0;
+        const numeroCuerdas = parseFloat(document.querySelector(".numero_cuerdas")?.value) || 0;
+        miFincaCell.textContent = formatCurrency(valorDirecto * numeroCuerdas);
+      }
+
+      materiales_total = actualizarTotalesMaterial();
+    });
+
+    // update Mi Finca values when numero_cuerdas changes
+    document.querySelector(".numero_cuerdas").addEventListener("input", () => {
+      const numeroCuerdas = parseFloat(document.querySelector(".numero_cuerdas")?.value) || 0;
+      let total = 0;
+      document.querySelectorAll(".valor_material").forEach((cell, idx) => {
+        const valor = parseFloat(cell.textContent.replace(/[$,]/g, '')) || 0;
+        const miFincaCell = document.querySelector(`.mi_finca_material[data-index='${idx}']`);
+        if (miFincaCell) {
+          miFincaCell.textContent = formatCurrency(valor * numeroCuerdas);
+          total += valor * numeroCuerdas;
+        }
+      });
+
+      const valorDirecto1 = document.querySelector(".valor_material_directo[data-index='5']");
+      const valorDirecto2 = document.querySelector(".valor_material_directo[data-index='6']");
+      const valorDirecto3 = document.querySelector(".valor_material_directo[data-index='9']");
+      if (valorDirecto1) {
+        const valor1 = parseFloat(valorDirecto1.value.replace(/,/g, '')) || 0;
+        const valor2 = parseFloat(valorDirecto2.value.replace(/,/g, '')) || 0;
+        const valor3 = parseFloat(valorDirecto3.value.replace(/,/g, '')) || 0;
+        const miFincaCell1 = document.querySelector(`.mi_finca_material[data-index='5']`);
+        const miFincaCell2 = document.querySelector(`.mi_finca_material[data-index='6']`);
+        const miFincaCell3 = document.querySelector(`.mi_finca_material[data-index='9']`);
+        if (miFincaCell1) {
+          miFincaCell1.textContent = formatCurrency(valor1 * numeroCuerdas);
+          total += valor1 * numeroCuerdas;
+        }
+        if (miFincaCell2) {
+          miFincaCell2.textContent = formatCurrency(valor2 * numeroCuerdas);
+          total += valor2 * numeroCuerdas;
+        }
+        if (miFincaCell3) {
+          miFincaCell3.textContent = formatCurrency(valor3 * numeroCuerdas);
+          total += valor3 * numeroCuerdas;
+        }
+      }
+
+      materiales_total = actualizarTotalesMaterial();
+    });
+
+    const filaVacía_3 = document.createElement("tr");
+    filaVacía_3.innerHTML = `<td colspan="10" style="height: 20px; background-color: transparent;"></td>`;
+    tabla.appendChild(filaVacía_3);
+
+    //-----------------------------------------------------------------------------------------------------------------------------------------------------
+    //-----------------------------------------------------------------------------------------------------------------------------------------------------
+    //----------------------------------------------------------------------------------------------------------------------------------------------------- 
+
+    const header3 = document.createElement("tr");
+    header3.innerHTML = `<th colspan="10" style="text-align: center;">OTROS GASTOS</th>`;
+    tabla.appendChild(header3);
+
+    columnas_3 = document.createElement("tr");
+    columnas_3.innerHTML = `
+      <th colspan="2">PARTIDA</th>
+      <th colspan="1">UNIDAD</th>
+      <th colspan="1">CANTIDAD</th>
+      <th colspan="2">PRECIO/UNIDAD</th>
+      <th colspan="2">VALOR</th>
+      <th colspan="2">MI FINCA</th>
+    `;
+    tabla.appendChild(columnas_3);
+
+    const otros_gastos = [
+      'Uso del terreno',
+      'Disposición de plásticos, mangas de riego y recipientes de plaguicidas',
+      'Seguro agricola',
+      'Seguridad',
+      'Administración y supervisión',
+      'Gastos misceláneos',
+      'Intereses sobre capital circulante',
+      'Obligaciones patronales'
+    ];
+
+    otros_gastos.forEach((gasto, index) => {
+      const fila = document.createElement("tr");
+
+      fila.innerHTML = `
+        <td colspan='2'>${gasto}</td>
+        <td colspan='1'>-</td>
+        <td colspan='1'>-</td>
+        <td colspan='2'>-</td>
+        <td colspan='2' class="valor_material" data-index="${index}"><input type="number" class="valor_otros_gastos" data-index="${index}"></td>
+        <td colspan='2' class="mi_finca_otros_gastos" data-index="${index}"></td>
+      `;
+
+      tabla.appendChild(fila);
+    });
+
+    const filaTotal_D = document.createElement("tr");
+    filaTotal_D.innerHTML = `
+            <th colspan="6">TOTAL OTROS GASTOS</th>
+            <th style="background-color: #f0f0f0;" colspan='2' id="total_otros_gastos"></th>
+            <th style="background-color: #f0f0f0;" colspan='2' id="mi_finca_otros_gastos_total"></th>
+        `;
+    tabla.appendChild(filaTotal_D);
+
+    // Totalizador
+    function actualizarTotalesOtrosGastos() {
+      let totalValor = 0;
+
+      document.querySelectorAll(".valor_otros_gastos").forEach(cell => {
+        const valor = parseFloat(cell.value.replace(/,/g, '')) || 0;
+        totalValor += valor;
+      });
+
+      const totalOtrosGastos = document.getElementById("total_otros_gastos");
+      totalOtrosGastos.textContent = totalValor == 0 ? '' : formatCurrency(totalValor);
+
+      const miFincaCell = document.getElementById("mi_finca_otros_gastos_total");
+      const numeroCuerdas = parseFloat(document.querySelector(".numero_cuerdas")?.value) || 0;
+      miFincaCell.textContent = totalValor == 0 ? '' : formatCurrency(totalValor * numeroCuerdas);
+
+      return totalValor;
+    }
+
+    let otros_gastos_total = actualizarTotalesOtrosGastos();
+
+    // input listener
+    tabla.addEventListener("input", (e) => {
+      if (!e.target.matches(".valor_otros_gastos")) return;
+      const index = e.target.dataset.index;
+      const valorCell = document.querySelector(`.valor_otros_gastos[data-index='${index}']`);
+      const miFincaCell = document.querySelector(`.mi_finca_otros_gastos[data-index='${index}']`);
+      const valor = parseFloat(e.target.value.replace(/,/g, '')) || 0;
+      valorCell.textContent = formatCurrency(valor);
+      const numeroCuerdas = parseFloat(document.querySelector(".numero_cuerdas")?.value) || 0;
+      if (miFincaCell) {
+        miFincaCell.textContent = formatCurrency(valor * numeroCuerdas);
+      }
+      otros_gastos_total = actualizarTotalesOtrosGastos();
+    });
+
+    const total_gastos = document.createElement("tr");
+    total_gastos.innerHTML = `
+        <th colspan="6">TOTAL DE GASTOS</th>
+        <th style="background-color: #f0f0f0;" colspan='2' id="gastos_total"></th>
+        <th style="background-color: #f0f0f0;" colspan='2' id="mi_finca_gastos_total"></th>
+      `;
+    tabla.appendChild(total_gastos);
+
+    // Totalizador
+    function actualizarTotalGastos() {
+      const totalGastos = mano_de_obra_total + maquinaria_y_equipo_total + materiales_total + otros_gastos_total;
+
+      document.getElementById("gastos_total").textContent = totalGastos == 0 ? '' : formatCurrency(totalGastos);
+      const miFincaCell = document.getElementById("mi_finca_gastos_total");
+      const numeroCuerdas = parseFloat(document.querySelector(".numero_cuerdas")?.value) || 0;
+      miFincaCell.textContent = totalGastos == 0 ? '' : formatCurrency(totalGastos * numeroCuerdas);
+
+      return totalGastos;
+    }
+
+    let gastos_totales = actualizarTotalGastos();
+
+    // input listener
+    tabla.addEventListener("input", (e) => {
+      if (!e.target.matches(".cantidad_mano_de_obra, .precio_mano_de_obra, .cantidad_maquinaria, .precio_maquinaria, .cantidad_material, .precio_material, .valor_material_directo, .valor_otros_gastos")) return;
+
+      gastos_totales = actualizarTotalGastos();
+    });
+
+    // Actualizar Mi Finca otros gastos valores al cambiar numero_cuerdas
+    document.querySelector(".numero_cuerdas").addEventListener("input", () => {
+      const numeroCuerdas = parseFloat(document.querySelector(".numero_cuerdas")?.value) || 0;
+      let total = 0;
+      document.querySelectorAll(".valor_otros_gastos").forEach((cell, idx) => {
+        const valor = parseFloat(cell.textContent.replace(/[$,]/g, '')) || 0;
+        const miFincaCell = document.querySelector(`.mi_finca_otros_gastos[data-index='${idx}']`);
+        if (miFincaCell) {
+          miFincaCell.textContent = formatCurrency(valor * numeroCuerdas);
+          total += valor * numeroCuerdas;
+        }
+      });
+      const miFincaTotalCell = document.getElementById("mi_finca_otros_gastos_total");
+      if (miFincaTotalCell) {
+        miFincaTotalCell.textContent = formatCurrency(total);
+      }
+
+      const miFincaGastosTotalCell = document.getElementById("mi_finca_gastos_total");
+      if (miFincaGastosTotalCell) {
+        miFincaGastosTotalCell.textContent = formatCurrency(total * numeroCuerdas);
+      }
+
+      gastos_totales = actualizarTotalGastos();
+    });
+
+    const filaVacía_4 = document.createElement("tr");
+    filaVacía_4.innerHTML = `<td colspan="10" style="height: 20px; background-color: transparent;"></td>`;
+    tabla.appendChild(filaVacía_4);
+
+    //-----------------------------------------------------------------------------------------------------------------------------------------------------
+    //-----------------------------------------------------------------------------------------------------------------------------------------------------
+    //----------------------------------------------------------------------------------------------------------------------------------------------------- 
+
+    const header4 = document.createElement("tr");
+    header4.innerHTML = `<th colspan="10" style="text-align: center;">INGRESOS ESPERADOS</th>`;
+    tabla.appendChild(header4);
+
+    columnas_4 = document.createElement("tr");
+    columnas_4.innerHTML = `
+      <th colspan="2">PARTIDA</th>
+      <th colspan="1">UNIDAD</th>
+      <th colspan="1">CANTIDAD</th>
+      <th colspan="2">PRECIO/UNIDAD</th>
+      <th colspan="2">VALOR</th>
+      <th colspan="2">MI FINCA</th>
+    `;
+    tabla.appendChild(columnas_4);
+
+    const ingresos = [
+      "Venta de honeydew",
+      "Subsidio salarial"
+    ];
+
+    ingresos.forEach((ingreso, index) => {
+      const fila = document.createElement("tr");
+
+      const isSubsidio = ingreso === "Subsidio salarial";
+      const cantidad = isSubsidio ? '-' : '700';
+      const unidad = isSubsidio ? '-' : 'caja/30 lbs';
+
+      fila.innerHTML = `
+            <td colspan='2'>${ingreso}</td>
+            <td colspan='1'>${unidad}</td>
+            <td colspan='1'>${cantidad}</td>
+            <td colspan='2'>${isSubsidio ? `<input type="number" class="subsidio_salarial" data-index="${index}" />` : `<input type="number" class="precio_honeydew" data-index="${index}" />`}</td>
+            <td colspan='2' class='valor_ingreso' data-index="${index}">${formatCurrency(0)}</td>
+            <td colspan='2' class='mi_finca_ingreso' data-index="${index}">${formatCurrency(0)}</td>
+        `;
+
+      tabla.appendChild(fila);
+    });
+
+    // fila total ingresos
+    const filaTotal_F = document.createElement("tr");
+    filaTotal_F.innerHTML = `
+        <th colspan="6">TOTAL DE INGRESOS</th>
+        <th style="background-color: #f0f0f0;" colspan='2' class='valor_ingreso_total'></th>
+        <th style="background-color: #f0f0f0;" colspan='2' class='mi_finca_ingreso_total'></th>
+        `;
+    tabla.appendChild(filaTotal_F);
+
+    // totalizador
+    function actualizarTotalesIngresos() {
+      let total = 0;
+      document.querySelectorAll('.valor_ingreso').forEach(cell => {
+        total += parseFloat(cell.textContent.replace(/[$,]/g, '')) || 0;
+      });
+
+      document.querySelector('.valor_ingreso_total').textContent = total === 0 ? '' : formatCurrency(total);
+      const miFincaCell = document.querySelector('.mi_finca_ingreso_total');
+      const numeroCuerdas = parseFloat(document.querySelector(".numero_cuerdas")?.value) || 0;
+      if (miFincaCell) {
+        miFincaCell.textContent = total === 0 ? '' : formatCurrency(total * numeroCuerdas);
+      }
+
+      return total;
+    }
+
+    let ingresos_totales = actualizarTotalesIngresos();
+
+    // input listener for ingresos (venta y subsidio)
+    tabla.addEventListener("input", (e) => {
+      if (!e.target.matches(".precio_honeydew, .subsidio_salarial")) return;
+
+      const index = e.target.dataset.index;
+      const precioInput = document.querySelector(`.precio_honeydew[data-index="${index}"]`);
+      const subsidioInput = document.querySelector(`.subsidio_salarial[data-index="${index}"]`);
+      const valorCell = document.querySelector(`.valor_ingreso[data-index="${index}"]`);
+      const miFincaCell = document.querySelector(`.mi_finca_ingreso[data-index="${index}"]`);
+
+      let valor = 0;
+
+      if (precioInput && e.target.classList.contains("precio_honeydew")) {
+        const cantidad = parseFloat(precioInput.value) || 0;
+        valor = cantidad * 700; // Asumiendo 700 cajas de honeydew
+      } else if (subsidioInput && e.target.classList.contains("subsidio_salarial")) {
+        valor = parseFloat(subsidioInput.value) || 0;
+      }
+
+      valorCell.textContent = formatCurrency(valor);
+      const numeroCuerdas = parseFloat(document.querySelector(".numero_cuerdas")?.value) || 0;
+      if (miFincaCell) {
+        miFincaCell.textContent = formatCurrency(valor * numeroCuerdas);
+      }
+
+      ingresos_totales = actualizarTotalesIngresos();
+    });
+
+
+    const ingreso_neto = document.createElement("tr");
+    ingreso_neto.innerHTML = `
+            <th colspan="6">INGRESO NETO</th>
+            <th style="background-color: #f0f0f0;" colspan='2' id='ingreso_neto_total'></th>
+            <th style="background-color: #f0f0f0;" colspan='2' class='mi_finca_neto_total'></th>
+        `;
+    tabla.appendChild(ingreso_neto);
+
+    // Totalizador
+    function actualizarIngresoNeto() {
+      const ingresoNeto = ingresos_totales - gastos_totales;
+      const numeroCuerdas = parseFloat(document.querySelector(".numero_cuerdas")?.value) || 0;
+      document.getElementById("ingreso_neto_total").textContent = ingresoNeto === 0 ? '' : formatCurrency(ingresoNeto);
+      const miFincaCell = document.querySelector('.mi_finca_neto_total');
+      if (miFincaCell) {
+        miFincaCell.textContent = ingresoNeto === 0 ? '' : formatCurrency(ingresoNeto * numeroCuerdas);
+      }
+      return ingresoNeto;
+    }
+
+    let ingreso_neto_total = actualizarIngresoNeto();
+
+    // input listener
+    tabla.addEventListener("input", (e) => {
+      // Actualizar ingreso_neto siempre que cualquier input relevante cambie
+      ingreso_neto_total = actualizarIngresoNeto();
+      actualizarTotalesGenerales(); // <-- AÑADIDO: actualiza los totales generales en cada cambio
+    });
+
+    // Actualizar Mi Finca ingresos valores al cambiar numero_cuerdas
+    document.querySelector(".numero_cuerdas").addEventListener("input", () => {
+      const numeroCuerdas = parseFloat(document.querySelector(".numero_cuerdas")?.value) || 0;
+      let total = 0;
+      document.querySelectorAll(".valor_ingreso").forEach((cell, idx) => {
+        const valor = parseFloat(cell.textContent.replace(/[$,]/g, '')) || 0;
+        const miFincaCell = document.querySelector(`.mi_finca_ingreso[data-index='${idx}']`);
+        if (miFincaCell) {
+          miFincaCell.textContent = formatCurrency(valor * numeroCuerdas);
+          total += valor * numeroCuerdas;
+        }
+      });
+
+      ingresos_totales = actualizarTotalesIngresos();
+      ingreso_neto_total = actualizarIngresoNeto();
+    });
+
+    const filaVacía_7 = document.createElement("tr");
+    filaVacía_7.innerHTML = `<td colspan="10" style="height: 20px; background-color: transparent;"></td>`;
+    tabla.appendChild(filaVacía_7);
+
+    //-----------------------------------------------------------------------------------------------------------------------------------------------------
+    //-----------------------------------------------------------------------------------------------------------------------------------------------------
+    //-----------------------------------------------------------------------------------------------------------------------------------------------------
+
+    // Obtener el precio de honeydew ingresado por el usuario
+    function obtenerPrecioHoneydew() {
+      const precioInput = document.querySelector('.precio_honeydew[data-index="0"]');
+      return parseFloat(precioInput?.value) || 0;
+    }
+
+    let produccion_minima_platanos = document.createElement("tr");
+    produccion_minima_platanos.innerHTML = `
+        <th colspan="8">PRODUCCIÓN MÍNIMA</th>
+        <td colspan="2" id="produccion_minima_total">${(() => {
+        const precio = obtenerPrecioHoneydew();
+        return precio > 0 ? (gastos_totales / precio).toFixed(2) : '-';
+      })()
+      }</td>
+      `;
+    tabla.appendChild(produccion_minima_platanos);
+
+    let precio_minimo_platanos = document.createElement("tr");
+    precio_minimo_platanos.innerHTML = `
+            <th colspan="8">PRECIO MÍNIMO</th>
+            <td colspan="2" id="precio_minimo_total">${formatCurrency((gastos_totales / 700))}</td>
+        `;
+    tabla.appendChild(precio_minimo_platanos);
+
+    const filaVacía_8 = document.createElement("tr");
+    filaVacía_8.innerHTML = `<td colspan="10" style="height: 20px; background-color: transparent;"></td>`;
+    tabla.appendChild(filaVacía_8);
+
+    // Actualizar dinámicamente los valores cuando cambian los totales
+    function actualizarProduccionYPrecioMinimo() {
+      let precioHoneydew = obtenerPrecioHoneydew();
+      if (isNaN(precioHoneydew)) precioHoneydew = 0;
+      if (precioHoneydew <= 0) {
+        document.getElementById("produccion_minima_total").textContent = '0.00';
+        document.getElementById("precio_minimo_total").textContent = '0.00';
+        return;
+      }
+      // Actualizar producción mínima y precio mínimo
+      document.getElementById("produccion_minima_total").textContent = (gastos_totales / precioHoneydew).toLocaleString('es-PR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+      document.getElementById("precio_minimo_total").textContent = (gastos_totales / 700).toLocaleString('es-PR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    }
+
+    // Escuchar cambios relevantes
+    tabla.addEventListener("input", () => {
+      actualizarProduccionYPrecioMinimo();
+    });
+
+    // Inicializar valores al cargar
+    actualizarProduccionYPrecioMinimo();
+
+    //-----------------------------------------------------------------------------------------------------------------------------------------------------
+    //-----------------------------------------------------------------------------------------------------------------------------------------------------
+    //-----------------------------------------------------------------------------------------------------------------------------------------------------
+
+    columnas_5 = document.createElement("tr");
+    columnas_5.innerHTML = `
+          <th colspan="6">PARTIDA</th>
+          <th colspan="2">VALOR</th>
+          <th colspan="2">MI FINCA</th>
+        `;
+    tabla.appendChild(columnas_5);
+
+    totales = [
+      'Ingreso Total',
+      'Gasto Total',
+      'Ingreso Neto',
+      'Producción mínima de plátanos'
+    ];
+
+    totales.forEach((total, index) => {
+      const fila = document.createElement("tr");
+
+      fila.innerHTML = `
+        <td colspan='6'>${total}</td>
+        <!-- Estandar -->
+        <td colspan='2'><span id="valor_${index}">$ -</span></td>
+        <td colspan='2'><span class='mi_finca_${index}'>$ -</span></td>
+      `;
+
+      tabla.appendChild(fila);
+    });
+
+    function formatSignedCurrency(value) {
+      const abs = Math.abs(value);
+      const formatted = formatCurrency(abs).replace('$', ''); // remove $ from inside
+      return value < 0 ? `$(${formatted})` : `$${formatted}`;
+    }
+
+    // Totalizador
+    function actualizarTotalesGenerales() {
+      const numeroCuerdas = parseFloat(document.querySelector(".numero_cuerdas")?.value) || 0;
+      const ingresoTotal = ingresos_totales;
+      const gastoTotal = gastos_totales;
+      const ingresoNeto = ingresoTotal - gastoTotal;
+      let precioHoneydew = obtenerPrecioHoneydew();
+      const produccionMinima = (precioHoneydew > 0) ? (gastos_totales / precioHoneydew) : 0;
+
+      if (document.getElementById("valor_0")) document.getElementById("valor_0").textContent = ingresoTotal ? formatSignedCurrency(ingresoTotal) : '-';
+      if (document.querySelector('.mi_finca_0')) {
+        document.querySelector('.mi_finca_0').textContent = ingresoTotal === 0 ? '-' : formatSignedCurrency(ingresoTotal * numeroCuerdas);
+      }
+      if (document.getElementById("valor_1")) document.getElementById("valor_1").textContent = gastoTotal ? formatSignedCurrency(gastoTotal) : '-';
+      if (document.querySelector('.mi_finca_1')) {
+        document.querySelector('.mi_finca_1').textContent = gastoTotal === 0 ? '-' : formatSignedCurrency(gastoTotal * numeroCuerdas);
+      }
+      if (document.getElementById("valor_2")) document.getElementById("valor_2").textContent = ingresoNeto ? formatSignedCurrency(ingresoNeto) : '-';
+      if (document.querySelector('.mi_finca_2')) {
+        document.querySelector('.mi_finca_2').textContent = ingresoNeto === 0 ? '-' : formatSignedCurrency(ingresoNeto * numeroCuerdas);
+      }
+      document.getElementById("valor_3").textContent = `${formatCurrency(produccionMinima).replace('$', '')}`;
+      if (!isNaN(produccionMinima) && !isNaN(gastos_totales) && !isNaN(precioHoneydew) && precioHoneydew !== 0) {
+        document.querySelector('.mi_finca_3').textContent = `${formatCurrency(produccionMinima).replace('$', '')}`;
+      }
+      document.querySelector('.mi_finca_3').textContent = `${formatCurrency(produccionMinima * numeroCuerdas).replace('$', '')}`;
+    }
+
+    // Inicializar los valores al cargar la página
+    actualizarTotalesGenerales();
+
+
+  </script>
+</body>
+
+</html>
+
+
+
+<!-- ejemplo, pagina de café, copy, paste y ajustan -->
