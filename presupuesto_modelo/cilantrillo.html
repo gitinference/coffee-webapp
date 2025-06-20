@@ -596,7 +596,7 @@
         <!--Valor-->
         <td id=${partida[1]}
         <!--Mi finca-->
-        <td id=${partida[2]}></td>
+        <td id=${partida[2]}>0.00</td>
       `;
       tabla.appendChild(fila);
    })
@@ -606,9 +606,9 @@
       cell.dataset.valor = NUMERO_UMBRACULOS;
       cell.textContent = NUMERO_UMBRACULOS
 
-      const cell2 = document.getElementById("mifinca-umbraculos")
-      cell2.dataset.valor = NUMERO_UMBRACULOS;
-      cell2.textContent = NUMERO_UMBRACULOS;
+      // const cell2 = document.getElementById("mifinca-umbraculos")
+      // cell2.dataset.valor = NUMERO_UMBRACULOS;
+      // cell2.textContent = NUMERO_UMBRACULOS;
 
       t5_ingreso_bruto();
    }
@@ -618,13 +618,13 @@
       cell.dataset.valor = NUMERO_COSECHAS;
       cell.textContent = NUMERO_COSECHAS;
 
-      const cell2 = document.getElementById("mifinca-cosechas")
-      cell2.dataset.valor = NUMERO_COSECHAS;
-      cell2.textContent = NUMERO_COSECHAS;
+      // const cell2 = document.getElementById("mifinca-cosechas")
+      // cell2.dataset.valor = NUMERO_COSECHAS;
+      // cell2.textContent = NUMERO_COSECHAS;
 
       t5_ingreso_bruto();
       t5_gasto_total();
-       t5_ingreso_neto();
+      t5_ingreso_neto();
    }
 
    function t5_ingreso_bruto(){
@@ -632,10 +632,10 @@
       cell.dataset.valor = INGRESO_BRUTO;
       cell.textContent = INGRESO_BRUTO.toFixed(2);
 
-      const cell2 = document.getElementById("mifinca-ingreso-bruto")
-      const resultado = INGRESO_BRUTO-(7437.5*NUMERO_COSECHAS*NUMERO_UMBRACULOS);
-      cell2.dataset.valor = resultado;
-      cell2.textContent = "$" + resultado.toFixed(2);
+      // const cell2 = document.getElementById("mifinca-ingreso-bruto")
+      // const resultado = INGRESO_BRUTO-(7437.5*NUMERO_COSECHAS*NUMERO_UMBRACULOS);
+      // cell2.dataset.valor = resultado;
+      // cell2.textContent = "$" + resultado.toFixed(2);
 
    }
 
@@ -644,10 +644,10 @@
       cell.dataset.valor = TOTAL_GASTOS;
       cell.textContent = "$" + TOTAL_GASTOS.toFixed(2);
 
-      const cell2 = document.getElementById("mifinca-gasto-total")
-      const resultado = TOTAL_GASTOS-(2507.76*NUMERO_COSECHAS*NUMERO_UMBRACULOS)
-      cell2.dataset.valor= resultado;
-      cell2.textContent = "$" + resultado.toFixed(2);
+      // const cell2 = document.getElementById("mifinca-gasto-total")
+      // const resultado = TOTAL_GASTOS-(2507.76*NUMERO_COSECHAS*NUMERO_UMBRACULOS)
+      // cell2.dataset.valor= resultado;
+      // cell2.textContent = "$" + resultado.toFixed(2);
    }
 
    function t5_ingreso_neto(){
@@ -655,10 +655,10 @@
       cell.dataset.valor = INGRESO_NETO;
       cell.textContent = "$" + INGRESO_NETO.toFixed(2);
 
-      const cell2 = document.getElementById("mifinca-ingreso-neto")
-      const resultado = INGRESO_NETO-(4929.74*NUMERO_COSECHAS*NUMERO_UMBRACULOS)
-      cell2.dataset.valor = resultado;
-      cell2.textContent = "$" + resultado;
+      // const cell2 = document.getElementById("mifinca-ingreso-neto")
+      // const resultado = INGRESO_NETO-(4929.74*NUMERO_COSECHAS*NUMERO_UMBRACULOS)
+      // cell2.dataset.valor = resultado;
+      // cell2.textContent = "$" + resultado;
    }
 
    function t5_produccion_minima(){
@@ -673,10 +673,10 @@
       cell.textContent = produccion.toFixed(2);
 
 
-      const cell2 = document.getElementById("mifinca-produccion-minima")
-      const resultado = RENDIMIENTO_LIBRAS-produccion;
-      cell2.dataset.valor = resultado;
-      cell2.textContent = resultado.toFixed(2);
+      // const cell2 = document.getElementById("mifinca-produccion-minima")
+      // const resultado = RENDIMIENTO_LIBRAS-produccion;
+      // cell2.dataset.valor = resultado;
+      // cell2.textContent = resultado.toFixed(2);
    }
 
    function t5_precio_minimo(){
@@ -689,11 +689,11 @@
       cell.dataset.valor = precio;
       cell.textContent = "$" + precio.toFixed(2);
 
-      const cell2 = document.getElementById("mifinca-precio-minimo")
-      const venta_cilantrillo = parseFloat(document.getElementById("t4-costo-0").value) || 0;
-      const resultado = venta_cilantrillo-precio;
-      cell2.dataset.valor = resultado;
-      cell2.textContent = "$" + resultado.toFixed(2);
+      // const cell2 = document.getElementById("mifinca-precio-minimo")
+      // const venta_cilantrillo = parseFloat(document.getElementById("t4-costo-0").value) || 0;
+      // const resultado = venta_cilantrillo-precio;
+      // cell2.dataset.valor = resultado;
+      // cell2.textContent = "$" + resultado.toFixed(2);
       
    }
 
