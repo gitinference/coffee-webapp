@@ -31,38 +31,46 @@
 
           <h2 style="color: #000000; font-size: 1em">Supuestos</h2>
           <ol style="padding-left: 20px;">
-            <li>Una aplicación pre emergente, tres aplicaciones post emergentes.</li>
-            <li>Valor promedio del alquiler de un cuerda de terreno.</li>
-            <li>25% de la mano de obra. Las obligaciones patronales incluyen pagos al "Internet Revenue Service" (Seguro Social), Corporación del Fondo del Seguro del Estado (Seguros Obreros)</li>
-            <li>10% del total de mano de obra.</li>
-            <li>9% del total de gastos de operación.</li>
+            <li>El costo de construir el vivero 40x100 se estima en $37,000. Esto incluye todo el equipo necesario para comenzar la siembra y el adiestramiento para su uso. Estas instalaciones pueden ser financiadas atraves de un programa gubernamental o agencia federal. La vida útil del mismo es de aproximadamente 25 años.</li>
+            <li>Una cosecha puede tomar entre 23-27 días</li>
+            <li>En un Umbraculo de 100x40 hay 5 mesas(bancos) y cada mesa cuenta con 3,500 huecos/mazo para un total de 17,500. Se adjudica el 15% de pérdidas de producción para un total de 14,875 mazos. Cada mesa mide 5 pies de ancho.</li>
+            <li>Supervisar que todo el sistema esté funcionando correctamente, verificar pH., mangas, tanques, etc. Se recomienda realizar tres veces al día. Diariamente 30 minutos x 27 días = 13.5 horas por ciclo</li>
+            <li>Limpiezas de tubos y tanques. Tres horas semanales por 4 semanas.</li>
+            <li>Todas la semanas una hora.</li>
+            <li>Se estima que se realiza en media hora por banco, por semana. Dos horas por banco.</li>
+            <li>Seis horas semanales. Incluye la cosecha, la limpieza del mazo y empaque.</li>
+            <li>Una hora y treinta minutos semanales, no se aplica todos los días.</li>
+            <li>Abono 11-11-40 hidropónico</li>
+            <li>Franquicia/pozo</li>
+            <li>25% del gasto en mano de obra</li>
+            <li>Gasto mensual, pero puede variar dependiendo de la eficiencia de la bomba de agua y del arreglo de tubos que el agriculto utilize.</li>
+            <li>Depreciación promedio, se utilizó depreciación por línea recta para el costo de la estructura y equipos</li>
+            <li>No se tomó en consideración el subsidio salarial, si se aplicara el subsidio el ingreso neto aumentaría. Se proveyó encasillado para que coloque el valor del subsidio.</li>
           </ol>
 
-          <span style="font-weight: bold;">Preparado por:</span><br>
-          Prof. Mildred Cortes<br>
-          Catedrática en Economía Agrícola<br>
-          Estación Experimental Agrícola<br><br>
+          <span style="font-weight: bold;">Revisado por:</span><br>
+          Profa. Mildred Cortes<br>
+          Catedrática, Departamento de Economía Agrícola y Sociología Rural<br><br>
 
-          Prof. Manuel Diaz<br>
-          Catedrático Asociado<br>
-          Especialista en Farináceos<br>
-          Servicio de Extensión Agrícola<br><br>
+          Dra. Ermita Hernández<br>
+          Catedrática Auxiliar, Departamento de Ciencias Agroambientales<br><br>
 
-          Prof. Juan Ortiz<br>
-          Catedrático en Economía Agrícola<br>
-          Estación Experimental Agrícola<br><br>
+          Dra. Alexandra Gregory Crespo<br>
+          Catedrática Asociada, Departamento de Economía Agrícola y Sociología Rural<br><br>
 
-          <span style="font-weight: bold;">Versión Electrónica:</span><br>
-          Dra. Alexandra Gregory<br>
-          Catedrática en Economía Agrícola<br>
-          Servicio de Extensión Agrícola<br><br>
+          Prof. Raúl Pérez<br>
+          Agente Agrícola, Florida y Barceloneta<br><br>
 
-          Joe Kirk R. Lucarne<br>
-          Estudiante Graduado<br>
-          Departamento de Economía Agrícola y Sociología Rural<br><br>
+          Prof. Carlos Gautier<br>
+          Agente Agrícola, Humacao<br><br>
 
-          Yaira A. Avilés Ortiz<br>
-          Economista Agrícola<br><br>
+          Yasmín del Río Ríos<br>
+          Estudiante Graduada Departamento de Economía Agrícola y Sociología Rural<br><br>
+
+          Roberto Sánchez Silva<br>
+          M.S. Departamento de Economía Agrícola y Sociología Rural<br><br>
+
+
 
     
           <span style="font-weight: bold;">Fecha de revisión:</span><br>
@@ -95,6 +103,7 @@
    let SUBTOTAL_GASTOS_OPERACIONALES = 0;
    let TOTAL_GASTOS = 0;
    let INGRESO_BRUTO = 0; 
+   let INGRESO_NETO = 0;
    let COSTO_CLANTRILLO = 0;
    let CANTIDAD_CILANTRILLO = 0;
 
@@ -115,14 +124,14 @@
     ["Número de Mazos por libra", "numero-mazos"],
    ]
 
-   fila_inputs.forEach((item) => {
+   fila_inputs.forEach((item, index) => {
     const fila = document.createElement("tr");
 
     fila.innerHTML = `
         <!--Titulo de item-->
         <td colspan="4">${item[0]}</td>
         <!--Input-->
-        <td colspan="1"><input type="number" min="0" step="1" id=${item[1]} oninput="calcular_rendimiento_libras(); calcular_valor_mano(index)">
+        <td colspan="1"><input type="number" min="0" step="1" id=${item[1]} oninput="calcular_rendimiento_libras(); calcular_valor_mano(${index}); calcular_valor_t3(${index}); calcular_valor_t4(${index}); t5_num_umbraculos(); t5_num_cosechas();"></td>
     `;
     tabla.appendChild(fila)
    });
@@ -130,19 +139,39 @@
    document.querySelectorAll('[id^="t1-"]').forEach(input => {
     input.addEventListener('input', ()=>{
         calcular_rendimiento_libras();
-    })
+       })
    })
 
-   document.getElementById("t1-numero-umbraculos").addEventListener('input', ()=>{
-        for (let i = 0; i<partidas_t2.length;i++){
+   document.querySelectorAll('[id^="t1-numero-umbraculos"]').forEach(input=>{
+      input.addEventListener('input', ()=>{
+      for (let i = 0; i<partidas_t2.length;i++){
             calcular_valor_mano(i);
         }
+        for (let i=0; i<partidas_t3.length; i++){
+            calcular_valor_t3(i);
+        }
+        for (let i=0; i<partidas_t4.length; i++){
+            calcular_valor_t4(i);
+        }
+        t5_num_umbraculos();
+        t5_num_cosechas();
+      })
    })
 
-   document.getElementById("t1-numero-cosechas").addEventListener('input', ()=>{
-        for (let i = 0; i<partidas_t2.length;i++){
+   document.querySelectorAll('[id^="t1-numero-cosechas"]').forEach(input=>{
+      input.addEventListener('input', ()=>{
+      for (let i = 0; i<partidas_t2.length;i++){
             calcular_valor_mano(i);
         }
+        for (let i=0; i<partidas_t3.length; i++){
+            calcular_valor_t3(i);
+        }
+        for (let i=0; i<partidas_t4.length; i++){
+            calcular_valor_t4(i);
+        }
+        t5_num_umbraculos();
+        t5_num_cosechas();
+      })
    })
 
    const fila_rendimiento_por_libras = document.createElement("tr")
@@ -169,6 +198,10 @@
   }
     RENDIMIENTO_LIBRAS = (((num_plantas*RENDIMIENTO_PORCENTAJE)/num_plantas_mazo)/num_mazos)*NUMERO_UMBRACULOS*NUMERO_COSECHAS;
     document.getElementById("resultado-rendimiento-libras").textContent = RENDIMIENTO_LIBRAS.toFixed(2);
+    document.getElementById("t4-venta-cilantrillo").textContent = RENDIMIENTO_LIBRAS.toFixed(2);
+    t5_precio_minimo();
+    t5_produccion_minima()
+
    }
 
 
@@ -271,6 +304,9 @@
             SUBTOTAL_MANO_DE_OBRA += valor;
         }
         document.getElementById("subtotal-t2").textContent = "$" + SUBTOTAL_MANO_DE_OBRA.toFixed(2)
+        calcular_gastos_totales()
+        calcular_valor_t3(7);
+        calcular_valor_t3(16);
    }
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------  
@@ -307,7 +343,364 @@
    partidas_t3.forEach((partida, index)=>{
         const fila = document.createElement("tr");
         
+        let cantidad_html = "";
+        let costo_html = "";
+        if (partida[2]===-1){
+          cantidad_html = `<input type="number" min="0" step="1" id="t3-cantidad-${index}" oninput="calcular_valor_t3(${index})">`
+        }
+        if (partida[3]===-1){
+          costo_html = `<input type="number" min="0" step="1" id="t3-costo-${index}" oninput="calcular_valor_t3(${index})">`
+        }
+        
+        fila.innerHTML =  `
+          <!--Partida-->
+          <td>${partida[0]}</td>
+          <!--Unidad-->
+          <td>${partida[1]}</td>
+          <!--Cantidad-->
+          <td>${cantidad_html}</td>
+          <!--Costo-->
+          <td>${costo_html}</td>
+          <!--Valor-->
+          <td id="t3-valor-${index}">$0.00</td>
+        `;
+        tabla.appendChild(fila);
+   });
+
+   document.querySelectorAll('input[id^="t3-cantidad-"]').forEach(input => {
+      const index = parseInt(input.id.split('-').pop());
+      input.addEventListener('input', () => {
+        calcular_valor_t3(index); // ✅ now index is guaranteed correct
+      });
+    });
+
+    document.querySelectorAll('input[id^="t3-costo-"]').forEach(input => {
+      const index = parseInt(input.id.split('-').pop());
+      input.addEventListener('input', () => {
+        calcular_valor_t3(index);
+      });
+    });
+
+   const fila_subtotal_t3 = document.createElement("tr");
+   fila_subtotal_t3.innerHTML = `
+    <th colspan="4">Subtotal Gastos Operacionales</th>
+    <th colspan="1" id="subtotal-gastos-operacionales">$0.00</th>
+   `;
+   tabla.appendChild(fila_subtotal_t3);
+
+   function calcular_valor_t3(index){
+      let cantidad_t3 = 0;
+      let costo_t3 = 0;
+      let valor_t3 = 0;
+      //si hay input de cantidad y costo
+      if (partidas_t3[index][2]===-1 && partidas_t3[index][3]===-1){
+        cantidad_t3 = parseFloat(document.getElementById(`t3-cantidad-${index}`).value) || 0;
+        costo_t3 = parseFloat(document.getElementById(`t3-costo-${index}`).value) || 0;
+        valor_t3 = cantidad_t3*costo_t3*NUMERO_COSECHAS*NUMERO_UMBRACULOS;
+      }
+      //si hay input de costo
+      else if(partidas_t3[index][3]===-1){
+        costo_t3 = parseFloat(document.getElementById(`t3-costo-${index}`).value) || 0;
+        valor_t3 = costo_t3*NUMERO_COSECHAS*NUMERO_UMBRACULOS;
+      }
+
+      //Control de Plagas y Manjeo de Yerbajos
+      if (index===4){
+        valor_t3 = 40*NUMERO_COSECHAS*NUMERO_UMBRACULOS;
+      }
+      //Obligaciones Patronales
+      else if(index===7){
+        valor_t3 = SUBTOTAL_MANO_DE_OBRA*0.2;
+      }
+      //Administración, supervisión e imprevistos (10% de la nómina)
+      else if (index === 16){
+        valor_t3 = SUBTOTAL_MANO_DE_OBRA*0.1;
+      }
+      //Interés sobre gastos (9%)
+      else if (index === 17){
+        valor_t3 = 2489.26*0.09*NUMERO_COSECHAS*NUMERO_UMBRACULOS;
+      }
+
+
+      const cell = document.getElementById(`t3-valor-${index}`);
+        if (cell) {
+        cell.dataset.valor = valor_t3 || 0;
+        cell.textContent = "$" + valor_t3.toFixed(2);
+        }
+
+      calcular_subtotal_t3();
+   };
+
+   //ERROR AQUI CREOOOOO
+   function calcular_subtotal_t3(){
+      SUBTOTAL_GASTOS_OPERACIONALES = 0;
+      for (let i = 0; i < partidas_t3.length;i++){
+          const valor = parseFloat(document.getElementById(`t3-valor-${i}`).dataset.valor) || 0;
+          SUBTOTAL_GASTOS_OPERACIONALES += valor;
+      }
+      document.getElementById("subtotal-gastos-operacionales").textContent = "$" + SUBTOTAL_GASTOS_OPERACIONALES.toFixed(2)
+      calcular_gastos_totales();
+   }
+   
+
+//-----------------------------------------------------------------------------------------------------------------------------------------------------  
+//-----------------------------------------------------------------------------------------------------------------------------------------------------
+//-----------------------------------------------------------------------------------------------------------------------------------------------------
+
+   //TOTAL DE GASTOS
+   const total_gastos = document.createElement("tr");
+   total_gastos.innerHTML = `
+      <th colspan="4">TOTAL DE GASTOS</th>
+      <th colspan="1" id="total-gastos">$0.00</th>
+   `;
+   tabla.appendChild(total_gastos)
+
+   function calcular_gastos_totales(){
+      TOTAL_GASTOS = SUBTOTAL_GASTOS_OPERACIONALES+SUBTOTAL_MANO_DE_OBRA
+      document.getElementById("total-gastos").textContent = "$" + TOTAL_GASTOS.toFixed(2);
+      calcular_ingreso_neto();
+      t5_gasto_total();
+      t5_produccion_minima();
+      t5_precio_minimo();
+   }
+
+
+//-----------------------------------------------------------------------------------------------------------------------------------------------------  
+//-----------------------------------------------------------------------------------------------------------------------------------------------------
+//-----------------------------------------------------------------------------------------------------------------------------------------------------
+
+   //tabla 4
+   const ingreso_bruto = document.createElement("tr")
+   ingreso_bruto.innerHTML = `<th colspan="5" style="text-align: center; background-color: #cccccc;">Ingreso Bruto</th>`;
+   tabla.appendChild(ingreso_bruto);
+
+   const partidas_t4 = [
+      ["Venta de Cilantrillo [2]", "Libras/Cosecha", "t4-venta-cilantrillo"],
+      ["Subsidio salarial [15]", "", "t4-subsidio"]
+   ];
+
+   partidas_t4.forEach((partida, index)=>{
+      const fila = document.createElement("tr");
+
+      fila.innerHTML = `
+        <!--Partida-->
+        <td>${partida[0]}</td>
+        <!--Unidad-->
+        <td>${partida[1]}</td>
+        <!--Cantidad-->
+        <td id=${partida[2]}></td>
+        <!--Costo-->
+        <td><input type="number" min="0" step="1" id="t4-costo-${index}" oninput="calcular_valor_t4(${index}); t5_produccion_minima()"></td>
+        <!--Valor-->
+        <td id="t4-valor-${index}">$0.00</td>
+      `;
+      tabla.appendChild(fila);
    })
+
+   document.querySelectorAll('input[id^="t4-costo-"]').forEach(input => {
+      const index = parseInt(input.id.split("-").pop());
+
+      input.addEventListener('input', () => {
+      calcular_valor_t4(index);
+      t5_produccion_minima();
+      t5_precio_minimo();
+      });
+    });
+
+
+   const fila_ingreso_bruto = document.createElement("tr");
+   fila_ingreso_bruto.innerHTML = `
+      <th colspan="4">INGRESO BRUTO</th>
+      <th id="ingreso-bruto">$0.00</th
+   `;
+   tabla.appendChild(fila_ingreso_bruto);
+
+   const fila_ingreso_neto = document.createElement("tr");
+   fila_ingreso_neto.innerHTML = `
+      <th colspan="4">INGRESO NETO</th>
+      <th id="ingreso-neto">$0.00</th
+   `;
+   tabla.appendChild(fila_ingreso_neto);
+
+   function calcular_valor_t4(index){
+    let valor_t4 = 0;
+    let costo = 0;
+    //Venta de Cilantrillo
+    if (index === 0){
+      costo = parseFloat(document.getElementById(`t4-costo-${index}`).value) || 0;
+      valor_t4 = costo*RENDIMIENTO_LIBRAS;
+    }
+    //Subsidio Salarial
+    else if (index=== 1){
+      costo = parseFloat(document.getElementById(`t4-costo-${index}`).value) || 0;
+      valor_t4 = costo*NUMERO_COSECHAS*NUMERO_UMBRACULOS
+    }
+    const cell = document.getElementById(`t4-valor-${index}`);
+    cell.dataset.valor = valor_t4;
+    cell.textContent = "$" + valor_t4.toFixed(2);
+
+    calcular_ingreso_bruto();
+   }
+
+   function calcular_ingreso_bruto(){
+      INGRESO_BRUTO = 0;
+      for (let i = 0; i < partidas_t4.length;i++){
+        const valor = parseFloat(document.getElementById(`t4-valor-${i}`).dataset.valor) || 0;
+        INGRESO_BRUTO += valor;
+        }
+      document.getElementById("ingreso-bruto").textContent = "$" + INGRESO_BRUTO.toFixed(2);
+      calcular_ingreso_neto();
+      t5_ingreso_bruto();
+   }
+
+   function calcular_ingreso_neto(){
+      INGRESO_NETO = INGRESO_BRUTO-TOTAL_GASTOS;
+      document.getElementById("ingreso-neto").textContent = "$" + INGRESO_NETO.toFixed(2);
+      t5_ingreso_neto();
+   }
+
+   const filaVacía_2 = document.createElement("tr");
+   filaVacía_2.innerHTML = `<td colspan="5" style="height: 20px; background-color: transparent;"></td>`;
+   tabla.appendChild(filaVacía_2);
+
+//-----------------------------------------------------------------------------------------------------------------------------------------------------  
+//-----------------------------------------------------------------------------------------------------------------------------------------------------
+//-----------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+   //tabla5
+   const tabla5 = document.createElement("tr");
+   tabla5.innerHTML = `
+      <th colspan="3">PARTIDA</th>
+      <th>VALOR</th>
+      <th>MI FINCA</th>
+   `;
+   tabla.appendChild(tabla5);
+
+   const partidas_t5 = [
+      ["Número de Umbráculos", "t5-numero-umbraculos", "mifinca-umbraculos"],
+      ["Número de Cosechas", "t5-numero-cosechas", "mifinca-cosechas"],
+      ["Ingreso Bruto", "t5-ingreso-bruto", "mifinca-ingreso-bruto"],
+      ["Gasto Total", "t5-gasto-total", "mifinca-gasto-total"],
+      ["Ingreso Neto", "t5-ingreso-neto", "mifinca-ingreso-neto"],
+      ["Precio Mínimo de Venta por libra (Precio mínimo para cubrir costos, break even, Mi Finca presenta la ganacia/pérdida por libra)", "t5-precio-minimo", "mifinca-precio-minimo"],
+      ["Producción Mínima en libras (Producción mínima para cubrir mis costos, Mi Finca presenta la cantidad que puedo vender para obtener ganancias sino perdí nada de mi producción)", "t5-produccion-minima", "mifinca-produccion-minima"]
+   ]
+
+   partidas_t5.forEach((partida, index)=>{
+      const fila = document.createElement("tr")
+
+      fila.innerHTML = `
+        <!--Partida-->
+        <td colspan="3">${partida[0]}</th>
+        <!--Valor-->
+        <td id=${partida[1]}
+        <!--Mi finca-->
+        <td id=${partida[2]}></td>
+      `;
+      tabla.appendChild(fila);
+   })
+
+   function t5_num_umbraculos(){
+      const cell = document.getElementById("t5-numero-umbraculos")
+      cell.dataset.valor = NUMERO_UMBRACULOS;
+      cell.textContent = NUMERO_UMBRACULOS
+
+      const cell2 = document.getElementById("mifinca-umbraculos")
+      cell2.dataset.valor = NUMERO_UMBRACULOS;
+      cell2.textContent = NUMERO_UMBRACULOS;
+
+      t5_ingreso_bruto();
+   }
+
+   function t5_num_cosechas(){
+      const cell = document.getElementById("t5-numero-cosechas")
+      cell.dataset.valor = NUMERO_COSECHAS;
+      cell.textContent = NUMERO_COSECHAS;
+
+      const cell2 = document.getElementById("mifinca-cosechas")
+      cell2.dataset.valor = NUMERO_COSECHAS;
+      cell2.textContent = NUMERO_COSECHAS;
+
+      t5_ingreso_bruto();
+      t5_gasto_total();
+       t5_ingreso_neto();
+   }
+
+   function t5_ingreso_bruto(){
+      const cell = document.getElementById("t5-ingreso-bruto")
+      cell.dataset.valor = INGRESO_BRUTO;
+      cell.textContent = INGRESO_BRUTO.toFixed(2);
+
+      const cell2 = document.getElementById("mifinca-ingreso-bruto")
+      const resultado = INGRESO_BRUTO-(7437.5*NUMERO_COSECHAS*NUMERO_UMBRACULOS);
+      cell2.dataset.valor = resultado;
+      cell2.textContent = "$" + resultado.toFixed(2);
+
+   }
+
+   function t5_gasto_total(){
+      const cell = document.getElementById("t5-gasto-total")
+      cell.dataset.valor = TOTAL_GASTOS;
+      cell.textContent = "$" + TOTAL_GASTOS.toFixed(2);
+
+      const cell2 = document.getElementById("mifinca-gasto-total")
+      const resultado = TOTAL_GASTOS-(2507.76*NUMERO_COSECHAS*NUMERO_UMBRACULOS)
+      cell2.dataset.valor= resultado;
+      cell2.textContent = "$" + resultado.toFixed(2);
+   }
+
+   function t5_ingreso_neto(){
+      const cell = document.getElementById("t5-ingreso-neto")
+      cell.dataset.valor = INGRESO_NETO;
+      cell.textContent = "$" + INGRESO_NETO.toFixed(2);
+
+      const cell2 = document.getElementById("mifinca-ingreso-neto")
+      const resultado = INGRESO_NETO-(4929.74*NUMERO_COSECHAS*NUMERO_UMBRACULOS)
+      cell2.dataset.valor = resultado;
+      cell2.textContent = "$" + resultado;
+   }
+
+   function t5_produccion_minima(){
+      let produccion = 0;
+      const venta_cilantrillo = parseFloat(document.getElementById("t4-costo-0").value) || 0;
+      if (venta_cilantrillo != 0){
+        produccion = TOTAL_GASTOS/venta_cilantrillo;
+      }
+
+      const cell = document.getElementById("t5-produccion-minima")
+      cell.dataset.valor = produccion;
+      cell.textContent = produccion.toFixed(2);
+
+
+      const cell2 = document.getElementById("mifinca-produccion-minima")
+      const resultado = RENDIMIENTO_LIBRAS-produccion;
+      cell2.dataset.valor = resultado;
+      cell2.textContent = resultado.toFixed(2);
+   }
+
+   function t5_precio_minimo(){
+      let precio = 0
+      if (RENDIMIENTO_LIBRAS !== 0){
+        precio = TOTAL_GASTOS/RENDIMIENTO_LIBRAS;
+      }
+
+      const cell = document.getElementById("t5-precio-minimo")
+      cell.dataset.valor = precio;
+      cell.textContent = "$" + precio.toFixed(2);
+
+      const cell2 = document.getElementById("mifinca-precio-minimo")
+      const venta_cilantrillo = parseFloat(document.getElementById("t4-costo-0").value) || 0;
+      const resultado = venta_cilantrillo-precio;
+      cell2.dataset.valor = resultado;
+      cell2.textContent = "$" + resultado.toFixed(2);
+      
+   }
+
+
+
+   
+
 
 
   </script>
