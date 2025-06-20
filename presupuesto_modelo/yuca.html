@@ -114,6 +114,25 @@
     const tabla_rendimiento = document.getElementById("tabla-rendimiento")
     console.log(tabla_rendimiento)
 
+    const cuerda_fila = document.createElement("tr");
+    cuerda_fila.innerHTML = `
+      <td colspan="5">Número de Cuerdas</th>
+      <td colspan="1"><input type="number" min="0" step="1" id="cuerdas" oninput="calcular_valores_E()"></td>
+    `;
+      tabla_rendimiento.appendChild(cuerda_fila)
+
+    let NUM_CUERDAS = 0;
+    document.querySelectorAll('[id^="cuerdas"]').forEach((input) => {
+      input.addEventListener('input', () => {
+        calcular_valores_E();
+        calcular_mifinca_A();
+        calcular_mifinca_B();
+        calcular_mifinca_C();
+        subtotal_mifinca_C();
+        total_mifinca_C();
+      });
+    });
+
     const plantas_por_cuerdas = document.createElement("tr");
       plantas_por_cuerdas.innerHTML = `
         <td colspan="5">Número de plantas por cuerda para una distancia de siembra de 3'x4'</td>
@@ -215,9 +234,30 @@
       const costo_unidad_A = parseFloat(document.getElementById(`costo_unidad_cantidad_A-${index}`).value) || 0;
       const cantidad_unidad_A = parseFloat(document.getElementById(`cantidad_unidad_A-${index}`).value) || 0;
       const costo_A = costo_unidad_A * cantidad_unidad_A;
-      document.getElementById(`valor_unidad_cantidad_A-${index}`).textContent = "$" + costo_A.toFixed(2);
+      const cell = document.getElementById(`valor_unidad_cantidad_A-${index}`)
+      cell.dataset.valor=costo_A;
+      cell.textContent = "$" + costo_A.toFixed(2);
+
+      //mifinca valor
+      calcular_mifinca_A();
     
       calcularTotal_A();
+    }
+
+    function calcular_mifinca_A(){
+      let total_mifinca_A = 0;
+      for (let i = 0; i<gastos_de_alquiler.length; i++){
+        const valor_A = parseFloat(document.getElementById(`valor_unidad_cantidad_A-${i}`).dataset.valor) || 0;
+        const resultado = valor_A * NUM_CUERDAS;
+        total_mifinca_A += resultado;
+        const cell = document.getElementById(`valor_mifinca_A-${i}`);
+        cell.dataset.valor = resultado;
+        cell.textContent = "$" + resultado.toFixed(2);
+      }
+
+      const cell2 = document.getElementById("mi-finca-A")
+      cell2.dataset.valor = total_mifinca_A;
+      cell2.textContent = "$" + total_mifinca_A.toFixed(2);
     }
 
     function calcularTotal_A() {
@@ -297,9 +337,30 @@
       const costo_unidad_B = parseFloat(document.getElementById(`costo_unidad_cantidad_B-${index}`).value) || 0;
       const cantidad_unidad_B = parseFloat(document.getElementById(`cantidad_unidad_B-${index}`).value) || 0;
       const costo_B = costo_unidad_B * cantidad_unidad_B;
-      document.getElementById(`valor_unidad_cantidad_B-${index}`).textContent = "$" + costo_B.toFixed(2);
-    
+      const cell = document.getElementById(`valor_unidad_cantidad_B-${index}`)
+      cell.dataset.valor = costo_B;
+      cell.textContent = "$" + costo_B.toFixed(2);
+      
+      calcular_mifinca_B()
       calcularTotal_B();
+      
+    }
+    
+
+    function calcular_mifinca_B(){
+      let total_mifinca_B = 0;
+      for (let i = 0; i<gastos_en_materiales.length; i++){
+        const valor_B = parseFloat(document.getElementById(`valor_unidad_cantidad_B-${i}`).dataset.valor) || 0;
+        const resultado = valor_B * NUM_CUERDAS;
+        total_mifinca_B += resultado;
+        const cell = document.getElementById(`valor_mifinca_B-${i}`);
+        cell.dataset.valor = resultado;
+        cell.textContent = "$" + resultado.toFixed(2);
+      }
+
+      const cell2 = document.getElementById("mi-finca-B")
+      cell2.dataset.valor = total_mifinca_B;
+      cell2.textContent = "$" + total_mifinca_B.toFixed(2);
     }
 
     function calcularTotal_B() {
@@ -335,8 +396,8 @@
         ["Obligaciones Patronales(3)", "valor_obligaciones_C"] ,
         ["Gastos Administrativos (4)", "valor_administrativos_C"],
         ["Interés sobre los gastos (5)", "valor_interes"],
-        ["Seguro agrícola", ""],
-        ["Gastos misceláneos", ""]
+        ["Seguro agrícola", "seguro-agricola"],
+        ["Gastos misceláneos", "gastos-miscleaneos"]
   ];
 
     otros_gastos.forEach((trabajo, index) => {
@@ -369,6 +430,7 @@
     });
 
     document.getElementById("terreno").textContent = "$60.00";
+    document.getElementById("terreno").dataset.valor = 60;
 
     document.querySelectorAll('[id^="costo_unidad_cantidad_C-"]').forEach((input, index) => {
       input.addEventListener('input', () => {
@@ -380,7 +442,7 @@
     filaSubTotal_C.innerHTML = `
         <th colspan="4">Subtotal</th>
         <th id="subtotal_valor_C">$0.00</th>
-        <th id="mi-finca-B">$0.00</th> 
+        <th id="mi-finca-C">$0.00</th> 
       `;
       tabla.appendChild(filaSubTotal_C);
 
@@ -394,14 +456,20 @@
 
     function calcular_obligaciones_C(valor){
       valor*=0.2
-      document.getElementById("valor_obligaciones_C").textContent = "$" + valor.toFixed(2)
+      const cell = document.getElementById("valor_obligaciones_C")
+      cell.dataset.valor = valor;
+      cell.textContent = "$" + valor.toFixed(2)
       calcular_subtotal_C(0,0)
+      calcular_mifinca_C();
     }
 
     function gastos_administrativos_C(valor){
       const gastos = valor*0.1
-      document.getElementById("valor_administrativos_C").textContent = "$" + gastos.toFixed(2)
+      const cell = document.getElementById("valor_administrativos_C")
+      cell.dataset.valor = gastos;
+      cell.textContent = "$" + gastos.toFixed(2)
       calcular_subtotal_C(0,0)
+      calcular_mifinca_C();
     }
 
     function calcular_interes_C(){
@@ -424,8 +492,33 @@
       interes+= valor_total_A+valor_total_B
       interes*=0.09
 
-      document.getElementById("valor_interes").textContent = "$" + interes.toFixed(2)
+      const cell = document.getElementById("valor_interes")
+      cell.dataset.valor = interes;
+      cell.textContent = "$" + interes.toFixed(2)
       calcular_subtotal_C(seguro_agricola, gastos_miscelaneos)
+      calcular_mifinca_C();
+    }
+
+    function calcular_mifinca_C(){
+      let subtotal_C = 0;
+      for (let i = 0; i<otros_gastos.length; i++){
+        let valor_C = 0;
+        if (i ===4){
+          valor_C = parseFloat(document.getElementById("valor_seguro_C").value) || 0;
+        }
+        else if(i === 5){
+          valor_C = parseFloat(document.getElementById("valor_miscelaneos_C").value) || 0;
+        }
+        else{
+          valor_C = parseFloat(document.getElementById(otros_gastos[i][1]).dataset.valor) || 0;
+        };
+        const resultado = valor_C*NUM_CUERDAS;
+        const cell = document.getElementById(`valor_mifinca_C-${i}`)
+        cell.dataset.valor = resultado;
+        cell.textContent = "$" + resultado.toFixed(2);
+        subtotal_C+=valor_C;
+      }
+
     }
 
     function calcular_subtotal_C (seguro, miscelaneos){
@@ -437,8 +530,21 @@
         subtotal_C += valor
       }
 
-      document.getElementById("subtotal_valor_C").textContent = "$" + subtotal_C.toFixed(2)
+      const cell = document.getElementById("subtotal_valor_C")
+      cell.dataset.valor = subtotal_C;
+      cell.textContent = "$" + subtotal_C.toFixed(2)
+
       calcular_total_C()
+      subtotal_mifinca_C();
+    }
+
+    function subtotal_mifinca_C(){
+      //mifinca
+      const subtotal_C = parseFloat(document.getElementById("subtotal_valor_C").dataset.valor) || 0;
+      const resultado = subtotal_C*NUM_CUERDAS;
+      const cell = document.getElementById("mi-finca-C")
+      cell.dataset.valor = resultado;
+      cell.textContent = "$" + resultado.toFixed(2);
     }
 
     let GASTO_TOTAL = 0;
@@ -453,11 +559,22 @@
       const valor_C = parseFloat(texto_C.replace("$", "")) || 0;
       total += valor_C + valor_A + valor_B
       GASTO_TOTAL = total
-      document.getElementById("total_valor_C").textContent = "$" + total.toFixed(2);
+      const cell = document.getElementById("total_valor_C")
+      .textContent = "$" + total.toFixed(2);
       calcularNetoD()
       calcular_produccion_precio_minimo()
       calcular_valor_gasto_total()
+      total_mifinca_C();
     }
+
+    function total_mifinca_C(){
+      const resultado = GASTO_TOTAL*NUM_CUERDAS
+      const cell = document.getElementById("total_mifinca_C")
+      cell.dataset.valor = resultado;
+      cell.textContent = "$" + resultado;
+    }
+
+    
 
 
     const filaVacía_3 = document.createElement("tr");
@@ -631,13 +748,6 @@
     `;
       tabla.appendChild(header7);
 
-    const cuerda_fila = document.createElement("tr");
-    cuerda_fila.innerHTML = `
-      <td colspan="4">Número de Cuerdas</th>
-      <td colspan="1"><input type="number" min="0" step="1" id="cuerdas" oninput="calcular_valores_E()"></td>
-      <td colspan="1">0</th>
-    `;
-      tabla.appendChild(cuerda_fila)
 
     const partidas = [
       ["Ingreso Total", "ingreso_total_E"],
@@ -660,12 +770,6 @@
       tabla.appendChild(fila);
     }); 
 
-    let NUM_CUERDAS = 0;
-    document.querySelectorAll('[id^="cuerdas"]').forEach((input) => {
-      input.addEventListener('input', () => {
-        calcular_valores_E();
-      });
-    });
 
     function calcular_valores_E(){
       NUM_CUERDAS = document.getElementById("cuerdas").value || 0;
@@ -673,6 +777,9 @@
       calcular_valor_gasto_total()
       calcular_ingreso_neto()
       calcular_produccion_minima()
+      for (let i = 0; i<gastos_de_alquiler.length; i++){
+        calcularcosto_A(i);
+      }
     }
 
     let resultado_ingreso_E =0;
