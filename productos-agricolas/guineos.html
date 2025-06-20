@@ -401,7 +401,8 @@ function actualizarValoresMiFinca_t1() {
     }
   });
 
-  calcularTotaldeTodo(); // Ensures the global totals update
+  calcularTotaldeTodo(); 
+  calcularTotalOtrosGastos();
 }
 
   
@@ -461,12 +462,19 @@ function calcularTotalOtrosGastos() {
     if (totalCelda) {
       totalCelda.textContent = "$" + total.toFixed(2);
     }
+
+    const numCuerdas = parseFloat(document.getElementById("numero-cuerdas")?.value) || 0;
+    const fincaOtrosCell = document.getElementById("total-finca-otros");
+    if (fincaOtrosCell) {
+        fincaOtrosCell.textContent = "$" + (total * numCuerdas).toFixed(2);
+}
 }
 
 function calcularTotaldeTodo() {
   const totalMaquinaria = parseFloat(document.getElementById("total-valoresMaqt1")?.textContent.replace("$", "")) || 0;
   const totalMateriales = parseFloat(document.getElementById("total-valores-t2")?.textContent.replace("$", "")) || 0;
 
+  const numCuerdas = parseFloat(document.getElementById("numero-cuerdas")?.value) || 0;
   const otrosGastos = obtenerOtrosGastos();
   let totalOtros = 0;
 
@@ -478,7 +486,13 @@ function calcularTotaldeTodo() {
     } else {
       totalOtros += valor;
     }
-   
+    const total = totalMaquinaria + totalMateriales + totalOtros;
+
+  const totalFincaGastosCell = document.getElementById("total-finca-todos");
+  
+  if (totalFincaGastosCell) {
+    totalFincaGastosCell.textContent = "$" + (total * numCuerdas).toFixed(2);
+}
   });
 
   const total = totalMaquinaria + totalMateriales + totalOtros;
@@ -491,6 +505,9 @@ function calcularTotaldeTodo() {
   const gastoExtra = document.getElementById("gasto-total-extra");
   if (gastoExtra) {
   gastoExtra.textContent = "$" + total.toFixed(2);
+
+  const gastoFinca = document.getElementById("gasto-total-extra-finca");
+if (gastoFinca) gastoFinca.textContent = "$" + (total * numCuerdas).toFixed(2);
 }
   const produccionMinima=document.getElementById("produccion-minima");
   const precioMinimoCaja = document.getElementById("precio-minimo-caja");
@@ -504,7 +521,7 @@ function calcularTotaldeTodo() {
   const cuerdaInput = document.getElementById("numero-cuerdas");
   const produccionMinimaStr = document.getElementById("produccion-minima")?.textContent.replace("$", "") || "0";
   const produccionMinimaNum = parseFloat(produccionMinimaStr) || 0;
-  const numCuerdas = parseFloat(cuerdaInput?.value) || 0;
+  
   const produccionTotal = produccionMinimaNum * numCuerdas;
 
   const celdaProduccionTotal = document.getElementById("produccion-minima-total");
@@ -512,13 +529,14 @@ function calcularTotaldeTodo() {
     celdaProduccionTotal.textContent = `${produccionTotal.toFixed(2)}`;
   }
   
+  
 }
 
 const filaTotalOtros = document.createElement("tr");
 filaTotalOtros.innerHTML = `
   <th colspan="4">Total Otros Gastos</th>
   <th colspan="1" id="total-otros-gastos">$0.00</th>
-  <th>$0.00</th>
+  <th id="total-finca-otros">$0.00</th>
 
 `;
 tabla.appendChild(filaTotalOtros);
@@ -527,7 +545,7 @@ const filatotalTODO=document.createElement("tr");
 filatotalTODO.innerHTML=`
   <th colspan="4">Total Gastos</th>
   <th colspan="1" id="total-todos-gastos">$0.00</th>
-  <th>$0.00</th>
+  <th id="total-finca-todos">$0.00</th>
 `;
 tabla.appendChild(filatotalTODO);
 
@@ -576,7 +594,7 @@ tabla.appendChild(filatotalTODO);
     <td id="ingreso-output-${index}">
       ${esEditable ? "-" : `$${trabajo[4].toFixed(2)}`}
     </td>
-        <td>finca</td>
+        <td id="mi-finca-ingreso-${index}">$0.00</td>
        `;
 
     tabla.appendChild(fila);
@@ -596,7 +614,7 @@ tabla.appendChild(filatotalTODO);
   filas_total_ingresos.innerHTML=`
   <th colspan="4">TOTAL DE INGRESOS</th>
   <th colspan="1" id="total-ingresos">$0.00</th>
-  <th colspan="1">finca</th>
+  <th colspan="1" id="total-finca-ingresos">$0.00</th>
 
   `;
   tabla.appendChild(filas_total_ingresos);
@@ -605,32 +623,50 @@ tabla.appendChild(filatotalTODO);
   filas_ingreso_neto.innerHTML=`
   <th colspan="4">INGRESOS NETO</th>
   <th id="ingreso-neto">$0.00</th>
-  <th>finca</th>`
+  <th id="ingreso-neto-finca">$0.00</th>`
     ;
   tabla.appendChild(filas_ingreso_neto);
 
   function calcularTotalIngresos() {
-  let total = 0;
+    let total = 0;
+  let totalFinca = 0;
+  const numCuerdas = parseFloat(document.getElementById("numero-cuerdas")?.value) || 0;
 
   ingresosEsperados.forEach((trabajo, index) => {
-const input = document.getElementById(`ingreso-input-${index}`);
-if (input) {
-  const valor = parseFloat(input.value) || 0;
-  total += valor;
-} else {
-  total += parseFloat(trabajo[4]) || 0;
-}
-   
+    const input = document.getElementById(`ingreso-input-${index}`);
+    let valor = 0;
+
+    if (input) {
+      valor = parseFloat(input.value) || 0;
+    } else {
+      valor = parseFloat(trabajo[4]) || 0;
+    }
+
+    total += valor;
+    const fincaValor = valor * numCuerdas;
+    totalFinca += fincaValor;
+
+    const fincaCell = document.getElementById(`mi-finca-ingreso-${index}`);
+    if (fincaCell) {
+      fincaCell.textContent = `$${fincaValor.toFixed(2)}`;
+    }
   });
 
   document.getElementById("total-ingresos").textContent = `$${total.toFixed(2)}`;
-  const extra = document.getElementById("ingreso-total-extra");//al final
+  const extra = document.getElementById("ingreso-total-extra");
   if (extra) extra.textContent = `$${total.toFixed(2)}`;
+
+  const fincaExtra = document.getElementById("ingreso-total-extra-finca");
+  if (fincaExtra) fincaExtra.textContent = `$${totalFinca.toFixed(2)}`;
+
+  const topFincaCell = document.getElementById("total-finca-ingresos");
+if (topFincaCell) topFincaCell.textContent = `$${totalFinca.toFixed(2)}`;
 
   calcularIngresoNeto();
 }
 
 function calcularIngresoNeto() {
+  const numCuerdas = parseFloat(document.getElementById("numero-cuerdas")?.value) || 0;
   const totalGastos = parseFloat(document.getElementById("total-todos-gastos").textContent.replace("$", "")) || 0;
   const totalIngresos = parseFloat(document.getElementById("total-ingresos").textContent.replace("$", "")) || 0;
 
@@ -641,6 +677,16 @@ function calcularIngresoNeto() {
   if (netoExtra) {
     netoExtra.textContent = `$${neto.toFixed(2)}`;
 }
+const fincaNeto = document.getElementById("ingreso-neto-extra-finca");
+
+if (fincaNeto) fincaNeto.textContent = `$${(neto * numCuerdas).toFixed(2)}`;
+ 
+  const netoFinca = neto * numCuerdas;
+  const netoFincaCell = document.getElementById("ingreso-neto-finca");
+
+  if (netoFincaCell) {
+    netoFincaCell.textContent = `$${netoFinca.toFixed(2)}`;
+  }
 }
   
     const filaVacía_4 = document.createElement("tr");
@@ -676,7 +722,7 @@ function calcularIngresoNeto() {
   `<th colspan="4"> Ingreso Total </th>
   <th id="ingreso-total-extra">$0.00</th>
 
-  <th>finca</th>
+  <th id="ingreso-total-extra-finca">$0.00</th>
   `
   tabla.appendChild(ingresoTotal)
 
@@ -684,21 +730,22 @@ function calcularIngresoNeto() {
   const gastoTotal=document.createElement("tr");
   gastoTotal.innerHTML=`<th colspan="4"> Gasto Total </th>
   <th id="gasto-total-extra">$0.00</th>
-  <th>finca</th>`
+  <th id="gasto-total-extra-finca">$0.00</th>`
   tabla.appendChild(gastoTotal);
 
 
   const ingresoNeto=document.createElement("tr");
   ingresoNeto.innerHTML=`<th colspan="4"> Ingreso Neto </th>
   <th id="ingreso-neto-extra">$0.00</th>
-  <th>finca</th>`
+  <th id="ingreso-neto-extra-finca">$0.00</th>`
   tabla.appendChild(ingresoNeto);
 
 const filaProduccionMinimaTotal = document.createElement("tr");
 filaProduccionMinimaTotal.innerHTML = `
   <th colspan="4">PRODUCCIÓN MÍNIMA TOTAL DE CAJAS DE GUINEO</th>
+  <th id="produccion-minima-total-finca">-</th>
   <th id="produccion-minima-total">0</th>
-  <th>finca</th>
+
 `;
 tabla.appendChild(filaProduccionMinimaTotal);
 
@@ -723,14 +770,15 @@ proyeccionBody.innerHTML = `
     <td></td>
   </tr>
 `;
-const nuevaInputCuerdas = document.getElementById("numero-cuerdas");
+const nuevoInputCuerdas = document.getElementById("numero-cuerdas");
 
-if (nuevaInputCuerdas) {
-  nuevaInputCuerdas.addEventListener("input", () => {
+if (nuevoInputCuerdas) {
+  nuevoInputCuerdas.addEventListener("input", () => {
     calcularTotaldeTodo();
     actualizarValoresMiFinca_t1();
     calcularTotal_año_t2();
     updateOtrosGastos();
+    calcularTotalIngresos();
   });
 }
  
