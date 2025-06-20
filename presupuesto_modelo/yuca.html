@@ -112,7 +112,6 @@
     //logica para rendimiento por cuerdas-----------------------
 
     const tabla_rendimiento = document.getElementById("tabla-rendimiento")
-    console.log(tabla_rendimiento)
 
     const cuerda_fila = document.createElement("tr");
     cuerda_fila.innerHTML = `
@@ -130,6 +129,9 @@
         calcular_mifinca_C();
         subtotal_mifinca_C();
         total_mifinca_C();
+        calcular_mifinca_D();
+        ingreso_total_mifinca();
+        ingreso_neto_mifinca();
       });
     });
 
@@ -560,7 +562,7 @@
       total += valor_C + valor_A + valor_B
       GASTO_TOTAL = total
       const cell = document.getElementById("total_valor_C")
-      .textContent = "$" + total.toFixed(2);
+      cell.textContent = "$" + total.toFixed(2);
       calcularNetoD()
       calcular_produccion_precio_minimo()
       calcular_valor_gasto_total()
@@ -571,11 +573,8 @@
       const resultado = GASTO_TOTAL*NUM_CUERDAS
       const cell = document.getElementById("total_mifinca_C")
       cell.dataset.valor = resultado;
-      cell.textContent = "$" + resultado;
+      cell.textContent = "$" + resultado.toFixed(2);
     }
-
-    
-
 
     const filaVacía_3 = document.createElement("tr");
     filaVacía_3.innerHTML = `<td colspan="6" style="height: 20px; background-color: transparent;"></td>`;
@@ -591,16 +590,16 @@
       tabla.appendChild(header4);
 
     const ingreso_bruto = [
-    ["Venta de yuca encerada","Quintal"],
-    ["Venta de semilla", "Cangre/Esqueje"],
-    ["Subsidio Salarial",""]
+    ["Venta de yuca encerada","Quintal", ""],
+    ["Venta de semilla", "Cangre/Esqueje",""],
+    ["Subsidio Salarial","",-1]
   ];
 
     ingreso_bruto.forEach((trabajo, index) => {
       const fila = document.createElement("tr");
       
       let valorColumn = "";
-      if (trabajo[1]!==""){
+      if (trabajo[2]!==-1){
         valorColumn = `<td><input type="number" min="0" step="1" id="cantidad_unidad_D-${index}" oninput="calcularcosto_D(${index})"></td>`
       }
       else {
@@ -648,25 +647,33 @@
     
 
     function calcularcosto_D(index) {
-      const costoInput = document.getElementById(`costo_unidad_cantidad_D-${index}`);
-      const cantidadEl = document.getElementById(`cantidad_unidad_D-${index}`);
-      const output = document.getElementById(`valor_unidad_cantidad_D-${index}`);
-
-      const costo = parseFloat(costoInput?.value) || 0;
-
-      let cantidad = 1;
-      if (cantidadEl && cantidadEl.tagName === "INPUT") {
-        const parsedCantidad = parseFloat(cantidadEl.value);
-        if (!isNaN(parsedCantidad)) {
-          cantidad = parsedCantidad;
-        }
-      }
-    
-      const total = costo * cantidad;
-      output.textContent = `$${total.toFixed(2)}`;
+      let valor_D = 0;
+      const costoInput = parseFloat(document.getElementById(`costo_unidad_cantidad_D-${index}`).value) || 0;
+       if (ingreso_bruto[index][2]===-1){
+          valor_D = costoInput;
+       }
+       else{
+        const cantidadInput = document.getElementById(`cantidad_unidad_D-${index}`).value || 0;
+        valor_D = costoInput*cantidadInput;
+       }
+      
+      const cell = document.getElementById(`valor_unidad_cantidad_D-${index}`);
+      cell.dataset.valor = valor_D;
+      cell.textContent = "$" + valor_D.toFixed(2);
     
       calcularTotal_D();
-    }   
+      calcular_mifinca_D();
+    } 
+    
+    function calcular_mifinca_D(){
+      for (let i = 0; i<ingreso_bruto.length; i++){
+        const valor_D = parseFloat(document.getElementById(`valor_unidad_cantidad_D-${i}`).dataset.valor) || 0;
+        const resultado = valor_D*NUM_CUERDAS;
+        const cell = document.getElementById(`valor_mifinca_D-${i}`)
+        cell.dataset.valor = resultado;
+        cell.textContent = "$" + resultado.toFixed(2);
+      }
+    }
 
     let INGRESO_TOTAL = 0; 
     function calcularTotal_D() {
@@ -680,17 +687,35 @@
      calcularNetoD()
      INGRESO_TOTAL = total_valores_D
      calcular_valor_ingreso_total()
+     ingreso_total_mifinca();
     }
 
+    function ingreso_total_mifinca(){
+      const resultado = INGRESO_TOTAL*NUM_CUERDAS;
+      const cell = document.getElementById("mi-finca-total-D")
+      cell.dataset.valor = resultado;
+      cell.textContent = "$" + resultado.toFixed(2);
+    }
+
+    let INGRESO_NETO = 0;
     function calcularNetoD(){
-      let neto_valores_D = 0;
+      INGRESO_NETO = 0;
       const text_ingreso = document.getElementById("ingreso_total_D").textContent
       const valor_ingreso = parseFloat(text_ingreso.replace("$","")) || 0;
       const text_gasto = document.getElementById("total_valor_C").textContent
       const valor_gasto = parseFloat(text_gasto.replace("$", "")) || 0;
 
-      neto_valores_D = valor_ingreso-valor_gasto
-      document.getElementById("ingreso_neto_D").textContent = "$" + neto_valores_D.toFixed(2)
+      INGRESO_NETO = valor_ingreso-valor_gasto
+      document.getElementById("ingreso_neto_D").textContent = "$" + INGRESO_NETO.toFixed(2)
+
+      ingreso_neto_mifinca();
+    }
+
+    function ingreso_neto_mifinca(){
+      const resultado = INGRESO_NETO*NUM_CUERDAS;
+      const cell = document.getElementById("mi-finca-neto-D")
+      cell.dataset.valor = resultado;
+      cell.textContent = "$" + resultado.toFixed(2);
     }
 
 
@@ -724,11 +749,16 @@
       const text_gasto = document.getElementById("total_valor_C").textContent
       const valor_gasto = parseFloat(text_gasto.replace("$", "")) || 0;
       const valor_venta_unidad = document.getElementById("costo_unidad_cantidad_D-0").value || 0;
-      PRODUCCION_MINIMA = valor_gasto/valor_venta_unidad
+      console.log(valor_venta_unidad)
+      if (!isNaN(valor_venta_unidad) && valor_venta_unidad!==0){
+        PRODUCCION_MINIMA = valor_gasto/valor_venta_unidad
+      }
       document.getElementById("produccion_minima").textContent = PRODUCCION_MINIMA.toFixed(2)
 
       const valor_venta_cantidad = document.getElementById("cantidad_unidad_D-0").value || 0;
-      precio = valor_gasto/valor_venta_cantidad
+      if (!isNaN(valor_venta_cantidad) && valor_venta_cantidad!==0){
+        precio = valor_gasto/valor_venta_cantidad
+      }
       document.getElementById("precio_minimo").textContent = "$" + precio.toFixed(2)
       calcular_produccion_minima()
     }
@@ -750,10 +780,10 @@
 
 
     const partidas = [
-      ["Ingreso Total", "ingreso_total_E"],
-      ["Gasto Total", "gasto_total_E"],
-      ["Ingreso Neto", "ingreso_neto_E"],
-      ["Producción Mínima", "produccion_minima_E"]
+      ["Ingreso Total", "ingreso_total_E", "mifinca-ingreso-total-E"],
+      ["Gasto Total", "gasto_total_E", "mifinca-gasto-total-E"],
+      ["Ingreso Neto", "ingreso_neto_E", "mifinca-ingreso-neto-E"],
+      ["Producción Mínima", "produccion_minima_E", "mifinca-produccion-minima-E"]
     ]
 
     partidas.forEach((trabajo, index) =>{
@@ -764,7 +794,7 @@
         <!--Valor $$-->
         <td id=${trabajo[1]}>$0.00</td>
         <!--Mi finca-->
-        <td id="valor_partidas_E-${index}">$0.00</td>
+        <td id=${trabajo[2]}>$0.00</td>
       `;
 
       tabla.appendChild(fila);
@@ -784,10 +814,14 @@
 
     let resultado_ingreso_E =0;
     function calcular_valor_ingreso_total(){
-      console.log(INGRESO_TOTAL)
       resultado_ingreso_E = NUM_CUERDAS*INGRESO_TOTAL
       document.getElementById("ingreso_total_E").textContent = "$" + resultado_ingreso_E.toFixed(2)
       calcular_ingreso_neto()
+
+      const mifinca = resultado_ingreso_E*NUM_CUERDAS;
+      const cell = document.getElementById("mifinca-ingreso-total-E")
+      cell.dataset.valor = mifinca;
+      cell.textContent = "$" + mifinca.toFixed(2);
     }
 
     let resultado_gasto_E = 0;
@@ -795,17 +829,32 @@
       resultado_gasto_E = NUM_CUERDAS*GASTO_TOTAL
       document.getElementById("gasto_total_E").textContent = "$" + resultado_gasto_E.toFixed(2)
       calcular_ingreso_neto()
+
+      const mifinca = resultado_gasto_E*NUM_CUERDAS;
+      const cell = document.getElementById("mifinca-gasto-total-E")
+      cell.dataset.valor = mifinca;
+      cell.textContent = "$" + mifinca.toFixed(2);
     }
 
     let resultado_neto_E = 0;
     function calcular_ingreso_neto(){
       resultado_neto_E = resultado_ingreso_E -resultado_gasto_E
       document.getElementById("ingreso_neto_E").textContent = "$" + resultado_neto_E.toFixed(2)
+
+      const mifinca = resultado_neto_E*NUM_CUERDAS;
+      const cell = document.getElementById("mifinca-ingreso-neto-E")
+      cell.dataset.valor = mifinca;
+      cell.textContent = "$" + mifinca.toFixed(2);
     }
 
     function calcular_produccion_minima(){
       const resultado = PRODUCCION_MINIMA*NUM_CUERDAS
       document.getElementById("produccion_minima_E").textContent = "$" + resultado.toFixed(2)
+
+      const mifinca = resultado*NUM_CUERDAS
+      const cell = document.getElementById("mifinca-produccion-minima-E")
+      cell.dataset.valor = mifinca;
+      cell.textContent = "$" + mifinca.toFixed(2);
     }
 
 
