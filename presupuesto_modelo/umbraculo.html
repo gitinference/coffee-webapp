@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nómina Semanal - Agricultores</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 20px; }
+    table { width: 100%; border-collapse: collapse; margin-bottom: 20px; }
+    th, td { border: 1px solid #ccc; padding: 8px; text-align: center; }
+    th { background-color: #f2f2f2; }
+    input, select { width: 95%; padding: 4px; }
+
+    td:first-child,
+    th:first-child{
+      text-align: left;
+    }
+  </style>
+</head>
+<body>
+  <h1>Nómina Semanal - Registro de Horas<sup style="font-size: 0.1em;">K11</sup></h1>
+
+  <table>
+    <tbody id="tabla">
+      <!-- Filas generadas por JS -->
+    </tbody>
+
+    <tfoot>
+      <tr>
+        <td colspan="6" style="padding: 20px; background-color: #ffffff; line-height: 1.6;">
+
+          <h2 style="color: #000000; font-size: 1em">Supuestos</h2>
+          <ol style="padding-left: 20px;">
+            <li>El Departamento de Ingeniería Agrícola y Biosistemas de la Universidad de Puerto Rico - Recinto Universitario de Mayagüez, estima que un umbráculo de 40 pies de ancho, 100 pies de largo y 12 pies de alto tiene un valor de $3,095. Debido a que se calcula que cada árbol necesita un espacio de 4 pies cuadrados, este umbráculo permite la siembra de alrededor 660 árboles teniendo en cuenta el espacio requerido para los pasillos dentro del mismo.</li>
+            <li>El Departamento de Ingeniería Agrícola y Biosistemas de la Universidad de Puerto Rico - Recinto Universitario de Mayagüez, recomienda un sistema de riego por goteo utilizando: una bomba de 2.5 hp; un inyector de químicos Mazei K584; un regulador de presión; filtros de malla #140; 4,000 pies de línea de distribución de riego en Polyethylene de 3/4"; y líneas principales de PVC, y secundarias de Polyethylene.</li>
+            <li>Actualmente en Puerto Rico no existe un mercado de semillas de árboles, los precios utilizados en este presupuesto fueron tomados de ventas de semillas en otros países. Muchos de los productores tienen sus propias plantas madre dentro de su negocio.</li>
+            <li>Se recomienda usar fibra de coco por su alto porcentaje de enraizamiento. El saco de 3.8 pies cúbicos comprimidos equivale a 7 pies cúbicos.</li>
+            <li>Abono granular "Controlled Realease" de concentración 12-4-12, se calcula una cantidad de 30 gramos de abono por cada tiesto de 3 galones, con una frecuencia de cada 3 meses. En temperaturas muy altas puede que sea necesario aumentar la cantidad de abono aplicado o aplicar con una mayor frecuencia.</li>
+            <li> Hace referencia a fungicidas y/o insecticidas. Se sugiere que solo se aplique de ser necesario; y el valor puede variar dependiendo del tipo de producto utilizado y de la plaga que se quiera combatir, se recomienda consultar a un experto antes de aplicar cualquier plaguicida o fungicida.</li>
+            <li>No se consideran: entrega, acarreo o distribución de productos fuera de la finca. Si desea considerar esto dentro de su negocio, debe adicionar el valor del vehículo, los costos de mantenimiento del mismo, el salario del chofer y el seguro choferil dentro del presupuesto.</li>
+            <li>Corresponde a 7.65% del Seguro Social, 6.1% del Fondo del Seguro del Estado y 2.9% de Desempleo. Se deben hacer ajustes si se contemplan otros porcentajes u obligaciones que no están contempladas en este documento.</li>
+            <li>Canón de arrendamiento por uso del terreno.</li>
+            <li>Se debe tener en cuenta que estos valores son aproximados y pueden variar dependiendo de cada caso.</li>
+          </ol>
+
+          <span style="font-weight: bold;">Presupuesto electrónico creado por:</span><br>
+          Dra. Gladys M. González Martínez<br>
+          Catedrática, Departamento de Economía Agrícola<br>
+          Directora de Proyecto Z-244<br>
+          Estación Experimental Agrícola<br><br>
+
+          Dr. Alwin J. Jiménez Maldonado<br>
+          Catedrático, Departamento de Economía Agrícola<br>
+          Colaborador de Proyecto Z-244<br>
+          Servicio de Extensión Agrícola<br><br>
+
+          Alexander Cano<br>
+          Asistente de Investigación Graduado<br>
+          Departamento de Economía Agrícola<br><br>
+
+          Andrés Alonso<br>
+          Asistente de Investigación Graduado<br>
+          Departamento de Economía Agrícola<br>
+          Catedrática, Departamento de Economía Agrícola y Sociología Rural<br><br>
+
+          <span style="font-weight: bold;">Revisado por:</span><br>
+
+          Dra. María del C. Libran<br>
+          Catedrática<br>
+          Departamento de Cultivos y Ciencias Agro-ambientales<br><br>
+
+          Prof. Sally González<br>
+          Especialista en Arquitectura Paisajista y Forestación Urbana<br>
+          Departamento de Cultivos y Ciencias Agro-ambientales<br>
+          Servicio de Extensión Agrícola<br><br>
+
+          Prof. Eric A. Irizarry<br>
+          Catedrático<br>
+          Departamento de Ingeniería Agrícola y Biosistemas<br>
+          Servicio de Extensión Agrícola<br><br>
+
+          <span style="font-weight: bold;">Versión en Excel:</span><br>
+
+          Dra. Alexandra Gregory Crespo<br>
+          Catedrática, Departamento de Economía Agrícola<br>
+          Servicio de Extensión Agrícola<br><br>
+
+          Herold Kasandor Eustache<br>
+          Estudiante graduado<br>
+          Departamento de Economía Agrícola<br><br>
+
+          Yaira A. Avilés Ortiz<br>
+          Economista Agrícola<br><br>
+
+          <span style="font-weight: bold;">Fecha de revisión:</span><br>
+          Junio 2025<br><br>
+    
+          <div style="margin-top: 20px; padding: 12px; border-left: 5px solid #d9534f; background-color: #fdf2f2;">
+            <strong>AVISO:</strong> Los Presupuestos Modelos presentan la información de los ingresos y gastos bajo condiciones normales y características particulares de una finca.  La Universidad de Puerto Rico no asume responsabilidad por los resultados si los ingresos y gastos de una empresa en particular difieren de dicha publicación. El usuario de estos modelos releva a la Universidad de Puerto Rico de toda responsabilidad, reclamación, pérdida, daño o costo relacionado o surgido por el uso de estos modelos.
+          </div>
+    
+          <div style="margin-top: 20px; font-size: 0.85em; text-align: center; color: #999;">
+            This material is based upon work supported by USDA/OPPE under Award Number: AO212501x443G010
+          </div>
+        </td>
+      </tr>
+    </tfoot>
+
+    
+  </table>
+<!----------------------------------------------------------------------------------------------------------------------------------------->
+<!----------------------------------------------------------------------------------------------------------------------------------------->
+<!----------------------------------------------------------------------------------------------------------------------------------------->
+  <script>
+
+
+  </script>
+</body>
+</html>
+
+
+

@@ -1,0 +1,841 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Presupuesto modelo: Producción de Pacas de Heno</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 20px; }
+    table { width: 100%; border-collapse: collapse; margin-bottom: 20px; }
+    th, td { border: 1px solid #ccc; padding: 8px; text-align: center; }
+    th { background-color: #f2f2f2; }
+    input, select { width: 95%; padding: 4px; }
+
+    td:first-child,
+    th:first-child{
+      text-align: left;
+    }
+  </style>
+</head>
+<body>
+  
+  <div id="botones-acciones" style="text-align: center; margin-top: 40px;">
+    <button id="btn-excel">📥 Descargar Excel</button>
+    <button id="btn-pdf">📄 Guardar PDF</button>
+    <button id="btn-email">✉️ Enviar por Email</button>
+    <button onclick="window.print()">🖨 Imprimir</button>
+  </div>
+  
+
+
+  <!-- Excel export -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>
+  <!-- PDF export -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.3/html2pdf.bundle.min.js"></script>
+
+  <script>
+    // Descargar Excel
+    document.getElementById("btn-excel").addEventListener("click", function () {
+      const table = document.querySelector("table"); 
+      const wb = XLSX.utils.table_to_book(table, { sheet: "Presupuesto" });
+      XLSX.writeFile(wb, "presupuesto.xlsx");
+    });
+  
+    // Guardar PDF
+    document.getElementById("btn-pdf").addEventListener("click", function () {
+      const content = document.body; 
+      html2pdf().from(content).set({
+        margin: 0.5,
+        filename: "presupuesto.pdf",
+        html2canvas: { scale: 2 },
+        jsPDF: { unit: "in", format: "letter", orientation: "portrait" }
+      }).save();
+    });
+  
+    // Enviar por Email
+    document.getElementById("btn-email").addEventListener("click", function () {
+      const asunto = "Presupuesto Modelo";
+      const cuerpo = "Saludos,\n\nAdjunto encontrará el presupuesto modelo generado.\n\nGracias.";
+      window.location.href = `mailto:?subject=${encodeURIComponent(asunto)}&body=${encodeURIComponent(cuerpo)}`;
+    });
+  </script>
+  <h1>Presupuesto modelo: Producción de Pacas de Heno (35 libras)
+    <h2>con Pastos Mejorados utilizando SEMILLA<sup>1</sup>								</h2> 															<sup style="font-size: 0.1em;">K11</sup></h1>
+
+
+  <table>
+    <thead>
+      <tr>
+        <th>Partida</th>
+        <th>Cantidad</th>
+        <th>Unidad (Primer año)</th>
+        <th>Precio</th>
+        <th>Costo Primer año</th>
+        <th>Costo Segundo año</th>
+       
+      </tr>
+
+    </thead>
+    <tbody id="tabla">
+      <!-- Filas generadas por JS -->
+    </tbody>
+
+    <tfoot>
+      <tr>
+        <td colspan="10" style="padding: 20px; background-color: #fff; line-height: 1.6;">
+
+          <h2 style="color: #000000; font-size: 1em">Supuestos</h2>							
+          <ol style="padding-left: 20px;">
+            <li>Este estimado de gastos se basa en el uso de semillas comerciales. El uso de semillas comerciales elimina la necesidad de mano de obra para corte de tallos, recogido y transporte.</li>
+            <li>El presupuesto presentado es para el establecimiento y manejo de pastos para los primeros 2 años.</li>
+            <li>El costo de la maquinaria incluye el operador y el combustible.</li>
+            <li>Área con relieve moderado, que requieren desmonte mecánico de árboles, arbustos y yerbas</li>
+            <li>Un pase de arado con un tractor 105-115 HP.</li>
+            <li>Dos pases de rastrillo con un tractor 80-90 HP.</li>
+            <li>Las semillas de las yerbas buffel, pajon y guinea son muy pequeñas. Por lo que se utiliza un agente portador para esparcirlas en el terreno. Se siembra al voleo y luego se cubren con 1/4 -1/2 pulgada de tierra.</li>
+            <li>El control de las malezas se deberá efectuar mecánicamente mediante talado hasta que las plántulas de las yerbas sembradas por semilla tengan de 6-7 pulgadas de altura.</li>
+            <li>El agricultor posee maquinaria para la aplicación de abono.</li>
+            <li>El agricultor posee la maquinaria para corte y alineamiento. El primer corte se realiza después de 5 meses de la siembra y luego se realizan cortes cada 60 días aproximadamente.</li>
+            <li>La aplicación de abono se hace principalmente con el uso de maquinaria.</li>
+            <li>La aplicación de herbicida se hace principalmente con el uso de maquinaria.</li>
+            <li>La finca posee infraestructura para riego.</li>
+            <li>El pago de la mano de obra para el recogido del producto se efectúa por paca recolectada.</li>
+            <li>Incluye pago del Seguro Social al Internal Revenue Service, Seguro por Desempleo al Departamento del Trabajo y Recursos Humanos y Seguro Obrero a la Corporación del Fondo del Seguro del Estado.</li>
+            <li>La variedad a sembrar dependerá de las condiciones de clima y suelos prevalecientes en la finca. La cantidad y costo de la semilla dependerá de la variedad a ser sembrada, esto fluctúa significativamente entre variedades.</li>
+            <li>La cantidad de cal a utilizar dependerá del análisis de suelo.</li>
+            <li>Se deben incorporar 100# de superfosfato triple en las primeras 6-8 pulgadas de suelo durante la preparación del terreno. Esto se puede hacer en uno de los pases de rastrillo.</li>
+            <li>La formulación y cantidad de fertilizantes va a depender del análisis de suelo. Para fines de este estimado de costos se utilizará la formulación 15-5-10 a razón de 3 qq por cuerda al mes de sembrar y 5 qq posterior a cada corte.</li>
+            <li>Incluye herbicidas para el control de malezas de hoja ancha, suculentas y leñosas</li>
+            <li>Se recomienda realizar un análisis de suelo para determinar el pH. El pH recomendado para este cultivo es de 5.5 a 7.0.</li>
+            <li>La finca posee sistema de riego.</li>
+            <li>La producción se estimó a razón de 100 pacas por cuerda y cuatro cortes el primer año y 5 el segundo año. Esta producción puede variar por el manejo de los pastos, las variedades sembradas, factores ambientales y otros.</li>
+						<li>En el segundo año no hay gastos para establecimiento de los pastos. Esto incluye preparación del terreno, semilla y siembra. En el segundo año deben aumentar los cortes.</li>
+          </ol>
+
+          <span style="font-weight: bold;">Preparado por:</span><br>
+          Myrna Comas Pagán, PhD<br>
+          Catedrática de Extensión Agrícola en Economía Agrícola<br><br>
+      
+
+          <span style="font-weight: bold;">Versión Electrónica:</span><br>
+          Alexandra Gregory Crespo, PhD<br>
+          Catedrática del Servicio de Extensión Agrícola en Economía Agrícola<br><br>
+    
+          <span style="font-weight: bold;">Versión Web:</span><br>
+          Julio C. Hernández Correa<br>
+          Catedrático del Servicio de Extensión Agrícola en Economía Agrícola<br><br>
+    
+          <span style="font-weight: bold;">Fecha de revisión:</span><br>
+          Junio 2025<br><br>
+    
+          <div style="margin-top: 20px; padding: 12px; border-left: 5px solid #d9534f; background-color: #fdf2f2;">
+            <strong>AVISO:</strong> Los Presupuestos Modelos presentan la información de los ingresos y gastos bajo condiciones normales y características particulares de una finca. La Universidad de Puerto Rico no asume responsabilidad por los resultados si los ingresos y gastos de una empresa en particular difieren de dicha publicación. El usuario de estos modelos releva a la Universidad de Puerto Rico de toda responsabilidad, reclamación, pérdida, daño o costo relacionado o surgido por el uso de estos modelos.
+          </div>
+    
+          <div style="margin-top: 20px; font-size: 0.85em; text-align: center; color: #999;">
+            This material is based upon work supported by USDA/OPPE under Award Number: AO212501x443G010
+          </div>
+        </td>
+      </tr>
+    </tfoot>
+
+    
+  </table>
+<!----------------------------------------------------------------------------------------------------------------------------------------->
+<!----------------------------------------------------------------------------------------------------------------------------------------->
+<!----------------------------------------------------------------------------------------------------------------------------------------->
+  <script>
+
+    const tabla = document.getElementById("tabla");
+
+    const actividades = {
+      "Preparación de Terreno": 7.25,
+      "Poda": 8.50,
+      "Cosecha": 6.75
+    };
+
+    const header1 = document.createElement("tr");
+      header1.innerHTML = `<th colspan="6" style="text-align: center; background-color: #cccccc;">GASTOS DE MAQUINARIA</th>`;
+      tabla.appendChild(header1);
+
+    const mano_de_obra_1 = [
+    "Limpieza de area<sup>4</sup>", 
+    "Arar<sup>5</sup>", 
+    "Rastrillar<sup>6</sup>",
+    "Siembra<sup>7</sup>",
+    "Desyerbo Mecánico <sup>8</sup> ",
+    "Aplicar abono <sup>9</sup>",
+    "Aplicar herbicida",
+    "Corte y alineación de pastos <sup>10</sup>",
+    "Empaque de heno"
+    
+  ];
+
+  const valores_segundo_año_t1=[
+    120.00,80.00,105.00,105.00
+  ];
+
+  
+
+    mano_de_obra_1.forEach((trabajo, index) => {
+      const fila = document.createElement("tr");
+      
+      fila.innerHTML = `
+      <td>${trabajo}</td>
+      <td><input type="number" min="0" step="1" id="cantidad-${index}"  oninput="calcularCostoAño1(${index})"></td>
+      <td>Horas</td>
+      <td><input type="number" min="0" step="1" id="precio-${index}"  oninput="calcularCostoAño1(${index})"></td>
+      <td id="costo-año1-${index}">$0.00</td>
+      <td id="costo-año2-${index}">${index > 4 && (index - 5) < valores_segundo_año_t1.length? "$"+valores_segundo_año_t1[index-5].toFixed(2) : "-"}</td>
+      
+    `;
+
+    tabla.appendChild(fila);
+  });
+
+    
+
+    const filaTotalMaquinaria = document.createElement("tr");
+    filaTotalMaquinaria.innerHTML = `
+        <th colspan="4">TOTAL DE GASTOS DE MAQUINARIA</th>
+        <th id="total-costo-año1-t1">$0.00</th>
+        <th id=total-costo-año2-t1>$410.00</th>
+        
+      `;
+      tabla.appendChild(filaTotalMaquinaria);
+
+      function calcularCostoAño1(index){
+        const precio = parseFloat(document.getElementById(`precio-${index}`).value) || 0;
+        const cantidad= parseFloat(document.getElementById(`cantidad-${index}`).value) || 0;
+        const costoCalculado=precio * cantidad;
+        document.getElementById(`costo-año1-${index}`).textContent = "$" + costoCalculado.toFixed(2);
+        calcularTotal_CostoAño1_t1();
+
+      }
+
+    function calcularTotal_CostoAño1_t1() {
+      let total_valores= 0;
+      for (let i = 0; i < mano_de_obra_1.length; i++) {
+        const texto = document.getElementById(`costo-año1-${i}`).textContent; 
+        const valor = parseFloat(texto.replace("$", "")) || 0;
+        total_valores+=valor;
+      }
+      document.getElementById("total-costo-año1-t1").textContent = "$" + total_valores.toFixed(2);
+      calcularTotalGastosPorCuerda();
+      calcularGastoTotal();
+
+    }
+
+
+    const filaVacía_1 = document.createElement("tr");
+    filaVacía_1.innerHTML = `<td colspan="6" style="height: 20px; background-color: transparent;"></td>`;
+    tabla.appendChild(filaVacía_1);
+
+
+
+
+    
+
+//-----------------------------------------------------------------------------------------------------------------------------------------------------
+//-----------------------------------------------------------------------------------------------------------------------------------------------------
+//----------------------------------------------------------------------------------------------------------------------------------------------------- 
+    const header2 = document.createElement("tr");
+      header2.innerHTML = `<th colspan="6" style="text-align: center; background-color: #cccccc;">GASTOS DE MANO DE OBRA</th>`;
+      tabla.appendChild(header2);
+
+    const mano_de_obra2=[
+     ["Sembrar",-1,"hora", -1],
+      ["Aplicar cal",-1,"hora",-1],
+     ["Aplicar abono<sup>11</sup>",-1,"hora",-1],
+      ["Aplicar herbicida <sup>12</sup>",-1,"hora",-1],
+      ["Manejo del sistema de riego <sup>13</sup>",-1,"hora",-1],
+      ["Recogido de pacas<sup>14</sup>",-1,"paca",-1],
+      ["Subtotal",5.5,"",""],
+      ["Obligaciones patronales","","",""]
+    ];
+
+    const valores_segundo_año_t2=[
+      3.63,3.63,3.63,90.00,100.89,20.18
+    ];
+
+    mano_de_obra2.forEach((trabajo, index) => {
+  const fila = document.createElement("tr");
+
+  const cantidad = trabajo[1] === -1 
+    ? `<input type="number" min="0" step="1" id="cantidad-año1-t2-${index}" oninput="calcularCostoAñot2(${index})">` 
+    : trabajo[1];
+
+  const precio = trabajo[3] === -1 
+    ? `<input type="number" min="0" step="1" id="precio-año1-t2${index}"oninput="calcularCostoAñot2(${index})">` 
+    : `${trabajo[3]}`;
+
+  fila.innerHTML = `
+    <td>${trabajo[0]}</td>
+    <td>${cantidad}</td>
+    <td>${trabajo[2]}</td>
+    <td>${precio}</td>
+    <td id="costo-año1-t2-${index}">$0.00</td>
+    <td id="costo-año2-t2-${index}">${index > 1 && index-2 < valores_segundo_año_t2.length? "$"+valores_segundo_año_t2[index-2].toFixed(2) : "-"}</td>
+  `;
+
+  tabla.appendChild(fila);
+});
+
+function calcularCostoAñot2(index) {
+  const precioInput = document.getElementById(`precio-año1-t2${index}`);
+  const cantidadInput = document.getElementById(`cantidad-año1-t2-${index}`);
+
+  const precio = parseFloat(precioInput?.value) || 0;
+  const cantidad = parseFloat(cantidadInput?.value) || 0;
+
+  const costoCalculado = precio * cantidad;
+  document.getElementById(`costo-año1-t2-${index}`).textContent = "$" + costoCalculado.toFixed(2);
+  calcularSubtotalyObligaciones();
+}
+
+function calcularSubtotalyObligaciones() {
+  let subtotal = 0;
+  for (let i = 0; i <= 5; i++) {
+    const texto = document.getElementById(`costo-año1-t2-${i}`)?.textContent || "$0.00";
+    const valor = parseFloat(texto.replace("$", "")) || 0;
+    subtotal += valor;
+  }
+  const subtotalElem = document.getElementById("costo-año1-t2-6");
+  if (subtotalElem) {
+    subtotalElem.textContent = `$${subtotal.toFixed(2)}`;
+  }
+  const obligaciones = subtotal * 0.2;
+  const obligacionesElem = document.getElementById("costo-año1-t2-7");
+  if (obligacionesElem) {
+    obligacionesElem.textContent = `$${obligaciones.toFixed(2)}`;
+  }
+
+  const total=subtotal+obligaciones;
+  const totalElem=document.getElementById("total-costo-año1-t2");
+  if(totalElem){
+    totalElem.textContent=`$${total.toFixed(2)}`;
+  }
+  calcularTotalGastosPorCuerda();
+  calcularGastoTotal();
+}
+
+
+const filaTotalManodeObra = document.createElement("tr");
+    filaTotalManodeObra.innerHTML = `
+        <th colspan="4">TOTAL GASTO EN MANO DE OBRA</th>
+        <th id="total-costo-año1-t2">$0.00</th>
+        <th id=total-costo-año2-t2>$121.07</th>
+        
+      `;
+      tabla.appendChild(filaTotalManodeObra);
+
+
+const filaVacía_2 = document.createElement("tr");
+    filaVacía_2.innerHTML = `<td colspan="6" style="height: 20px; background-color: transparent;"></td>`;
+    tabla.appendChild(filaVacía_2);
+
+//-----------------------------------------------------------------------------------------------------------------------------------------------------
+//-----------------------------------------------------------------------------------------------------------------------------------------------------
+//----------------------------------------------------------------------------------------------------------------------------------------------------- 
+
+const header3 = document.createElement("tr");
+      header3.innerHTML = `<th colspan="6" style="text-align: center; background-color: #cccccc;">GASTO DE MATERIALES</th>`;
+      tabla.appendChild(header3);
+
+const materiales=[
+  ["Semillas<sup>16</sup>",-1,"lbs",-1],
+  ["Cal<sup>17</sup",-1,"ton",-1],
+  ["Superfosfato triple<sup>18</sup>",-1,"saco",-1],
+  ["Fertilizante 15-5-10<sup>19</sup>",-1,"qq",-1],
+  ["Hebicidas<sup>20</sup>","-","-","-"],
+  ["Combustible",-1,"galón",-1],
+  ["Hilo",-1,"rollo",-1]
+  ];
+
+  const valores_segundo_año_t3=[600.00,28.00,22.80,37.50];
+
+  materiales.forEach((trabajo, index) => {
+  const fila = document.createElement("tr");
+
+  if (index === 4) {
+    fila.innerHTML = `
+      <td>${trabajo[0]}</td>
+      <td>-</td>
+      <td>${trabajo[2]}</td>
+      <td>-</td>
+      <td id="costo-año1-t3-${index}">$28.00</td>
+      <td id="costo-año2-t3-${index}">$28.00</td>
+    `;
+  } else {
+
+  const cantidad = trabajo[1] === -1 
+    ? `<input type="number" min="0" step="1" id="cantidad-año1-t3-${index}" oninput="calcularCostoAño1t3(${index})">` 
+    : trabajo[1];
+
+  const precio = trabajo[3] === -1 
+    ? `<input type="number" min="0" step="1" id="precio-año1-t3${index}"oninput="calcularCostoAño1t3(${index})">` 
+    : `${trabajo[3]}`;
+
+  fila.innerHTML = `
+    <td>${trabajo[0]}</td>
+    <td>${cantidad}</td>
+    <td>${trabajo[2]}</td>
+    <td>${precio}</td>
+    <td id="costo-año1-t3-${index}">$0.00</td>
+    <td id="costo-año2-t3-${index}">${index > 2 && index-3 < valores_segundo_año_t3.length? "$"+valores_segundo_año_t3[index-3].toFixed(2) : "-"}</td>
+  `;
+  }
+  tabla.appendChild(fila);
+});
+
+
+function calcularCostoAño1t3(index) {
+  const precioInput = document.getElementById(`precio-año1-t3${index}`);
+  const cantidadInput = document.getElementById(`cantidad-año1-t3-${index}`);
+
+  const precio = parseFloat(precioInput?.value) || 0;
+  const cantidad = parseFloat(cantidadInput?.value) || 0;
+
+  const costoCalculado = precio * cantidad;
+  document.getElementById(`costo-año1-t3-${index}`).textContent = "$" + costoCalculado.toFixed(2);
+  CalcularTotalAño1t3();
+}
+
+  function CalcularTotalAño1t3(){
+    total=0;
+    for(i=0;i<materiales.length;i++){
+    const texto = document.getElementById(`costo-año1-t3-${i}`)?.textContent || "$0.00";
+    const valor = parseFloat(texto.replace("$", "")) || 0;
+    total += valor;
+    }
+  const totalElem=document.getElementById("total-costo-año1-t3");
+  if(totalElem){
+    totalElem.textContent=`$${total.toFixed(2)}`;
+  }
+  calcularTotalGastosPorCuerda();
+  calcularGastoTotal();
+  }
+
+  const filaTotalMateriales = document.createElement("tr");
+    filaTotalMateriales.innerHTML = `
+        <th colspan="4">TOTAL GASTO EN MATERIALES</th>
+        <th id="total-costo-año1-t3">$0.00</th>
+        <th id=total-costo-año2-t3>$688.30</th>
+        
+      `;
+      tabla.appendChild(filaTotalMateriales);
+
+  
+  const filaVacía_3 = document.createElement("tr");
+    filaVacía_3.innerHTML = `<td colspan="6" style="height: 20px; background-color: transparent;"></td>`;
+    tabla.appendChild(filaVacía_3);
+
+
+
+//-----------------------------------------------------------------------------------------------------------------------------------------------------
+//-----------------------------------------------------------------------------------------------------------------------------------------------------
+//----------------------------------------------------------------------------------------------------------------------------------------------------- 
+
+
+  const header4 = document.createElement("tr");
+      header4.innerHTML = `<th colspan="6" style="text-align: center; background-color: #cccccc;">OTROS GASTOS</th>`;
+      tabla.appendChild(header4);
+
+  const otrosGastos=[
+    ["Analasis de suelo<sup>21</sup>","","","","$20.00","-"],
+    ["Renta de terreno<sup>22</sup>","","","","$100.00","$100.00"],
+    ["Gastos Misceláneos","","","","$50.00","$50.00"]
+  ]
+
+  otrosGastos.forEach((trabajo, index) => {
+  const fila = document.createElement("tr");
+
+  fila.innerHTML = `
+    <td>${trabajo[0]}</td>
+    <td>${trabajo[1]}</td>
+    <td>${trabajo[2]}</td>
+    <td>${trabajo[3]}</td>
+    <td>${trabajo[4]}</td>
+    <td>${trabajo[5]}</td>
+  `;
+
+  tabla.appendChild(fila);
+});
+  
+  const filaTotalOtrosGastos = document.createElement("tr");
+    filaTotalOtrosGastos.innerHTML = `
+        <th colspan="4">TOTAL DE OTROS GASTOS</th>
+        <th id="total-otros-gastos-año1">$170.00</th>
+        <th id=total-otros-gastos-año2>$150.00</th>
+        `
+    tabla.appendChild(filaTotalOtrosGastos);
+ 
+
+    const filaVacía_4 = document.createElement("tr");
+    filaVacía_4.innerHTML = `<td colspan="6" style="height: 20px; background-color: transparent;"></td>`;
+    tabla.appendChild(filaVacía_4);
+
+
+  const filaTotalGastosPorCuerda = document.createElement("tr");
+    filaTotalGastosPorCuerda.innerHTML = `
+        <th colspan="4">TOTAL DE GASTOS POR CUERDA</th>
+        <th id="total-gastos-por-cuerda-1">$0.00</th>
+        <th id=total-gastos-por-cuerda-2>$0.00</th>
+        `
+    tabla.appendChild(filaTotalGastosPorCuerda);
+
+    function calcularTotalGastosPorCuerda() {
+      total1=0;
+      total2=0;
+
+    const totalMaquinaria1 = parseFloat(document.getElementById("total-costo-año1-t1")?.textContent.replace("$", "")) || 0;
+    const totalManoDeObra1 = parseFloat(document.getElementById("total-costo-año1-t2")?.textContent.replace("$", "")) || 0;
+    const totalMateriales1 = parseFloat(document.getElementById("total-costo-año1-t3")?.textContent.replace("$", "")) || 0;
+    const totalOtros1 = parseFloat(document.getElementById("total-otros-gastos-año1")?.textContent.replace("$", "")) || 0;
+
+    total1 = totalMaquinaria1 + totalManoDeObra1 + totalMateriales1 + totalOtros1;
+
+    const totalMaquinaria2 = parseFloat(document.getElementById("total-costo-año2-t1")?.textContent.replace("$", "")) || 0;
+    const totalManoDeObra2 = parseFloat(document.getElementById("total-costo-año2-t2")?.textContent.replace("$", "")) || 0;
+    const totalMateriales2 = parseFloat(document.getElementById("total-costo-año2-t3")?.textContent.replace("$", "")) || 0;
+    const totalOtros2 = parseFloat(document.getElementById("total-otros-gastos-año2")?.textContent.replace("$", "")) || 0;
+
+    total2 = totalMaquinaria2 + totalManoDeObra2 + totalMateriales2 + totalOtros2;
+
+    const cell1 = document.getElementById("total-gastos-por-cuerda-1");
+    const cell2 = document.getElementById("total-gastos-por-cuerda-2");
+
+    if (cell1) cell1.textContent = `$${total1.toFixed(2)}`;
+    if (cell2) cell2.textContent = `$${total2.toFixed(2)}`;
+    calcularIngresoNetoPorCuerda();
+    calcularIngresoNeto();
+    calcularProduccionMinima();
+  }
+
+    const filaVacía_5 = document.createElement("tr");
+    filaVacía_5.innerHTML = `<td colspan="6" style="height: 20px; background-color: transparent;"></td>`;
+    tabla.appendChild(filaVacía_5); 
+
+
+//-----------------------------------------------------------------------------------------------------------------------------------------------------
+//-----------------------------------------------------------------------------------------------------------------------------------------------------
+//----------------------------------------------------------------------------------------------------------------------------------------------------- 
+
+  const header5 = document.createElement("tr");
+      header5.innerHTML = `<th colspan="6" style="text-align: center; background-color: #cccccc;">INGRESOS</th>`;
+      tabla.appendChild(header5);
+
+  const ingresos=[
+    ["Venta de heno<sup>23</sup>",400,"pacas"],
+    ["Subsidio salarial","",""]
+  ]
+
+  ingresos.forEach((trabajo, index) => {
+  const fila = document.createElement("tr");
+
+  fila.innerHTML = `
+    <td>${trabajo[0]}</td>
+    <td id="cantidad-ingresos-${index}">${trabajo[1]}</td>
+    <td>${trabajo[2]}</td>
+    <td><input type="number" min="0" step="1" id="precio-ingresos-${index}" oninput="calcularIngresoAño1(${index})"></td>
+    <td id=ingreso-año1-${index}>$0.00</td>
+    <td id=ingreso-año2-${index}>${index == 0? "$1750.00" : "-"}</td>
+`
+  tabla.appendChild(fila);
+  })
+
+  function calcularIngresoAño1(index){
+  let costoCalculado=0;
+  const precioInput = document.getElementById(`precio-ingresos-${index}`);
+  const cantidadInput = document.getElementById(`cantidad-ingresos-${index}`);
+
+  const precio = parseFloat(precioInput?.value) || 0;
+  const cantidad = parseFloat(cantidadInput?.textContent) || 0;
+  if(cantidad!=0){
+   costoCalculado = precio * cantidad;
+  }
+  else{
+    costoCalculado=precio;
+   document.getElementById(`ingreso-año2-${index}`).textContent = "$" + costoCalculado.toFixed(2);
+  }
+  document.getElementById(`ingreso-año1-${index}`).textContent = "$" + costoCalculado.toFixed(2);
+  calcularTotalIngresos();
+  }
+
+
+  const filaTotalIngresosPorCuerda = document.createElement("tr");
+    filaTotalIngresosPorCuerda.innerHTML = `
+        <th colspan="4">TOTAL DE INGRESOS POR CUERDA</th>
+        <th id="total-ingresos-por-cuerda-1">$0.00</th>
+        <th id=total-ingresos-por-cuerda-2>$0.00</th>
+        `
+    tabla.appendChild(filaTotalIngresosPorCuerda);
+
+  function calcularTotalIngresos() {
+  let total1 = 0;
+  let total2 = 0;
+
+  for (let i = 0; i < ingresos.length; i++) {
+    const val1 = document.getElementById(`ingreso-año1-${i}`)?.textContent || "$0.00";
+    const val2 = document.getElementById(`ingreso-año2-${i}`)?.textContent || "$0.00";
+
+    total1 += parseFloat(val1.replace("$", "")) || 0;
+    total2 += parseFloat(val2.replace("$", "")) || 0;
+  }
+
+  const elem1 = document.getElementById("total-ingresos-por-cuerda-1");
+  const elem2 = document.getElementById("total-ingresos-por-cuerda-2");
+
+  if (elem1) elem1.textContent = `$${total1.toFixed(2)}`;
+  if (elem2) elem2.textContent = `$${total2.toFixed(2)}`;
+  calcularIngresoNetoPorCuerda();
+  calcularIngresoBruto();
+  calcularIngresoNeto();
+}
+
+  const filaVacía_6 = document.createElement("tr");
+    filaVacía_6.innerHTML = `<td colspan="6" style="height: 20px; background-color: transparent;"></td>`;
+    tabla.appendChild(filaVacía_6);
+    
+    
+//-----------------------------------------------------------------------------------------------------------------------------------------------------
+//-----------------------------------------------------------------------------------------------------------------------------------------------------
+//----------------------------------------------------------------------------------------------------------------------------------------------------- 
+
+const header6 = document.createElement("tr");
+      header6.innerHTML = `<th colspan="4" style="text-align: center; background-color: #cccccc;"></th>
+      <th style="text-align: center; background-color: #cccccc;">Primer año </th>
+      <th style="text-align: center; background-color: #cccccc;">Segundo año </th>`
+
+      tabla.appendChild(header6);
+
+  const ingresosAños=document.createElement("tr");
+    ingresosAños.innerHTML=`<td colspan="4" style="text-align: center"; >INGRESO NETO</td>
+    <td id=ingreso-neto-año1> $0.00 </td>
+    <td id=ingreso-neto-año2> $0.00 </td>
+  `
+  tabla.appendChild(ingresosAños);
+
+  function calcularIngresoNetoPorCuerda() {
+  const totalIngresos1 = parseFloat(document.getElementById("total-ingresos-por-cuerda-1")?.textContent.replace("$", "")) || 0;
+  const totalIngresos2 = parseFloat(document.getElementById("total-ingresos-por-cuerda-2")?.textContent.replace("$", "")) || 0;
+
+  const totalGastos1 = parseFloat(document.getElementById("total-gastos-por-cuerda-1")?.textContent.replace("$", "")) || 0;
+  const totalGastos2 = parseFloat(document.getElementById("total-gastos-por-cuerda-2")?.textContent.replace("$", "")) || 0;
+
+  const ingresoNeto1 = totalIngresos1 - totalGastos1;
+  const ingresoNeto2 = totalIngresos2 - totalGastos2;
+
+  const neto1Elem = document.getElementById("ingreso-neto-año1");
+  const neto2Elem = document.getElementById("ingreso-neto-año2");
+
+  if (neto1Elem) neto1Elem.textContent = `$${ingresoNeto1.toFixed(2)}`;
+  if (neto2Elem) neto2Elem.textContent = `$${ingresoNeto2.toFixed(2)}`;
+
+}
+  const filaVacía_7 = document.createElement("tr");
+    filaVacía_7.innerHTML = `<td colspan="6" style="height: 20px; background-color: transparent;"></td>`;
+    tabla.appendChild(filaVacía_7);
+
+
+//-----------------------------------------------------------------------------------------------------------------------------------------------------
+//-----------------------------------------------------------------------------------------------------------------------------------------------------
+//----------------------------------------------------------------------------------------------------------------------------------------------------- 
+
+  const header7 = document.createElement("tr");
+      header7.innerHTML = `<th colspan="2" style="text-align: center; background-color: #cccccc;">Partida</th>
+      <th style="text-align: center; background-color: #cccccc;">Primer año Valor </th>
+      <th style="text-align: center; background-color: #cccccc;">Primer año Mi finca </th>
+      <th style="text-align: center; background-color: #cccccc;">Segundo año Valor </th>
+      <th style="text-align: center; background-color: #cccccc;">Segundo año Mi finca </th>`
+
+      tabla.appendChild(header7);
+
+  infoUltima=[
+    "Número de Cuerdas",
+    "Ingreso Bruto",
+    "Gasto Total",
+    "Ingreso Neto",
+    "Producción Mínima (pacas 35 lb)"
+  ]
+
+  infoUltima.forEach((trabajo, index) => {
+  const fila = document.createElement("tr");
+  
+
+
+  if (index===0){
+      fila.innerHTML= 
+      `<td colspan="2">${trabajo}</td>
+      <td><input type="number" min="0" step="1" id="numero-cuerdas"  oninput="calcularValoresRestantes(this); calcularIngresoBruto(); calcularGastoTotal(); calcularIngresoNeto(); calcularProduccionMinima();"></td>
+      <td id="primer-año-mi-finca">-</td>
+      <td id="segundo-año-valor">-</td>
+      <td id="segundo-año-mi-finca">-</td>
+      `
+  }
+  else if(index===1){
+      fila.innerHTML=`
+    <td colspan="2">Ingreso Bruto</td>
+    <td id="ingreso-bruto-1">$0.00</td>
+    <td id="ingreso-bruto-mi-finca-1">$0.00</td>
+    <td id="ingreso-bruto-2">$0.00</td>
+    <td id="ingreso-bruto-mi-finca-2">$0.00</td>
+  `
+  }
+
+  else if(index===2){
+      fila.innerHTML = `
+      <td colspan="2">Gasto Total</td>
+      <td id="gasto-total-1">$0.00</td>
+      <td id="gasto-total-mi-finca-1">$0.00</td>
+      <td id="gasto-total-2">$0.00</td>
+      <td id="gasto-total-mi-finca-2">$0.00</td>
+    `;
+  }
+  else if(index === 3){
+    fila.innerHTML = `
+      <td colspan="2">Ingreso Neto</td>
+      <td id="ingreso-neto-1">$0.00</td>
+      <td id="ingreso-neto-mi-finca-1">$0.00</td>
+      <td id="ingreso-neto-2">$0.00</td>
+      <td id="ingreso-neto-mi-finca-2">$0.00</td>
+    `;
+}
+  else if(index === 4){
+  fila.innerHTML = `
+    <td colspan="2">Producción Mínima (pacas 35 lb)</td>
+    <td id="produccion-minima-1">-</td>
+    <td id="produccion-minima-mi-finca-1">-</td>
+    <td id="produccion-minima-2">-</td>
+    <td id="produccion-minima-mi-finca-2">-</td>
+  `;
+}
+
+    tabla.appendChild(fila)
+  })
+
+
+  function calcularValoresRestantes(input) {
+    let val = parseInt(input.value);
+    if (val < 0) {
+      input.value = 0;
+      val = 0;
+    }
+
+    const display1 = document.getElementById("primer-año-mi-finca");
+    const display2 = document.getElementById("segundo-año-mi-finca");
+    const display3=document.getElementById("segundo-año-valor")
+
+
+  if (!val || val < 1) {
+    display1.textContent = "-";
+    display2.textContent = "-";
+  } else {
+    const resultado = (val - 1);
+    display1.textContent = resultado;
+    display2.textContent = resultado;
+    display3.textContent=val;
+  }
+
+}
+
+
+
+function calcularIngresoBruto() {
+    const ingresoPorCuerda1 = parseFloat(document.getElementById("total-ingresos-por-cuerda-1")?.textContent.replace("$", "")) || 0;
+    const ingresoPorCuerda2 = parseFloat(document.getElementById("total-ingresos-por-cuerda-2")?.textContent.replace("$", "")) || 0;
+
+    const cuerdas = parseInt(document.getElementById("numero-cuerdas")?.value) || 0;
+    const cuerdasRestantes = parseInt(document.getElementById("primer-año-mi-finca")?.textContent) || 0;
+
+    const ingresoTotal1 = ingresoPorCuerda1 * cuerdas;
+    const ingresoMiFinca1 = ingresoPorCuerda1 * cuerdasRestantes;
+    const ingresoTotal2 = ingresoPorCuerda2 * cuerdas;
+    const ingresoMiFinca2 = ingresoPorCuerda2 * cuerdasRestantes;
+
+    document.getElementById("ingreso-bruto-1").textContent = `$${ingresoTotal1.toFixed(2)}`;
+    document.getElementById("ingreso-bruto-mi-finca-1").textContent = `$${ingresoMiFinca1.toFixed(2)}`;
+    document.getElementById("ingreso-bruto-2").textContent = `$${ingresoTotal2.toFixed(2)}`;
+    document.getElementById("ingreso-bruto-mi-finca-2").textContent = `$${ingresoMiFinca2.toFixed(2)}`;
+
+    document.getElementById("segundo-año-valor").textContent = cuerdas;
+}
+
+
+
+
+
+function calcularGastoTotal() {
+    const gastoPorCuerda1 = parseFloat(document.getElementById("total-gastos-por-cuerda-1")?.textContent.replace("$", "")) || 0;
+    const gastoPorCuerda2 = parseFloat(document.getElementById("total-gastos-por-cuerda-2")?.textContent.replace("$", "")) || 0;
+    const cuerdas = parseInt(document.getElementById("numero-cuerdas")?.value) || 0;
+    const cuerdasRestantes = parseInt(document.getElementById("primer-año-mi-finca")?.textContent);
+    const valorSegundoAñoTexto = document.getElementById("segundo-año-valor")?.textContent;
+
+    const valorSegundoAño = isNaN(parseInt(valorSegundoAñoTexto)) ? 0 : parseInt(valorSegundoAñoTexto);
+
+    const gastoTotal1 = gastoPorCuerda1 * cuerdas;
+    const gastoMiFinca1 = gastoPorCuerda1 * (isNaN(cuerdasRestantes) ? 0 : cuerdasRestantes);
+
+    const gastoTotal2 = gastoPorCuerda2 * valorSegundoAño;
+    const gastoMiFinca2 = gastoPorCuerda2 * (valorSegundoAño - 1);
+
+     document.getElementById("gasto-total-1").textContent = `$${gastoTotal1.toFixed(2)}`;
+    document.getElementById("gasto-total-mi-finca-1").textContent = `$${gastoMiFinca1.toFixed(2)}`;
+    document.getElementById("gasto-total-2").textContent = `$${gastoTotal2.toFixed(2)}`;
+    document.getElementById("gasto-total-mi-finca-2").textContent = `$${gastoMiFinca2.toFixed(2)}`;
+    calcularProduccionMinima();
+}
+
+
+
+
+function calcularIngresoNeto() {
+    const ingresoPorCuerda1 = parseFloat(document.getElementById("total-ingresos-por-cuerda-1")?.textContent.replace("$", "")) || 0;
+    const ingresoPorCuerda2 = parseFloat(document.getElementById("total-ingresos-por-cuerda-2")?.textContent.replace("$", "")) || 0;
+
+    const gastoPorCuerda1 = parseFloat(document.getElementById("total-gastos-por-cuerda-1")?.textContent.replace("$", "")) || 0;
+    const gastoPorCuerda2 = parseFloat(document.getElementById("total-gastos-por-cuerda-2")?.textContent.replace("$", "")) || 0;
+
+    const cuerdas = parseInt(document.getElementById("numero-cuerdas")?.value) || 0;
+    const cuerdasRestantes = parseInt(document.getElementById("primer-año-mi-finca")?.textContent) || 0;
+
+    const ingresoNeto1 = (ingresoPorCuerda1 - gastoPorCuerda1) * cuerdas;
+    const ingresoNetoMiFinca1 = (ingresoPorCuerda1 - gastoPorCuerda1) * cuerdasRestantes;
+    const ingresoNeto2 = (ingresoPorCuerda2 - gastoPorCuerda2) * cuerdas;
+    const ingresoNetoMiFinca2 = (ingresoPorCuerda2 - gastoPorCuerda2) * cuerdasRestantes;
+
+    document.getElementById("ingreso-neto-1").textContent = `$${ingresoNeto1.toFixed(2)}`;
+    document.getElementById("ingreso-neto-mi-finca-1").textContent = `$${ingresoNetoMiFinca1.toFixed(2)}`;
+    document.getElementById("ingreso-neto-2").textContent = `$${ingresoNeto2.toFixed(2)}`;
+    document.getElementById("ingreso-neto-mi-finca-2").textContent = `$${ingresoNetoMiFinca2.toFixed(2)}`;
+}
+
+function calcularProduccionMinima() {
+    const gastoPorCuerda1 = parseFloat(document.getElementById("total-gastos-por-cuerda-1")?.textContent.replace("$", "")) || 0;
+    const gastoPorCuerda2 = parseFloat(document.getElementById("total-gastos-por-cuerda-2")?.textContent.replace("$", "")) || 0;
+
+    const cuerdas = parseInt(document.getElementById("numero-cuerdas")?.value) || 0;
+    const valorSegundoAño = parseInt(document.getElementById("segundo-año-valor")?.textContent) || 0;
+
+    const precioVentaHeno = parseFloat(document.getElementById("precio-ingresos-0")?.value) || 0;
+
+    let produccion1 = 0;
+    let produccion2 = 0;
+
+    if (precioVentaHeno > 0) {
+      produccion1 = (gastoPorCuerda1 / precioVentaHeno) * cuerdas;
+      produccion2 = (gastoPorCuerda2 / precioVentaHeno) * valorSegundoAño;
+    }
+
+    const produccionMiFinca1 = produccion1 - 603.33;
+    const produccionMiFinca2 = produccion2 - 391.25;
+
+    document.getElementById("produccion-minima-1").textContent = produccion1.toFixed(2);
+     document.getElementById("produccion-minima-mi-finca-1").textContent = produccionMiFinca1.toFixed(2);
+    document.getElementById("produccion-minima-2").textContent = produccion2.toFixed(2);
+    document.getElementById("produccion-minima-mi-finca-2").textContent = produccionMiFinca2.toFixed(2);
+}
+  </script>
+</body>
+</html>
