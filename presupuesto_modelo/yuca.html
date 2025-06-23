@@ -18,31 +18,52 @@
   </style>
 </head>
 <body>
-  <h1>Nómina Semanal - Registro de Horas<sup style="font-size: 0.1em;">K11</sup></h1>
+  <div id="botones-acciones" style="text-align: center; margin-top: 40px;">
+    <button id="btn-excel">📥 Descargar Excel</button>
+    <button id="btn-pdf">📄 Guardar PDF</button>
+    <button id="btn-email">✉️ Enviar por Email</button>
+    <button onclick="window.print()">🖨 Imprimir</button>
+  </div>
+  
+
+
+  <!-- Excel export -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>
+  <!-- PDF export -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.3/html2pdf.bundle.min.js"></script>
+
+  <script>
+      // Descargar Excel
+      document.getElementById("btn-excel").addEventListener("click", function () {
+        const table = document.querySelector("table"); 
+        const wb = XLSX.utils.table_to_book(table, { sheet: "Presupuesto" });
+        XLSX.writeFile(wb, "presupuesto.xlsx");
+      });
+    
+      // Guardar PDF
+      document.getElementById("btn-pdf").addEventListener("click", function () {
+        const content = document.body; 
+        html2pdf().from(content).set({
+          margin: 0.5,
+          filename: "presupuesto.pdf",
+          html2canvas: { scale: 2 },
+          jsPDF: { unit: "in", format: "letter", orientation: "portrait" }
+        }).save();
+      });
+    
+      // Enviar por Email
+      document.getElementById("btn-email").addEventListener("click", function () {
+        const asunto = "Presupuesto Modelo";
+        const cuerpo = "Saludos,\n\nAdjunto encontrará el presupuesto modelo generado.\n\nGracias.";
+        window.location.href = `mailto:?subject=${encodeURIComponent(asunto)}&body=${encodeURIComponent(cuerpo)}`;
+      });
+    </script>
+
+  <h1>Yuca<sup style="font-size: 0.1em;">K11</sup></h1>
+
 
   <table>
     <thead>
-      <tr>
-        <th colspan="6">PRODUCCION POR CUERDA</th>
-      </tr>
-    </thead>
-    <tbody id="tabla-rendimiento">
-      <!--logica en js-->
-    </tbody>
-  </table>
-
-  <table>
-    <thead>
-      <tr>
-        <th>Trabajos</th>
-        <th>Unidad</th>
-        <th>Cantidad</th>
-        <th>Costo/Unidad</th>
-        <th>Valor $$</th>
-        <th>Mi Finca</th>
-      </tr>
-
-
     </thead>
     <tbody id="tabla">
       <!-- Filas generadas por JS -->
@@ -108,17 +129,24 @@
 <!----------------------------------------------------------------------------------------------------------------------------------------->
 <!----------------------------------------------------------------------------------------------------------------------------------------->
   <script>
+    const tabla = document.getElementById("tabla");
+
 
     //logica para rendimiento por cuerdas-----------------------
-
-    const tabla_rendimiento = document.getElementById("tabla-rendimiento")
+    const produccion_cuerda = document.createElement("tr");
+    produccion_cuerda.innerHTML = `
+      <th colspan="6" style="text-align: center; background-color: #cccccc;">
+        PRODUCCION POR CUERDA
+      </th>;
+    `;
+    tabla.appendChild(produccion_cuerda);
 
     const cuerda_fila = document.createElement("tr");
     cuerda_fila.innerHTML = `
       <td colspan="5">Número de Cuerdas</th>
       <td colspan="1"><input type="number" min="0" step="1" id="cuerdas" oninput="calcular_valores_E()"></td>
     `;
-      tabla_rendimiento.appendChild(cuerda_fila)
+      tabla.appendChild(cuerda_fila)
 
     let NUM_CUERDAS = 0;
     document.querySelectorAll('[id^="cuerdas"]').forEach((input) => {
@@ -140,21 +168,21 @@
         <td colspan="5">Número de plantas por cuerda para una distancia de siembra de 3'x4'</td>
         <td colspan="1"><input type="number" min="0" step="1" id="produccion-input-plantas" oninput="calcular_rendimiento()"></td>
       `;
-      tabla_rendimiento.appendChild(plantas_por_cuerdas);
+      tabla.appendChild(plantas_por_cuerdas);
 
     const rendimiento_por_planta = document.createElement("tr");
       rendimiento_por_planta.innerHTML = `
         <td colspan="5">Rendimiento por planta (libra)</td>
         <td colspan="1"><input type="number" min="0" step="1" id="produccion-input-rendimiento" oninput="calcular_rendimiento()"></td>
       `;
-      tabla_rendimiento.appendChild(rendimiento_por_planta);
+      tabla.appendChild(rendimiento_por_planta);
 
     const rendimiento_por_cuerda = document.createElement("tr");
       rendimiento_por_cuerda.innerHTML = `
         <td colspan="5">Rendimiento por cuerda (quintal)</td>
         <td colspan="1" id="rendimiento-cuerda">0.00</td>
       `;
-      tabla_rendimiento.appendChild(rendimiento_por_cuerda);
+      tabla.appendChild(rendimiento_por_cuerda);
 
 
     document.querySelectorAll('[id^="produccion-input-"]').forEach((input) => {
@@ -173,17 +201,26 @@
     //------------------------------------------------------------
 
     
-    const tabla = document.getElementById("tabla");
-
     const actividades = {
       "Preparación de Terreno": 7.25,
       "Poda": 8.50,
       "Cosecha": 6.75
     };
 
+    const columnas_titulos = document.createElement("tr");
+    columnas_titulos.innerHTML = `
+      <th>Partida</th>
+      <th>Unidad</th>
+      <th>Cantidad</th>
+      <th>Precio/Unidad</th>
+      <th>Valor</th>
+      <th>Mi Finca</th>
+    `;
+    tabla.appendChild(columnas_titulos);
+
     const header1 = document.createElement("tr");
-      header1.innerHTML = `<th colspan="6" style="text-align: center; background-color: #cccccc;">GASTOS DE ALQUILER DE MAQUINARIA Y MANO DE OBRA</th>`;
-      tabla.appendChild(header1);
+    header1.innerHTML = `<th colspan="6" style="text-align: center; background-color: #cccccc;">GASTOS DE ALQUILER DE MAQUINARIA Y MANO DE OBRA</th>`;
+    tabla.appendChild(header1);
 
     const gastos_de_alquiler = [
     "Arado y rastrillado", 
