@@ -247,9 +247,9 @@
 
 
     obra_maquinaria_total.forEach((trabajo, index) => {
-      const filaTotal_D = document.createElement("tr");
+      const filaTotal = document.createElement("tr");
 
-      filaTotal_D.innerHTML = `
+      filaTotal.innerHTML = `
           <th colspan="2">${trabajo}</th>
           <td style="background-color: #f0f0f0;" id="total_horas_A-${index}"></td>
           <td style="background-color: #f0f0f0;"></td>
@@ -257,7 +257,7 @@
           <td style="background-color: #f0f0f0; font-weight: bold;" id="total_finca_A-${index}">$0.00</td>
         `;
 
-      tabla.appendChild(filaTotal_D);
+      tabla.appendChild(filaTotal);
     });
 
     function calcular_A(index) {
@@ -534,15 +534,15 @@
 
 
     otros_gastos_total.forEach((trabajo, index) => {
-      const filaTotal_C = document.createElement("tr");
+      const filaTotal = document.createElement("tr");
 
-      filaTotal_C.innerHTML = `
+      filaTotal.innerHTML = `
           <th colspan="4">${trabajo}</th>
           <td style="background-color: #f0f0f0; font-weight: bold;" id="total_valor_C-${index}">$0.00</td>
           <td style="background-color: #f0f0f0; font-weight: bold;" id="total_finca_C-${index}">$0.00</td>
         `;
 
-      tabla.appendChild(filaTotal_C);
+      tabla.appendChild(filaTotal);
     });
 
     function calcular_C() {
