@@ -222,7 +222,7 @@
       fila.innerHTML = `
         <td id="maquinaria_alquiler-${index}">${trabajo}</td>
         <td><input type="number" min="0" step="1" id="cantidad_maquinaria-${index}" oninput="calcularTotalesSecciones()"></td>
-        <td id="unidad_maquinaria-${index}">horas</td>
+        <td id="unidad_maquinaria-${index}">hora</td>
         <td><input type="number" min="0" step="1" id="precio_maquinaria-${index}" oninput="calcularTotalesSecciones()"></td>
         <td id="costo_maquinaria_1-${index}">$0.00</td>
         <td id="costo_maquinaria_2-${index}">-</td>
@@ -333,7 +333,7 @@
         fila.innerHTML = `
           <td id="mano_de_obra-${index}">${trabajo}</td>
           <td><input type="number" min="0" step="1" id="cantidad_obra-${index}" oninput="calcularTotalesSecciones()"></td>
-          <td id="unidad_obra-${index}">horas</td>
+          <td id="unidad_obra-${index}">hora</td>
           <td><input type="number" min="0" step="1" id="precio_obra-${index}" oninput="calcularTotalesSecciones()"></td>
           <td id="costo_obra_1-${index}">$0.00</td>
           <td id="costo_obra_2-${index}">-</td>
@@ -343,7 +343,7 @@
         fila.innerHTML = `
           <td id="mano_de_obra-${index}">${trabajo}</td>
           <td><input type="number" min="0" step="1" id="cantidad_obra-${index}" oninput="calcularTotalesSecciones()"></td>
-          <td id="unidad_obra-${index}">horas</td>
+          <td id="unidad_obra-${index}">hora</td>
           <td><input type="number" min="0" step="1" id="precio_obra-${index}" oninput="calcularTotalesSecciones()"></td>
           <td id="costo_obra_1-${index}">$0.00</td>
           <td id="costo_obra_2-${index}">$0.00</td>
@@ -402,7 +402,14 @@
         totalCostos_1 += costo_año_1;
         totalHoras += getElement(`cantidad_obra-${i}`);
 
-        if (i > 2) {
+        if (i == 4 || i == 5 || i == 6) {
+          setElement(`costo_obra_2-${i}`, `$${costo_año_1.toFixed(2)}`);
+          setElement(`costo_obra_3-${i}`, `$${costo_año_1.toFixed(2)}`);
+
+          totalCostos_2 += costo_año_1;
+          totalCostos_3 += costo_año_1;
+        }
+        else if (i > 2) {
           const costo_año_2 = costo_año_1 * 2;
           const costo_año_3 = costo_año_1 * 3;
 
@@ -488,7 +495,7 @@
         fila.innerHTML = `
         <td id="materiales-${index}">${trabajo}</td>
         <td><input type="number" min="0" step="1" id="cantidad_materiales-${index}" oninput="calcularTotalesSecciones()"></td>
-        <td id="unidad_materiales-${index}">horas</td>
+        <td id="unidad_materiales-${index}">hora</td>
         <td><input type="number" min="0" step="1" id="precio_materiales-${index}" oninput="calcularTotalesSecciones()"></td>
         <td id="costo_materiales_1-${index}">$0.00</td>
         <td id="costo_materiales_2-${index}">-</td>
@@ -508,7 +515,7 @@
         fila.innerHTML = `
         <td id="materiales-${index}">${trabajo}</td>
         <td><input type="number" min="0" step="1" id="cantidad_materiales-${index}" oninput="calcularTotalesSecciones()"></td>
-        <td id="unidad_materiales-${index}">horas</td>
+        <td id="unidad_materiales-${index}">hora</td>
         <td><input type="number" min="0" step="1" id="precio_materiales-${index}" oninput="calcularTotalesSecciones()"></td>
         <td id="costo_materiales_1-${index}">-</td>
         <td id="costo_materiales_2-${index}">-</td>
@@ -518,7 +525,7 @@
         fila.innerHTML = `
         <td id="materiales-${index}">${trabajo}</td>
         <td><input type="number" min="0" step="1" id="cantidad_materiales-${index}" oninput="calcularTotalesSecciones()"></td>
-        <td id="unidad_materiales-${index}">horas</td>
+        <td id="unidad_materiales-${index}">hora</td>
         <td><input type="number" min="0" step="1" id="precio_materiales-${index}" oninput="calcularTotalesSecciones()"></td>
         <td id="costo_materiales_1-${index}">$0.00</td>
         <td id="costo_materiales_2-${index}">$0.00</td>
@@ -570,6 +577,11 @@
 
       for (let i = 0; i < materiales.length; i++) {
         let costo_año_1 = 0;
+        if (i == 7) {
+          const costo_año_3 = getElement(`cantidad_materiales-${i}`) * getElement(`precio_materiales-${i}`);
+          setElement(`costo_materiales_3-${i}`, `$${costo_año_3.toFixed(2)}`);
+          continue;
+        }
 
         if (i == 4 || i == 5) {
           costo_año_1 = getElement(`costo_materiales_1-${i}`);
@@ -579,7 +591,7 @@
         }
         totalCostos_1 += costo_año_1;
 
-        if (i > 2 && i != 7) {
+        if (i > 2) {
           const costo_año_2 = costo_año_1 * 2;
           const costo_año_3 = costo_año_1 * 3;
 
@@ -636,16 +648,27 @@
 
     otros_gastos.forEach((trabajo, index) => {
       const fila = document.createElement("tr");
-      fila.innerHTML = `
-          <td id="otros_gastos-${index}">${trabajo}</td>
-          <td>-</td>
-          <td>-</td>
-          <td><input type="number" min="0" step="1" id="precio_otros_gastos-${index}" oninput="calcularTotalesSecciones()"></td>
-          <td id="costo_otros_gastos_1-${index}">$0.00</td>
-          <td id="costo_otros_gastos_2-${index}">$0.00</td>
-          <td id="costo_otros_gastos_3-${index}">$0.00</td>
-        `;
-
+      if (index == 0) {
+        fila.innerHTML = `
+            <td id="otros_gastos-${index}">${trabajo}</td>
+            <td>-</td>
+            <td>-</td>
+            <td><input type="number" min="0" step="1" id="precio_otros_gastos-${index}" oninput="calcularTotalesSecciones()"></td>
+            <td id="costo_otros_gastos_1-${index}">$0.00</td>
+            <td id="costo_otros_gastos_2-${index}">-</td>
+            <td id="costo_otros_gastos_3-${index}">-</td>
+          `;
+      } else {
+        fila.innerHTML = `
+            <td id="otros_gastos-${index}">${trabajo}</td>
+            <td>-</td>
+            <td>-</td>
+            <td><input type="number" min="0" step="1" id="precio_otros_gastos-${index}" oninput="calcularTotalesSecciones()"></td>
+            <td id="costo_otros_gastos_1-${index}">$0.00</td>
+            <td id="costo_otros_gastos_2-${index}">$0.00</td>
+            <td id="costo_otros_gastos_3-${index}">$0.00</td>
+          `;
+      }
       tabla.appendChild(fila);
     });
 
@@ -679,25 +702,22 @@
 
     function calcularCosto_Otros() {
       let totalCostos_1 = 0;
-      let totalCostos_2 = 0;
-      let totalCostos_3 = 0;
 
       for (let i = 0; i < otros_gastos.length; i++) {
         const costo_año_1 = getElement(`precio_otros_gastos-${i}`);
-        const costo_año_2 = costo_año_1 * 2;
-        const costo_año_3 = costo_año_1 * 3;
 
         setElement(`costo_otros_gastos_1-${i}`, `$${costo_año_1.toFixed(2)}`);
-        setElement(`costo_otros_gastos_2-${i}`, `$${costo_año_2.toFixed(2)}`);
-        setElement(`costo_otros_gastos_3-${i}`, `$${costo_año_3.toFixed(2)}`);
+
+        if (i > 0) {
+          setElement(`costo_otros_gastos_2-${i}`, `$${costo_año_1.toFixed(2)}`);
+          setElement(`costo_otros_gastos_3-${i}`, `$${costo_año_1.toFixed(2)}`);
+        }
 
         totalCostos_1 += costo_año_1;
-        totalCostos_2 += costo_año_2;
-        totalCostos_3 += costo_año_3;
       }
       setElement(`total_otros_gastos_1-0`, `$${totalCostos_1.toFixed(2)}`);
-      setElement(`total_otros_gastos_2-0`, `$${totalCostos_2.toFixed(2)}`);
-      setElement(`total_otros_gastos_3-0`, `$${totalCostos_3.toFixed(2)}`);
+      setElement(`total_otros_gastos_2-0`, `$${totalCostos_1.toFixed(2)}`);
+      setElement(`total_otros_gastos_3-0`, `$${totalCostos_1.toFixed(2)}`);
     }
 
     function calcularGasto_Total() {
@@ -932,7 +952,7 @@
     //-----------------------------------------------------------------------------------------------------------------------------------------------------
 
     const header7 = document.createElement("tr");
-    header7.innerHTML = `<th colspan="7" style="text-align: center; background-color: #cccccc;">VALOR POR CUERDA</th>`;
+    header7.innerHTML = `<th colspan="7" style="text-align: center; background-color: #cccccc;">VALOR PARA CUERDAS</th>`;
     tabla.appendChild(header7);
 
     const header7_unidades = document.createElement("tr");
