@@ -1,0 +1,1083 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nómina Semanal - Agricultores</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 20px;
+    }
+
+    th,
+    td {
+      border: 1px solid #ccc;
+      padding: 8px;
+      text-align: center;
+    }
+
+    th {
+      background-color: #f2f2f2;
+    }
+
+    input,
+    select {
+      width: 100%;
+      padding: 4px;
+    }
+
+    td:first-child,
+    th:first-child {
+      text-align: left;
+    }
+  </style>
+
+  <!-- Excel export -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>
+  <!-- PDF export -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.3/html2pdf.bundle.min.js"></script>
+</head>
+
+<body>
+  <div id="botones-acciones" style="text-align: center; margin-top: 40px;">
+    <button id="btn-excel">📥 Descargar Excel</button>
+    <button id="btn-pdf">📄 Guardar PDF</button>
+    <button id="btn-email">✉️ Enviar por Email</button>
+    <button onclick="window.print()">🖨 Imprimir</button>
+  </div>
+
+  <h1>Presupuesto Modelo: Guanabana (1 cuerda)</h1>
+
+  <table>
+    <thead>
+      <tr>
+      </tr>
+
+
+    </thead>
+    <tbody id="tabla">
+      <!-- Filas generadas por JS -->
+    </tbody>
+
+    <tfoot>
+      <tr>
+        <td colspan="10" style="padding: 20px; background-color: #fff; line-height: 1.6;">
+
+          <h2 style="color: #000000; font-size: 1em">Supuestos</h2>
+          <ol style="padding-left: 20px;">
+            <li>El presupuesto presentado es para el establecimiento y manejo de arboles de guanabana para los primeros
+              tres años.</li>
+            <li>El precio de la maquinaria incluye el operador y el combustible.</li>
+            <li>Área con relieve moderado requiere desmonte de árboles, arbustos y yerbas.</li>
+            <li>Dos pases de arado con un tractor 105-115 HP.</li>
+            <li>Un pase de rastrillo con un tractor 80-90 HP.</li>
+            <li>Se usa taladora para control de maleza entre calles.</li>
+            <li>El agricultor posee la maquinaria y equipo para la aplicación de abono y de cal.</li>
+            <li>La aplicación de herbicida se hace principalmente con el uso de maquinaria.</li>
+            <li>La finca posee infraestructura para riego.</li>
+            <li>Incluye pago del Seguro Social al Internal Revenue Service, Seguro por Desempleo al Departamento del
+              Trabajo y Recursos Humanos y Seguro Obrero a la Corporación del Fondo del Seguro del Estado.</li>
+            <li>La cantidad de cal a utilizar dependerá del análisis de suelo.</li>
+            <li>El abono se diluye en agua a razón de 2 onzas por galon y de esta solucción se aplica 6 onzas/arbol en
+              el pilon de tierra en bolsa.</li>
+            <li>La formulación y cantidad de fertilizantes va a depender del análisis de suelo. Se aplicaría 1.5
+              Libras/arbol el primer año, 2 libra/arbol el segundo año y 3 libras/arbol el tercer año. Luego que el
+              árbol empiece a producir se alterna con el análisis 10-5-15-3 u otro alto en potasio.</li>
+            <li>Incluye herbicidas para el control de malezas de hoja ancha, suculentas y leñosas y el uso de herbicidas
+              no selectivos. El costo incluye surfactante.</li>
+            <li>Se recomienda realizar un análisis de suelo para determinar el pH.</li>
+            <li>La finca posee infraestructura de riego.</li>
+            <li>La produccion se estima a razón de 12-15 libras por arbol para el tercer año.</li>
+            <li>En el segundo año y años subsiguientes no habrán gastos para el establecimiento de siembras, que incluye
+              preparación del terreno y siembra.</li>
+          </ol>
+
+          <span style="font-weight: bold;">Preparado por:</span><br>
+          Myrna Comas Pagán, PhD<br>
+          Catedrática del Servicio de Extensión Agrícola en Economía Agrícola<br><br>
+
+          <span style="font-weight: bold;">Revisado por:</span><br>
+          Jose Zamora Echeverria, MS<br>
+          Catedrático del Servicio de Extensión Agrícola en Frutales<br><br>
+
+          <span style="font-weight: bold;">Versión Electrónica:</span><br>
+          Alexandra Gregory Crespo, PhD<br>
+          Catedrática del Servicio de Extensión Agrícola en Economía Agrícola<br><br>
+
+          <span style="font-weight: bold;">Fecha de revisión:</span><br>
+          Marzo 2022<br><br>
+
+          <div style="margin-top: 20px; padding: 12px; border-left: 5px solid #d9534f; background-color: #fdf2f2;">
+            <strong>AVISO:</strong> AVISO: Los Presupuestos Modelos presentan la información de los ingresos y gastos
+            bajo condiciones normales y
+            características particulares de una finca.  La Universidad de Puerto Rico no asume responsabilidad por los
+            resultados si
+            los ingresos y gastos de una empresa en particular difieren de dicha publicación. El usuario de estos
+            modelos releva a
+            la Universidad de Puerto Rico de toda responsabilidad, reclamación, pérdida, daño o costo relacionado o
+            surgido por el
+            uso de estos modelos.
+          </div>
+
+          <div style="margin-top: 20px; font-size: 0.85em; text-align: center; color: #999;">
+            This material is based upon work supported by USDA/OPPE under Award Number: AO212501x443G010
+          </div>
+        </td>
+      </tr>
+    </tfoot>
+
+
+  </table>
+  <!----------------------------------------------------------------------------------------------------------------------------------------->
+  <!----------------------------------------------------------------------------------------------------------------------------------------->
+  <!----------------------------------------------------------------------------------------------------------------------------------------->
+  <script>
+    const tbody = document.getElementById("tabla");
+    const thead = document.querySelector("thead");
+
+    // Orden inverso
+    const encabezado = [
+      "Nùmero de Cuerdas Sembradas",
+      "Rendimiento por Cuerda Cajas de 50 lbs",
+    ]
+
+    encabezado.forEach((trabajo, index) => {
+      const fila = document.createElement("tr");
+
+      fila.innerHTML = `
+        <td colspan="6">${trabajo}</td>
+        <td><input type="number" min="0" step="1" id="header-${index}" oninput="calcularTotalesSecciones()"></td>
+      `;
+
+      thead.insertBefore(fila, thead.children[1]);
+    });
+
+    setElement(`header-1`, 60);
+
+    document.querySelectorAll('[id^="header-"]').forEach((input, index) => {
+      input.addEventListener('input', () => {
+        calcularTotalesSecciones();
+      });
+    });
+
+    //-----------------------------------------------------------------------------------------------------------------------------------------------------  
+    //-----------------------------------------------------------------------------------------------------------------------------------------------------
+    //-----------------------------------------------------------------------------------------------------------------------------------------------------
+
+    const table_title = document.createElement("tr");
+    table_title.innerHTML = `<th colspan="7" style="text-align: center; background-color: #ffffff;">SIEMBRA 18'*20'</th>`;
+    tabla.appendChild(table_title);
+
+    const table_subtext = document.createElement("tr");
+    table_subtext.innerHTML = `<th colspan="7" style="text-align: center; background-color: #ffffff;">1 CUERDA<sup style="font-size: 0.1em;">1</sup></th>`;
+    tabla.appendChild(table_subtext);
+
+    const filaVacía_0 = document.createElement("tr");
+    filaVacía_0.innerHTML = `<td colspan="7" style="height: 20px; background-color: transparent;"></td>`;
+    tabla.appendChild(filaVacía_0);
+
+    const header1 = document.createElement("tr");
+    header1.innerHTML = `<th colspan="7" style="text-align: center; background-color: #cccccc;">USO DE MAQUINARIA<sup style="font-size: 0.1em;">2</sup></th>`;
+    tabla.appendChild(header1);
+
+    const header1_unidades = document.createElement("tr");
+    header1_unidades.innerHTML = `<th colspan="1" style="text-align: center; background-color: #cccccc;"></th>
+    <td style="font-weight: bold; text-align: center; background-color: #cccccc;">CANTIDAD</td>
+    <td style="font-weight: bold; text-align: center; background-color: #cccccc;">UNIDAD</td>
+    <td style="font-weight: bold; text-align: center; background-color: #cccccc;">PRECIO</td>
+    <td style="font-weight: bold; text-align: center; background-color: #cccccc;">COSTOS</td>
+    <td style="font-weight: bold; text-align: center; background-color: #cccccc;">COSTOS</td>
+    <td style="font-weight: bold; text-align: center; background-color: #cccccc;">COSTOS</td>
+    `
+    tabla.appendChild(header1_unidades);
+
+    const header1_years = document.createElement("tr");
+    header1_years.innerHTML = `<th colspan="1" style="text-align: center; background-color: #cccccc;"></th>
+    <td colspan="3" style="font-weight: bold; text-align: center; background-color: #cccccc;">(PRIMER AÑO)</td>
+    <td style="font-weight: bold; text-align: center; background-color: #cccccc;">PRIMER AÑO</td>
+    <td style="font-weight: bold; text-align: center; background-color: #cccccc;">SEGUNDO AÑO</td>
+    <td style="font-weight: bold; text-align: center; background-color: #cccccc;">TERCER AÑO</td>
+    `
+    tabla.appendChild(header1_years);
+
+    const maquinaria = [
+      "Limpieza de área",
+      "Arar",
+      "Rastrillar",
+      "Banquear",
+      "Control de malezas",
+    ];
+
+    maquinaria.forEach((trabajo, index) => {
+      const fila = document.createElement("tr");
+
+      fila.innerHTML = `
+        <td id="maquinaria_alquiler-${index}">${trabajo}</td>
+        <td><input type="number" min="0" step="1" id="cantidad_maquinaria-${index}" oninput="calcularTotalesSecciones()"></td>
+        <td id="unidad_maquinaria-${index}">horas</td>
+        <td><input type="number" min="0" step="1" id="precio_maquinaria-${index}" oninput="calcularTotalesSecciones()"></td>
+        <td id="costo_maquinaria_1-${index}">$0.00</td>
+        <td id="costo_maquinaria_2-${index}">-</td>
+        <td id="costo_maquinaria_3-${index}">-</td>
+      `;
+
+      tabla.appendChild(fila);
+    });
+
+    document.getElementById("maquinaria_alquiler-0").innerHTML += `<sup style="font-size: 0.1em;">3</sup>`;
+    document.getElementById("maquinaria_alquiler-1").innerHTML += `<sup style="font-size: 0.1em;">4</sup>`;
+    document.getElementById("maquinaria_alquiler-2").innerHTML += `<sup style="font-size: 0.1em;">5</sup>`;
+    document.getElementById("maquinaria_alquiler-4").innerHTML += `<sup style="font-size: 0.1em;">6</sup>`;
+
+    document.getElementById("costo_maquinaria_2-4").innerHTML = `$0.00`;
+    document.getElementById("costo_maquinaria_3-4").innerHTML = `$0.00`;
+
+    document.querySelectorAll('[id^="maquinaria-"]').forEach((input, index) => {
+      input.addEventListener('input', () => {
+        calcularCosto_Maquinaria(index);
+      });
+    });
+
+    const filaTotal_Maquinaria = document.createElement("tr");
+    filaTotal_Maquinaria.innerHTML = `
+        <th colspan="4">Total Uso de Maquinaria</th>
+        <th style="background-color: #f0f0f0;" id="total_maquinaria_1">$0.00</th>
+        <th style="background-color: #f0f0f0;" id="total_maquinaria_2">$0.00</th>
+        <th style="background-color: #f0f0f0;" id="total_maquinaria_3">$0.00</th>
+      `;
+    tabla.appendChild(filaTotal_Maquinaria);
+
+
+    function calcularCosto_Maquinaria() {
+      let totalCostos_1 = 0;
+      let totalCostos_2 = 0;
+      let totalCostos_3 = 0;
+
+      for (let i = 0; i < maquinaria.length; i++) {
+        const costo_año_1 = getElement(`cantidad_maquinaria-${i}`) * getElement(`precio_maquinaria-${i}`);
+        if (i == 4) {
+          // Precio no cambia en proximos años
+          setElement(`costo_maquinaria_2-${i}`, `$${costo_año_1.toFixed(2)}`);
+          setElement(`costo_maquinaria_3-${i}`, `$${costo_año_1.toFixed(2)}`);
+
+          totalCostos_2 += costo_año_1;
+          totalCostos_3 += costo_año_1;
+        }
+
+        setElement(`costo_maquinaria_1-${i}`, `$${costo_año_1.toFixed(2)}`);
+
+        totalCostos_1 += costo_año_1;
+      }
+
+      setElement(`total_maquinaria_1`, `$${totalCostos_1.toFixed(2)}`);
+      setElement(`total_maquinaria_2`, `$${totalCostos_2.toFixed(2)}`);
+      setElement(`total_maquinaria_3`, `$${totalCostos_3.toFixed(2)}`);
+    }
+
+    const filaVacía_1 = document.createElement("tr");
+    filaVacía_1.innerHTML = `<td colspan="7" style="height: 20px; background-color: transparent;"></td>`;
+    tabla.appendChild(filaVacía_1);
+
+    //-----------------------------------------------------------------------------------------------------------------------------------------------------
+    //-----------------------------------------------------------------------------------------------------------------------------------------------------
+    //-----------------------------------------------------------------------------------------------------------------------------------------------------
+    const header2 = document.createElement("tr");
+    header2.innerHTML = `<th colspan="7" style="text-align: center; background-color: #cccccc;">Mano de Obra</th>`;
+    tabla.appendChild(header2);
+
+    const header2_unidades = document.createElement("tr");
+    header2_unidades.innerHTML = `<th colspan="1" style="text-align: center; background-color: #cccccc;"></th>
+    <td style="font-weight: bold; text-align: center; background-color: #cccccc;">CANTIDAD</td>
+    <td style="font-weight: bold; text-align: center; background-color: #cccccc;">UNIDAD</td>
+    <td style="font-weight: bold; text-align: center; background-color: #cccccc;">PRECIO</td>
+    <td style="font-weight: bold; text-align: center; background-color: #cccccc;">COSTOS</td>
+    <td style="font-weight: bold; text-align: center; background-color: #cccccc;">COSTOS</td>
+    <td style="font-weight: bold; text-align: center; background-color: #cccccc;">COSTOS</td>
+    `
+    tabla.appendChild(header2_unidades);
+
+    const header2_years = document.createElement("tr");
+    header2_years.innerHTML = `<th colspan="1" style="text-align: center; background-color: #cccccc;"></th>
+    <td colspan="3" style="font-weight: bold; text-align: center; background-color: #cccccc;">(PRIMER AÑO)</td>
+    <td style="font-weight: bold; text-align: center; background-color: #cccccc;">PRIMER AÑO</td>
+    <td style="font-weight: bold; text-align: center; background-color: #cccccc;">SEGUNDO AÑO</td>
+    <td style="font-weight: bold; text-align: center; background-color: #cccccc;">TERCER AÑO</td>
+    `
+    tabla.appendChild(header2_years);
+
+    const mano_de_obra = [
+      "Ahoyar",
+      "Sembrar",
+      "Aplicar cal",
+      "Aplicar abono foliar",
+      "Aplicar abono",
+      "Aplicar hierbicida",
+      "Manejo de riego",
+      "Control de plagas",
+      "Poda o aclareo troncos",
+      "Subtotal",
+      "Obligaciones patronales",
+    ];
+
+    mano_de_obra.forEach((trabajo, index) => {
+      const fila = document.createElement("tr");
+      if (index < 3) {
+        fila.innerHTML = `
+          <td id="mano_de_obra-${index}">${trabajo}</td>
+          <td><input type="number" min="0" step="1" id="cantidad_obra-${index}" oninput="calcularTotalesSecciones()"></td>
+          <td id="unidad_obra-${index}">horas</td>
+          <td><input type="number" min="0" step="1" id="precio_obra-${index}" oninput="calcularTotalesSecciones()"></td>
+          <td id="costo_obra_1-${index}">$0.00</td>
+          <td id="costo_obra_2-${index}">-</td>
+          <td id="costo_obra_3-${index}">-</td>
+        `;
+      } else if (index < (mano_de_obra.length - 2)) {
+        fila.innerHTML = `
+          <td id="mano_de_obra-${index}">${trabajo}</td>
+          <td><input type="number" min="0" step="1" id="cantidad_obra-${index}" oninput="calcularTotalesSecciones()"></td>
+          <td id="unidad_obra-${index}">horas</td>
+          <td><input type="number" min="0" step="1" id="precio_obra-${index}" oninput="calcularTotalesSecciones()"></td>
+          <td id="costo_obra_1-${index}">$0.00</td>
+          <td id="costo_obra_2-${index}">$0.00</td>
+          <td id="costo_obra_3-${index}">$0.00</td>
+        `;
+      } else {
+        fila.innerHTML = `
+          <td id="mano_de_obra-${index}">${trabajo}</td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td id="costo_obra_1-${index}">$0.00</td>
+          <td id="costo_obra_2-${index}">$0.00</td>
+          <td id="costo_obra_3-${index}">$0.00</td>
+        `;
+      }
+
+      tabla.appendChild(fila);
+    });
+
+    document.getElementById("mano_de_obra-3").innerHTML += `<sup style="font-size: 0.1em;">7</sup>`;
+    document.getElementById("mano_de_obra-5").innerHTML += `<sup style="font-size: 0.1em;">8</sup>`;
+    document.getElementById("mano_de_obra-6").innerHTML += `<sup style="font-size: 0.1em;">9</sup>`;
+    document.getElementById("mano_de_obra-10").innerHTML += `<sup style="font-size: 0.1em;">10</sup>`;
+
+    document.getElementById("mano_de_obra-9").outerHTML = `<td style="font-weight: bold;" id="mano_de_obra-9">Subtotal</td>`;
+
+    document.querySelectorAll('[id^="obra-"]').forEach((input, index) => {
+      input.addEventListener('input', () => {
+        calcularTotalesSecciones();
+      });
+    });
+
+    const filaTotal_Obra = document.createElement("tr");
+    filaTotal_Obra.innerHTML = `
+        <th colspan="1">Total Mano de Obra</th>
+        <th colspan="1" id="total_horas_obra"></th>
+        <th colspan="2"></th>
+        <th style="background-color: #f0f0f0;" id="total_obra_1">$0.00</th>
+        <th style="background-color: #f0f0f0;" id="total_obra_2">$0.00</th>
+        <th style="background-color: #f0f0f0;" id="total_obra_3">$0.00</th>
+      `;
+    tabla.appendChild(filaTotal_Obra);
+
+    function calcularCosto_Obra() {
+      let totalCostos_1 = 0;
+      let totalCostos_2 = 0;
+      let totalCostos_3 = 0;
+      let totalHoras = 0;
+
+      for (let i = 0; i < mano_de_obra.length - 2; i++) {
+        const costo_año_1 = getElement(`cantidad_obra-${i}`) * getElement(`precio_obra-${i}`);
+
+        setElement(`costo_obra_1-${i}`, `$${costo_año_1.toFixed(2)}`);
+
+        totalCostos_1 += costo_año_1;
+        totalHoras += getElement(`cantidad_obra-${i}`);
+
+        if (i > 2) {
+          const costo_año_2 = costo_año_1 * 2;
+          const costo_año_3 = costo_año_1 * 3;
+
+          setElement(`costo_obra_2-${i}`, `$${costo_año_2.toFixed(2)}`);
+          setElement(`costo_obra_3-${i}`, `$${costo_año_3.toFixed(2)}`);
+
+          totalCostos_2 += costo_año_2;
+          totalCostos_3 += costo_año_3;
+        }
+      }
+
+      // Subtotal
+      setElement(`costo_obra_1-9`, `$${totalCostos_1.toFixed(2)}`);
+      setElement(`costo_obra_2-9`, `$${totalCostos_2.toFixed(2)}`);
+      setElement(`costo_obra_3-9`, `$${totalCostos_3.toFixed(2)}`);
+
+      // Obligaciones Patronales
+      const obligaciones_1 = totalCostos_1 * 0.2;
+      const obligaciones_2 = totalCostos_2 * 0.2;
+      const obligaciones_3 = totalCostos_3 * 0.2;
+      setElement(`costo_obra_1-10`, `$${obligaciones_1.toFixed(2)}`);
+      setElement(`costo_obra_2-10`, `$${obligaciones_2.toFixed(2)}`);
+      setElement(`costo_obra_3-10`, `$${obligaciones_3.toFixed(2)}`);
+
+      totalCostos_1 += obligaciones_1;
+      totalCostos_2 += obligaciones_2;
+      totalCostos_3 += obligaciones_3;
+
+      setElement(`total_obra_1`, `$${totalCostos_1.toFixed(2)}`);
+      setElement(`total_obra_2`, `$${totalCostos_2.toFixed(2)}`);
+      setElement(`total_obra_3`, `$${totalCostos_3.toFixed(2)}`);
+      setElement(`total_horas_obra`, `${totalHoras}`);
+    }
+
+    const filaVacía_2 = document.createElement("tr");
+    filaVacía_2.innerHTML = `<td colspan="7" style="height: 20px; background-color: transparent;"></td>`;
+    tabla.appendChild(filaVacía_2);
+
+    //-----------------------------------------------------------------------------------------------------------------------------------------------------
+    //-----------------------------------------------------------------------------------------------------------------------------------------------------
+    //-----------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+    const header3 = document.createElement("tr");
+    header3.innerHTML = `<th colspan="7" style="text-align: center; background-color: #cccccc;">Materiales</th>`;
+    tabla.appendChild(header3);
+
+    const header3_unidades = document.createElement("tr");
+    header3_unidades.innerHTML = `<th colspan="1" style="text-align: center; background-color: #cccccc;"></th>
+    <td style="font-weight: bold; text-align: center; background-color: #cccccc;">CANTIDAD</td>
+    <td style="font-weight: bold; text-align: center; background-color: #cccccc;">UNIDAD</td>
+    <td style="font-weight: bold; text-align: center; background-color: #cccccc;">PRECIO</td>
+    <td style="font-weight: bold; text-align: center; background-color: #cccccc;">COSTOS</td>
+    <td style="font-weight: bold; text-align: center; background-color: #cccccc;">COSTOS</td>
+    <td style="font-weight: bold; text-align: center; background-color: #cccccc;">COSTOS</td>
+    `
+    tabla.appendChild(header3_unidades);
+
+    const header3_years = document.createElement("tr");
+    header3_years.innerHTML = `<th colspan="1" style="text-align: center; background-color: #cccccc;"></th>
+    <td colspan="3" style="font-weight: bold; text-align: center; background-color: #cccccc;">(PRIMER AÑO)</td>
+    <td style="font-weight: bold; text-align: center; background-color: #cccccc;">PRIMER AÑO</td>
+    <td style="font-weight: bold; text-align: center; background-color: #cccccc;">SEGUNDO AÑO</td>
+    <td style="font-weight: bold; text-align: center; background-color: #cccccc;">TERCER AÑO</td>
+    `
+    tabla.appendChild(header3_years);
+
+    const materiales = [
+      "Cal",
+      "Arbolitos",
+      "Abono Foliar 12-48-8",
+      "Fertilizante 15-5-10-=3 EM",
+      "Hierbicidas",
+      "Plaguicidas",
+      "Combustible",
+      "Material empaque",
+    ];
+
+    materiales.forEach((trabajo, index) => {
+      const fila = document.createElement("tr");
+      if (index < 3) {
+        fila.innerHTML = `
+        <td id="materiales-${index}">${trabajo}</td>
+        <td><input type="number" min="0" step="1" id="cantidad_materiales-${index}" oninput="calcularTotalesSecciones()"></td>
+        <td id="unidad_materiales-${index}">horas</td>
+        <td><input type="number" min="0" step="1" id="precio_materiales-${index}" oninput="calcularTotalesSecciones()"></td>
+        <td id="costo_materiales_1-${index}">$0.00</td>
+        <td id="costo_materiales_2-${index}">-</td>
+        <td id="costo_materiales_3-${index}">-</td>
+        `;
+      } else if (index == 4 || index == 5) {
+        fila.innerHTML = `
+        <td id="materiales-${index}">${trabajo}</td>
+        <td id="cantidad_materiales-${index}""></td>
+        <td id="unidad_materiales-${index}"></td>
+        <td id="precio_materiales-${index}""></td>
+        <td><input type="number" min="0" step="1" id="costo_materiales_1-${index}" oninput="calcularTotalesSecciones()"></td>
+        <td id="costo_materiales_2-${index}">$0.00</td>
+        <td id="costo_materiales_3-${index}">$0.00</td>
+        `;
+      } else if (index == 7) {
+        fila.innerHTML = `
+        <td id="materiales-${index}">${trabajo}</td>
+        <td><input type="number" min="0" step="1" id="cantidad_materiales-${index}" oninput="calcularTotalesSecciones()"></td>
+        <td id="unidad_materiales-${index}">horas</td>
+        <td><input type="number" min="0" step="1" id="precio_materiales-${index}" oninput="calcularTotalesSecciones()"></td>
+        <td id="costo_materiales_1-${index}">-</td>
+        <td id="costo_materiales_2-${index}">-</td>
+        <td id="costo_materiales_3-${index}">$0.00</td>
+        `;
+      } else {
+        fila.innerHTML = `
+        <td id="materiales-${index}">${trabajo}</td>
+        <td><input type="number" min="0" step="1" id="cantidad_materiales-${index}" oninput="calcularTotalesSecciones()"></td>
+        <td id="unidad_materiales-${index}">horas</td>
+        <td><input type="number" min="0" step="1" id="precio_materiales-${index}" oninput="calcularTotalesSecciones()"></td>
+        <td id="costo_materiales_1-${index}">$0.00</td>
+        <td id="costo_materiales_2-${index}">$0.00</td>
+        <td id="costo_materiales_3-${index}">$0.00</td>
+        `;
+      }
+
+      tabla.appendChild(fila);
+    });
+
+    document.getElementById("materiales-0").innerHTML += `<sup style="font-size: 0.1em;">11</sup>`;
+    document.getElementById("materiales-2").innerHTML += `<sup style="font-size: 0.1em;">12</sup>`;
+    document.getElementById("materiales-3").innerHTML += `<sup style="font-size: 0.1em;">13</sup>`;
+    document.getElementById("materiales-4").innerHTML += `<sup style="font-size: 0.1em;">14</sup>`;
+
+    document.getElementById("unidad_materiales-0").innerHTML = `ton`;
+    document.getElementById("unidad_materiales-1").innerHTML = `arbolito`;
+    document.getElementById("unidad_materiales-2").innerHTML = `bolsa 5#`;
+    document.getElementById("unidad_materiales-3").innerHTML = `qq`;
+    document.getElementById("unidad_materiales-4").innerHTML = `-`;
+    document.getElementById("unidad_materiales-5").innerHTML = `-`;
+    document.getElementById("unidad_materiales-6").innerHTML = `galón`;
+    document.getElementById("unidad_materiales-7").innerHTML = `caja`;
+
+    document.getElementById("cantidad_materiales-4").innerHTML = `-`;
+    document.getElementById("precio_materiales-4").innerHTML = `-`;
+    document.getElementById("cantidad_materiales-5").innerHTML = `-`;
+    document.getElementById("precio_materiales-5").innerHTML = `-`;
+
+    document.querySelectorAll('[id^=",materiales-"]').forEach((input, index) => {
+      input.addEventListener('input', () => {
+        calcularCosto_Materiales(index);
+      });
+    });
+
+    const filaTotal_Materiales = document.createElement("tr");
+    filaTotal_Materiales.innerHTML = `
+    <th colspan="4">Sub Total Gastos Materiales</th>
+    <th style="background-color: #f0f0f0;" id="total_materiales_1">$0.00</th>
+    <th style="background-color: #f0f0f0;" id="total_materiales_2">$0.00</th>
+    <th style="background-color: #f0f0f0;" id="total_materiales_3">$0.00</th>
+    `;
+    tabla.appendChild(filaTotal_Materiales);
+
+    function calcularCosto_Materiales() {
+      let totalCostos_1 = 0;
+      let totalCostos_2 = 0;
+      let totalCostos_3 = 0;
+
+      for (let i = 0; i < materiales.length; i++) {
+        let costo_año_1 = 0;
+
+        if (i == 4 || i == 5) {
+          costo_año_1 = getElement(`costo_materiales_1-${i}`);
+        } else {
+          costo_año_1 = getElement(`cantidad_materiales-${i}`) * getElement(`precio_materiales-${i}`);
+          setElement(`costo_materiales_1-${i}`, `$${costo_año_1.toFixed(2)}`);
+        }
+        totalCostos_1 += costo_año_1;
+
+        if (i > 2 && i != 7) {
+          const costo_año_2 = costo_año_1 * 2;
+          const costo_año_3 = costo_año_1 * 3;
+
+          setElement(`costo_materiales_2-${i}`, `$${costo_año_2.toFixed(2)}`);
+          setElement(`costo_materiales_3-${i}`, `$${costo_año_3.toFixed(2)}`);
+
+          totalCostos_2 += costo_año_2;
+          totalCostos_3 += costo_año_3;
+        }
+      }
+
+      setElement(`total_materiales_1`, `$${totalCostos_1.toFixed(2)}`);
+      setElement(`total_materiales_2`, `$${totalCostos_2.toFixed(2)}`);
+      setElement(`total_materiales_3`, `$${totalCostos_3.toFixed(2)}`);
+    }
+
+    const filaVacía_3 = document.createElement("tr");
+    filaVacía_3.innerHTML = `<td colspan="7" style="height: 20px; background-color: transparent;"></td>`;
+    tabla.appendChild(filaVacía_3);
+
+    //-----------------------------------------------------------------------------------------------------------------------------------------------------
+    //-----------------------------------------------------------------------------------------------------------------------------------------------------
+    //-----------------------------------------------------------------------------------------------------------------------------------------------------
+
+    const header4 = document.createElement("tr");
+    header4.innerHTML = `<th colspan="7" style="text-align: center; background-color: #cccccc;">Sub Total de Otros Gastos</th>`;
+    tabla.appendChild(header4);
+
+    const header4_unidades = document.createElement("tr");
+    header4_unidades.innerHTML = `<th colspan="1" style="text-align: center; background-color: #cccccc;"></th>
+    <td style="font-weight: bold; text-align: center; background-color: #cccccc;">CANTIDAD</td>
+    <td style="font-weight: bold; text-align: center; background-color: #cccccc;">UNIDAD</td>
+    <td style="font-weight: bold; text-align: center; background-color: #cccccc;">PRECIO</td>
+    <td style="font-weight: bold; text-align: center; background-color: #cccccc;">COSTOS</td>
+    <td style="font-weight: bold; text-align: center; background-color: #cccccc;">COSTOS</td>
+    <td style="font-weight: bold; text-align: center; background-color: #cccccc;">COSTOS</td>
+    `
+    tabla.appendChild(header4_unidades);
+
+    const header4_years = document.createElement("tr");
+    header4_years.innerHTML = `<th colspan="1" style="text-align: center; background-color: #cccccc;"></th>
+    <td colspan="3" style="font-weight: bold; text-align: center; background-color: #cccccc;">(PRIMER AÑO)</td>
+    <td style="font-weight: bold; text-align: center; background-color: #cccccc;">PRIMER AÑO</td>
+    <td style="font-weight: bold; text-align: center; background-color: #cccccc;">SEGUNDO AÑO</td>
+    <td style="font-weight: bold; text-align: center; background-color: #cccccc;">TERCER AÑO</td>
+    `
+    tabla.appendChild(header4_years);
+
+    const otros_gastos = [
+      "Análisis de suelo",
+      "Renta de terreno",
+      "Gastos Misceláneos",
+    ];
+
+    otros_gastos.forEach((trabajo, index) => {
+      const fila = document.createElement("tr");
+      fila.innerHTML = `
+          <td id="otros_gastos-${index}">${trabajo}</td>
+          <td>-</td>
+          <td>-</td>
+          <td><input type="number" min="0" step="1" id="precio_otros_gastos-${index}" oninput="calcularTotalesSecciones()"></td>
+          <td id="costo_otros_gastos_1-${index}">$0.00</td>
+          <td id="costo_otros_gastos_2-${index}">$0.00</td>
+          <td id="costo_otros_gastos_3-${index}">$0.00</td>
+        `;
+
+      tabla.appendChild(fila);
+    });
+
+    document.getElementById("otros_gastos-0").innerHTML += `<sup style="font-size: 0.1em;">15</sup>`;
+    document.getElementById("otros_gastos-1").innerHTML += `<sup style="font-size: 0.1em;">16</sup>`;
+
+    document.querySelectorAll('[id^=",otros_gastos-"]').forEach((input, index) => {
+      input.addEventListener('input', () => {
+        calcularCosto_Otros(index);
+      });
+    });
+
+    const otros_gastos_total = [
+      "Sub Total Gastos Materiales",
+      "TOTAL DE GASTOS",
+    ];
+
+
+    otros_gastos_total.forEach((trabajo, index) => {
+      const filaTotal = document.createElement("tr");
+
+      filaTotal.innerHTML = `
+        <th colspan="4">${trabajo}</th>
+        <th style="background-color: #f0f0f0;" id="total_otros_gastos_1-${index}">$0.00</th>
+        <th style="background-color: #f0f0f0;" id="total_otros_gastos_2-${index}">$0.00</th>
+        <th style="background-color: #f0f0f0;" id="total_otros_gastos_3-${index}">$0.00</th>
+      `;
+
+      tabla.appendChild(filaTotal);
+    });
+
+    function calcularCosto_Otros() {
+      let totalCostos_1 = 0;
+      let totalCostos_2 = 0;
+      let totalCostos_3 = 0;
+
+      for (let i = 0; i < otros_gastos.length; i++) {
+        const costo_año_1 = getElement(`precio_otros_gastos-${i}`);
+        const costo_año_2 = costo_año_1 * 2;
+        const costo_año_3 = costo_año_1 * 3;
+
+        setElement(`costo_otros_gastos_1-${i}`, `$${costo_año_1.toFixed(2)}`);
+        setElement(`costo_otros_gastos_2-${i}`, `$${costo_año_2.toFixed(2)}`);
+        setElement(`costo_otros_gastos_3-${i}`, `$${costo_año_3.toFixed(2)}`);
+
+        totalCostos_1 += costo_año_1;
+        totalCostos_2 += costo_año_2;
+        totalCostos_3 += costo_año_3;
+      }
+      setElement(`total_otros_gastos_1-0`, `$${totalCostos_1.toFixed(2)}`);
+      setElement(`total_otros_gastos_2-0`, `$${totalCostos_2.toFixed(2)}`);
+      setElement(`total_otros_gastos_3-0`, `$${totalCostos_3.toFixed(2)}`);
+    }
+
+    function calcularGasto_Total() {
+      const gastoTotal_1 = getElement(`total_maquinaria_1`) + getElement(`total_obra_1`) + getElement(`total_materiales_1`) + getElement(`total_otros_gastos_1-0`);
+      const gastoTotal_2 = getElement(`total_maquinaria_2`) + getElement(`total_obra_2`) + getElement(`total_materiales_2`) + getElement(`total_otros_gastos_2-0`);
+      const gastoTotal_3 = getElement(`total_maquinaria_3`) + getElement(`total_obra_3`) + getElement(`total_materiales_3`) + getElement(`total_otros_gastos_3-0`);
+
+      setElement(`total_otros_gastos_1-1`, `$${gastoTotal_1.toFixed(2)}`);
+      setElement(`total_otros_gastos_2-1`, `$${gastoTotal_2.toFixed(2)}`);
+      setElement(`total_otros_gastos_3-1`, `$${gastoTotal_3.toFixed(2)}`);
+    }
+
+    const filaVacía_4 = document.createElement("tr");
+    filaVacía_4.innerHTML = `<td colspan="7" style="height: 20px; background-color: transparent;"></td>`;
+    tabla.appendChild(filaVacía_4);
+
+    //-----------------------------------------------------------------------------------------------------------------------------------------------------
+    //-----------------------------------------------------------------------------------------------------------------------------------------------------
+    //-----------------------------------------------------------------------------------------------------------------------------------------------------
+
+    const header5 = document.createElement("tr");
+    header5.innerHTML = `<th colspan="7" style="text-align: center; background-color: #cccccc;">INGRESO BRUTO</th>`;
+    tabla.appendChild(header5);
+
+    const header5_unidades = document.createElement("tr");
+    header5_unidades.innerHTML = `<th colspan="1" style="text-align: center; background-color: #cccccc;"></th>
+    <td style="font-weight: bold; text-align: center; background-color: #cccccc;">CANTIDAD</td>
+    <td style="font-weight: bold; text-align: center; background-color: #cccccc;">UNIDAD</td>
+    <td style="font-weight: bold; text-align: center; background-color: #cccccc;">PRECIO</td>
+    <td style="font-weight: bold; text-align: center; background-color: #cccccc;">CANTIDAD</td>
+    <td style="font-weight: bold; text-align: center; background-color: #cccccc;">CANTIDAD</td>
+    <td style="font-weight: bold; text-align: center; background-color: #cccccc;">CANTIDAD</td>
+    `
+    tabla.appendChild(header5_unidades);
+
+    const header5_years = document.createElement("tr");
+    header5_years.innerHTML = `<th colspan="1" style="text-align: center; background-color: #cccccc;"></th>
+    <td colspan="3" style="font-weight: bold; text-align: center; background-color: #cccccc;">(PRIMER AÑO)</td>
+    <td style="font-weight: bold; text-align: center; background-color: #cccccc;">PRIMER AÑO</td>
+    <td style="font-weight: bold; text-align: center; background-color: #cccccc;">SEGUNDO AÑO</td>
+    <td style="font-weight: bold; text-align: center; background-color: #cccccc;">TERCER AÑO</td>
+    `
+    tabla.appendChild(header5_years);
+
+    const ingresos = [
+      "Venta de guanabanas",
+      "Subsidio Salarial",
+    ];
+
+    ingresos.forEach((trabajo, index) => {
+      const fila = document.createElement("tr");
+      fila.innerHTML = `
+          <td id="ingresos-${index}">${trabajo}</td>
+          <td id="cantidad_ingresos-${index}">-</td>
+          <td id="unidad_ingresos-${index}">-</td>
+          <td><input type="number" min="0" step="1" id="precio_ingresos-${index}" oninput="calcularTotalesSecciones()"></td>
+          <td id="costo_ingresos_1-${index}">-</td>
+          <td id="costo_ingresos_2-${index}">-</td>
+          <td id="costo_ingresos_3-${index}">-</td>
+        `;
+
+      tabla.appendChild(fila);
+    });
+
+    document.getElementById("ingresos-0").innerHTML += `<sup style="font-size: 0.1em;">17</sup>`;
+
+    document.getElementById("unidad_ingresos-0").innerHTML = `cajas`;
+    document.getElementById("cantidad_ingresos-0").innerHTML = 60;
+
+    document.querySelectorAll('[id^=",ingresos-"]').forEach((input, index) => {
+      input.addEventListener('input', () => {
+        calcularIngresos(index);
+      });
+    });
+
+    const ingresos_total = [
+      "TOTAL DE INGRESOS",
+      "INGRESO NETO 1 CUERDA",
+    ];
+
+    ingresos_total.forEach((trabajo, index) => {
+      const filaTotal = document.createElement("tr");
+
+      filaTotal.innerHTML = `
+        <th colspan="4">${trabajo}</th>
+        <th style="background-color: #f0f0f0;" id="total_ingresos_1-${index}">$0.00</th>
+        <th style="background-color: #f0f0f0;" id="total_ingresos_2-${index}">$0.00</th>
+        <th style="background-color: #f0f0f0;" id="total_ingresos_3-${index}">$0.00</th>
+        `;
+
+      tabla.appendChild(filaTotal);
+    });
+
+    function calcularIngresos() {
+      let totalIngreso_1 = 0;
+      let totalIngreso_2 = 0;
+      let totalIngreso_3 = 0;
+
+      for (let i = 0; i < ingresos.length; i++) {
+        if (i == 1) {
+          // Ingreso Neto por Cuerda
+          const precio = getElement(`precio_ingresos-1`);
+          const horas = getElement(`total_horas_obra`);
+
+          const subsidio = precio * horas;
+          // Cambiar por cálculo correcto (no todas las horas de obra son recurrentes)
+          const subsidio2 = precio * (horas * 2);
+          const subsidio3 = precio * (horas * 3);
+
+          setElement(`costo_ingresos_1-1`, `$${subsidio.toFixed(2)}`);
+          setElement(`costo_ingresos_2-1`, `$${subsidio2.toFixed(2)}`);
+          setElement(`costo_ingresos_3-1`, `$${subsidio3.toFixed(2)}`);
+          totalIngreso_1 += subsidio;
+          totalIngreso_2 += subsidio2;
+          totalIngreso_3 += subsidio3;
+        } else {
+          const ingreso = getElement(`cantidad_ingresos-0`) * getElement(`precio_ingresos-0`);
+          setElement(`costo_ingresos_3-0`, `$${ingreso.toFixed(2)}`);
+          totalIngreso_3 += ingreso;
+        }
+      }
+      setElement(`total_ingresos_1-0`, `$${totalIngreso_1.toFixed(2)}`);
+      setElement(`total_ingresos_2-0`, `$${totalIngreso_2.toFixed(2)}`);
+      setElement(`total_ingresos_3-0`, `$${totalIngreso_3.toFixed(2)}`);
+    }
+
+    function calcularIngreso_Neto() {
+      const ingreso_año_1 = getElement(`total_ingresos_1-0`) - getElement(`total_otros_gastos_1-1`)
+      const ingreso_año_2 = getElement(`total_ingresos_2-0`) - getElement(`total_otros_gastos_2-1`)
+      const ingreso_año_3 = getElement(`total_ingresos_3-0`) - getElement(`total_otros_gastos_3-1`)
+
+      setElement(`total_ingresos_1-1`, `$${ingreso_año_1.toFixed(2)}`);
+      setElement(`total_ingresos_2-1`, `$${ingreso_año_2.toFixed(2)}`);
+      setElement(`total_ingresos_3-1`, `$${ingreso_año_3.toFixed(2)}`);
+    }
+
+    const filaVacía_5 = document.createElement("tr");
+    filaVacía_5.innerHTML = `<td colspan="7" style="height: 20px; background-color: transparent;"></td>`;
+    tabla.appendChild(filaVacía_5);
+
+    //-----------------------------------------------------------------------------------------------------------------------------------------------------
+    //-----------------------------------------------------------------------------------------------------------------------------------------------------
+    //-----------------------------------------------------------------------------------------------------------------------------------------------------
+
+    const header6 = document.createElement("tr");
+    header6.innerHTML = `<th colspan="7" style="text-align: center; background-color: #cccccc;">VALOR</th>`;
+    tabla.appendChild(header6);
+
+    const header6_unidades = document.createElement("tr");
+    header6_unidades.innerHTML = `<th colspan="1" style="text-align: center; background-color: #cccccc;"></th>
+    <td style="font-weight: bold; text-align: center; background-color: #cccccc;">PARTIDA</td>
+    <th colspan="2" style="text-align: center; background-color: #cccccc;"></th>
+    <td style="font-weight: bold; text-align: center; background-color: #cccccc;">PRIMER AÑO</td>
+    <td style="font-weight: bold; text-align: center; background-color: #cccccc;">SEGUNDO AÑO</td>
+    <td style="font-weight: bold; text-align: center; background-color: #cccccc;">TERCER AÑO</td>
+    `
+    tabla.appendChild(header6_unidades);
+
+    const datos = [
+      "Ingreso Total",
+      "Gasto Total",
+      "Ingreso Neto",
+      "Precio Mínimo",
+      "Producción Mínima en cajas",
+    ];
+
+    datos.forEach((trabajo, index) => {
+      const fila = document.createElement("tr");
+      fila.innerHTML = `
+          <td colspan="4" id="datos-${index}">${trabajo}</td>
+          <td id="datos_1-${index}">$0.00</td>
+          <td id="datos_2-${index}">$0.00</td>
+          <td id="datos_3-${index}">$0.00</td>
+        `;
+
+      tabla.appendChild(fila);
+    });
+
+    function calcularDatos() {
+      let datos_1 = 0;
+      let datos_2 = 0;
+      let datos_3 = 0;
+
+      for (let i = 0; i < datos.length; i++) {
+        switch (i) {
+          case 0: // Ingreso Total
+            datos_1 = getElement(`total_ingresos_1-0`);
+            datos_2 = getElement(`total_ingresos_2-0`);
+            datos_3 = getElement(`total_ingresos_3-0`);
+            break;
+          case 1: // Gasto Total
+            datos_1 = getElement(`total_otros_gastos_1-1`);
+            datos_2 = getElement(`total_otros_gastos_2-1`);
+            datos_3 = getElement(`total_otros_gastos_3-1`);
+            break;
+          case 2: // Ingreso Neto
+            datos_1 = getElement(`total_ingresos_1-0`) - getElement(`total_otros_gastos_1-1`);
+            datos_2 = getElement(`total_ingresos_2-0`) - getElement(`total_otros_gastos_2-1`);
+            datos_3 = getElement(`total_ingresos_3-0`) - getElement(`total_otros_gastos_3-1`);
+            break;
+          case 3: // Precio Mínimo
+            datos_1 = getElement(`total_otros_gastos_1-1`) / (getElement(`cantidad_ingresos-0`) || 1);
+            datos_2 = getElement(`total_otros_gastos_2-1`) / (getElement(`cantidad_ingresos-0`) || 1);
+            datos_3 = getElement(`total_otros_gastos_3-1`) / (getElement(`cantidad_ingresos-0`) || 1);
+            break;
+          case 4: // Producción Mínima en cajas
+            datos_1 = getElement(`total_otros_gastos_1-1`) / (getElement(`precio_ingresos-0`) || 1);
+            datos_2 = getElement(`total_otros_gastos_2-1`) / (getElement(`precio_ingresos-0`) || 1);
+            datos_3 = getElement(`total_otros_gastos_3-1`) / (getElement(`precio_ingresos-0`) || 1);
+            break;
+        }
+
+        // '$' format
+        if (i == 4) {
+          setElement(`datos_1-${i}`, `${(datos_1 || 0).toFixed(2)}`);
+          setElement(`datos_2-${i}`, `${(datos_2 || 0).toFixed(2)}`);
+          setElement(`datos_3-${i}`, `${(datos_3 || 0).toFixed(2)}`);
+        } else {
+          setElement(`datos_1-${i}`, `$${(datos_1 || 0).toFixed(2)}`);
+          setElement(`datos_2-${i}`, `$${(datos_2 || 0).toFixed(2)}`);
+          setElement(`datos_3-${i}`, `$${(datos_3 || 0).toFixed(2)}`);
+        }
+      }
+    }
+
+    const filaVacía_6 = document.createElement("tr");
+    filaVacía_6.innerHTML = `<td colspan="7" style="height: 20px; background-color: transparent;"></td>`;
+    tabla.appendChild(filaVacía_6);
+
+    //-----------------------------------------------------------------------------------------------------------------------------------------------------
+    //-----------------------------------------------------------------------------------------------------------------------------------------------------
+    //-----------------------------------------------------------------------------------------------------------------------------------------------------
+
+    const header7 = document.createElement("tr");
+    header7.innerHTML = `<th colspan="7" style="text-align: center; background-color: #cccccc;">VALOR POR CUERDA</th>`;
+    tabla.appendChild(header7);
+
+    const header7_unidades = document.createElement("tr");
+    header7_unidades.innerHTML = `<th colspan="1" style="text-align: center; background-color: #cccccc;"></th>
+    <td style="font-weight: bold; text-align: center; background-color: #cccccc;">PARTIDA</td>
+    <th colspan="2" style="text-align: center; background-color: #cccccc;"></th>
+    <td style="font-weight: bold; text-align: center; background-color: #cccccc;">PRIMER AÑO</td>
+    <td style="font-weight: bold; text-align: center; background-color: #cccccc;">SEGUNDO AÑO</td>
+    <td style="font-weight: bold; text-align: center; background-color: #cccccc;">TERCER AÑO</td>
+    `
+    tabla.appendChild(header7_unidades);
+
+    datos.forEach((trabajo, index) => {
+      const fila = document.createElement("tr");
+      fila.innerHTML = `
+          <td colspan="4" id="datos_cuerdas-${index}">${trabajo}</td>
+          <td id="datos_cuerdas_1-${index}">$0.00</td>
+          <td id="datos_cuerdas_2-${index}">$0.00</td>
+          <td id="datos_cuerdas_3-${index}">$0.00</td>
+        `;
+
+      tabla.appendChild(fila);
+    });
+
+    function calcularDatos_Cuerdas() {
+      const cuerdas = document.getElementById(`header-0`).value || 1;
+
+      let datos_1 = 0;
+      let datos_2 = 0;
+      let datos_3 = 0;
+
+      for (let i = 0; i < datos.length; i++) {
+        switch (i) {
+          case 0: // Ingreso Total
+            datos_1 = getElement(`total_ingresos_1-0`) * cuerdas;
+            datos_2 = getElement(`total_ingresos_2-0`) * cuerdas;
+            datos_3 = getElement(`total_ingresos_3-0`) * cuerdas;
+            break;
+          case 1: // Gasto Total
+            datos_1 = getElement(`total_otros_gastos_1-1`) * cuerdas;
+            datos_2 = getElement(`total_otros_gastos_2-1`) * cuerdas;
+            datos_3 = getElement(`total_otros_gastos_3-1`) * cuerdas;
+            break;
+          case 2: // Ingreso Neto
+            datos_1 = (getElement(`total_ingresos_1-0`) - getElement(`total_otros_gastos_1-1`)) * cuerdas;
+            datos_2 = (getElement(`total_ingresos_2-0`) - getElement(`total_otros_gastos_2-1`)) * cuerdas;
+            datos_3 = (getElement(`total_ingresos_3-0`) - getElement(`total_otros_gastos_3-1`)) * cuerdas;
+            break;
+          case 3: // Precio Mínimo
+            // No se multiplica con Cuerdas porque el precio mínimo se mantiene constante:
+            // (gastos * cuerdas) / (cantidad * cuerdas) = (gastos / cantidad)
+            datos_1 = getElement(`total_otros_gastos_1-1`) / (getElement(`cantidad_ingresos-0`) || 1);
+            datos_2 = getElement(`total_otros_gastos_2-1`) / (getElement(`cantidad_ingresos-0`) || 1);
+            datos_3 = getElement(`total_otros_gastos_3-1`) / (getElement(`cantidad_ingresos-0`) || 1);
+            break;
+          case 4: // Producción Mínima en cajas
+            datos_1 = (getElement(`total_otros_gastos_1-1`) / (getElement(`precio_ingresos-0`) || 1)) * cuerdas;
+            datos_2 = (getElement(`total_otros_gastos_2-1`) / (getElement(`precio_ingresos-0`) || 1)) * cuerdas;
+            datos_3 = (getElement(`total_otros_gastos_3-1`) / (getElement(`precio_ingresos-0`) || 1)) * cuerdas;
+            break;
+        }
+
+        // '$' format
+        if (i == 4) {
+          setElement(`datos_cuerdas_1-${i}`, `${(datos_1 || 0).toFixed(2)}`);
+          setElement(`datos_cuerdas_2-${i}`, `${(datos_2 || 0).toFixed(2)}`);
+          setElement(`datos_cuerdas_3-${i}`, `${(datos_3 || 0).toFixed(2)}`);
+        } else {
+          setElement(`datos_cuerdas_1-${i}`, `$${(datos_1 || 0).toFixed(2)}`);
+          setElement(`datos_cuerdas_2-${i}`, `$${(datos_2 || 0).toFixed(2)}`);
+          setElement(`datos_cuerdas_3-${i}`, `$${(datos_3 || 0).toFixed(2)}`);
+        }
+      }
+    }
+
+    const filaVacía_7 = document.createElement("tr");
+    filaVacía_7.innerHTML = `<td colspan="7" style="height: 20px; background-color: transparent;"></td>`;
+    tabla.appendChild(filaVacía_7);
+
+    //-----------------------------------------------------------------------------------------------------------------------------------------------------
+    //-----------------------------------------------------------------------------------------------------------------------------------------------------
+    //-----------------------------------------------------------------------------------------------------------------------------------------------------
+
+    function calcularTotalesSecciones() {
+      calcularCosto_Maquinaria();
+      calcularCosto_Obra();
+      calcularCosto_Materiales();
+      calcularCosto_Otros();
+      calcularGasto_Total();
+      calcularIngresos()
+      calcularIngreso_Neto();
+      calcularDatos();
+      calcularDatos_Cuerdas();
+    }
+
+    function getElement(id) {
+      const el = document.getElementById(id);
+      if (!el) return 0;
+
+      if (el.tagName === "INPUT") {
+        return parseFloat(el.value) || 0;
+      } else {
+        const texto = el.textContent.replace(/\$/g, '').replace(/,/g, '').trim();
+        const valor = parseFloat(texto);
+        return isNaN(valor) ? 0 : valor;
+      }
+    }
+
+
+    function setElement(id, value) {
+      const el = document.getElementById(id);
+      if (!el) return 0;
+
+      if (el.tagName === "INPUT") {
+        el.value = value;
+      } else {
+        el.textContent = value;
+      }
+    }
+
+    // Descargar Excel
+    document.getElementById("btn-excel").addEventListener("click", function () {
+      const table = document.querySelector("table");
+      const wb = XLSX.utils.table_to_book(table, { sheet: "Presupuesto" });
+      XLSX.writeFile(wb, "presupuesto.xlsx");
+    });
+
+    // Guardar PDF
+    document.getElementById("btn-pdf").addEventListener("click", function () {
+      const content = document.body;
+      html2pdf().from(content).set({
+        margin: 0.5,
+        filename: "presupuesto.pdf",
+        html2canvas: { scale: 2 },
+        jsPDF: { unit: "in", format: "letter", orientation: "portrait" }
+      }).save();
+    });
+
+    // Enviar por Email
+    document.getElementById("btn-email").addEventListener("click", function () {
+      const asunto = "Presupuesto Modelo";
+      const cuerpo = "Saludos,\n\nAdjunto encontrará el presupuesto modelo generado.\n\nGracias.";
+      window.location.href = `mailto:?subject = ${encodeURIComponent(asunto)}& body=${encodeURIComponent(cuerpo)}`;
+    });
+  </script>
+</body>
+
+</html>
