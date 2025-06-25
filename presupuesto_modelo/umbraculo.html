@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Nómina Semanal - Agricultores</title>
+  <title>Presupuesto modelo: Árboles en Umbráculo</title>
   <style>
     body { font-family: Arial, sans-serif; margin: 20px; }
     table { width: 100%; border-collapse: collapse; margin-bottom: 20px; }
@@ -18,7 +18,49 @@
   </style>
 </head>
 <body>
-  <h1>Nómina Semanal - Registro de Horas<sup style="font-size: 0.1em;">K11</sup></h1>
+
+  <div id="botones-acciones" style="text-align: center; margin-top: 40px;">
+    <button id="btn-excel">📥 Descargar Excel</button>
+    <button id="btn-pdf">📄 Guardar PDF</button>
+    <button id="btn-email">✉️ Enviar por Email</button>
+    <button onclick="window.print()">🖨 Imprimir</button>
+  </div>
+  
+
+
+    <!-- Excel export -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>
+    <!-- PDF export -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.3/html2pdf.bundle.min.js"></script>
+
+    <script>
+    // Descargar Excel
+    document.getElementById("btn-excel").addEventListener("click", function () {
+      const table = document.querySelector("table"); 
+      const wb = XLSX.utils.table_to_book(table, { sheet: "Presupuesto" });
+      XLSX.writeFile(wb, "presupuesto.xlsx");
+    });
+  
+    // Guardar PDF
+    document.getElementById("btn-pdf").addEventListener("click", function () {
+      const content = document.body; 
+      html2pdf().from(content).set({
+        margin: 0.5,
+        filename: "presupuesto.pdf",
+        html2canvas: { scale: 2 },
+        jsPDF: { unit: "in", format: "letter", orientation: "portrait" }
+      }).save();
+    });
+  
+    // Enviar por Email
+    document.getElementById("btn-email").addEventListener("click", function () {
+      const asunto = "Presupuesto Modelo";
+      const cuerpo = "Saludos,\n\nAdjunto encontrará el presupuesto modelo generado.\n\nGracias.";
+      window.location.href = `mailto:?subject=${encodeURIComponent(asunto)}&body=${encodeURIComponent(cuerpo)}`;
+    });
+  </script>
+
+  <h1>Presupuesto modelo: Árboles en Umbráculo<sup style="font-size: 0.1em;">K11</sup></h1>
 
   <table>
     <tbody id="tabla">
@@ -112,6 +154,850 @@
 <!----------------------------------------------------------------------------------------------------------------------------------------->
 <!----------------------------------------------------------------------------------------------------------------------------------------->
   <script>
+    const tabla = document.getElementById("tabla")
+
+    //VARIABLES GLOBALES
+    let NUM_CUERDAS = 0;
+    let TOTAL_GASTOS_INVERSION = 0;
+    let TOTAL_GASTOS_MATERIALES = 0;
+    let TOTAL_GASTOS_MANO_DE_OBRA = 0;
+    let TOTAL_OTROS_GASTOS = 0;
+    let TOTAL_GASTOS_VARIABLES = 0;
+    let TOTAL_INGRESOS = 0;
+    let INGRESO_NETO = 0;
+    let INTERES_ADMINISTRACION = 0;
+    let INTERES_GASTOS = 0;
+    let INGRESO_BRUTO_CANTIDAD = 0;
+    let INGRESO_BRUTO_PRECIO = 0;
+
+
+    //funcion para salvar valores en los elementos de la tabla y su texto
+    function setCell(id, valor){
+        const cell = document.getElementById(id);
+        cell.dataset.valor = valor;
+        cell.textContent = "$" + valor.toFixed(2);
+    }
+
+//-----------------------------------------------------------------------------------------------------------------------------------------------------  
+//-----------------------------------------------------------------------------------------------------------------------------------------------------
+//-----------------------------------------------------------------------------------------------------------------------------------------------------
+
+    //Numero de Cuerdas
+
+    const cuerdas_input = document.createElement("tr")
+    cuerdas_input.innerHTML = `
+        <th colspan="5">NÚMERO DE CUERDAS</th>
+        <td><input type="number" min="0" step="1" id="numero-cuerdas" oninput="setNumCuerdas()"></td>
+    `;
+    tabla.appendChild(cuerdas_input);
+
+    document.querySelectorAll('[id^="numero-cuerdas"]').forEach(input=>{
+        input.addEventListener('input', ()=>{
+            setNumCuerdas();
+            calcular_mifinca_t1();
+            calcular_mifinca_t2();
+            calcular_mifinca_t3();
+            calcular_mifinca_t4();
+            calcular_mifinca_administracion();
+            calcular_mifinca_interes();
+            calcular_mifinca_total_t4();
+            calcular_mifinca_variables();
+            setMiFincaIngresos();
+            calcular_mifinca_ingresos();
+            mifinca_ingreso_neto();
+        })
+    })
+
+    function setNumCuerdas(){
+        NUM_CUERDAS = parseFloat(document.getElementById("numero-cuerdas").value) || 0;
+    }
+
+    function setMiFincaIngresos(){
+        for (let i = 0; i<partidas_t5.length; i++){
+            calcular_mifinca_t5(i);
+        }
+    }
+
+    const filaVacía_1 = document.createElement("tr");
+    filaVacía_1.innerHTML = `<td colspan="6" style="height: 20px; background-color: transparent;"></td>`;
+    tabla.appendChild(filaVacía_1);
+
+//-----------------------------------------------------------------------------------------------------------------------------------------------------  
+//-----------------------------------------------------------------------------------------------------------------------------------------------------
+//-----------------------------------------------------------------------------------------------------------------------------------------------------
+
+    //t1-Gastos de inversion
+
+    const gastos_inversion = document.createElement("tr")
+    gastos_inversion.innerHTML = `
+        <th colspan="6" style="text-align: center; background-color: #cccccc;">
+            GASTOS DE INVERSION
+        </th>
+    `;
+    tabla.appendChild(gastos_inversion);
+
+    const columnas1 = document.createElement("tr")
+    columnas1.innerHTML = `
+        <th colspan="3">Partida</th>
+        <th>Cantidad</th>
+        <th>Valor</th>
+        <th>Mi finca</th>
+    `;
+    tabla.appendChild(columnas1);
+
+    const partidas_t1 = [
+        "Umbráculo de 4,000 pies cuadrados [1]",
+        "Sistema de riego [2]"
+    ]
+
+    partidas_t1.forEach((partida, index)=>{
+        const fila = document.createElement("tr");
+        fila.innerHTML = `
+            <!--Partida-->
+            <td colspan="3">${partida}</td>
+            <!--Cantidad-->
+            <td>1</td>
+            <!--Valor-->
+            <td><input type="number" min="0" step="1" id="t1-valor-gastos-inversion-${index}" oninput="calcular_total_t1()"></td>
+            <!--Mi finca-->
+            <td id = "t1-mifinca-gastos-inversion-${index}">$0.00</td>
+        `;
+        tabla.appendChild(fila);
+    });
+
+    document.querySelectorAll('[id^="t1-valor-gastos-inversion-"]').forEach((input)=>{
+        input.addEventListener('input', ()=>{
+            calcular_total_t1();
+        })
+    })
+
+    const total_gastos_ingreso = document.createElement("tr");
+    total_gastos_ingreso.innerHTML = `
+        <th colspan="4">Total Gastos de Inversión</th>
+        <th id="valor-total-t1">$0.00</th>
+        <th id="mifinca-valor-total-t1">$0.00</th>
+    `;
+    tabla.appendChild(total_gastos_ingreso);
+
+    function calcular_mifinca_t1(){
+        let total = 0;
+        for (let i = 0; i<partidas_t1.length; i++){
+            const valor_t1 = parseFloat(document.getElementById(`t1-valor-gastos-inversion-${i}`).value) || 0;
+            const resultado = valor_t1*NUM_CUERDAS;
+            setCell(`t1-mifinca-gastos-inversion-${i}`, resultado);
+            total+=resultado;
+        }
+
+        setCell("mifinca-valor-total-t1", total);
+    }
+
+    function calcular_total_t1(){
+        TOTAL_GASTOS_INVERSION = 0;
+        for (let i = 0; i < partidas_t1.length; i++){
+            const valor_t1 = parseFloat(document.getElementById(`t1-valor-gastos-inversion-${i}`).value) || 0;
+            TOTAL_GASTOS_INVERSION+=valor_t1;
+        }
+
+        setCell("valor-total-t1", TOTAL_GASTOS_INVERSION);
+        calcular_mifinca_t1();
+    }
+
+    const filaVacía_2 = document.createElement("tr");
+    filaVacía_2.innerHTML = `<td colspan="6" style="height: 20px; background-color: transparent;"></td>`;
+    tabla.appendChild(filaVacía_2);
+
+//-----------------------------------------------------------------------------------------------------------------------------------------------------  
+//-----------------------------------------------------------------------------------------------------------------------------------------------------
+//-----------------------------------------------------------------------------------------------------------------------------------------------------
+
+    //GASTOS VARIABLES
+
+    const gastos_variables = document.createElement("tr")
+    gastos_variables.innerHTML = `
+        <th colspan="6" style="text-align: center; background-color: #cccccc;">
+            GASTOS VARIABLES
+        </th>
+    `;
+    tabla.appendChild(gastos_variables);
+
+    const columnas2 = document.createElement("tr");
+    columnas2.innerHTML = `
+        <th>Partida</th>
+        <th>Unidad</th>
+        <th>Cantidad</th>
+        <th>Precio/Unidad</th>
+        <th>Valor</th>
+        <th>Mi Finca</th>
+    `;
+    tabla.appendChild(columnas2);
+
+    //t2-Gastos en Materiales
+
+    const gastos_materiales = document.createElement("tr")
+    gastos_materiales.innerHTML = `
+        <th colspan="6" style="text-align: center; background-color: #cccccc;">
+            GASTOS EN MATERIALES
+        </th>
+    `;
+    tabla.appendChild(gastos_materiales);
+
+
+    const partidas_t2 = [
+        ["Semillas [3]", "Semilla"],
+        ["Bandejas", "Paquete de 10 bandejas de 72 celdas"],
+        ["Tiestos", "Tiesto de 3 galones"],
+        ["Mezcla de sustrato [4]", "Saco de 3.8 pies cúbicos"],
+        ["Abono [5]", "Saco de 50 libras"],
+    ]
+
+    partidas_t2.forEach((partida, index)=>{
+        const fila = document.createElement("tr");
+
+        fila.innerHTML = `
+            <!--Partida-->
+            <td>${partida[0]}</td>
+            <!--Unidad-->
+            <td>${partida[1]}</td>
+            <!--Cantidad-->
+            <td><input type="number" min="0" step="1" id="t2-cantidad-${index}" oninput=""></td>
+            <!--Precio/Unidad-->
+            <td><input type="number" min="0" step="1" id="t2-precio-${index}" oninpu=""></td>
+            <!--Valor-->
+            <td id="t2-valor-${index}">$0.00</td>
+            <!--Mi finca-->
+            <td id="t2-mifinca-${index}">$0.00</td>
+        `;
+        tabla.appendChild(fila);
+    })
+
+    document.querySelectorAll('[id^="t2-cantidad-"], [id^="t2-precio-"]').forEach(input=>{
+        input.addEventListener('input', ()=>{
+             const id = input.id;
+             const index = parseInt(id.split('-').pop());
+             calcular_valor_t2(index);
+        })
+    })
+
+    const plaguicidas_cell = document.createElement("tr");
+    plaguicidas_cell.innerHTML = `
+        <td>Plaguicidas [6]</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td id="t2-plaguicidas" data-valor="57">$57.00</td>
+        <td id="t2-mifinca-plaguicidas">$0.00</td>
+    `;
+    tabla.appendChild(plaguicidas_cell);
+
+    const total_gastos_materiales = document.createElement("tr");
+    total_gastos_materiales.innerHTML = `
+        <th colspan="4">Total Gasto en Materiales</th>
+        <th id="t2-total-valor">$57.00</th>
+        <th id="t2-mifinca-total">$0.00</th>
+    `;
+    tabla.appendChild(total_gastos_materiales);
+
+    function calcular_valor_t2(index){
+        const cantidad_t2 = parseFloat(document.getElementById(`t2-cantidad-${index}`).value) || 0;
+        const precio_t2 = parseFloat(document.getElementById(`t2-precio-${index}`).value) || 0;
+        const resultado = cantidad_t2*precio_t2;
+        setCell(`t2-valor-${index}`, resultado);
+
+        calcular_total_t2();
+        calcular_mifinca_t2();
+    }
+
+    function calcular_total_t2(){
+        TOTAL_GASTOS_MATERIALES = 0;
+        for (let i = 0; i<partidas_t2.length; i++){
+            const valor_t2 = parseFloat(document.getElementById(`t2-valor-${i}`).dataset.valor) || 0;
+            TOTAL_GASTOS_MATERIALES+=valor_t2;
+        }
+
+        const plaguicidas = parseFloat(document.getElementById(`t2-plaguicidas`).dataset.valor) || 0;
+        TOTAL_GASTOS_MATERIALES+= plaguicidas;
+
+        setCell("t2-total-valor", TOTAL_GASTOS_MATERIALES);
+        calcular_valor_interes();
+        calcular_total_variables();
+    }
+
+    function calcular_mifinca_t2(){
+        let total = 0;
+        for (let i = 0; i<partidas_t2.length; i++){
+            const valor_t2 = parseFloat(document.getElementById(`t2-valor-${i}`).dataset.valor) || 0;
+            const resultado = valor_t2*NUM_CUERDAS;
+            setCell(`t2-mifinca-${i}`, resultado);
+            total+=resultado;
+        }
+
+        let mifinca_plaguicidas = parseFloat(document.getElementById(`t2-plaguicidas`).dataset.valor) || 0;
+        mifinca_plaguicidas*=NUM_CUERDAS;
+        setCell("t2-mifinca-plaguicidas", mifinca_plaguicidas);
+
+        total+=mifinca_plaguicidas;
+        setCell("t2-mifinca-total", total);
+    }
+
+
+//-----------------------------------------------------------------------------------------------------------------------------------------------------  
+//-----------------------------------------------------------------------------------------------------------------------------------------------------
+//-----------------------------------------------------------------------------------------------------------------------------------------------------
+
+    //t3-Gastos en Mano de Obra
+    const gastos_mano_obra = document.createElement("tr")
+    gastos_mano_obra.innerHTML = `
+        <th colspan="6" style="text-align: center; background-color: #cccccc;">
+            GASTOS EN MANO DE OBRA
+        </th>
+    `;
+    tabla.appendChild(gastos_mano_obra);
+
+
+    const partidas_t3 = [
+        "Preparación de semilleros",
+        "Llenado de tiestos",
+        "Trasplante",
+        "Abonamiento",
+        "Aplicación de plaguicidas",
+        "Venta al detal [7]",
+    ]
+
+    partidas_t3.forEach((partida, index)=>{
+        const fila = document.createElement("tr");
+
+        fila.innerHTML = `
+            <!--Partida-->
+            <td>${partida}</td>
+            <!--Unidad-->
+            <td>Horas</td>
+            <!--Cantidad-->
+            <td><input type="number" min="0" step="1" id="t3-cantidad-${index}" oninput=""></td>
+            <!--Precio/Unidad-->
+            <td><input type="number" min="0" step="1" id="t3-precio-${index}" oninpu=""></td>
+            <!--Valor-->
+            <td id="t3-valor-${index}" data-valor="0">$0.00</td>
+            <!--Mi finca-->
+            <td id="t3-mifinca-${index}">$0.00</td>
+        `;
+        tabla.appendChild(fila);
+    })
+
+    document.querySelectorAll('[id^="t3-cantidad-"], [id^="t3-precio-"]').forEach(input=>{
+        input.addEventListener('input', ()=>{
+             const id = input.id;
+             const index = parseInt(id.split('-').pop());
+             calcular_valor_t3(index);
+        })
+    })
+
+    const obligaciones_patronales_cell = document.createElement("tr");
+    obligaciones_patronales_cell.innerHTML = `
+        <td>Obligaciones patronales [8] (entrar porcentaje en decimal)</td>
+        <td>Nómina</td>
+        <td></td>
+        <td><input type="number" min="0" step="1" id="t3-cantidad-obligaciones" oninput=""></td>
+        <td id="t3-obligaciones" data-valor="0">$0.00</td>
+        <td id="t3-mifinca-obligaciones">$0.00</td>
+    `;
+    tabla.appendChild(obligaciones_patronales_cell);
+
+    document.querySelectorAll('[id^="t3-cantidad-obligaciones"]').forEach(input=>{
+        input.addEventListener('input', ()=>{
+            calcular_obligaciones();
+            calcular_total_t3();
+            calcular_mifinca_t3();
+        })
+    })
+
+    const total_gastos_mano = document.createElement("tr");
+    total_gastos_mano.innerHTML = `
+        <th colspan="4">Total Gastos En Mano de Obra</th>
+        <th id="t3-total-valor">$0.00</th>
+        <th id="t3-mifinca-total">$0.00</th>
+    `;
+    tabla.appendChild(total_gastos_mano);
+
+    function calcular_obligaciones(){
+        let total=0;
+        for (let i=0; i<partidas_t3.length; i++){
+            const valor_t3 = parseFloat(document.getElementById(`t3-valor-${i}`).dataset.valor) || 0;
+            total+=valor_t3;
+        }
+
+        const input = parseFloat(document.getElementById(`t3-cantidad-obligaciones`).value) || 0;
+        const obligaciones = input*total;
+        setCell("t3-obligaciones", obligaciones);
+    }
+
+    function calcular_valor_t3(index){
+        const cantidad_t3 = parseFloat(document.getElementById(`t3-cantidad-${index}`).value) || 0;
+        const precio_t3 = parseFloat(document.getElementById(`t3-precio-${index}`).value) || 0;
+        const resultado = cantidad_t3*precio_t3;
+        setCell(`t3-valor-${index}`, resultado);
+
+        calcular_total_t3();
+        calcular_mifinca_t3();
+        calcular_obligaciones();
+    }
+
+    function calcular_total_t3(){
+        TOTAL_GASTOS_MANO_DE_OBRA = 0;
+        for (let i = 0; i<partidas_t3.length; i++){
+            const valor_t3 = parseFloat(document.getElementById(`t3-valor-${i}`).dataset.valor) || 0;
+            TOTAL_GASTOS_MANO_DE_OBRA+=valor_t3;
+        }
+     
+        let obligaciones = parseFloat(document.getElementById(`t3-obligaciones`).dataset.valor) || 0;
+        TOTAL_GASTOS_MANO_DE_OBRA+= obligaciones;
+        setCell("t3-total-valor", TOTAL_GASTOS_MANO_DE_OBRA);
+
+        calcular_valor_administracion();
+        calcular_valor_interes();
+        calcular_total_variables();
+    }
+
+    function calcular_mifinca_t3(){
+        let total = 0;
+        for (let i = 0; i<partidas_t3.length; i++){
+            const valor_t3 = parseFloat(document.getElementById(`t3-valor-${i}`).dataset.valor) || 0;
+            const resultado = valor_t3*NUM_CUERDAS;
+            setCell(`t3-mifinca-${i}`, resultado);
+            total+=resultado;
+        }
+
+        let mifinca_obligaciones = parseFloat(document.getElementById(`t3-obligaciones`).dataset.valor) || 0;
+        mifinca_obligaciones*=NUM_CUERDAS;
+        setCell("t3-mifinca-obligaciones", mifinca_obligaciones);
+
+        total+=mifinca_obligaciones;
+        setCell("t3-mifinca-total", total);
+    }
+
+//-----------------------------------------------------------------------------------------------------------------------------------------------------  
+//-----------------------------------------------------------------------------------------------------------------------------------------------------
+//-----------------------------------------------------------------------------------------------------------------------------------------------------
+
+    //t4-Otros Gastos
+
+    const otros_gastos = document.createElement("tr");
+    otros_gastos.innerHTML = `
+        <th colspan="6" style="text-align: center; background-color: #cccccc;">
+            OTROS GASTOS
+        </th>
+    `;
+    tabla.appendChild(otros_gastos);
+    
+    const uso_terreno_cell = document.createElement("tr");
+    uso_terreno_cell.innerHTML = `
+        <td>Uso del terreno [9]</td>
+        <td><input type="text" id="t4-unidad-tiempo" placeholder="Unidad de tiempo"></td>
+        <td><input type="number" min="0" step="1" id="t4-cantidad-terreno" oninput=""></td>
+        <td><input type="number" min="0" step="1" id="t4-precio-terreno" oninput=""></td>
+        <td id="t4-valor-terreno" data-valor="0">$0.00</td>
+        <td id="t4-mifinca-terreno" data-valor="0">$0.00</td>
+
+    `;
+    tabla.appendChild(uso_terreno_cell);
+
+    document.querySelectorAll('[id^=t4-cantidad-terreno], [id^=t4-precio-terreno]').forEach(input=>{
+        input.addEventListener('input', ()=>{
+            calcular_valor_terreno();
+            calcular_valor_interes();
+            calcular_total_t4();
+        })
+    })
+
+    const partidas_t4 = [
+        "Electricidad [10]",
+        "Agua [10]",
+        "Seguros [10]",
+        "Gastos misceláneos"
+    ]
+
+    partidas_t4.forEach((partida,index)=>{
+        const fila = document.createElement("tr")
+
+        fila.innerHTML = `
+            <td>${partida}</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td><input type="number" min="0" step="1" id="t4-valor-${index}" oninput=""></td>
+            <td id="t4-mifinca-${index}">$0.00</td>
+        `;
+        tabla.appendChild(fila);
+    })
+
+    document.querySelectorAll('[id^=t4-valor-]').forEach(input=>{
+        input.addEventListener('input', ()=>{
+            //calcular_total_t4();
+            calcular_mifinca_t4();
+            calcular_valor_interes();
+            calcular_total_t4();
+            
+        })
+    })
+
+    const administracion_t4 = document.createElement("tr");
+    administracion_t4.innerHTML = `
+        <td>Administración, supervisión e imprevistos</td>
+        <td>Nómina</td>
+        <td id="t4-interes-administracion" data-valor="0.1">10%</td>
+        <td></td>
+        <td id="t4-valor-administracion" data-valor="0">$0.00</td>
+        <td id="t4-mifinca-administracion" data-valor="0">$0.00</td>
+    `;
+    tabla.appendChild(administracion_t4);
+
+    const interes_gastos_t4 = document.createElement("tr");
+    interes_gastos_t4.innerHTML = `
+        <td>Interés sobre los gastos</td>
+        <td>Gastos</td>
+        <td id="t4-interes-gastos" data-valor="0.09">9%</td>
+        <td></td>
+        <td id="t4-valor-interes" data-valor="0">$0.00</td>
+        <td id="t4-mifinca-interes" data-valor="0">$0.00</td>
+    `;
+    tabla.appendChild(interes_gastos_t4);
+
+    const total_t4 = document.createElement("tr");
+    total_t4.innerHTML = `
+        <th colspan="4">Total otros gastos</th>
+        <th id="t4-total-valor" data-valor="0">$0.00</th>
+        <th id="t4-total-mifinca" data-valor="0">$0.00</th>
+    `;
+    tabla.append(total_t4);
+
+    function calcular_valor_terreno(){
+        const cantidad_terreno = parseFloat(document.getElementById("t4-cantidad-terreno").value) || 0;
+        const precio_terreno = parseFloat(document.getElementById("t4-precio-terreno").value) || 0;
+        const resultado = cantidad_terreno*precio_terreno;
+        setCell("t4-valor-terreno", resultado);
+
+        calcular_mifinca_t4();
+    }
+
+    function calcular_mifinca_t4(){
+        let valor_terreno = parseFloat(document.getElementById("t4-valor-terreno").dataset.valor) || 0;
+        valor_terreno*=NUM_CUERDAS
+        setCell("t4-mifinca-terreno", valor_terreno);
+
+        for (let i=0; i<partidas_t4.length; i++){
+            const valor_t4 = parseFloat(document.getElementById(`t4-valor-${i}`).value) || 0;
+            const mifinca = valor_t4*NUM_CUERDAS;
+            setCell(`t4-mifinca-${i}`, mifinca);
+        }
+    }
+
+    function calcular_valor_administracion(){
+        const interes = parseFloat(document.getElementById("t4-interes-administracion").dataset.valor) || 0;
+        INTERES_ADMINISTRACION = interes*TOTAL_GASTOS_MANO_DE_OBRA;
+        setCell("t4-valor-administracion", INTERES_ADMINISTRACION);
+
+        calcular_mifinca_administracion();
+        calcular_valor_interes();
+        calcular_total_t4();
+    }
+    
+    function calcular_mifinca_administracion(){
+        const valor_administracion = parseFloat(document.getElementById("t4-valor-administracion").dataset.valor) || 0;
+        const resultado = valor_administracion*NUM_CUERDAS;
+        setCell("t4-mifinca-administracion", resultado);
+    }
+
+    function calcular_valor_interes(){
+        const interes = parseFloat(document.getElementById("t4-interes-gastos").dataset.valor) || 0;
+
+        INTERES_GASTOS = (calcular_suma_t4() + INTERES_ADMINISTRACION + TOTAL_GASTOS_MATERIALES + TOTAL_GASTOS_MANO_DE_OBRA)*interes;
+
+        setCell("t4-valor-interes", INTERES_GASTOS);
+        calcular_mifinca_interes();
+        calcular_total_t4();
+    }
+
+    function calcular_mifinca_interes(){
+        const valor_interes = parseFloat(document.getElementById("t4-valor-interes").dataset.valor) || 0;
+        const resultado = valor_interes*NUM_CUERDAS;
+        setCell("t4-mifinca-interes", resultado);
+    }
+
+    function calcular_suma_t4(){
+        let total = 0;
+        const terreno = parseFloat(document.getElementById("t4-valor-terreno").dataset.valor) || 0;
+        total+=terreno;
+        for (let i = 0; i<partidas_t4.length; i++){
+            const valor = parseFloat(document.getElementById(`t4-valor-${i}`).value) || 0;
+            total+=valor;
+        }
+        return total;
+    }
+
+    function calcular_total_t4(){
+        TOTAL_OTROS_GASTOS = calcular_suma_t4();
+        TOTAL_OTROS_GASTOS+=INTERES_ADMINISTRACION+INTERES_GASTOS;
+        setCell("t4-total-valor", TOTAL_OTROS_GASTOS);
+
+        calcular_mifinca_total_t4();
+        calcular_total_variables();
+    }
+
+    function calcular_mifinca_total_t4(){
+        const valor = parseFloat(document.getElementById("t4-total-valor").dataset.valor) || 0;
+        const resultado = valor*NUM_CUERDAS;
+        setCell("t4-total-mifinca", resultado);
+    }
+
+
+//-----------------------------------------------------------------------------------------------------------------------------------------------------  
+//-----------------------------------------------------------------------------------------------------------------------------------------------------
+//-----------------------------------------------------------------------------------------------------------------------------------------------------
+
+    //Total de gastos variables
+    const total_gastos_variables = document.createElement("tr");
+    total_gastos_variables.innerHTML = `
+        <th colspan="4" style="background-color: #cccccc;">TOTAL GASTOS VARIABLES</th>
+        <th id="total-gastos-variables" data-valor="0" style="background-color: #cccccc;">$0.00</th>
+        <th id="mifinca-gastos-variables" data-valor="0" style="background-color: #cccccc;">$0.00</th>
+    `;
+    tabla.appendChild(total_gastos_variables);
+
+    function calcular_total_variables(){
+        TOTAL_GASTOS_VARIABLES = TOTAL_GASTOS_MANO_DE_OBRA+TOTAL_GASTOS_MATERIALES+TOTAL_OTROS_GASTOS;
+        setCell("total-gastos-variables", TOTAL_GASTOS_VARIABLES);
+
+        calcular_mifinca_variables();
+        calcular_ingreso_neto();
+        calcular_precio_minimo();
+        calcular_produccion_minimo();
+        resumen_gastos_totales();
+    }
+    
+    function calcular_mifinca_variables(){
+        const resultado = TOTAL_GASTOS_VARIABLES*NUM_CUERDAS;
+        setCell("mifinca-gastos-variables", resultado);
+    }
+
+    const filaVacía_3 = document.createElement("tr");
+    filaVacía_3.innerHTML = `
+        <td style="height: 20px; background-color: transparent;"></td>
+        <td style="height: 20px; background-color: transparent;"></td>
+        <td style="height: 20px; background-color: transparent;"></td>
+        <td style="height: 20px; background-color: transparent;"></td>
+        <td style="height: 20px; background-color: transparent;"></td>
+        <td style="height: 20px; background-color: transparent;"></td>
+    `;
+    tabla.appendChild(filaVacía_3);
+
+//-----------------------------------------------------------------------------------------------------------------------------------------------------  
+//-----------------------------------------------------------------------------------------------------------------------------------------------------
+//-----------------------------------------------------------------------------------------------------------------------------------------------------
+
+    //t5-Ingresos
+    const ingresos = document.createElement("tr");
+    ingresos.innerHTML = `
+        <th colspan="6" style="text-align: center; background-color: #cccccc;">
+            INGRESOS
+        </th>
+    `;
+    tabla.appendChild(ingresos);
+
+    const partidas_t5 = [
+        ["Ingreso Bruto por Ventas", "Tiestos 3 galones"],
+        ["Subsidio salarial", "Número de Empleados"]
+    ]
+
+    partidas_t5.forEach((partida, index)=>{
+        const fila = document.createElement('tr');
+
+        fila.innerHTML = `
+            <td>${partida[0]}</td>
+            <td>${partida[1]}</td>
+            <td><input type="number" min="0" step="1" id="t5-cantidad-${index}" oninput=""></td>
+            <td><input type="number" min="0" step="1" id="t5-precio-${index}" oninput=""></td>
+            <td id="t5-valor-${index}" data-valor="0">$0.00</td>
+            <td id="t5-mifinca-${index}" data-valor="0">$0.00</td>
+        `;
+        tabla.appendChild(fila);
+    })
+
+    document.querySelectorAll('[id^="t5-cantidad-"], [id^="t5-precio-"]').forEach(input=>{
+        const id = input.id;
+        const index = parseInt(id.split('-').pop());
+        input.addEventListener('input', ()=>{
+            calcular_valor_t5(index);
+        })
+    })
+
+    const total_ingresos = document.createElement("tr");
+    total_ingresos.innerHTML=`
+        <th colspan="4">TOTAL DE INGRESOS</th>
+        <th id="t5-total-ingresos" data-valor="0">$0.00</th>
+        <th id="t5-mifinca-ingresos" data-valor="0">$0.00</th>
+    `;
+    tabla.appendChild(total_ingresos);
+
+    const ingreso_neto = document.createElement("tr");
+    ingreso_neto.innerHTML=`
+        <th colspan="4">INGRESO NETO</th>
+        <th id="t5-ingreso-neto" data-valor="0">$0.00</th>
+        <th id="t5-ingreso-neto-mifinca" data-valor="0">$0.00</th>
+    `;
+    tabla.appendChild(ingreso_neto);
+
+    function calcular_valor_t5(index){
+        const cantidad = parseFloat(document.getElementById(`t5-cantidad-${index}`).value) || 0;
+        const precio = parseFloat(document.getElementById(`t5-precio-${index}`).value) || 0;
+        const valor = cantidad*precio;
+        setCell(`t5-valor-${index}`, valor);
+
+        calcular_mifinca_t5(index);
+        calcular_total_ingresos();
+        if (index === 0){
+            INGRESO_BRUTO_CANTIDAD = cantidad;
+            INGRESO_BRUTO_PRECIO = precio;
+            calcular_precio_minimo();
+            calcular_produccion_minimo();
+        }
+    }
+
+    function calcular_mifinca_t5(index){
+        const valor = parseFloat(document.getElementById(`t5-valor-${index}`).dataset.valor) || 0;
+        const resultado = valor*NUM_CUERDAS;
+        setCell(`t5-mifinca-${index}`,resultado);
+    }
+
+
+    function calcular_total_ingresos(){
+        TOTAL_INGRESOS = 0;
+        for (let i = 0; i<partidas_t5.length; i++){
+            const valor = parseFloat(document.getElementById(`t5-valor-${i}`).dataset.valor) || 0;
+            TOTAL_INGRESOS+=valor;
+        }
+        setCell("t5-total-ingresos", TOTAL_INGRESOS);
+
+        calcular_mifinca_ingresos();
+        calcular_ingreso_neto();
+        resumen_ingreso_total();
+    }
+
+    function calcular_mifinca_ingresos(){
+        const resultado = TOTAL_INGRESOS*NUM_CUERDAS;
+        setCell("t5-mifinca-ingresos", resultado);
+    }
+
+    function calcular_ingreso_neto(){
+        INGRESO_NETO = TOTAL_INGRESOS-TOTAL_GASTOS_VARIABLES;
+        setCell("t5-ingreso-neto", INGRESO_NETO);
+
+        mifinca_ingreso_neto();
+        resumen_ingreso_neto();
+    }
+
+    function mifinca_ingreso_neto(){
+        const valor = parseFloat(document.getElementById("t5-ingreso-neto").dataset.valor) || 0;
+        const resultado = valor*NUM_CUERDAS;
+        setCell("t5-ingreso-neto-mifinca", resultado);
+    }
+
+    const filaVacía_4 = document.createElement("tr");
+    filaVacía_4.innerHTML = `<td colspan="6" style="height: 20px; background-color: transparent;"></td>`;
+    tabla.appendChild(filaVacía_4);
+
+//-----------------------------------------------------------------------------------------------------------------------------------------------------  
+//-----------------------------------------------------------------------------------------------------------------------------------------------------
+//-----------------------------------------------------------------------------------------------------------------------------------------------------
+
+    //t6-Break Even
+     const break_even = document.createElement("tr");
+    break_even.innerHTML = `
+        <th colspan="6" style="text-align: center; background-color: #cccccc;">
+            Break Even
+        </th>
+    `;
+    tabla.appendChild(break_even);
+
+    const precio_minimo = document.createElement("tr");
+    precio_minimo.innerHTML = `
+        <td colspan="5">Precio Mínimo de Venta</td>
+        <td id="precio-minimo-valor" data-valor="0">$0.00</td>
+    `;
+    tabla.appendChild(precio_minimo);
+
+    function calcular_precio_minimo(){
+        let resultado = 0;
+        if (!isNaN(INGRESO_BRUTO_CANTIDAD) && INGRESO_BRUTO_CANTIDAD !== 0){
+            resultado = TOTAL_GASTOS_VARIABLES/INGRESO_BRUTO_CANTIDAD;
+        }
+
+        setCell("precio-minimo-valor", resultado);
+    }
+
+    const produccion_minima = document.createElement("tr");
+    produccion_minima.innerHTML = `
+        <td colspan="5">Producción Mínima (en tiestos de 3 galones)</td>
+        <td id="produccion-minima-valor" data-valor="0">$0.00</td>
+    `;
+    tabla.appendChild(produccion_minima);
+
+    function calcular_produccion_minimo(){
+        let resultado = 0;
+        if (!isNaN(INGRESO_BRUTO_PRECIO) && INGRESO_BRUTO_PRECIO !==0){
+            resultado = TOTAL_GASTOS_VARIABLES/INGRESO_BRUTO_PRECIO;
+        }
+
+        setCell("produccion-minima-valor", resultado);
+    }
+
+    const filaVacía_5 = document.createElement("tr");
+    filaVacía_5.innerHTML = `<td colspan="6" style="height: 20px; background-color: transparent;"></td>`;
+    tabla.appendChild(filaVacía_5);
+
+//-----------------------------------------------------------------------------------------------------------------------------------------------------  
+//-----------------------------------------------------------------------------------------------------------------------------------------------------
+//-----------------------------------------------------------------------------------------------------------------------------------------------------
+
+    //t7-resumen
+
+    const resumen = document.createElement('tr');
+    resumen.innerHTML = `
+        <th colspan="5">PARTIDA</th>
+        <th>VALOR</th>
+    `;
+    tabla.appendChild(resumen);
+
+    const ingreso_total = document.createElement("tr");
+    ingreso_total.innerHTML = `
+        <td colspan="5">Ingreso Total</td>
+        <td id="resumen-ingreso-total">$0.00</td>
+    `;
+    tabla.appendChild(ingreso_total);
+
+    function resumen_ingreso_total(){
+        setCell("resumen-ingreso-total", TOTAL_INGRESOS)
+    }
+
+    const gastos_totales = document.createElement("tr");
+    gastos_totales.innerHTML = `
+        <td colspan="5">Gastos Totales</td>
+        <td id="resumen-gastos-totales">$0.00</td>
+    `;
+    tabla.appendChild(gastos_totales);
+
+    function resumen_gastos_totales(){
+        setCell("resumen-gastos-totales", TOTAL_GASTOS_VARIABLES);
+    }
+    
+    const ingreso_neto_resumen = document.createElement("tr");
+    ingreso_neto_resumen.innerHTML = `
+        <td colspan="5">Ingreso Neto</td>
+        <td id="resumen-ingreso-neto">$0.00</td>
+    `;
+    tabla.appendChild(ingreso_neto_resumen);
+
+    function resumen_ingreso_neto(){
+        setCell("resumen-ingreso-neto",INGRESO_NETO);
+    }
 
 
   </script>
