@@ -18,14 +18,14 @@
   </style>
 </head>
 <body>
-  <h1>Presupuesto modelo: Guineos para maduración en la zona del sur de PR (1 cuerda)								<sup style="font-size: 0.1em;">K11</sup></h1>
+  <h1>Presupuesto modelo: Guineos para maduración en la zona del sur de PR (1 cuerda)<sup style="font-size: 0.1em;">K11</sup></h1>
 
   <table>
     <thead>
       <tr><th colspan="6">PROYECCIÓN POR CUERDA</th></tr>
     </thead>
     <tbody id="proyeccion-tbody">
-      <!-- This will be filled with JS -->
+      <!-- Filas generadas por JS -->
     </tbody>
   </table>
 
@@ -383,7 +383,6 @@ function actualizarValoresMiFinca_t1() {
       const input = document.getElementById(`otros-gasto-input-${index}`);
       finalValor = parseFloat(input?.value) || 0;
 
-      // Also update the span if it exists (optional, if you add one later)
       if (celda) {
         celda.textContent = "$" + finalValor.toFixed(2);
       }
@@ -428,7 +427,6 @@ otros_gastos.forEach(([nombre, valor], index) => {
 
   tabla.appendChild(fila);
   if (esEditable) {
-    // Escuchar cambios en el input editable
     const input = fila.querySelector(`#otros-gasto-input-${index}`);
     input.addEventListener("input", () => {
     calcularTotalOtrosGastos();
@@ -555,10 +553,6 @@ tabla.appendChild(filatotalTODO);
     const filaVacía_3 = document.createElement("tr");
       filaVacía_3.innerHTML = `<td colspan="6" style="height: 20px; background-color: transparent;"></td>`;
       tabla.appendChild(filaVacía_3);
-
-
-      
-
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------
 //-----------------------------------------------------------------------------------------------------------------------------------------------------
