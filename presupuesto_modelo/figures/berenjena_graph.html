@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gráfica de Berenjena</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 40px;
+      background-color: #f4f4f4;
+    }
+
+    canvas {
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    label,
+    select {
+      font-size: 16px;
+      margin-right: 10px;
+    }
+  </style>
+</head>
+
+<body>
+  <h2>Gráfica Interactiva de Producción / Importación / Exportación de Berenjena</h2>
+
+  <label for="metric">Selecciona un valor:</label>
+  <select id="metric">
+    <option value="Producción Local (Quintales)">Producción</option>
+    <option value="Indice Producción (base 1991 = 100)">Índice Producción (base 1991 = 100)</option>
+    <option value="Importación (Quintales)">Importación</option>
+    <option value="Exportación (Quintales)">Exportación</option>
+    <option value="Importación Neta (Quintales)">Importación Neta (Quintales)</option>
+    <option value="Producción per Cápita (Libras)">Producción per Cápita (Libras)</option>
+    <option value="Importación per Cápita (Libras)">Importación per Cápita (Libras)</option>
+  </select>
+
+  <canvas id="coffeeChart" width="300" height="100" style="max-width: none;"></canvas>
+
+  <script>
+    const ctx = document.getElementById("coffeeChart").getContext("2d");
+    let chart;
+
+    function updateChart(data, metric) {
+      const labels = data.map(d => d["Año"]);
+      const values = data.map(d => parseFloat(d[metric]));
+
+      if (chart) chart.destroy();
+
+      chart = new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels,
+          datasets: [{
+            label: metric,
+            data: values,
+            borderColor: '#504dff',
+            backgroundColor: 'rgba(80,77,255,0.2)',
+            fill: true,
+            tension: 0.2,
+            pointRadius: 5,
+            pointHoverRadius: 7
+          }]
+        },
+        options: {
+          responsive: true,
+          plugins: {
+            legend: { position: 'top' },
+            title: {
+              display: true,
+              text: `Valor de ${metric} por Año`
+            }
+          },
+          scales: {
+            y: {
+              beginAtZero: true,
+              ticks: { stepSize: 1000 }
+            }
+          }
+        }
+      });
+    }
+
+    async function loadExcelData() {
+      const response = await fetch('../data/berenjena.xlsx');
+      const arrayBuffer = await response.arrayBuffer();
+
+      const workbook = XLSX.read(arrayBuffer, { type: "array" });
+      const firstSheet = workbook.Sheets[workbook.SheetNames[0]];
+      const jsonData = XLSX.utils.sheet_to_json(firstSheet);
+
+      // Fill dropdown with column names (except Año/Tipo)
+      const metricSelect = document.getElementById("metric");
+      const headers = Object.keys(jsonData[0]).filter(k => k !== "Año" && k !== "Tipo");
+
+      headers.forEach(h => {
+        const opt = document.createElement("option");
+        opt.value = h;
+        opt.textContent = h;
+        metricSelect.appendChild(opt);
+      });
+
+      // Initial chart
+      updateChart(jsonData, metricSelect.value);
+
+      // Update chart on dropdown change
+      metricSelect.addEventListener("change", () => {
+        updateChart(jsonData, metricSelect.value);
+      });
+    }
+
+    loadExcelData();
+  </script>
+</body>
+
+</html>
