@@ -18,28 +18,55 @@
   </style>
 </head>
 <body>
+  <div id="botones-acciones" style="text-align: center; margin-top: 40px;">
+    <button id="btn-excel">📥 Descargar Excel</button>
+    <button id="btn-pdf">📄 Guardar PDF</button>
+    <button id="btn-email">✉️ Enviar por Email</button>
+    <button onclick="window.print()">🖨 Imprimir</button>
+  </div>
+  
+
+
+  <!-- Excel export -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>
+  <!-- PDF export -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.3/html2pdf.bundle.min.js"></script>
+
+  <script>
+      // Descargar Excel
+      document.getElementById("btn-excel").addEventListener("click", function () {
+        const table = document.querySelector("table"); 
+        const wb = XLSX.utils.table_to_book(table, { sheet: "Presupuesto" });
+        XLSX.writeFile(wb, "presupuesto.xlsx");
+      });
+    
+      // Guardar PDF
+      document.getElementById("btn-pdf").addEventListener("click", function () {
+        const content = document.body; 
+        html2pdf().from(content).set({
+          margin: 0.5,
+          filename: "presupuesto.pdf",
+          html2canvas: { scale: 2 },
+          jsPDF: { unit: "in", format: "letter", orientation: "portrait" }
+        }).save();
+      });
+    
+      // Enviar por Email
+      document.getElementById("btn-email").addEventListener("click", function () {
+        const asunto = "Presupuesto Modelo";
+        const cuerpo = "Saludos,\n\nAdjunto encontrará el presupuesto modelo generado.\n\nGracias.";
+        window.location.href = `mailto:?subject=${encodeURIComponent(asunto)}&body=${encodeURIComponent(cuerpo)}`;
+      });
+    </script>
+  
   <h1>Presupuesto modelo: Ñame habanero en la zona de altura húmeda en PR (1 cuerda)<sup style="font-size: 0.1em;">K11</sup></h1>
 
-  <table>
-    <thead>
-      <tr><th colspan="6">PROYECCIÓN POR CUERDA</th></tr>
-    </thead>
-    <tbody id="proyeccion-tbody">
-      <!-- This will be filled with JS -->
-    </tbody>
-  </table>
+  
 
   <table>
     <thead>
     
-      <tr>
-        <th>Trabajos</th>
-        <th>Unidad</th>
-        <th>Cantidad</th>
-        <th>$/Unidad</th>
-        <th>Valor $</th>
-        <th>Mi Finca</th>
-      </tr>
+    
 
     </thead>
     <tbody id="tabla">
@@ -102,12 +129,57 @@
   <script>
 
     const tabla = document.getElementById("tabla");
+    const produccion_cuerda = document.createElement("tr");
+    produccion_cuerda.innerHTML = `
+      <th colspan="6" style="text-align: center; background-color: #cccccc;">
+        PROYECCIÓN POR CUERDA
+      </th>
+    `;
+    tabla.appendChild(produccion_cuerda);
 
-    const actividades = {
-      "Preparación de Terreno": 7.25,
-      "Poda": 8.50,
-      "Cosecha": 6.75
-    };
+    const fila1 = document.createElement("tr");
+    fila1.innerHTML=`<tr>
+    <td colspan="5">Número de Plantas por Cuerda para una distancia de 1.3 pies</td>
+    <td><input type="number" min="0" step="1" id="plantas-por-cuerda"></td>
+  </tr>`;
+  tabla.appendChild(fila1);
+
+  const fila2 = document.createElement("tr");
+    fila2.innerHTML=`<tr>
+    <td colspan="5">Número de Cuerdas</td>
+    <td><input type="number" min="0" step="1" id="numero-cuerdas"></td>
+    </tr>
+  <tr>`;
+    tabla.appendChild(fila2)
+
+    const fila3 = document.createElement("tr");
+    fila3.innerHTML=`<tr><td colspan="5">Rendimiento por Planta (el promedio es de 4 lbs por planta)</td>
+    <td><input type="number" min="0" step="1" id="rendimiento-planta"></td>
+  </tr>`;
+  tabla.appendChild(fila3);
+
+    const fila4=document.createElement("tr");
+    fila4.innerHTML= `<tr>
+    <td colspan="5">Rendimiento por Cuerda (Quintal)</td>
+    <td id="rendimiento-cuerda">0</td>`;
+
+    tabla.appendChild(fila4);
+
+    const filaVacía_10 = document.createElement("tr");
+    filaVacía_10.innerHTML = `<td colspan="6" style="height: 20px; background-color: transparent;"></td>`;
+    tabla.appendChild(filaVacía_10);
+
+
+    const columnas_titulos = document.createElement("tr");
+    columnas_titulos.innerHTML = `
+      <th>Partida</th>
+      <th>Unidad</th>
+      <th>Cantidad</th>
+      <th>Precio/Unidad</th>
+      <th>Valor</th>
+      <th>Mi Finca</th>
+    `;
+    tabla.appendChild(columnas_titulos);
 
     const header1 = document.createElement("tr");
       header1.innerHTML = `<th colspan="6" style="text-align: center; background-color: #cccccc;">GASTOS EN MANO DE OBRA</th>`;
@@ -142,26 +214,13 @@
     tabla.appendChild(fila);
   });
 
-    
-
-    // const filaTotal_t1 = document.createElement("tr");
-    // filaTotal_t1.innerHTML = `
-    //     <th colspan="4">REMOVER!!</th>
-    //     <th id="total-valorest1">$0.00</th>
-    //     <th id=total-finca-t1>$.00</th>
-
-        
-    //   `;
-    //   tabla.appendChild(filaTotal_t1);
 
 
     const filaTotalMaq_t1 = document.createElement("tr");
     filaTotalMaq_t1.innerHTML = `
         <th colspan="4">TOTAL DE GASTOS DE MANO DE OBRA Y MAQUINARIA</th>
         <th id="total-valoresMaqt1">$0.00</th>
-        <th id=total-finca-Maqt1>$0.00</th>
-
-        
+        <th id=total-finca-Maqt1>$0.00</th>    
       `;
       tabla.appendChild(filaTotalMaq_t1);
 
@@ -180,9 +239,7 @@
     }
 
     calcularTotal_año_t1(); 
-    calcularTotaldeTodo();
-  
-  
+    calcularTotaldeTodo(); 
     }
 
 
@@ -208,8 +265,6 @@
     totalFinca_valores_t1 += finca;
     }
   }
-  // document.getElementById("total-valorest1").textContent = "$" + total_valores_t1.toFixed(2);
-  // document.getElementById("total-finca-t1").textContent = "$" + totalFinca_valores_t1.toFixed(2);
 
   const totalGeneral = total_valores_t1 + total_con_maquinaria_t1;
   const totalFincaGeneral = totalFinca_valores_t1 + totalFinca_con_maquinaria_t1;
@@ -235,9 +290,6 @@ function actualizarValoresMiFinca_t1() {
 
   calcularTotal_año_t1(); 
 }
-
-
-
 
     const filaVacía_1 = document.createElement("tr");
     filaVacía_1.innerHTML = `<td colspan=6 style="height: 20px; background-color: transparent;"></td>`;
@@ -270,10 +322,6 @@ function actualizarValoresMiFinca_t1() {
       fila.innerHTML = `
       <td>${trabajo[0]}</td>
       <td>${trabajo[1]}</td>
-
-
-
-
 
       <td><input type="number" min="0" step="1" id="t2-cantidad-${index}" oninput="calcularValor_t2(${index})"></td>
       <td><input type="number" min="0" step="1" id="t2-costo-${index}" oninput=calcularValor_t2(${index})></td>
@@ -445,7 +493,7 @@ otros_gastos.forEach(([nombre, valor], index) => {
 
   tabla.appendChild(fila);
   if (esEditable) {
-    // Escuchar cambios en el input editable
+
     const input = fila.querySelector(`#otros-gasto-input-${index}`);
     input.addEventListener("input", () => {
     calcularTotalOtrosGastos();
@@ -559,10 +607,6 @@ tabla.appendChild(filatotalTODO);
     const filaVacía_3 = document.createElement("tr");
       filaVacía_3.innerHTML = `<td colspan="6" style="height: 20px; background-color: transparent;"></td>`;
       tabla.appendChild(filaVacía_3);
-
-
-      
-
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------
 //-----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -697,9 +741,6 @@ if (fincaNeto) fincaNeto.textContent = `$${(neto * numCuerdas).toFixed(2)}`;
 //-----------------------------------------------------------------------------------------------------------------------------------------------------
 //----------------------------------------------------------------------------------------------------------------------------------------------------- 
 
-
-
-
   const ingresoTotal=document.createElement("tr");
   ingresoTotal.innerHTML=
   `<th colspan="4"> Ingreso Total </th>
@@ -725,7 +766,7 @@ if (fincaNeto) fincaNeto.textContent = `$${(neto * numCuerdas).toFixed(2)}`;
 
 const filaProduccionMinimaTotal = document.createElement("tr");
 filaProduccionMinimaTotal.innerHTML = `
-  <th colspan="4">PRODUCCIÓN MÍNIMA TOTAL DE CAJAS DE GUINEO</th>
+  <th colspan="4">PRODUCCIÓN MÍNIMA DE PRODUCTO</th>
   <th id="produccion-minima-total-finca">-</th>
   <th id="produccion-minima-total">0</th>
 
@@ -737,26 +778,6 @@ tabla.appendChild(filaProduccionMinimaTotal);
 //-----------------------------------------------------------------------------------------------------------------------------------------------------
 //----------------------------------------------------------------------------------------------------------------------------------------------------- 
 
-const proyeccionBody = document.getElementById("proyeccion-tbody");
-
-proyeccionBody.innerHTML = `
-  <tr>
-    <td colspan="5">Número de Plantas por Cuerda para una distancia de 1.3 pies</td>
-    <td><input type="number" min="0" step="1" id="plantas-por-cuerda"></td>
-  </tr>
-  <tr>
-    <td colspan="5">Número de Cuerdas</td>
-    <td><input type="number" min="0" step="1" id="numero-cuerdas"></td>
-    </tr>
-  <tr>
-    <td colspan="5">Rendimiento por Planta (el promedio es de 4 lbs por planta)</td>
-    <td><input type="number" min="0" step="1" id="rendimiento-planta"></td>
-  </tr>
-  <tr>
-    <td colspan="5">Rendimiento por Cuerda (Quintal)</td>
-    <td id="rendimiento-cuerda">0</td>
-
-`;
 
 function calcularRendimientoPorCuerda() {
   const plantasPorCuerda = parseFloat(document.getElementById("plantas-por-cuerda")?.value) || 0;
