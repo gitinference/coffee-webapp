@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nómina Semanal - Agricultores</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 20px;
+    }
+
+    th,
+    td {
+      border: 1px solid #ccc;
+      padding: 8px;
+      text-align: center;
+    }
+
+    th {
+      background-color: #f2f2f2;
+    }
+
+    input,
+    select {
+      width: 100%;
+      padding: 4px;
+    }
+
+    td:first-child,
+    th:first-child {
+      text-align: left;
+    }
+  </style>
+
+  <!-- Excel export -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>
+  <!-- PDF export -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.3/html2pdf.bundle.min.js"></script>
+</head>
+
+<body>
+  <div id="botones-acciones" style="text-align: center; margin-top: 40px;">
+    <button id="btn-excel">📥 Descargar Excel</button>
+    <button id="btn-pdf">📄 Guardar PDF</button>
+    <button id="btn-email">✉️ Enviar por Email</button>
+    <button onclick="window.print()">🖨 Imprimir</button>
+  </div>
+
+  <h1>Presupuesto Modelo: Establecimiento de Cercas</h1>
+
+  <table>
+    <thead>
+      <tr>
+      </tr>
+
+
+    </thead>
+    <tbody id="tabla">
+      <!-- Filas generadas por JS -->
+    </tbody>
+
+    <tfoot>
+      <tr>
+        <td colspan="10" style="padding: 20px; background-color: #fff; line-height: 1.6;">
+
+          <h2 style="color: #000000; font-size: 1em">Supuestos</h2>
+          <ol style="padding-left: 20px;">
+            <li>El área que se va a cercar esta limpia y accesible en vehículo, de lo contario hay que añadir los costos
+              de limpieza
+              y acarreo. La cerca se establecerá utilizando postes a 6 pies de distancia, intercalando un poste grueso
+              cada 4 postes
+              finos.</li>
+            <li>Postes tratados de 6.5' de largo * 2.5"-3" de diámetro.</li>
+            <li>Postes tratados de 8' de largo * 6"-8" de diámetro.</li>
+            <li>Incluye pago del Seguro Social al Internal Revenue Service, Seguro por Desempleo al Departamento del
+              Trabajo y
+              Recursos Humanos y Seguro Obrero a la Corporación del Fondo del Seguro del Estado.</li>
+          </ol>
+
+          <span style="font-weight: bold;">Preparado por:</span><br>
+          Myrna Comas Pagán, PhD<br>
+          Catedrática del Servicio de Extensión Agrícola en Economía Agrícola<br><br>
+
+          <span style="font-weight: bold;">Versión Electrónica:</span><br>
+          Alexandra Gregory Crespo, PhD<br>
+          Catedrática del Servicio de Extensión Agrícola en Economía Agrícola<br><br>
+
+          Yaira A. Avilés Ortiz<br>
+          Economista Agrícola<br><br>
+
+          <span style="font-weight: bold;">Fecha de revisión:</span><br>
+          Marzo 2022<br><br>
+
+          <div style="margin-top: 20px; padding: 12px; border-left: 5px solid #d9534f; background-color: #fdf2f2;">
+            <strong>AVISO:</strong> AVISO: Los Presupuestos Modelos presentan la información de los ingresos y gastos
+            bajo condiciones normales y
+            características particulares de una finca.  La Universidad de Puerto Rico no asume responsabilidad por los
+            resultados si
+            los ingresos y gastos de una empresa en particular difieren de dicha publicación. El usuario de estos
+            modelos releva a
+            la Universidad de Puerto Rico de toda responsabilidad, reclamación, pérdida, daño o costo relacionado o
+            surgido por el
+            uso de estos modelos.
+          </div>
+
+          <div style="margin-top: 20px; font-size: 0.85em; text-align: center; color: #999;">
+            This material is based upon work supported by USDA/OPPE under Award Number: AO212501x443G010
+          </div>
+        </td>
+      </tr>
+    </tfoot>
+
+
+  </table>
+  <!----------------------------------------------------------------------------------------------------------------------------------------->
+  <!----------------------------------------------------------------------------------------------------------------------------------------->
+  <!----------------------------------------------------------------------------------------------------------------------------------------->
+  <script>
+    const tbody = document.getElementById("tabla");
+    const thead = document.querySelector("thead");
+
+    const header0 = document.createElement("tr");
+    header0.innerHTML = `<th colspan="6" style="text-align: center; background-color: #cccccc;">Estimado de costos: Establecimiento de CERCAS</th>`;
+    thead.insertBefore(header0, thead.children[0]);
+
+    const header1 = document.createElement("tr");
+    header1.innerHTML = `<th colspan="6" style="text-align: center; background-color: #cccccc;">200 pies lineales<sup style="font-size: 0.1em;">1</sup></th>`;
+    thead.insertBefore(header1, thead.children[1]);
+
+    const encabezado = [
+      "Nùmero de Cuerdas Sembradas",
+    ]
+
+    encabezado.forEach((trabajo, index) => {
+      const fila = document.createElement("tr");
+
+      fila.innerHTML = `
+        <td colspan="5">${trabajo}</td>
+        <td><input type="number" min="0" step="1" id="header-${index}" oninput="calcularCostos()"></td>
+      `;
+
+      thead.insertBefore(fila, thead.children[2]);
+    });
+
+    document.querySelectorAll('[id^="header-"]').forEach((input, index) => {
+      input.addEventListener('input', () => {
+        calcularCostos();
+      });
+    });
+
+    const filaVacía_1 = document.createElement("tr");
+    filaVacía_1.innerHTML = `<td colspan="6" style="height: 20px; background-color: transparent;"></td>`;
+    tabla.appendChild(filaVacía_1);
+
+    //-----------------------------------------------------------------------------------------------------------------------------------------------------  
+    //-----------------------------------------------------------------------------------------------------------------------------------------------------
+    //-----------------------------------------------------------------------------------------------------------------------------------------------------
+
+    const header2 = document.createElement("tr");
+    header2.innerHTML = `<th colspan="6" style="text-align: center; background-color: #cccccc;"></th>`;
+    tabla.appendChild(header2);
+
+    const header2_unidades = document.createElement("tr");
+    header2_unidades.innerHTML = `<th colspan="1" style="text-align: center; background-color: #cccccc;"></th>
+    <td style="font-weight: bold; text-align: center; background-color: #cccccc;">Cantidad</td>
+    <td style="font-weight: bold; text-align: center; background-color: #cccccc;">Unidad</td>
+    <td style="font-weight: bold; text-align: center; background-color: #cccccc;">Precio</td>
+    <td style="font-weight: bold; text-align: center; background-color: #cccccc;">Valor</td>
+    <td style="font-weight: bold; text-align: center; background-color: #cccccc;">Mi Finca</td>`;
+    tabla.appendChild(header2_unidades);
+
+    const costos = [
+      "Postes finos",
+      "Postes gruesos",
+      "Alambre de pua fino",
+      "Grampas",
+      "Mano de obra",
+      "Obligaciones patronales",
+    ];
+
+    costos.forEach((trabajo, index) => {
+      const fila = document.createElement("tr");
+
+      // Obligaciones Patronales
+      if (index == 5) {
+        fila.innerHTML = `
+                <td id="costos-${index}">${trabajo}<sup style="font-size: 0.1em;">4</sup></td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+                <td id="precio-${index}">$0.00</td>
+                <td id="finca-${index}">$0.00</td>
+              `;
+      } else {
+        fila.innerHTML = `
+                <td id="costos-${index}">${trabajo}</td>
+                <td><input type="number" min="0" step="1" id="cantidad_unidad-${index}" oninput="calcularCostos()"></td>
+                <td id="unidad-${index}">c/u</td>
+                <td><input type="number" min="0" step="1" id="costo_unidad-${index}" oninput="calcularCostos()"></td>
+                <td id="precio-${index}">$0.00</td>
+                <td id="finca-${index}">$0.00</td>
+              `;
+      }
+
+      tabla.appendChild(fila);
+    });
+
+    document.getElementById(`costos-0`).innerHTML += `<sup style="font-size: 0.1em;">2</sup>`;
+    document.getElementById(`costos-1`).innerHTML += `<sup style="font-size: 0.1em;">3</sup>`;
+
+    document.getElementById("unidad-2").textContent = "rollo";
+    document.getElementById("unidad-3").textContent = "libra";
+    document.getElementById("unidad-4").textContent = "hora";
+
+    document.querySelectorAll('[id^="unidad-"]').forEach((input, index) => {
+      input.addEventListener('input', () => {
+        calcularCostos();
+      });
+    });
+
+    const filaTotalCostos = document.createElement("tr");
+
+    filaTotalCostos.innerHTML = `
+          <th colspan="2">Total de Costos</th>
+          <td style="background-color: #f0f0f0;""></td>
+          <td style="background-color: #f0f0f0;"></td>
+          <td style="background-color: #f0f0f0; font-weight: bold;" id="totalCostos">$0.00</td>
+          <td style="background-color: #f0f0f0; font-weight: bold;" id="totalCostosFinca">$0.00</td>
+        `;
+
+    tabla.appendChild(filaTotalCostos);
+
+    function calcularCostos() {
+      let totalCostos = 0;
+      let totalCostosFinca = 0;
+      const cuerdas = document.getElementById(`header-0`).value || 1;
+
+      for (let i = 0; i < costos.length; i++) {
+        if (i == 5) {
+          const obligaciones_patronales = safeMonto(`precio-4`) * 0.25 // Mano de Obra
+          document.getElementById(`precio-5`).textContent = "$" + obligaciones_patronales.toFixed(2);
+          document.getElementById(`finca-5`).textContent = "$" + (obligaciones_patronales * cuerdas).toFixed(2);
+
+          totalCostos += obligaciones_patronales;
+          totalCostosFinca += (obligaciones_patronales * cuerdas);
+        } else {
+          const costo_unidad = parseFloat(document.getElementById(`costo_unidad-${i}`).value) || 0;
+          const cantidad_unidad = parseFloat(document.getElementById(`cantidad_unidad-${i}`).value) || 0;
+
+          const precio = costo_unidad * cantidad_unidad;
+          const precio_finca = precio * cuerdas;
+          document.getElementById(`precio-${i}`).textContent = "$" + precio.toFixed(2);
+          document.getElementById(`finca-${i}`).textContent = "$" + precio_finca.toFixed(2);
+
+          totalCostos += precio;
+          totalCostosFinca += (precio * cuerdas);
+        }
+      }
+      document.getElementById("totalCostos").textContent = "$" + totalCostos.toFixed(2);
+      document.getElementById("totalCostosFinca").textContent = "$" + totalCostosFinca.toFixed(2);
+    }
+
+    function safeMonto(id) {
+      const el = document.getElementById(id);
+      if (!el) return 0;
+
+      if (el.tagName === "INPUT") {
+        return parseFloat(el.value) || 0;
+      } else {
+        return parseFloat(el.textContent.replace('$', '')) || 0;
+      }
+    }
+
+    const filaVacía_2 = document.createElement("tr");
+    filaVacía_2.innerHTML = `<td colspan="6" style="height: 20px; background-color: transparent;"></td>`;
+    tabla.appendChild(filaVacía_2);
+
+    // Descargar Excel
+    document.getElementById("btn-excel").addEventListener("click", function () {
+      const table = document.querySelector("table");
+      const wb = XLSX.utils.table_to_book(table, { sheet: "Presupuesto" });
+      XLSX.writeFile(wb, "presupuesto.xlsx");
+    });
+
+    // Guardar PDF
+    document.getElementById("btn-pdf").addEventListener("click", function () {
+      const content = document.body;
+      html2pdf().from(content).set({
+        margin: 0.5,
+        filename: "presupuesto.pdf",
+        html2canvas: { scale: 2 },
+        jsPDF: { unit: "in", format: "letter", orientation: "portrait" }
+      }).save();
+    });
+
+    // Enviar por Email
+    document.getElementById("btn-email").addEventListener("click", function () {
+      const asunto = "Presupuesto Modelo";
+      const cuerpo = "Saludos,\n\nAdjunto encontrará el presupuesto modelo generado.\n\nGracias.";
+      window.location.href = `mailto:?subject = ${encodeURIComponent(asunto)}& body=${encodeURIComponent(cuerpo)}`;
+    });
+
+    window.onload = calcularCostos;
+  </script>
+</body>
+
+</html>
